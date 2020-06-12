@@ -39,7 +39,10 @@ class PermissionsTableSeeder extends Seeder
 
         $guest->givePermissionTo([
             'products.index',
-            'product.show'
+            'product.edit',
+            'product.show',
+            'product.create',
+            'product.destroy'
         ]);
 
         //User Admin

@@ -29,4 +29,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('product/{role}/edit', 'ProductController@edit')->name('product.edit')->middleware('permission:product.edit');
     Route::put('product/{role}', 'ProductController@update')->name('product.update');
     Route::delete('product/{role}', 'ProductController@destroy')->name('product.destroy')->middleware('permission:product.destroy');
+
+    Route::post('search/category', 'HomeController@searchCategory')->name('search.category');
 });

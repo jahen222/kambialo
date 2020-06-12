@@ -2,10 +2,6 @@
 @extends('layouts.app')
 
 @section('content')
-<ol class="breadcrumb">
-   <li><a href="{{route('products.index')}}">Productos</a></li>
-   <li class="active">{{$product->name}}</li>
-</ol>
 <div class="container">
    <div class="row">
        <div class="col-md-8">

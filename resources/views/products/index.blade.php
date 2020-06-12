@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
 
-                    @can('product.edit')
+                    @can('product.create')
                         <p class="text-right">
                             <a href="{{ route('product.create') }}" class="btn btn-success">
                                 Crear

@@ -17,7 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-      $user = User::find(auth()->user()->id);
+      $user_id = auth()->user()->id;
+      $user = User::find($user_id);
       $products = $user->products()->paginate(10);
 
       return view('products.index', compact('products'));
@@ -55,7 +56,6 @@ class ProductController extends Controller
            $extension = $request->file('image')->getClientOriginalExtension();
            $fileNameToStore= $filename.'_'.time().'.'.$extension;
            $file->move(public_path().'/images/',$fileNameToStore);
-           //$path = $request->file('image')->storeAs('public/images', $fileNameToStore);
        } else {
            $fileNameToStore = 'noimage.jpg';
        }
