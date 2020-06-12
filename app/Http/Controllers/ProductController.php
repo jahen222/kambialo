@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\User;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -14,9 +17,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+      $user = User::find(auth()->user()->id);
+      $products = $user->products()->paginate(10);
 
-        return view('products.index', compact('products'));
+      return view('products.index', compact('products'));
     }
 
     /**
@@ -26,7 +30,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return 'Tiene permiso de crear';
+
+        return view('products.create');
     }
 
     /**
@@ -37,7 +42,35 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+           'name' => 'required',
+           'description'  => 'required',
+           'image' => 'image|nullable|max:1999'
+       ]);
+
+       if($request->hasFile('image')){
+           $file = $request->file('image');
+           $filenameWithExt = $request->file('image')->getClientOriginalName();
+           $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           $extension = $request->file('image')->getClientOriginalExtension();
+           $fileNameToStore= $filename.'_'.time().'.'.$extension;
+           $file->move(public_path().'/images/',$fileNameToStore);
+           //$path = $request->file('image')->storeAs('public/images', $fileNameToStore);
+       } else {
+           $fileNameToStore = 'noimage.jpg';
+       }
+
+       $product = new Product;
+       $product->name = $request->input('name');
+       $product->description = $request->input('description');
+       $product->image = $fileNameToStore;
+       $user = User::find(auth()->user()->id);
+       $product->user()->associate($user);
+       $category = Category::find($request->input('category'));
+       $product->category()->associate($category);
+       $product->save();
+
+       return redirect('/products')->with('success', 'Producto creado con éxito.');
     }
 
     /**
@@ -46,9 +79,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        return 'Tiene permiso de ver';
+        $product = Product::find($id);
+
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -80,8 +115,20 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        return 'Tiene permiso de eliminar';
+        $product = Product::find($id);
+
+        if(auth()->user()->id !== $product->user_id){
+            return back()->with('error', 'No puedes hacer eso.');
+        }
+
+        if($product->image !== 'noimage.jpg'){
+            //Delete image
+            Storage::delete('public/images/'.$product->image);
+        }
+        $product->delete();
+
+        return redirect('/products')->with('success', 'Producto eliminado con éxito.');
     }
 }

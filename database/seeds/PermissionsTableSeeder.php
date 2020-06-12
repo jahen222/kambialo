@@ -16,20 +16,20 @@ class PermissionsTableSeeder extends Seeder
     {
         //Permission list
         Permission::create(['name' => 'products.index']);
-        Permission::create(['name' => 'products.edit']);
-        Permission::create(['name' => 'products.show']);
-        Permission::create(['name' => 'products.create']);
-        Permission::create(['name' => 'products.destroy']);
+        Permission::create(['name' => 'product.edit']);
+        Permission::create(['name' => 'product.show']);
+        Permission::create(['name' => 'product.create']);
+        Permission::create(['name' => 'product.destroy']);
 
         //Admin
         $admin = Role::create(['name' => 'Admin']);
 
         $admin->givePermissionTo([
             'products.index',
-            'products.edit',
-            'products.show',
-            'products.create',
-            'products.destroy'
+            'product.edit',
+            'product.show',
+            'product.create',
+            'product.destroy'
         ]);
         //$admin->givePermissionTo('products.index');
         //$admin->givePermissionTo(Permission::all());
@@ -39,7 +39,7 @@ class PermissionsTableSeeder extends Seeder
 
         $guest->givePermissionTo([
             'products.index',
-            'products.show'
+            'product.show'
         ]);
 
         //User Admin

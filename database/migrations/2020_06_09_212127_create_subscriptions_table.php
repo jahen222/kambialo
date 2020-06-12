@@ -18,7 +18,7 @@ class CreateSubscriptionsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('price');
-            $table->integer('quantity');
+            $table->integer('quote');
             $table->timestamps();
         });
     }

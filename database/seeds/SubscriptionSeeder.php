@@ -14,21 +14,21 @@ class SubscriptionSeeder extends Seeder
         App\Subscription::create([
             'name'            => 'PLAN 1',
             'description'     => '1 Producto',
-            'quantity'        => 1,
+            'quote'        => 1,
             'price'           => 1000
         ]);
 
         App\Subscription::create([
             'name'            => 'PLAN 2',
             'description'     => '5 Producto',
-            'quantity'        => 2,
+            'quote'        => 2,
             'price'           => 4000
         ]);
 
         App\Subscription::create([
             'name'            => 'PLAN 3',
             'description'     => '50 Producto',
-            'quantity'        => 50,
+            'quote'        => 50,
             'price'           => 7000
         ]);
     }

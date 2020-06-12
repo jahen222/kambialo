@@ -9,9 +9,9 @@
 
                 <div class="panel-body">
 
-                    @can('products.edit')
+                    @can('product.edit')
                         <p class="text-right">
-                            <a href="{{ route('products.create') }}" class="btn btn-primary">
+                            <a href="{{ route('product.create') }}" class="btn btn-success">
                                 Crear
                             </a>
                         </p>
@@ -23,27 +23,18 @@
                             <tr>
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->description }}</td>
 
-                                @can('products.edit')
+                                @can('product.show')
                                 <td>
-                                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-default">
-                                        Editar
-                                    </a>
-                                </td>
-                                @endcan
-
-                                @can('products.show')
-                                <td>
-                                    <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-default">
+                                    <a href="{{ route('product.show', $product->id) }}" class="btn btn-sm btn-primary">
                                         Ver
                                     </a>
                                 </td>
                                 @endcan
 
-                                @can('products.destroy')
+                                @can('product.destroy')
                                 <td>
-                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                    <form action="{{ route('product.destroy', $product->id) }}" method="POST">
                                         {{ method_field('DELETE') }}
                                         {{ csrf_field() }}
                                         <button type="submit" class="btn btn-sm btn-danger">
