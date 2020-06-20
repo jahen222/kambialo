@@ -47,7 +47,7 @@
                         <?php foreach ($products as $product): ?>
                           <div class="mySlides">
                             <a href="{{ route('product.show', $product->id) }}">
-                              <img src="/images/{{$product->image}}" style="width:100%">
+                              <img src="/images/{{$product->cover_image}}" style="width:100%">
                               <div class="text">{{$product->name}}</div>
                             </a>
                           </div>
