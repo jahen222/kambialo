@@ -31,4 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('product/{role}', 'ProductController@destroy')->name('product.destroy')->middleware('permission:product.destroy');
 
     Route::post('search/category', 'HomeController@searchCategory')->name('search.category');
+
+    Route::get('favorites', 'FavoriteController@index')->name('favorites.index')->middleware('permission:products.index');
+    Route::post('favorite/store', 'FavoriteController@store')->name('favorite.store');
 });

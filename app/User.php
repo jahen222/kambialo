@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function subscription(){
         return $this->belongsTo('App\Subscription');
     }
+
+    public function favorites(){
+        return $this->hasMany('App\Favorite');
+    }
 }
