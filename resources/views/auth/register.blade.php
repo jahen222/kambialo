@@ -122,19 +122,16 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row setup-content" id="step-2">
                             <div class="form-group row">
-                                <label for="name" class="col-md-6 col-form-label text-md-right">{{ __('Subscripción') }}</label>
-                                <div class="col-md-6">
+                                <div class="col-md-12 col-form-label">
                                     <?php
                                         $subcription = App\Subscription::all();
                                      ?>
-                                    <select class="form-control @error('name') is-invalid @enderror" id="subscription" name="subscription" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                        @foreach($subcription as $sub)
-                                            <option value="{{ $sub->id }}">{{ $sub->name }} - {{ $sub->description }}</option>
-                                        @endforeach
-                                    </select>
+                                    @foreach($subcription as $sub)
+                                        <input type="radio" id="subscription" name="subscription" value="{{ $sub->id }}">
+                                        <label for="male">{{ $sub->name }} - {{ $sub->description }} - {{ $sub->price }}</label><br>
+                                    @endforeach
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -143,7 +140,7 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
+                                <div class="col-md-4 offset-md-4">
                                     <button class="btn btn-success nextBtn btn-lg pull-right" type="button" >Siguiente</button>
                                 </div>
                             </div>

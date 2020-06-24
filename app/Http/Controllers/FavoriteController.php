@@ -44,11 +44,6 @@ class FavoriteController extends Controller
     {
         $user = User::find(auth()->user()->id);
         $product = Product::find($request->input('product'));
-        
-        if (auth()->user()->id !== $product->user_id) {
-            return back()->with('error', 'No puedes hacer eso.');
-        }
-        
         $favorite = $user->favorites()->where('product_id', '=', $product->id)->first();
         //echo dd($favorite->id);
         if (!empty($favorite)) {

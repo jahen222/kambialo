@@ -22,16 +22,16 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('products', 'ProductController@index')->name('products.index')->middleware('permission:products.index');
-    Route::get('product/create', 'ProductController@create')->name('product.create')->middleware('permission:product.create');
+    Route::get('products', 'ProductController@index')->name('products.index');
+    Route::get('product/create', 'ProductController@create')->name('product.create');
     Route::post('product/store', 'ProductController@store')->name('product.store');
-    Route::get('product/{role}', 'ProductController@show')->name('product.show')->middleware('permission:product.show');
-    Route::get('product/{role}/edit', 'ProductController@edit')->name('product.edit')->middleware('permission:product.edit');
+    Route::get('product/{role}', 'ProductController@show')->name('product.show');
+    Route::get('product/{role}/edit', 'ProductController@edit')->name('product.edit');
     Route::put('product/{role}', 'ProductController@update')->name('product.update');
-    Route::delete('product/{role}', 'ProductController@destroy')->name('product.destroy')->middleware('permission:product.destroy');
+    Route::delete('product/{role}', 'ProductController@destroy')->name('product.destroy');
 
     Route::post('search/category', 'HomeController@searchCategory')->name('search.category');
 
-    Route::get('favorites', 'FavoriteController@index')->name('favorites.index')->middleware('permission:products.index');
+    Route::get('favorites', 'FavoriteController@index')->name('favorites.index');
     Route::post('favorite/store', 'FavoriteController@store')->name('favorite.store');
 });

@@ -46,7 +46,7 @@ class ProductController extends Controller
         $this->validate($request, [
            'name' => 'required',
            'description'  => 'required',
-           'cover_image' => 'image|nullable|max:1999'
+           'cover_image' => 'image'
        ]);
 
        $product = new Product;

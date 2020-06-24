@@ -23,6 +23,7 @@
                             <tr>
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
+                                <td>Favoritos: {{ count($product->favorites()->get()) }}</td>
 
                                 @can('product.show')
                                 <td>

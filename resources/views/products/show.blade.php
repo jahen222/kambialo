@@ -11,55 +11,55 @@
             <div class="card">
               <div class="card-body" style="padding: 0px;">
                 <div class="slideshow-container">
-                  <div class="mySlides" style="display: block">
+                  <div class="mySlides">
                     <img style="width:100%" src="/images/{{$product->cover_image}}" alt="{{$product->cover_image}}" style="width:100%">
                   </div>
-                  <?php if ($product->image1) : ?>
+                  <?php if (isset($product->image1)) : ?>
                     <div class="mySlides">
                       <img style="width:100%" src="/images/{{$product->image1}}" alt="{{$product->image1}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if ($product->image2) : ?>
+                  <?php if (isset($product->image2)) : ?>
                     <div class="mySlides">
                       <img style="width:100%" src="/images/{{$product->image2}}" alt="{{$product->image2}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if ($product->image3) : ?>
+                  <?php if (isset($product->image3)) : ?>
                     <div class="mySlides">
                       <img style="width:100%" src="/images/{{$product->image3}}" alt="{{$product->image3}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if ($product->image4) : ?>
+                  <?php if (isset($product->image4)) : ?>
                     <div class="mySlides">
                       <img style="width:100%" src="/images/{{$product->image4}}" alt="{{$product->image4}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if ($product->image5) : ?>
+                  <?php if (isset($product->image5)) : ?>
                     <div class="mySlides">
                       <img style="width:100%" src="/images/{{$product->image5}}" alt="{{$product->image5}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if ($product->image6) : ?>
+                  <?php if (isset($product->image6)) : ?>
                     <div class="mySlides">
                       <img style="width:100%" src="/images/{{$product->image6}}" alt="{{$product->image6}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if ($product->image7) : ?>
+                  <?php if (isset($product->image7)) : ?>
                     <div class="mySlides">
                       <img style="width:100%" src="/images/{{$product->image7}}" alt="{{$product->image7}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if ($product->image8) : ?>
+                  <?php if (isset($product->image8)) : ?>
                     <div class="mySlides">
                       <img style="width:100%" src="/images/{{$product->image8}}" alt="{{$product->image8}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if ($product->image9) : ?>
+                  <?php if (isset($product->image9)) : ?>
                     <div class="mySlides">
                       <img style="width:100%" src="/images/{{$product->image9}}" alt="{{$product->image9}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if ($product->image10) : ?>
+                  <?php if (isset($product->image10)) : ?>
                     <div class="mySlides">
                       <img style="width:100%" src="/images/{{$product->image10}}" alt="{{$product->image10}}" style="width:100%">
                     </div>
@@ -90,14 +90,20 @@
           {{ csrf_field() }}
           <button type="submit" class="btn btn-danger">Eliminar Producto</button>
         </form>
+      </div>
+    </div>
+    @else
+    <div class="col-md-4">
+      <div class="well">
+        <h1>Opciones</h1>
+        <hr>
         <form action="{{route('favorite.store')}}" method="POST" class="pull-right">
           {{ csrf_field() }}
           <input type="hidden" name="product" value="{{ $product->id }}">
-          <button type="submit" class="btn btn-success">A#adir a Favoritos</button>
+          <button type="submit" class="btn btn-success">Favoritos</button>
         </form>
       </div>
     </div>
-    <div id="result"></div>
     @endif
     @endif
   </div>
@@ -105,7 +111,7 @@
 
 <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
-<script type="application/javascript">
+<script>
   var slideIndex = 1;
   showSlides(slideIndex);
 
@@ -120,6 +126,7 @@
   function showSlides(n) {
     var i;
     var slides = document.getElementsByClassName("mySlides");
+    console.log(slides);
     var dots = document.getElementsByClassName("dot");
     if (n > slides.length) {
       slideIndex = 1
@@ -134,7 +141,6 @@
       dots[i].className = dots[i].className.replace(" active", "");
     }
     slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
   }
 </script>
 @endsection
