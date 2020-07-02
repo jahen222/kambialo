@@ -7,11 +7,13 @@
            <h1>Producto Nuevo </h1>
            <br/>
 
-           <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
+           <form action="{{route('product.update', [$product->id]) }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
+                {{ method_field('PUT') }}
                 <div class="form-group">
                     <label for="category">Categoría del producto</label>
                     <select class="form-group" id="category" name="category" required>
+                        <option value="{{ $product->category->id }}">{{ $product->category->name }}</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
@@ -23,11 +25,11 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Nombre del producto</label>
-                    <input type="text" class="form-control" name="name" id="name" required>
+                    <input type="text" class="form-control" name="name" id="name" value="{{ $product->name }}" required>
                 </div>
                 <div class="form-group">
                     <label for="description">Descripción del producto</label>
-                    <textarea class="form-control" name="description" id="article-ckeditor" cols="30" rows="10" required></textarea>
+                    <textarea class="form-control" name="description" id="article-ckeditor" cols="30" rows="10" required>{{ $product->description }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="image1">Imagen1</label>
@@ -78,7 +80,7 @@
                     </select>
                 </div>
               
-                <button type="submit" class="btn btn-success">Crear</button>
+                <button type="submit" class="btn btn-primary">Editar</button>
             </form>
         </div>
     </div>

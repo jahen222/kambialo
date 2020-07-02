@@ -75,6 +75,10 @@
         <p class="blog-product-meta">Categoría: {{ $product->category->name }} </p>
         <p class="blog-product-meta">Propietario: {{ $product->user->email }} </p>
         <p class="blog-product-meta">Publicado: {{ $product->created_at }} </p>
+        <p class="blog-product-meta">Tags: 
+          @foreach ($product->tags()->get() as $tag)
+            {{ $tag->name }}
+          @endforeach </p>
         <p>{!! $product->description !!}</p>
       </div>
     </div>

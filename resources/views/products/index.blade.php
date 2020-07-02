@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
 
-                    @can('product.create')
+                    @can('create')
                         <p class="text-right">
                             <a href="{{ route('product.create') }}" class="btn btn-success">
                                 Crear
@@ -25,7 +25,7 @@
                                 <td>{{ $product->name }}</td>
                                 <td>Favoritos: {{ count($product->favorites()->get()) }}</td>
 
-                                @can('product.show')
+                                @can('show')
                                 <td>
                                     <a href="{{ route('product.show', $product->id) }}" class="btn btn-sm btn-primary">
                                         Ver
@@ -33,7 +33,15 @@
                                 </td>
                                 @endcan
 
-                                @can('product.destroy')
+                                @can('edit')
+                                <td>
+                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-primary">
+                                        Editar
+                                    </a>
+                                </td>
+                                @endcan
+
+                                @can('destroy')
                                 <td>
                                     <form action="{{ route('product.destroy', $product->id) }}" method="POST">
                                         {{ method_field('DELETE') }}

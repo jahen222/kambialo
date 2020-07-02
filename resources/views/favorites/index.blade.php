@@ -16,7 +16,7 @@
                                 <td>{{ $favorite->product()->get()[0]->name }}</td>
 
 
-                                @can('product.show')
+                                @can('show')
                                 <td>
                                     <a href="{{ route('product.show', $favorite->product()->get()[0]->id) }}" class="btn btn-sm btn-primary">
                                         Ver
@@ -24,7 +24,7 @@
                                 </td>
                                 @endcan
 
-                                @can('product.destroy')
+                                @can('destroy')
                                 <td>
                                     <form action="{{route('favorite.store')}}" method="POST">
                                         {{ csrf_field() }}

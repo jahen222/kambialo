@@ -15,34 +15,44 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         //Permission list
-        Permission::create(['name' => 'products.index']);
-        Permission::create(['name' => 'product.edit']);
-        Permission::create(['name' => 'product.show']);
-        Permission::create(['name' => 'product.create']);
-        Permission::create(['name' => 'product.destroy']);
+        Permission::create(['name' => 'index']);
+        Permission::create(['name' => 'edit']);
+        Permission::create(['name' => 'update']);
+        Permission::create(['name' => 'show']);
+        Permission::create(['name' => 'create']);
+        Permission::create(['name' => 'store']);
+        Permission::create(['name' => 'destroy']);
 
         //Admin
         $admin = Role::create(['name' => 'Admin']);
 
         $admin->givePermissionTo([
-            'products.index',
-            'product.edit',
-            'product.show',
-            'product.create',
-            'product.destroy'
+            'index',
+            'edit',
+            'update',
+            'show',
+            'create',
+            'store',
+            'destroy'
         ]);
-        //$admin->givePermissionTo('products.index');
-        //$admin->givePermissionTo(Permission::all());
 
-        //Guest
+        $user = Role::create(['name' => 'User']);
+
+        $user->givePermissionTo([
+            'index',
+            'edit',
+            'update',
+            'show',
+            'create',
+            'store',
+            'destroy'
+        ]);
+
         $guest = Role::create(['name' => 'Guest']);
 
         $guest->givePermissionTo([
-            'products.index',
-            'product.edit',
-            'product.show',
-            'product.create',
-            'product.destroy'
+            'index',
+            'show',
         ]);
 
         //User Admin

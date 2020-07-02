@@ -68,10 +68,11 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'subscription_id' => $data['subscription'],
             'password' => Hash::make($data['password']),
         ]);
 
-        $user->assignRole('Guest');
+        $user->assignRole('User');
 
         return $user;
     }
