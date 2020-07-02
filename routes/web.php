@@ -34,4 +34,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('favorites', 'FavoriteController@index')->name('favorites.index')->middleware('permission:index');
     Route::post('favorite/store', 'FavoriteController@store')->name('favorite.store')->middleware('permission:store');
+    
+    Route::post('match/store', 'FavoriteController@matchstore')->name('match.store')->middleware('permission:store');
 });

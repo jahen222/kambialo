@@ -57,7 +57,23 @@ class FavoriteController extends Controller
         }
         return back()->withInput();
     }
-
+    
+    public function matchstore(Request $request)
+    {
+        $user = User::find(auth()->user()->id);
+        $product = Product::find($request->input('product'));
+        $favorite = $user->favorites()->where('product_id', '=', $product->id)->first();
+        if (!empty($favorite)) {
+            $favorite->delete();
+        } else {
+            $favorite = new Favorite;
+            $favorite->user()->associate($user);
+            $product = Product::find($request->input('product'));
+            $favorite->product()->associate($product);
+            $favorite->save();
+        }
+        return response('Success', 200);
+    }
     /**
      * Display the specified resource.
      *

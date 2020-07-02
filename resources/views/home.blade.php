@@ -4,83 +4,37 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="{{ asset('css/swipe.css') }}" rel="stylesheet">
 
-
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-          Buscar por Categorías
-        </button>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Seleccione una categoría</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form action="{{route('search.category')}}" method="POST">
-                {{ csrf_field() }}
-                <div class="modal-body">
-                  <?php foreach ($categories as $category) : ?>
-                    <input type="radio" name="search" value="{{$category->id}}">
-                    <label for="search">{{$category->name}}</label><br>
-                  <?php endforeach; ?>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                  <button type="submit" class="btn btn-primary">Buscar</button>
-                </div>
-              </form>
+  <div class="stack">
+    <div class="final-message">No hay mas productos...</div>
+    <ul>
+      <?php foreach ($products as $product) : ?>
+        @if (auth()->user()->id != $product->user->id)
+        <li>
+          <a href="{{ route('product.show', $product->id) }}">
+            <div class="card js-swiping-card">
+              <input id="id" type="hidden" value="{{$product->id}}">
+              <div class="card-illustration js-lazyload" data-original="/images/{{$product->cover_image}}"></div>
             </div>
-          </div>
-        </div>
-
-        <div class="card-body" style="padding: 0px;">
-          @if (session('status'))
-          <div class="alert alert-success" role="alert">
-            {{ session('status') }}
-          </div>
-          @endif
-
-          <?php if (count($products) > 0) : ?>
-            <div class="slideshow-container">
-              <?php foreach ($products as $product) : ?>
-                <div class="mySlides">
-                  <a href="{{ route('product.show', $product->id) }}">
-                    <img src="/images/{{$product->cover_image}}" style="width:100%">
-                    <div class="text">{{$product->name}}</div>
-                  </a>
-                </div>
-              <?php endforeach; ?>
-              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-              <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            </div>
-            <img src="/images/fake_footer.png" style="width:100%">
-          <?php else : ?>
-            <div class="card-body">
-              @if (session('status'))
-              <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-              </div>
-              @endif
-
-              No hay productos.
-            </div>
-          <?php endif; ?>
-        </div>
-      </div>
-    </div>
+          </a>
+        </li>
+        @endif
+      <?php endforeach; ?>
+    </ul>
+  </div>
+  <div class="btn-controls text-center">
+    <button type="button" class="btn btn-danger js-left-trigger">
+      A volar!
+    </button>
+    <button type="button" class="btn btn-primary js-right-trigger">
+      Match!
+    </button>
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
-
 <script>
   $('.js-lazyload').lazyload({
     effect: 'fadeIn',
@@ -119,7 +73,7 @@
         });
 
       //Do something
-      console.log('Swipe done. \nCard:', $card, '\nDirection:', directionFactor);
+      console.log('Swipe done. \nCard:', $card, '\nDirection:', directionFactor, '\nid:', $card[0].firstElementChild.value);
 
     }
     //If the threshold isn't reached, the card goes back to its initial place
@@ -175,43 +129,19 @@
     swipeEnded(event, 'left', $topCard);
   });
   $('.js-right-trigger').on('click', function(event) {
-    console.log('sapo');
     var $topCard = $('.js-swiping-card').last();
-    swipeEnded(event, 'right', $topCard);
+    var product_id = $topCard[0].firstElementChild.value;
+    $.ajax({
+      url: "{{route('match.store')}}",
+      type: "POST",
+      data: {
+        "_token": "{{ csrf_token() }}",
+        product: product_id,
+      },
+      success: function(response) {
+        swipeEnded(event, 'right', $topCard);
+      },
+    });
   });
 </script>
-
-<script type="application/javascript">
-  var slideIndex = 1;
-  showSlides(slideIndex);
-
-  function plusSlides(n) {
-    showSlides(slideIndex += n);
-  }
-
-  function currentSlide(n) {
-    showSlides(slideIndex = n);
-  }
-
-  function showSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    console.log(slides);
-    var dots = document.getElementsByClassName("dot");
-    if (n > slides.length) {
-      slideIndex = 1
-    }
-    if (n < 1) {
-      slideIndex = slides.length
-    }
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex - 1].style.display = "block";
-  }
-</script>
-
 @endsection
