@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
       var navListItems = $('div.setup-panel div a'),
@@ -49,7 +46,94 @@
   });
 </script>
 
-<div class="container">
+<section class="container-fluid breakcump register">
+    <div class="row" id="selector">
+      <a href="#" class="col-4 kb-link kb-link-active" style="text-align: center;">
+        REGISTRO
+      </a>
+      <a href="#" class="col-4 kb-link" style="text-align: center;">
+        PLANES
+      </a>
+      <a href="#" class="col-4 kb-link" style="text-align: center;">
+        PAGO
+      </a>
+    </div>
+  </section>
+  <section class="container-fluid breakcump-grey">
+    <div class="container">
+      <div class="icon-breakcump">
+        <img src="assets/img/icon-k.png">
+        <h4>REGISTRO</h4>
+      </div>
+    </div>
+  </section>
+  <section class="container mt-2 pb-2 mb-4">
+      <div class="col-md-12">
+        <form class="form-register form-registro-step">
+          <fieldset>
+            <label class="color-green">Ingrese los datos</label>
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Nombre de Usuario">
+                <small class="form-text text-muted">Este dato es solo para notificacion</small>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Correo Elecronico">
+                <small class="form-text text-muted">Este dato es solo para notificacion</small>
+              </div>
+              <div class="form-group">
+                <select class="form-control">
+                  <option value>Val1</option>
+                  <option value="val2">Val2</option>
+                </select>
+                <small class="form-text text-muted">Este dato es solo para notificacion</small>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Contraseña">
+                <small class="form-text text-muted">Este dato es solo para notificacion</small>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Contraseña">
+                <small class="form-text text-muted">Este dato es solo para notificacion</small>
+              </div>
+              <input type="button" name="next" class="btn btn-lg btn-success btn-block next action-button" value="CONTINUAR" />
+          </fieldset>
+          <fieldset>
+            <div class="col-md-12 pt-5 pb-5">
+              <div class="form-group form-check col-md-12">
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" name="example1" value="1">
+                    <label class="custom-control-label" for="customCheck1">PLAN 1 - 1 Producto $10000</label>
+                  </div>
+               </div>
+              <div class="form-group form-check col-md-12">
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="customCheck2" name="example2" value="2">
+                    <label class="custom-control-label" for="customCheck2">PLAN 2 - 5 Productos $10000</label>
+                  </div>
+               </div>
+              <div class="form-group form-check col-md-12">
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="customCheck3" name="example3" value="3">
+                    <label class="custom-control-label" for="customCheck3">PLAN 3 - Hasta 50 Productos $10000</label>
+                  </div>
+               </div> 
+            </div>
+            <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" /> 
+                <input type="button" name="next" class="col-12 btn btn-lg btn-success btn-block next action-button" value="PAGAR" />
+          </fieldset>
+          <fieldset>
+
+            AQUI EL PAGO
+            <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" /> 
+            <input type="button" name="make_payment" class="col-12 btn btn-lg btn-info btn-block next action-button" value="CONFIRMAR" />
+          </fieldset>
+            
+          
+        </form>
+      </div>
+  </section>
+
+{{-- <div class="container">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panel">
             <div class="stepwizard-step">
@@ -163,5 +247,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection

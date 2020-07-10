@@ -39,10 +39,16 @@ body{
 
 .register .kb-link{
   padding: 10px 0px;
+  color: #fff;
 }
 
 .kb-link-active{
   background-color: #0a260a;
+}
+
+
+.form-register fieldset:not(:first-of-type) {
+    display: none;
 }
 
 .form-registro-step{
