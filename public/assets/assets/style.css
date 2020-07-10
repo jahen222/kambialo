@@ -1,0 +1,127 @@
+
+body{
+  background-color: #eeeeee;
+}
+.header-kb{
+  background-color: grey;
+}
+
+.breakcump{
+  background-color: #0a260a;
+  color: #fff;
+}
+
+.color-green{
+  color: #0a260a;
+  font-weight: bold;
+}
+
+.navbar-light .navbar-toggler{
+  color: #000;
+}
+
+.centrado {
+  text-align: center;
+}
+
+/* Bienvenida */
+.icon-breakcump {
+  padding: 20px 0;
+  text-align: center;
+  margin: 0px auto;
+}
+
+
+/* Registro */
+.register{
+  background-color: #c6c8c5;
+}
+
+.register .kb-link{
+  padding: 10px 0px;
+}
+
+.kb-link-active{
+  background-color: #0a260a;
+}
+
+.form-registro-step{
+  background-color: #fff;
+  border-radius: 10px; 
+}
+/**/
+
+.form-register {
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  margin: auto;
+}
+
+
+
+.form-categoria {
+  width: 100%;
+  max-width: 800px;
+  padding: 15px;
+  margin: auto;
+}
+
+.bto{
+  margin: auto;
+}
+
+
+/* PRODUCTO*/
+
+.producto-img img{
+  width: 100%;
+  max-height: 250px;
+}
+
+/*Check*/
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #28a745;
+  background-color: #28a745;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem #28a745;
+}
+
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+  border-color: #28a745;
+}
+
+.custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+  color: #fff;
+  background-color:#28a745;
+  border-color: #28a745;
+}
+
+.custom-control-input[disabled] ~ .custom-control-label, .custom-control-input:disabled ~ .custom-control-label {
+  color: #6c757d;
+}
+
+.custom-control-input[disabled] ~ .custom-control-label::before, .custom-control-input:disabled ~ .custom-control-label::before {
+  background-color: #e9ecef;
+}
+
+
+
+
+.form-register .checkbox {
+  font-weight: 400;
+}
+.form-register .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-register .form-control:focus {
+  z-index: 2;
+}
