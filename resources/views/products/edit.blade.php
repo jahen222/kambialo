@@ -44,34 +44,6 @@
                     <input type="file" id="image3" name="image3">
                 </div>
                 <div class="form-group">
-                    <label for="image4">Imagen4</label>
-                    <input type="file" id="image4" name="image4">
-                </div>
-                <div class="form-group">
-                    <label for="image5">Imagen5</label>
-                    <input type="file" id="image5" name="image5">
-                </div>
-                <div class="form-group">
-                    <label for="image6">Imagen6</label>
-                    <input type="file" id="image6" name="image6">
-                </div>
-                <div class="form-group">
-                    <label for="image7">Imagen7</label>
-                    <input type="file" id="image7" name="image7">
-                </div>
-                <div class="form-group">
-                    <label for="image8">Imagen8</label>
-                    <input type="file" id="image8" name="image8">
-                </div>
-                <div class="form-group">
-                    <label for="image9">Imagen9</label>
-                    <input type="file" id="image9" name="image9">
-                </div>
-                <div class="form-group">
-                    <label for="image10">Imagen10</label>
-                    <input type="file" id="image10" name="image10">
-                </div>
-                <div class="form-group">
                     <label for="tag">Tags</label> <br>
                     <select class="form-group" id="tags" name="tags[]" multiple>
                         @foreach($tags as $tag)

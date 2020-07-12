@@ -8,8 +8,19 @@
   <div class="stack">
     <div class="final-message">No hay mas productos...</div>
     <ul>
+      <?php
+
+      use App\User;
+
+      $productIds = [];
+      $favorites = User::find(auth()->user()->id)->favorites()->select('product_id');
+      foreach ($favorites->get() as $favorite) {
+        array_push($productIds, $favorite->product_id);
+      }
+      ?>
+
       <?php foreach ($products as $product) : ?>
-        @if (auth()->user()->id != $product->user->id)
+        @if (auth()->user()->id != $product->user->id && !in_array($product->id, $productIds))
         <li>
           <a href="{{ route('product.show', $product->id) }}">
             <div class="card js-swiping-card">
@@ -27,7 +38,7 @@
       A volar!
     </button>
     <button type="button" class="btn btn-primary js-right-trigger">
-      Match!
+      Favoritos!
     </button>
   </div>
 </div>
@@ -132,7 +143,7 @@
     var $topCard = $('.js-swiping-card').last();
     var product_id = $topCard[0].firstElementChild.value;
     $.ajax({
-      url: "{{route('match.store')}}",
+      url: "{{route('favorite.store')}}",
       type: "POST",
       data: {
         "_token": "{{ csrf_token() }}",

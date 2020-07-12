@@ -4,16 +4,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-           <h1>Producto Nuevo </h1>
-           <br/>
+            <h1>Producto Nuevo </h1>
+            <br />
 
-           <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="category">Categoría del producto</label>
                     <select class="form-group" id="category" name="category" required>
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @if($category->name != 'Todos')
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endif
                         @endforeach
                     </select>
                 </div>
@@ -42,46 +44,18 @@
                     <input type="file" id="image3" name="image3">
                 </div>
                 <div class="form-group">
-                    <label for="image4">Imagen4</label>
-                    <input type="file" id="image4" name="image4">
-                </div>
-                <div class="form-group">
-                    <label for="image5">Imagen5</label>
-                    <input type="file" id="image5" name="image5">
-                </div>
-                <div class="form-group">
-                    <label for="image6">Imagen6</label>
-                    <input type="file" id="image6" name="image6">
-                </div>
-                <div class="form-group">
-                    <label for="image7">Imagen7</label>
-                    <input type="file" id="image7" name="image7">
-                </div>
-                <div class="form-group">
-                    <label for="image8">Imagen8</label>
-                    <input type="file" id="image8" name="image8">
-                </div>
-                <div class="form-group">
-                    <label for="image9">Imagen9</label>
-                    <input type="file" id="image9" name="image9">
-                </div>
-                <div class="form-group">
-                    <label for="image10">Imagen10</label>
-                    <input type="file" id="image10" name="image10">
-                </div>
-                <div class="form-group">
                     <label for="tag">Tags</label> <br>
                     <select class="form-group" id="tags" name="tags[]" multiple>
                         @foreach($tags as $tag)
-                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                         @endforeach
                     </select>
                 </div>
-              
+
                 <button type="submit" class="btn btn-success">Crear</button>
             </form>
         </div>
     </div>
-{{-- @include('inc.footer') --}}
+    {{-- @include('inc.footer') --}}
 </div>
 @endsection
