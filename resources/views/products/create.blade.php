@@ -3,25 +3,35 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 offset-md-2">
             <h1>Producto Nuevo </h1>
             <br />
 
             <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="category">Categoría del producto</label>
-                    <select class="form-group" id="category" name="category" required>
-                        @foreach($categories as $category)
-                        @if($category->name != 'Todos')
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endif
-                        @endforeach
-                    </select>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="category ">Categoría del producto</label>
+
+                        </div>
+                        <div class="col-8">
+                            <select class="form-control" id="category" name="category" required>
+                                <option value>Seleccionar Categoria</option>
+                                @foreach($categories as $category)
+                                @if($category->name != 'Todos')
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="cover_image">Cover Imagen</label>
-                    <input type="file" id="cover_image" name="cover_image">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" lang="es">
+                        <label class="custom-file-label" for="customFile">Cover Imagen</label>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="name">Nombre del producto</label>
@@ -32,20 +42,26 @@
                     <textarea class="form-control" name="description" id="article-ckeditor" cols="30" rows="10" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="image1">Imagen1</label>
-                    <input type="file" id="image1" name="image1">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image1" lang="es">
+                        <label class="custom-file-label" for="image1">Imagen1</label>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="image2">Imagen2</label>
-                    <input type="file" id="image2" name="image2">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image2" lang="es">
+                        <label class="custom-file-label" for="image2">Imagen2</label>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="image3">Imagen3</label>
-                    <input type="file" id="image3" name="image3">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image3" lang="es">
+                        <label class="custom-file-label" for="image3">Imagen3</label>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="tag">Tags</label> <br>
-                    <select class="form-group" id="tags" name="tags[]" multiple>
+                    <select class="custom-select js-basic-multiple" id="tags" name="tags[]" multiple>
                         @foreach($tags as $tag)
                         <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                         @endforeach
