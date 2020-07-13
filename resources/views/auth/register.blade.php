@@ -105,9 +105,9 @@
                     ?>
                     @foreach($subcription as $sub)
                     <div class="form-group col-md-12">
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input type="radio" id="subscription" name="subscription" value="{{ $sub->id }}">
-                            <label class="custom-control-label" for="customCheck1">{{ $sub->name }} - {{ $sub->description }} - {{ $sub->price }}</label>
+                        <div class="custom-control custom-radio mb-3">
+                            <input type="radio" class="custom-control-input" id="subscription-{{ $sub->id }}" name="subscription" value="{{ $sub->id }}">
+                            <label class="custom-control-label" for="subscription-{{ $sub->id }}">{{ $sub->name }} - {{ $sub->description }} - {{ $sub->price }}</label>
                         </div>
                     </div>
                     @endforeach
