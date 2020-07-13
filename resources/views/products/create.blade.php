@@ -12,8 +12,8 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-4">
-                            <label for="category ">Categoría del producto</label>   
-                            
+                            <label for="category ">Categoría del producto</label>
+
                         </div>
                         <div class="col-8">
                             <select class="form-control" id="category" name="category" required>
@@ -23,14 +23,14 @@
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endif
                                 @endforeach
-                            </select>                            
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile" lang="es">
-                      <label class="custom-file-label" for="customFile">Cover Imagen</label>
+                        <input type="file" class="custom-file-input" id="customFile" lang="es">
+                        <label class="custom-file-label" for="customFile">Cover Imagen</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -43,20 +43,20 @@
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="image1" lang="es">
-                      <label class="custom-file-label" for="image1">Imagen1</label>
+                        <input type="file" class="custom-file-input" id="image1" lang="es">
+                        <label class="custom-file-label" for="image1">Imagen1</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="image2" lang="es">
-                      <label class="custom-file-label" for="image2">Imagen2</label>
+                        <input type="file" class="custom-file-input" id="image2" lang="es">
+                        <label class="custom-file-label" for="image2">Imagen2</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="image3" lang="es">
-                      <label class="custom-file-label" for="image3">Imagen3</label>
+                        <input type="file" class="custom-file-input" id="image3" lang="es">
+                        <label class="custom-file-label" for="image3">Imagen3</label>
                     </div>
                 </div>
                 <div class="form-group">

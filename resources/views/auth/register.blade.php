@@ -82,13 +82,6 @@
                     <small class="form-text text-muted">Correo Elecronico</small>
                 </div>
                 <div class="form-group">
-                    <select class="form-control">
-                        <option value>Val1</option>
-                        <option value="val2">Val2</option>
-                    </select>
-                    <small class="form-text text-muted">Todvia no se</small>
-                </div>
-                <div class="form-group">
                     <input type="password" name="password" required class="form-control">
                     <small class="form-text text-muted">Contraseña</small>
                 </div>
@@ -120,7 +113,7 @@
 
                 AQUI EL PAGO
                 <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" />
-                <button type="submit" class="col-12 btn btn-lg btn-info btn-block">CONFIRMAR</button> 
+                <button type="submit" class="col-12 btn btn-lg btn-info btn-block">CONFIRMAR</button>
             </fieldset>
 
 
