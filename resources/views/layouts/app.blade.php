@@ -17,6 +17,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/style.css') }}">
 
     <!-- Styles -->
@@ -61,13 +63,19 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('products.index') }}">
-                                {{ __('Productos') }}
+                                {{ __('Mis Productos') }}
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('favorites.index') }}">
-                                {{ __('Favoritos') }}
+                                {{ __('Mis Favoritos') }}
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('matches.index') }}">
+                                {{ __('Mis Matches') }}
                             </a>
                         </li>
 
@@ -101,6 +109,7 @@
     <script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="https://kit.fontawesome.com/18f61f0b58.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script type="text/javascript" src="{{ asset('assets/app.js') }}"></script>
 </body>
 

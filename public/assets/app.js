@@ -66,3 +66,11 @@ return false;
 })
 
 });
+
+
+
+
+$(document).ready(function() {
+
+    $('.js-basic-multiple').select2();
+});

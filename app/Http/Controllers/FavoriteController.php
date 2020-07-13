@@ -6,6 +6,7 @@ use App\Favorite;
 use Illuminate\Http\Request;
 use App\User;
 use App\Product;
+use App\Match;
 
 
 class FavoriteController extends Controller
@@ -20,7 +21,7 @@ class FavoriteController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $favorites = $user->favorites()->paginate(10);
-  
+
         return view('favorites.index', compact('favorites'));
     }
 
@@ -45,33 +46,94 @@ class FavoriteController extends Controller
         $user = User::find(auth()->user()->id);
         $product = Product::find($request->input('product'));
         $favorite = $user->favorites()->where('product_id', '=', $product->id)->first();
-        //echo dd($favorite->id);
+        $userProduct = $product->user()->first();
+        $match = Match::where([
+            ['user_id_1', '=', $user->id],
+            ['user_id_2', '=', $userProduct->id]
+        ])->first();
+
         if (!empty($favorite)) {
             $favorite->delete();
+            
+            if (!is_null($match)) {
+                $productIds = [];
+                foreach ($user->favorites()->get() as $favorite) {
+                    array_push($productIds, $favorite->product_id);
+                }
+
+                if (empty($userProduct->products()->whereIn('id', $productIds)->first())) {
+                    $match->delete();
+                }
+            }
         } else {
             $favorite = new Favorite;
             $favorite->user()->associate($user);
-            $product = Product::find($request->input('product'));
             $favorite->product()->associate($product);
             $favorite->save();
+
+            if (is_null($match)) {
+                $productIds = [];
+                foreach ($userProduct->favorites()->get() as $upf) {
+                    array_push($productIds, $upf->product_id);
+                }
+                
+                if (!empty($user->products()->whereIn('id', $productIds)->first())) {
+                    $userMatcher = new Match;
+                    $userMatcher->user1()->associate($user);
+                    $userMatcher->user2()->associate($userProduct);
+                    $userMatcher->save();
+                }
+            }
         }
+        
         return back()->withInput();
     }
-    
-    public function matchstore(Request $request)
+
+    public function storeHome(Request $request)
     {
         $user = User::find(auth()->user()->id);
         $product = Product::find($request->input('product'));
         $favorite = $user->favorites()->where('product_id', '=', $product->id)->first();
+        $userProduct = $product->user()->first();
+        $match = Match::where([
+            ['user_id_1', '=', $user->id],
+            ['user_id_2', '=', $userProduct->id]
+        ])->first();
+
         if (!empty($favorite)) {
             $favorite->delete();
+            
+            if (!is_null($match)) {
+                $productIds = [];
+                foreach ($user->favorites()->get() as $favorite) {
+                    array_push($productIds, $favorite->product_id);
+                }
+
+                if (empty($userProduct->products()->whereIn('id', $productIds)->first())) {
+                    $match->delete();
+                }
+            }
         } else {
             $favorite = new Favorite;
             $favorite->user()->associate($user);
-            $product = Product::find($request->input('product'));
             $favorite->product()->associate($product);
             $favorite->save();
+
+            if (is_null($match)) {
+                $productIds = [];
+                foreach ($userProduct->favorites()->get() as $upf) {
+                    array_push($productIds, $upf->product_id);
+                }
+                
+                if (!empty($user->products()->whereIn('id', $productIds)->first())) {
+                    $userMatcher = new Match;
+                    $userMatcher->user1()->associate($user);
+                    $userMatcher->user2()->associate($userProduct);
+                    $userMatcher->save();
+                }
+            }
         }
+
         return response('Success', 200);
     }
     /**
