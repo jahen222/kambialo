@@ -107,7 +107,7 @@
                     <div class="form-group col-md-12">
                         <div class="custom-control custom-radio mb-3">
                             <input type="radio" class="custom-control-input" id="subscription-{{ $sub->id }}" name="subscription" value="{{ $sub->id }}">
-                            <label class="custom-control-label" for="subscription-{{ $sub->id }}">{{ $sub->name }} - {{ $sub->description }} - {{ $sub->price }}</label>
+                            <label class="custom-control-label" for="subscription-{{ $sub->id }}">{{ $sub->name }} - {{ $sub->description }} - $ {{ number_format($sub->price) }} x 4 meses</label>
                         </div>
                     </div>
                     @endforeach
