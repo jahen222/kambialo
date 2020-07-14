@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" lang="es">
+                        <input type="file" class="custom-file-input" name="cover_image" id="customFile" lang="es">
                         <label class="custom-file-label" for="customFile">Cover Imagen</label>
                     </div>
                 </div>
@@ -43,19 +43,19 @@
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image1" lang="es">
+                        <input type="file" class="custom-file-input" id="image1" name="image1" lang="es">
                         <label class="custom-file-label" for="image1">Imagen1</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image2" lang="es">
+                        <input type="file" class="custom-file-input" id="image2" name="image2" lang="es">
                         <label class="custom-file-label" for="image2">Imagen2</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image3" lang="es">
+                        <input type="file" class="custom-file-input" id="image3" name="image3" lang="es">
                         <label class="custom-file-label" for="image3">Imagen3</label>
                     </div>
                 </div>

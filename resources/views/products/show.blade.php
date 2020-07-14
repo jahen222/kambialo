@@ -29,41 +29,6 @@
                       <img style="width:100%" src="/images/{{$product->image3}}" alt="{{$product->image3}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if (isset($product->image4)) : ?>
-                    <div class="mySlides">
-                      <img style="width:100%" src="/images/{{$product->image4}}" alt="{{$product->image4}}" style="width:100%">
-                    </div>
-                  <?php endif; ?>
-                  <?php if (isset($product->image5)) : ?>
-                    <div class="mySlides">
-                      <img style="width:100%" src="/images/{{$product->image5}}" alt="{{$product->image5}}" style="width:100%">
-                    </div>
-                  <?php endif; ?>
-                  <?php if (isset($product->image6)) : ?>
-                    <div class="mySlides">
-                      <img style="width:100%" src="/images/{{$product->image6}}" alt="{{$product->image6}}" style="width:100%">
-                    </div>
-                  <?php endif; ?>
-                  <?php if (isset($product->image7)) : ?>
-                    <div class="mySlides">
-                      <img style="width:100%" src="/images/{{$product->image7}}" alt="{{$product->image7}}" style="width:100%">
-                    </div>
-                  <?php endif; ?>
-                  <?php if (isset($product->image8)) : ?>
-                    <div class="mySlides">
-                      <img style="width:100%" src="/images/{{$product->image8}}" alt="{{$product->image8}}" style="width:100%">
-                    </div>
-                  <?php endif; ?>
-                  <?php if (isset($product->image9)) : ?>
-                    <div class="mySlides">
-                      <img style="width:100%" src="/images/{{$product->image9}}" alt="{{$product->image9}}" style="width:100%">
-                    </div>
-                  <?php endif; ?>
-                  <?php if (isset($product->image10)) : ?>
-                    <div class="mySlides">
-                      <img style="width:100%" src="/images/{{$product->image10}}" alt="{{$product->image10}}" style="width:100%">
-                    </div>
-                  <?php endif; ?>
                   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                   <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 </div>
