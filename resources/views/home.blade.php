@@ -24,8 +24,11 @@
         <li>
           <a href="{{ route('product.show', $product->id) }}">
             <div class="card js-swiping-card">
+              <h5>{{ $product->name }}</h5>
+
               <input id="id" type="hidden" value="{{$product->id}}">
               <div class="card-illustration js-lazyload" data-original="/images/{{$product->cover_image}}"></div>
+              <p>{{ $product->description }}</p>
             </div>
           </a>
         </li>
@@ -35,10 +38,10 @@
   </div>
   <div class="btn-controls text-center">
     <button type="button" class="btn btn-danger js-left-trigger">
-      A volar!
+      Más tarde
     </button>
     <button type="button" class="btn btn-primary js-right-trigger">
-      Favoritos!
+      Me gusta
     </button>
   </div>
 </div>

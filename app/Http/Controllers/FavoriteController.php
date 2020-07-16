@@ -47,11 +47,8 @@ class FavoriteController extends Controller
         $product = Product::find($request->input('product'));
         $favorite = $user->favorites()->where('product_id', '=', $product->id)->first();
         $userProduct = $product->user()->first();
-        $match = Match::where([
-            ['user_id_1', '=', $user->id],
-            ['user_id_2', '=', $userProduct->id]
-        ])->first();
-
+        
+        $match = Match::whereIn('user_id_1', [$user->id, $userProduct->id])->whereIn('user_id_2', [$user->id, $userProduct->id])->first();
         if (!empty($favorite)) {
             $favorite->delete();
             
@@ -95,11 +92,8 @@ class FavoriteController extends Controller
         $product = Product::find($request->input('product'));
         $favorite = $user->favorites()->where('product_id', '=', $product->id)->first();
         $userProduct = $product->user()->first();
-        $match = Match::where([
-            ['user_id_1', '=', $user->id],
-            ['user_id_2', '=', $userProduct->id]
-        ])->first();
-
+        
+        $match = Match::whereIn('user_id_1', [$user->id, $userProduct->id])->whereIn('user_id_2', [$user->id, $userProduct->id])->first();
         if (!empty($favorite)) {
             $favorite->delete();
             
