@@ -107,6 +107,8 @@
         </nav>
 
         <main class="py-4" style="background-color: #e1e3e5;">
+            @include('flash-message')
+            
             @yield('content')
         </main>
     </div>

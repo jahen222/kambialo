@@ -62,6 +62,9 @@ class FavoriteController extends Controller
                     $match->delete();
                 }
             }
+
+            return back()->withInput()->with('success', 'Producto retirado de favoritos.');
+
         } else {
             $favorite = new Favorite;
             $favorite->user()->associate($user);
@@ -79,11 +82,13 @@ class FavoriteController extends Controller
                     $userMatcher->user1()->associate($user);
                     $userMatcher->user2()->associate($userProduct);
                     $userMatcher->save();
+
+                    return back()->withInput()->with('success', 'Producto agregado a favoritos e hiciste match con otra persona.');
                 }
             }
         }
         
-        return back()->withInput();
+        return back()->withInput()->with('success', 'Producto agregado a favoritos.');
     }
 
     public function storeHome(Request $request)
