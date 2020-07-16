@@ -1,6 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+.app-fab--absolute {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+@media(min-width: 1024px) {
+   .app-fab--absolute {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -10,11 +25,10 @@
                 <div class="panel-body">
 
                     @can('create')
-                        <p class="text-right">
-                            <a href="{{ route('product.create') }}" class="btn btn-success">
-                                Crear
-                            </a>
-                        </p>
+
+                        <a href="{{ route('product.create') }}" class="mdc-fab app-fab--absolute" aria-label="F+">
+                          <span class="mdc-fab__icon material-icons">+</span>
+                        </a>
                     @endcan
 
                     <table class="table table-striped">

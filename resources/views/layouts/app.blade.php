@@ -19,6 +19,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/material/css/mdb.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/style.css') }}">
 
     <!-- Styles -->
@@ -118,6 +120,7 @@
     <script type="text/javascript" src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="https://kit.fontawesome.com/18f61f0b58.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="{{ asset('ssets/material/js/mdb.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/app.js') }}"></script>
 </body>
 
