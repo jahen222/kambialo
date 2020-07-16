@@ -24,11 +24,9 @@
         <li>
           <a href="{{ route('product.show', $product->id) }}">
             <div class="card js-swiping-card">
-              <h5>{{ $product->name }}</h5>
-
               <input id="id" type="hidden" value="{{$product->id}}">
               <div class="card-illustration js-lazyload" data-original="/images/{{$product->cover_image}}"></div>
-              <p>{{ $product->description }}</p>
+              <h5>{{ $product->name }}</h5>
             </div>
           </a>
         </li>
@@ -146,7 +144,7 @@
     var $topCard = $('.js-swiping-card').last();
     var product_id = $topCard[0].firstElementChild.value;
     $.ajax({
-      url: "{{route('favorite.store')}}",
+      url: "{{route('favorite_home.store')}}",
       type: "POST",
       data: {
         "_token": "{{ csrf_token() }}",
