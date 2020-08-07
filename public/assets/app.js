@@ -51,18 +51,33 @@ $(document).ready(function () {
     })
 
 });
-//fs = fieldset
+var _request;
 function ajax(fs) {
-    $.ajax({
+    if(_request)
+        _request.abort();
+
+    _request = $.ajax({
         url: fs.data('url'),
         data: fs.find(':input').serialize(),
         type: 'get',
         dataType: 'json',
+        beforeSend: function()
+        {
+            $('#buyorder').val('');
+            $('#confirmation-btn').addClass('disabled');
+            fs.find('.next').addClass('disabled');
+            fs.find('.previous').addClass('disabled');
+        },
+        complete: function()
+        {
+            fs.find('.next').removeClass('disabled');
+            fs.find('.previous').addClass('disabled');
+        },
         success: function (data) {
             $('#token_ws').val(data.token);
             $('#url_ws').val(data.token);
             $('#price').html(data.sub.price);
-            $('iframe').attr('height', '550px');
+            $('iframe').attr('height', '450px');
             show_next_fs(fs)
             post_to_iframe(data);
         }

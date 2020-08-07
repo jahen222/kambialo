@@ -117,7 +117,7 @@
                 <input type="hidden" name="token_ws" id="token_ws"/>
                 <input type="hidden" name="voucher" id="voucher">
                 <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" />
-                <button type="submit" class="col-12 btn btn-lg btn-info btn-block">CONFIRMAR</button>
+                <button type="submit" class="col-12 btn btn-lg btn-info btn-block disabled" id="confirmation-btn">CONFIRMAR</button>
             </fieldset>
 
 
