@@ -91,7 +91,7 @@
                 </div>
                 <input type="button" name="next" class="btn btn-lg btn-success btn-block next action-button" value="CONTINUAR" />
             </fieldset>
-            <fieldset>
+            <fieldset data-ajax="true" data-url="{{ url('webpay')}}">
                 <div class="col-md-12 pt-5 pb-5">
                     <?php
                     $subcription = App\Subscription::all();
@@ -104,14 +104,18 @@
                         </div>
                     </div>
                     @endforeach
-
                 </div>
                 <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" />
                 <input type="button" name="next" class="col-12 btn btn-lg btn-success btn-block next action-button" value="PAGAR" />
             </fieldset>
             <fieldset>
-
-                AQUI EL PAGO
+                <iframe src="" id="webpay-iframe" name="webpay-iframe" frameborder="0" width="100%" height="450px"></iframe>
+                <div class="form-group">
+                    <input type="text" disabled name="buyorder" id="buyorder" class="form-control"/>
+                    <small class="form-text text-muted">N orden</small>
+                </div>
+                <input type="hidden" name="token_ws" id="token_ws"/>
+                <input type="hidden" name="voucher" id="voucher">
                 <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" />
                 <button type="submit" class="col-12 btn btn-lg btn-info btn-block">CONFIRMAR</button>
             </fieldset>

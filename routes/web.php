@@ -21,6 +21,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//webpay
+Route::get('webpay', 'WebpayController@index')->name('webpay.index');
+Route::post('webpay/final', 'WebpayController@final')->name('webpay.final');
+Route::post('webpay/confirmation', 'WebpayController@confirmation')->name('webpay.confirmation');
+
 Route::middleware(['auth'])->group(function () {
     // Products
     Route::get('products', 'ProductController@index')->name('products.index')->middleware('permission:index');
