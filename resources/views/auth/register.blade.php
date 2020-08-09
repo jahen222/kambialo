@@ -69,29 +69,29 @@
 </section>
 <section class="container mt-2 pb-2 mb-4">
     <div class="col-md-12">
-        <form method="POST" action="{{ route('register') }}" class="form-register form-registro-step">
+        <form method="POST" action="{{ route('preregister') }}" class="form-register form-registro-step">
             @csrf
             <fieldset>
                 <label class="color-green">Ingrese los datos</label>
                 <div class="form-group">
-                    <input type="text" name="name" required class="form-control">
+                    <input type="text" name="register[name]" required class="form-control">
                     <small class="form-text text-muted">Nombre de Usuario</small>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" required class="form-control">
+                    <input type="email" name="register[email]" required class="form-control">
                     <small class="form-text text-muted">Correo Elecronico</small>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" required class="form-control">
+                    <input type="password" name="register[password]" required class="form-control">
                     <small class="form-text text-muted">Contraseña</small>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password_confirmation" required class="form-control">
+                    <input type="password" name="register[password_confirmation]" required class="form-control">
                     <small class="form-text text-muted">Confirmar Contraseña</small>
                 </div>
                 <input type="button" name="next" class="btn btn-lg btn-success btn-block next action-button" value="CONTINUAR" />
             </fieldset>
-            <fieldset data-ajax="true" data-url="{{ url('webpay')}}">
+            <fieldset>
                 <div class="col-md-12 pt-5 pb-5">
                     <?php
                     $subcription = App\Subscription::all();
@@ -99,7 +99,9 @@
                     @foreach($subcription as $sub)
                     <div class="form-group col-md-12">
                         <div class="custom-control custom-radio mb-3">
-                            <input type="radio" class="custom-control-input" id="subscription-{{ $sub->id }}" name="subscription" value="{{ $sub->id }}">
+                            <input type="radio" data-name="{{ $sub->name }}" data-description="{{$sub->description}}"
+                                data-price="{{ number_format($sub->price) }}" class="custom-control-input" id="subscription-{{ $sub->id }}"
+                                name="register[subscription_id]" value="{{ $sub->id }}"/>
                             <label class="custom-control-label" for="subscription-{{ $sub->id }}">{{ $sub->name }} - {{ $sub->description }} - $ {{ number_format($sub->price) }} x 4 meses</label>
                         </div>
                     </div>
@@ -109,18 +111,11 @@
                 <input type="button" name="next" class="col-12 btn btn-lg btn-success btn-block next action-button" value="PAGAR" />
             </fieldset>
             <fieldset>
-                <iframe src="" id="webpay-iframe" name="webpay-iframe" frameborder="0" width="100%" height="450px"></iframe>
-                <div class="form-group">
-                    <input type="text" disabled name="buyorder" id="buyorder" class="form-control"/>
-                    <small class="form-text text-muted">N orden</small>
-                </div>
-                <input type="hidden" name="token_ws" id="token_ws"/>
-                <input type="hidden" name="voucher" id="voucher">
+                <p><b>Subscripción: </b><span id="sub-name"></span> - <span id="sub-description"></span></p>
+                <p><b>Precio: $ </b><span id="sub-price"></span></p>
                 <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" />
-                <button type="submit" class="col-12 btn btn-lg btn-info btn-block disabled" id="confirmation-btn">CONFIRMAR</button>
+                <button type="submit" class="col-12 btn btn-lg btn-info btn-block submit">CONFIRMAR</button>
             </fieldset>
-
-
         </form>
     </div>
 </section>
