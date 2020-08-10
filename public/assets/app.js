@@ -3,14 +3,14 @@ $(document).ready(function () {
     var current_fs, next_fs, previous_fs; //fieldsets
     var opacity;
 
+    $('input[type=radio]').on('change', function(){
+        $('#sub-name').html($(this).data('name'));
+        $('#sub-description').html($(this).data('description'));
+        $('#sub-price').html($(this).data('price'));
+    });
+
     $(".next").click(function () {
-
         current_fs = $(this).parent();
-        if (current_fs.data('ajax')) {
-            ajax(current_fs);
-            return;
-        }
-
         show_next_fs(current_fs);
     });
 
@@ -47,52 +47,11 @@ $(document).ready(function () {
     });
 
     $(".submit").click(function () {
-        return false;
+        $('form').submit();
+        /*return false;*/
     })
 
 });
-var _request;
-function ajax(fs) {
-    if(_request)
-        _request.abort();
-
-    _request = $.ajax({
-        url: fs.data('url'),
-        data: fs.find(':input').serialize(),
-        type: 'get',
-        dataType: 'json',
-        beforeSend: function()
-        {
-            $('#buyorder').val('');
-            $('#confirmation-btn').addClass('disabled');
-            fs.find('.next').addClass('disabled');
-            fs.find('.previous').addClass('disabled');
-        },
-        complete: function()
-        {
-            fs.find('.next').removeClass('disabled');
-            fs.find('.previous').addClass('disabled');
-        },
-        success: function (data) {
-            $('#token_ws').val(data.token);
-            $('#url_ws').val(data.token);
-            $('#price').html(data.sub.price);
-            $('iframe').attr('height', '450px');
-            show_next_fs(fs)
-            post_to_iframe(data);
-        }
-    });
-}
-
-function post_to_iframe(data) {
-    var html = '<form style="display:none;" target="webpay-iframe" method="post" action="' + data.url + '">\
-                    <input type="hidden" value="'+ data.token + '" name="TBK_TOKEN"/>\
-                </form>';
-    form = $(html);
-    $(document.body).append(form);
-    form.submit();
-    form.remove();
-}
 
 function show_next_fs(current_fs) {
     next_fs = current_fs.next();

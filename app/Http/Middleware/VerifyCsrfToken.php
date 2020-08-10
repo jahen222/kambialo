@@ -13,6 +13,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'webpay/*'
+        'webpay/*',
+        'confirmation',
+        'endregister',
     ];
 }
