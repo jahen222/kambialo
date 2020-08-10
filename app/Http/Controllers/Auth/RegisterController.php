@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\WebpayOrder;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -84,6 +85,20 @@ class RegisterController extends Controller
 
         /* Comprueba que la orden no haya sido pagada */
         if ($response->detailOutput->responseCode == 0) {
+            $user = User::where('token_webpay', $request->input('token_ws'))->first();
+            WebpayOrder::create([
+                'user_id' => $user->id,
+                'accounting_date' => $response->accountingDate,
+                'buy_order' => $response->buyOrder,
+                'card_number' => $response->cardDetail->cardNumber,
+                'authorization_code' => $response->detailOutput->authorizationCode,
+                'payment_code' => $response->detailOutput->paymentTypeCode,
+                'response_code' => $response->detailOutput->responseCode,
+                'shares_number' => $response->detailOutput->sharesNumber,
+                'amount' => $response->detailOutput->amount,
+                'commerce_code' => $response->detailOutput->commerceCode,
+                'transaction_date' => $response->transactionDate,
+            ]);
             $plus->acknowledgeTransaction();
         }
         return RedirectorHelper::redirectBackNormal($response->urlRedirection);
@@ -91,8 +106,10 @@ class RegisterController extends Controller
 
     public function endregister(Request $request)
     {
-        if ($user = User::where('token_webpay', $request->input('token_ws'))->first())
-            return view('auth.register.endregistration', ['user' => $user]);   
+        if ($user = User::where('token_webpay', $request->input('token_ws'))->first()) {
+            if (WebpayOrder::where('user_id', $user->id)->first())
+                return view('auth.register.endregistration', ['user' => $user]);
+        }
     }
 
     /**
