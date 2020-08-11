@@ -29,7 +29,7 @@ Route::get('webpay', 'WebpayController@index')->name('webpay.index');
 Route::post('webpay/final', 'WebpayController@final')->name('webpay.final');
 Route::post('webpay/confirmation', 'WebpayController@confirmation')->name('webpay.confirmation');
 
-Route::middleware(['auth'])->group(function () {
+//Route::middleware(['auth'])->group(function () {
     // Products
     Route::get('products', 'ProductController@index')->name('products.index')->middleware('permission:index');
     Route::get('product/create', 'ProductController@create')->name('product.create')->middleware('permission:create');
@@ -49,4 +49,4 @@ Route::middleware(['auth'])->group(function () {
 
     // Favorites
     Route::post('match/store', 'FavoriteController@storeHome')->name('favorite_home.store')->middleware('permission:store');
-});
+//});
