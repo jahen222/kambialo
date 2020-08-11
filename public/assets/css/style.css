@@ -35,7 +35,7 @@
 
 .kb-bannerimage .banner-header i {
     font-size: 36px;
-    color: white;
+    /*color: white;*/
 }
 
 .kb-bannerimage .banner-description {
@@ -132,7 +132,7 @@
 }
 
 .kb-categories .product-categories .p-category {
-    margin: 1%;
+    /*margin: 1%;*/
 }
 
 .kb-categories .product-categories .p-category .ct-btn {
@@ -163,7 +163,6 @@
 }
 
 .kb-plans {
-    padding: 3% 15%;
     background-color: #f3f3f3;
 }
 
@@ -230,9 +229,9 @@
 .kb-footer {
     width: 100vw;
     text-align: center;
-    padding: 3% 22% 5% 22%;
     color: #ffffff;
-    background-color: #5078e0;
+    background-color: #5078e0;    
+    padding: 20px;
 }
 
 .kb-footer img {

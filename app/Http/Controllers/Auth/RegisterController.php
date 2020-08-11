@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use Auth;
 use App\WebpayOrder;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -108,6 +109,7 @@ class RegisterController extends Controller
     {
         if ($user = User::where('token_webpay', $request->input('token_ws'))->first()) {
             if (WebpayOrder::where('user_id', $user->id)->first())
+                Auth::loginUsingId($user->id);
                 return view('auth.register.endregistration', ['user' => $user]);
         }
     }
