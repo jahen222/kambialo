@@ -22,7 +22,11 @@ Auth::routes();
 Route::post('preregister', 'Auth\RegisterController@preregister')->name('preregister');
 Route::post('confirmation', 'Auth\RegisterController@confirmation')->name('confirmation');
 Route::post('endregister', 'Auth\RegisterController@endregister')->name('endregister');
-Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function () {
+    return view('welcome');
+});
 
 //webpay
 Route::get('webpay', 'WebpayController@index')->name('webpay.index');

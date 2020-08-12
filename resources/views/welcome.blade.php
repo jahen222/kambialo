@@ -161,7 +161,7 @@
             @endguest
                         @auth
                         <li>
-                            <a href="{{ route('/') }}">
+                            <a href="{{ url('/') }}">
                                 {{ __('Home') }}
                             </a>
                         </li>
