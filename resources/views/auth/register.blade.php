@@ -45,7 +45,6 @@
         $('div.setup-panel div a.btn-success').trigger('click');
     });
 </script>
-
 <section class="container-fluid breakcump register">
     <div class="row" id="selector">
         <a href="#" class="col-4 kb-link kb-link-active" style="text-align: center;">
@@ -61,6 +60,11 @@
 </section>
 <section class="container-fluid breakcump-grey">
     <div class="container">
+    <?php if(session()->has('webpay-message')): ?>
+        <div class="alert-warning" style="margin: 10px 0;">
+            <p><?= session()->get('webpay-message') ?></p>
+        </div>
+    <?php endif ?>
         <div class="icon-breakcump">
             <img src="assets/img/icon-k.png">
             <h4>REGISTRO</h4>

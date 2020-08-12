@@ -108,10 +108,14 @@ class RegisterController extends Controller
     public function endregister(Request $request)
     {
         if ($user = User::where('token_webpay', $request->input('token_ws'))->first()) {
-            if (WebpayOrder::where('user_id', $user->id)->first())
-                Auth::loginUsingId($user->id);
-                return view('auth.register.endregistration', ['user' => $user]);
+            if ($order = WebpayOrder::where('user_id', $user->id)->first()){
+				Auth::loginUsingId($user->id);
+            	return view('auth.register.endregistration', ['user' => $user, 'order' => $order]);
+            }
+            $user->delete();
         }
+        \Session::flash('webpay-message', 'Ha ocurrido un problema con su pago, puede volver a intentarlo');
+        return redirect('register');
     }
 
     /**
