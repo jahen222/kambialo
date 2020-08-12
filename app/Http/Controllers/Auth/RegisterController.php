@@ -49,7 +49,23 @@ class RegisterController extends Controller
 
     public function preregister(Request $request)
     {
-        if ($data = $request->input('register')) {
+        if ($data = $request->input('users')) {
+
+            Validator::make(
+                $data,
+                [
+                    'name' => 'required',
+                    'email' => 'unique:users',
+                    'subscription_id' => 'required'
+                ],
+                [
+                    'name.required' => 'Usuario es requerido',
+                    'subscription_id.required' => 'Debe seleccionar un plan de subscripcion',
+                    'email.unique' => 'El correo electronico se encuentra en uso',
+                ]
+            )->validate();
+
+            
             // Obtenemos los certificados y llaves para utilizar el ambiente de integración de Webpay Normal.  
             $bag = CertificationBagFactory::integrationWebpayNormal();
 
@@ -108,9 +124,9 @@ class RegisterController extends Controller
     public function endregister(Request $request)
     {
         if ($user = User::where('token_webpay', $request->input('token_ws'))->first()) {
-            if ($order = WebpayOrder::where('user_id', $user->id)->first()){
-				Auth::loginUsingId($user->id);
-            	return view('auth.register.endregistration', ['user' => $user, 'order' => $order]);
+            if ($order = WebpayOrder::where('user_id', $user->id)->first()) {
+                Auth::loginUsingId($user->id);
+                return view('auth.register.endregistration', ['user' => $user, 'order' => $order]);
             }
             $user->delete();
         }
