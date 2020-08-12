@@ -23,10 +23,7 @@ Route::post('preregister', 'Auth\RegisterController@preregister')->name('preregi
 Route::post('confirmation', 'Auth\RegisterController@confirmation')->name('confirmation');
 Route::post('endregister', 'Auth\RegisterController@endregister')->name('endregister');
 
-//Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home', function () {
-    return view('welcome');
-});
+Route::get('start', 'HomeController@index')->name('home');
 
 //webpay
 Route::get('webpay', 'WebpayController@index')->name('webpay.index');
@@ -50,7 +47,6 @@ Route::post('webpay/confirmation', 'WebpayController@confirmation')->name('webpa
     // Matches
     Route::get('matches', 'MatchController@index')->name('matches.index');//->middleware('permission:index');
     Route::get('match/{role}', 'MatchController@show')->name('match.show');//->middleware('permission:show');
-
     // Favorites
     Route::post('match/store', 'FavoriteController@storeHome')->name('favorite_home.store');//->middleware('permission:store');
 //});
