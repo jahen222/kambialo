@@ -106,6 +106,12 @@
           height: 2px;
           background-color: transparent;
       }
+
+      @media (max-width: 768px){
+        .caption h1{
+          font-size: 16px;
+        }
+      }
       </style>
   </head>
   <body>   
@@ -147,12 +153,15 @@
         <ul class="categories"> 
             @guest
             <li>
+                <a href="{{ url('login') }}"><span class="top">Iniciar Sesion</span></a>
+            </li>
+            <li>
                 <a href="{{ url('register') }}"><span class="top">Registro</span></a>
             </li>
-            @endif
-                        @else
+            @endguest
+                        @auth
                         <li>
-                            <a href="{{ route('home') }}">
+                            <a href="{{ route('/') }}">
                                 {{ __('Home') }}
                             </a>
                         </li>
@@ -196,7 +205,7 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-                        @endguest
+                        @endauth
         </ul> 
       </div>   
       <div class="b-wrapper">
@@ -226,7 +235,9 @@
                         <div class="b-header_links hidden-sm-down">
                           <ul class="pl-0 mb-0 list-unstyled">
                               <li>
+                                @guest
                                 <a href="login" class="btn btn-white d-none-sm d-block-md d-block-lg d-block-xl"> INICIA SESIÓN </a>
+                                @endguest
                               </li>
                           </ul>   
                         </div>
@@ -249,7 +260,7 @@
                       <h1> SI PUEDES KAMBIAR </h1>
                       <p> Aquí podrás subir los productos que <br> no necesitas pero que alguien más si </p>
                       <div class="registrate-button">
-                        <a href="register" class="btn btn-green"> REGÍSTRATE </a>
+                        <a href="{{ url('register') }}" class="btn btn-green"> REGÍSTRATE </a>
                       </div> 
                   </div> 
                 </li>
