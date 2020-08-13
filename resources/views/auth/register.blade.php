@@ -45,6 +45,9 @@
         $('div.setup-panel div a.btn-success').trigger('click');
     });
 </script>
+<script>
+   
+</script>
 <section class="container-fluid breakcump register">
     <div class="row" id="selector">
         <a href="#" class="col-4 kb-link kb-link-active" style="text-align: center;">
@@ -65,15 +68,6 @@
                 <p><?= session()->get('webpay-message') ?></p>
             </div>
         <?php endif ?>
-        @if ($errors->any())
-        <div class="alert alert-danger" style="margin: 10px 0;">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
         <div class="icon-breakcump">
             <img src="assets/img/icon-k.png">
             <h4>REGISTRO</h4>
@@ -89,18 +83,22 @@
                 <div class="form-group">
                     <input type="text" name="users[name]" value="{{ old('users.name') }}" required class="form-control">
                     <small class="form-text text-muted">Nombre de Usuario</small>
+                    <small class="form-text text-danger">@error('name') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
                     <input type="email" name="users[email]" value="{{ old('users.email') }}" required class="form-control">
                     <small class="form-text text-muted">Correo Elecronico</small>
+                    <small class="form-text text-danger">@error('email') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
                     <input type="password" name="users[password]" value="{{ old('users.password') }}" required class="form-control">
                     <small class="form-text text-muted">Contraseña</small>
+                    <small class="form-text text-danger">@error('password') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
                     <input type="password" name="users[password_confirmation]" value="{{ old('users.password_confirmation') }}" required class="form-control">
                     <small class="form-text text-muted">Confirmar Contraseña</small>
+                    <small class="form-text text-danger">@error('password_confirmation'){{ $message }} @enderror</small>
                 </div>
                 <input type="button" name="next" class="btn btn-lg btn-success btn-block next action-button" value="CONTINUAR" />
             </fieldset>
@@ -117,6 +115,7 @@
                         </div>
                     </div>
                     @endforeach
+                    <small class="form-text text-danger">@error('subscription_id'){{ $message }} @enderror</small>
                 </div>
                 <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" />
                 <input type="button" name="next" class="col-12 btn btn-lg btn-success btn-block next action-button" value="PAGAR" />

@@ -3,7 +3,7 @@ $(document).ready(function () {
     var current_fs, next_fs, previous_fs; //fieldsets
     var opacity;
 
-    $('input[type=radio]').on('change', function(){
+    $('input[type=radio]').on('change', function () {
         $('#sub-name').html($(this).data('name'));
         $('#sub-description').html($(this).data('description'));
         $('#sub-price').html($(this).data('price'));
@@ -51,6 +51,10 @@ $(document).ready(function () {
         /*return false;*/
     })
 
+    $(':input').on('change', function () {
+        $(this).nextAll('.text-danger').html('');
+        $(this).parents('.form-group').nextAll('.text-danger').html('');
+    });
 });
 
 function show_next_fs(current_fs) {
