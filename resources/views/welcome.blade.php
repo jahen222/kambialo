@@ -11,7 +11,7 @@
       <meta name="keywords" content="" >  
       
       <!-- FAVICON -->       
-      <link rel="shortcut icon" href="{{ asset('home/assets/images/favicon.png')}}">
+      <link rel="shortcut icon" href="{{ asset('homes/assets/images/favicon.png')}}">
 
       <!-- CSS:: FONTS --> 
       <link href="https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i" rel="stylesheet"> 
@@ -21,16 +21,16 @@
 
       <!-- CSS:: OWL -->
       <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ asset('home/assets/css/plugins/owl/owl.carousel.min.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ asset('home/assets/css/plugins/owl/owl.theme.default.min.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ asset('homes/assets/css/plugins/owl/owl.carousel.min.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ asset('homes/assets/css/plugins/owl/owl.theme.default.min.css') }}">
 
       <!-- CSS:: REVOLUTION -->
-      <link rel="stylesheet" type="text/css" href="{{ asset('home/assets/css/plugins/revolution/settings.css') }}"> 
-      <link rel="stylesheet" type="text/css" href="{{ asset('home/assets/css/plugins/revolution/layers.css') }}"> 
-      <link rel="stylesheet" type="text/css" href="{{ asset('home/assets/css/plugins/revolution/navigation.css') }}"> 
+      <link rel="stylesheet" type="text/css" href="{{ asset('homes/assets/css/plugins/revolution/settings.css') }}"> 
+      <link rel="stylesheet" type="text/css" href="{{ asset('homes/assets/css/plugins/revolution/layers.css') }}"> 
+      <link rel="stylesheet" type="text/css" href="{{ asset('homes/assets/css/plugins/revolution/navigation.css') }}"> 
       
       <!-- CSS:: MAIN -->
-      <link rel="stylesheet" type="text/css" href="{{ asset('home/assets/css/main.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ asset('homes/assets/css/main.css') }}">
 
       <style>
         .kb-plans {
@@ -123,19 +123,19 @@
         </div>
         <ul class="b-mini_cart_items mb-0 list-unstyled">
           <li class="clearfix">
-            <img src="{{ asset('home/assets/images/products/home/product_grid_01_01.jpg') }}" width="50" alt="item1">
+            <img src="{{ asset('homes/assets/images/products/home/product_grid_01_01.jpg') }}" width="50" alt="item1">
             <span class="item-name">Sony DSC-RX100M III</span>
             <span class="item-price">1&nbsp;x&nbsp;<span>$849.99</span></span> 
           </li>
 
           <li class="clearfix">
-            <img src="{{ asset('home/assets/images/products/home/product_grid_02_01.jpg') }}" width="50" alt="item1">
+            <img src="{{ asset('homes/assets/images/products/home/product_grid_02_01.jpg') }}" width="50" alt="item1">
             <span class="item-name">KS Automatic Mechanic...</span>
             <span class="item-price">1&nbsp;x&nbsp;<span>$849.99</span></span> 
           </li>
 
           <li class="clearfix">
-            <img src="{{ asset('home/assets/images/products/home/product_grid_03_01.jpg') }}" width="50" alt="item1">
+            <img src="{{ asset('homes/assets/images/products/home/product_grid_03_01.jpg') }}" width="50" alt="item1">
             <span class="item-name">Kindle, 6" Glare-Free To...</span>
             <span class="item-price">1&nbsp;x&nbsp;<span>$849.99</span></span> 
           </li>
@@ -236,12 +236,18 @@
                           <ul class="pl-0 mb-0 list-unstyled">
                               <li>
                                 @guest
-                                <a href="login" class="btn btn-white d-none-sm d-block-md d-block-lg d-block-xl"> INICIA SESIÓN </a>
+                                <a href="{{ url('login') }}" class="btn btn-white d-none-sm d-block-md d-block-lg d-block-xl"> INICIA SESIÓN </a>
                                 @endguest
+                                 @auth
+                                    <li>
+                                      <a href="{{ url('logout') }}">  </a>
+                                    </li>
+                                @endauth
                               </li>
                           </ul>   
                         </div>
                         <div class="b-search_icon">
+                           
                           <i class="icon-menu icons b-nav_icon" id="b-nav_icon" style="color: #fff;"></i>
                           </a>
                         </div>
@@ -254,11 +260,11 @@
           <div  class="fullwidthbanner-container"> 
             <div id="b-home_01_slider" style="display:none;" data-version="5.4.1">
               <ul>  
-                <li style="background-image: url({{ asset('home/assets/images/imagen-slider-02-06-min.jpg') }} ); background-size: cover;"> 
+                <li style="background-image: url({{ asset('homes/assets/images/imagen-slider-02-06-min.jpg') }} ); background-size: cover;"> 
                   <div class="caption">
-                      <h1> PARA QUE COMPRAR </h1> 
-                      <h1> SI PUEDES KAMBIAR </h1>
-                      <p> Aquí podrás subir los productos que <br> no necesitas pero que alguien más si </p>
+                      <!--<h1> PARA QUE COMPRAR </h1> 
+                      <h1> SI PUEDES KAMBIAR </h1>-->
+                      <h1> Aquí podrás subir los productos que <br> no necesitas pero que alguien más si </h1>
                       <div class="registrate-button">
                         <a href="{{ url('register') }}" class="btn btn-green"> REGÍSTRATE </a>
                       </div> 
@@ -506,24 +512,24 @@
           </div>
       </div>  
       <!-- JQUERY:: JQUERY.JS -->
-      <script src="{{ asset('home/assets/js/jquery.min.js') }}"></script>
+      <script src="{{ asset('homes/assets/js/jquery.min.js') }}"></script>
       
       <!-- JQUERY:: BOOTSTRAP.JS -->
-      <script src="{{ asset('home/assets/js/tether.min.js') }}"></script> 
+      <script src="{{ asset('homes/assets/js/tether.min.js') }}"></script> 
       <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script> 
 
       <!-- JQUERY:: OWL.JS -->
-      <script src="{{ asset('home/assets/js/plugins/owl/owl.carousel.min.js') }}"></script> 
+      <script src="{{ asset('homes/assets/js/plugins/owl/owl.carousel.min.js') }}"></script> 
 
       <!-- REVOLUTION JS FILES -->
-      <script src="{{ asset('home/assets/js/plugins/revolution/jquery.themepunch.tools.min.js') }}"></script>
-      <script src="{{ asset('home/assets/js/plugins/revolution/jquery.themepunch.revolution.min.js') }}"></script>
+      <script src="{{ asset('homes/assets/js/plugins/revolution/jquery.themepunch.tools.min.js') }}"></script>
+      <script src="{{ asset('homes/assets/js/plugins/revolution/jquery.themepunch.revolution.min.js') }}"></script>
 
       <!-- SLIDER REVOLUTION 5.0 EXTENSIONS -->    
-      <script src="{{ asset('home/assets/js/plugins/revolution/revolution.extension.layeranimation.min.js') }}"></script> 
-      <script src="{{ asset('home/assets/js/plugins/revolution/revolution.extension.navigation.min.js') }}"></script>
-      <script src="{{ asset('home/assets/js/plugins/revolution/revolution.extension.parallax.min.js') }}"></script>
-      <script src="{{ asset('home/assets/js/plugins/revolution/revolution.extension.slideanims.min.js') }}"></script>
+      <script src="{{ asset('homes/assets/js/plugins/revolution/revolution.extension.layeranimation.min.js') }}"></script> 
+      <script src="{{ asset('homes/assets/js/plugins/revolution/revolution.extension.navigation.min.js') }}"></script>
+      <script src="{{ asset('homes/assets/js/plugins/revolution/revolution.extension.parallax.min.js') }}"></script>
+      <script src="{{ asset('homes/assets/js/plugins/revolution/revolution.extension.slideanims.min.js') }}"></script>
  
       <!-- JQUERY:: CUSTOM.JS -->
       <script>
@@ -569,7 +575,7 @@
 
         });
       </script>
-      <script src="{{ asset('home/assets/js/custom.js') }}"></script>  
+      <script src="{{ asset('homes/assets/js/custom.js') }}"></script>  
 
   </body>
 </html>

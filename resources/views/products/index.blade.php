@@ -44,7 +44,28 @@
     right: 1.5rem;
   }
 }
+
+.float{
+    position:fixed;
+    width:60px;
+    height:60px;
+    bottom:40px;
+    right:40px;
+    background-color:#0C9;
+    color:#FFF;
+    border-radius:50px;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+    margin-top:22px;
+}
 </style>
+
+<a href="{{ route('product.create') }}" class="float">
+    <i class="fa fa-plus my-float"></i>
+</a>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -68,23 +89,16 @@
                                 <td>{{ $product->name }}</td>
                                 <td>Favoritos: {{ count($product->favorites()->get()) }}</td>
 
-                                @can('show')
                                 <td>
                                     <a href="{{ route('product.show', $product->id) }}" class="btn btn-sm btn-primary">
                                         Ver
                                     </a>
                                 </td>
-                                @endcan
-
-                                @can('edit')
                                 <td>
                                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-primary">
                                         Editar
                                     </a>
                                 </td>
-                                @endcan
-
-                                @can('destroy')
                                 <td>
                                     <form action="{{ route('product.destroy', $product->id) }}" method="POST">
                                         {{ method_field('DELETE') }}
@@ -94,8 +108,7 @@
                                         </button>
                                     </form>
                                 </td>
-                                @endcan
-
+                                
                             </tr>
                         </tbody>
                         @endforeach
