@@ -16,11 +16,22 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $products = $user->products()->paginate(10);
+        $products = $user->products();
+
+        if ($request->input('category'))
+            $products->where('category_id', '=', $request->input('category'));
+
+        //        if ($request->input('search'))
+        $products->where(function ($query) use ($request) {
+            $query->orWhere('name', 'like', $request->input('search') . '%')
+                ->orWhere('description', 'like', $request->input('search') . '%');
+        });
+
+        $products = $products->paginate(10);
 
         return view('products.index', compact('products'));
     }
@@ -56,13 +67,13 @@ class ProductController extends Controller
 
         $quote = $user->subscription()->get()[0]->quote;
         $count = count($user->products()->get());
-        
-        if($count >= $quote){
+
+        if ($count >= $quote) {
             return redirect('/products')->with('error', 'Tu suscripción no te permite tener mas productos.');
         }
 
         //echo dd($request->tags);
-        
+
         $product = new Product;
 
         if ($request->hasFile('cover_image')) {
@@ -188,7 +199,7 @@ class ProductController extends Controller
         if ($request->tags != null) {
             $product->tags()->sync($request->tags);
         }
-    
+
         return redirect('/products')->with('success', 'Producto creado con éxito.');
     }
 
@@ -356,7 +367,7 @@ class ProductController extends Controller
         if ($request->tags != null) {
             $product->tags()->sync($request->tags);
         }
-    
+
         return redirect('/products')->with('success', 'Producto editado con éxito.');
     }
 
