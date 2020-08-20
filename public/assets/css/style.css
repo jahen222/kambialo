@@ -1,0 +1,260 @@
+.success-color {
+    background-color: #38d438;
+}
+
+.kb-bannerimage {
+    padding: 2% 6%;
+}
+
+.kb-bannerimage,
+.kb-commission {
+    width: 100vw;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.kb-bannerimage .banner-header .header-right {
+    align-items: center;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    width: 231px;
+}
+
+.kb-bannerimage .banner-header img {
+    width: 250px;
+}
+
+.kb-bannerimage .banner-header a {
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: 500;
+}
+
+.kb-bannerimage .banner-header i {
+    font-size: 36px;
+    /*color: white;*/
+}
+
+.kb-bannerimage .banner-description {
+    margin: 12% 0;
+}
+
+.kb-bannerimage .banner-description h1,
+.kb-bannerimage .banner-description p {
+    color: #ffffff;
+    text-align: center;
+}
+
+.kb-bannerimage .banner-description h1 {
+    font-size: 75px;
+    font-weight: 700;
+    letter-spacing: 15px;
+}
+
+.kb-bannerimage .banner-description p {
+    font-size: 40px;
+}
+
+.kb-bannerimage .banner-description a {
+    padding: 0.75% 5%;
+    font-size: 25px;
+    letter-spacing: 1px;
+}
+
+.kb-bannerimage .banner-description .registrate-button {
+    text-align: center;
+}
+
+.kb-subtitle p,
+.kb-subtitle h2,
+.kb-subtitle hr {
+    display: flex;
+    justify-content: center;
+}
+
+.kb-howtoworks {
+    padding: 4% 10% 3% 10%;
+}
+
+.kb-subtitle p {
+    font-size: 25px;
+    color: #5078e0;
+}
+
+.kb-subtitle h2 {
+    font-size: 45px;
+    font-weight: 300;
+}
+
+.kb-subtitle hr {
+    width: 4%;
+    border-color: #5078e0;
+}
+
+.kb-howtoworks .kb-htw {
+    display: flex;
+    margin-top: 4%;
+    text-align: center;
+}
+
+.kb-howtoworks .kb-htw img {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 2%;
+}
+
+.kb-howtoworks .kb-htw h6 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.kb-howtoworks .kb-htw p {
+    letter-spacing: -0.2px;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.kb-categories {
+    padding: 3% 15%;
+}
+
+.kb-categories .product-categories {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.kb-uploads {
+    padding: 3% 7%;
+}
+
+.kb-categories .product-categories .p-category {
+    /*margin: 1%;*/
+}
+
+.kb-categories .product-categories .p-category .ct-btn {
+    position: relative;
+    margin-top: -70px;
+    display: flex;
+    justify-content: center;
+}
+
+.kb-categories .product-categories .p-category .ct-btn button {
+    background-color: #ffffff;
+    width: 120px;
+}
+
+.kb-categories .product-categories .p-category .ct-btn :hover {
+    box-shadow: 1px 1px 7px 5px #afafaf;
+}
+
+.kb-categories .product-categories .pc-second {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.kb-uploads .carousel-inner img {
+    width: 300px;
+    height: 400px;
+}
+
+.kb-plans {
+    background-color: #f3f3f3;
+}
+
+.kb-plans .plan-box .card {
+    padding: 0%;
+    border-radius: 0%;
+    border: none;
+    box-shadow: 5px 5px 10px 2px #afafaf;
+}
+
+.card-box {
+    display: grid;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.kb-plans .plan-box {
+    text-align: center;
+    margin: 4% 0;
+}
+
+.kb-plans .plan-box .card .card-header {
+    color: #ffffff;
+    border-bottom: none;
+    border-radius: 0%;
+}
+
+.kb-plans .plan-box .card .card-body p {
+    font-size: 18px;
+}
+
+.kb-plans .plan-box .card .card-footer {
+    border-top: none;
+}
+
+.kb-plans .plan-box .card .card-footer button {
+    color: #ffffff;
+    border-radius: 0%;
+    background-color: #38d438;
+}
+
+/*.kb-plans .plan-box .card .card-footer :hover {
+    box-shadow: 1px 1px 7px 5px #afafaf;
+}*/
+
+.kb-commission {
+    padding: 6% 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+.kb-commission h3 {
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: 10px;
+}
+
+.kb-commission p {
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 3px;
+}
+
+.kb-footer {
+    width: 100vw;
+    text-align: center;
+    color: #ffffff;
+    background-color: #5078e0;    
+    padding: 20px;
+}
+
+.kb-footer img {
+    width: 350px;
+}
+
+.kb-footer .footer-icons {
+    font-size: 22px;
+    font-weight: 100;
+    letter-spacing: 5px;
+    margin: 2% 0 3% 0;
+}
+
+.kb-footer .footer-icons a{
+    color: white;
+}
+
+
+.kb-footer .footer-menu {
+    padding: 3% 0;
+    display: flex;
+    justify-content: space-around;
+}
+.kb-footer .footer-menu a{
+    color: white;
+}

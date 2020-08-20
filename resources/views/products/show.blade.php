@@ -12,21 +12,21 @@
               <div class="card-body" style="padding: 0px;">
                 <div class="slideshow-container">
                   <div class="mySlides">
-                    <img style="width:100%" src="/images/{{$product->cover_image}}" alt="{{$product->cover_image}}" style="width:100%">
+                    <img style="width:100%" src="{{ url()->to('images/' . $product->cover_image) }}" alt="{{$product->cover_image}}" style="width:100%">
                   </div>
                   <?php if (isset($product->image1)) : ?>
                     <div class="mySlides">
-                      <img style="width:100%" src="/images/{{$product->image1}}" alt="{{$product->image1}}" style="width:100%">
+                      <img style="width:100%" src="{{ url()->to('images/' . $product->image1) }}" alt="{{$product->image1}}" style="width:100%">
                     </div>
                   <?php endif; ?>
                   <?php if (isset($product->image2)) : ?>
                     <div class="mySlides">
-                      <img style="width:100%" src="/images/{{$product->image2}}" alt="{{$product->image2}}" style="width:100%">
+                      <img style="width:100%" src="{{ url()->to('images/' . $product->image2) }}" alt="{{$product->image2}}" style="width:100%">
                     </div>
                   <?php endif; ?>
                   <?php if (isset($product->image3)) : ?>
                     <div class="mySlides">
-                      <img style="width:100%" src="/images/{{$product->image3}}" alt="{{$product->image3}}" style="width:100%">
+                      <img style="width:100%" src="{{ url()->to('images/' . $product->image3) }}" alt="{{$product->image3}}" style="width:100%">
                     </div>
                   <?php endif; ?>
                   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>

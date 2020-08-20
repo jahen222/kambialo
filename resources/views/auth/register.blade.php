@@ -45,7 +45,9 @@
         $('div.setup-panel div a.btn-success').trigger('click');
     });
 </script>
-
+<script>
+   
+</script>
 <section class="container-fluid breakcump register">
     <div class="row" id="selector">
         <a href="#" class="col-4 kb-link kb-link-active" style="text-align: center;">
@@ -61,6 +63,11 @@
 </section>
 <section class="container-fluid breakcump-grey">
     <div class="container">
+        <?php if (session()->has('webpay-message')) : ?>
+            <div class="alert-warning" style="margin: 10px 0;">
+                <p><?= session()->get('webpay-message') ?></p>
+            </div>
+        <?php endif ?>
         <div class="icon-breakcump">
             <img src="assets/img/icon-k.png">
             <h4>REGISTRO</h4>
@@ -69,25 +76,29 @@
 </section>
 <section class="container mt-2 pb-2 mb-4">
     <div class="col-md-12">
-        <form method="POST" action="{{ route('register') }}" class="form-register form-registro-step">
+        <form method="POST" action="{{ route('preregister') }}" class="form-register form-registro-step">
             @csrf
             <fieldset>
                 <label class="color-green">Ingrese los datos</label>
                 <div class="form-group">
-                    <input type="text" name="name" required class="form-control">
+                    <input type="text" name="users[name]" value="{{ old('users.name') }}" required class="form-control">
                     <small class="form-text text-muted">Nombre de Usuario</small>
+                    <small class="form-text text-danger">@error('name') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" required class="form-control">
+                    <input type="email" name="users[email]" value="{{ old('users.email') }}" required class="form-control">
                     <small class="form-text text-muted">Correo Elecronico</small>
+                    <small class="form-text text-danger">@error('email') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" required class="form-control">
+                    <input type="password" name="users[password]" value="{{ old('users.password') }}" required class="form-control">
                     <small class="form-text text-muted">Contraseña</small>
+                    <small class="form-text text-danger">@error('password') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password_confirmation" required class="form-control">
+                    <input type="password" name="users[password_confirmation]" value="{{ old('users.password_confirmation') }}" required class="form-control">
                     <small class="form-text text-muted">Confirmar Contraseña</small>
+                    <small class="form-text text-danger">@error('password_confirmation'){{ $message }} @enderror</small>
                 </div>
                 <input type="button" name="next" class="btn btn-lg btn-success btn-block next action-button" value="CONTINUAR" />
             </fieldset>
@@ -99,24 +110,22 @@
                     @foreach($subcription as $sub)
                     <div class="form-group col-md-12">
                         <div class="custom-control custom-radio mb-3">
-                            <input type="radio" class="custom-control-input" id="subscription-{{ $sub->id }}" name="subscription" value="{{ $sub->id }}">
+                            <input type="radio" data-name="{{ $sub->name }}" data-description="{{$sub->description}}" data-price="{{ number_format($sub->price) }}" class="custom-control-input" id="subscription-{{ $sub->id }}" name="users[subscription_id]" value="{{ $sub->id }}" />
                             <label class="custom-control-label" for="subscription-{{ $sub->id }}">{{ $sub->name }} - {{ $sub->description }} - $ {{ number_format($sub->price) }} x 4 meses</label>
                         </div>
                     </div>
                     @endforeach
-
+                    <small class="form-text text-danger">@error('subscription_id'){{ $message }} @enderror</small>
                 </div>
                 <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" />
                 <input type="button" name="next" class="col-12 btn btn-lg btn-success btn-block next action-button" value="PAGAR" />
             </fieldset>
             <fieldset>
-
-                AQUI EL PAGO
+                <p><b>Subscripción: </b><span id="sub-name"></span> - <span id="sub-description"></span></p>
+                <p><b>Precio: $ </b><span id="sub-price"></span></p>
                 <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" />
-                <button type="submit" class="col-12 btn btn-lg btn-info btn-block">CONFIRMAR</button>
+                <button type="submit" class="col-12 btn btn-lg btn-info btn-block submit">CONFIRMAR</button>
             </fieldset>
-
-
         </form>
     </div>
 </section>
