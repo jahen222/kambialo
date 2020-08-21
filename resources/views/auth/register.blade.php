@@ -91,6 +91,11 @@
                     <small class="form-text text-danger">@error('email') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
+                    <input type="email" name="users[comuna]" value="{{ old('users.comuna') }}" required class="form-control">
+                    <small class="form-text text-muted">Comuna</small>
+                    <small class="form-text text-danger">@error('comuna') {{ $message }} @enderror</small>
+                </div>
+                <div class="form-group">
                     <input type="password" name="users[password]" value="{{ old('users.password') }}" required class="form-control">
                     <small class="form-text text-muted">Contraseña</small>
                     <small class="form-text text-danger">@error('password') {{ $message }} @enderror</small>
@@ -111,7 +116,7 @@
                     <div class="form-group col-md-12">
                         <div class="custom-control custom-radio mb-3">
                             <input type="radio" data-name="{{ $sub->name }}" data-description="{{$sub->description}}" data-price="{{ number_format($sub->price) }}" class="custom-control-input" id="subscription-{{ $sub->id }}" name="users[subscription_id]" value="{{ $sub->id }}" />
-                            <label class="custom-control-label" for="subscription-{{ $sub->id }}">{{ $sub->name }} - {{ $sub->description }} - $ {{ number_format($sub->price) }} x 4 meses</label>
+                            <label class="custom-control-label" for="subscription-{{ $sub->id }}">{{ $sub->name }} - {{ $sub->description }} - $ {{ number_format($sub->price) }}</label>
                         </div>
                     </div>
                     @endforeach
@@ -121,6 +126,7 @@
                 <input type="button" name="next" class="col-12 btn btn-lg btn-success btn-block next action-button" value="PAGAR" />
             </fieldset>
             <fieldset>
+                <p><b>Vigencia de planes 4 meses</b></p>
                 <p><b>Subscripción: </b><span id="sub-name"></span> - <span id="sub-description"></span></p>
                 <p><b>Precio: $ </b><span id="sub-price"></span></p>
                 <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" />

@@ -116,7 +116,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-primary">
-                                        Editar
+                                        Actualizar
                                     </a>
                                 </td>
                                 <td>

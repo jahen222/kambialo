@@ -7,7 +7,7 @@
             <h1>Producto Nuevo </h1>
             <br />
 
-            <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('product.store')}}" id="product-form" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <div class="row">
@@ -73,5 +73,15 @@
         </div>
     </div>
     {{-- @include('inc.footer') --}}
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+      <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Procesando...</h4>
+        </div>
+    </div>
+  </div>
 </div>
 @endsection
