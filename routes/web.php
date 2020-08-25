@@ -23,9 +23,15 @@ Route::post('preregister', 'Auth\RegisterController@preregister')->name('preregi
 Route::post('confirmation', 'Auth\RegisterController@confirmation')->name('confirmation');
 Route::post('endregister', 'Auth\RegisterController@endregister')->name('endregister');
 
+
 Route::get('start', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    // showcase
+    Route::get('showcase', 'ShowcaseController@index')->name('showcase.index');
+    Route::get('showcase/data', 'ShowcaseController@data')->name('showcase.data');
+    Route::post('showcase/favorite', 'ShowcaseController@favorite')->name('showcase.favorite');
+
     // Products
     Route::get('products', 'ProductController@index')->name('products.index');//->middleware('permission:index');
     Route::get('product/create', 'ProductController@create')->name('product.create');//->middleware('permission:create');
