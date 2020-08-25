@@ -2026,7 +2026,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
+ //import Slider from 'slider';
 
 var EVENTS = {
   MATCH: 'match',
@@ -2042,6 +2045,7 @@ var EVENTS = {
     return {
       isVisible: true,
       index: 0,
+      imageIndex: 0,
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
         draggedLeft: EVENTS.REJECT,
@@ -2054,6 +2058,14 @@ var EVENTS = {
     this.fetchData();
   },
   computed: {
+    currentImage: function currentImage() {
+      if (this.imageIndex == 0 || !this.cards[this.index]['image' + this.imageIndex]) {
+        this.imageIndex = 0;
+        return this.cards[this.index].cover_image;
+      }
+
+      return this.cards[this.index]['image' + this.imageIndex];
+    },
     current: function current() {
       if (!this.cards[this.index]) this.index = 0;
       return this.cards[this.index];
@@ -2064,6 +2076,12 @@ var EVENTS = {
     }
   },
   methods: {
+    nextImage: function nextImage() {
+      this.imageIndex += 1;
+    },
+    prevImage: function prevImage() {
+      this.imageIndex -= 1;
+    },
     fetchData: function fetchData() {
       var _this = this;
 
@@ -2142,6 +2160,7 @@ var EVENTS = {
       }, 200);
       setTimeout(function () {
         _this3.index++;
+        _this3.imageIndex = 0;
         _this3.isVisible = true;
       }, 200);
     }
@@ -6582,7 +6601,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container[data-v-5d1eb04c] {\n  background: #eceff1;\n  width: 100%;\n  height: 100vh;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  width: 77vw;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-around;\n  align-items: center;\n}\n.btn[data-v-5d1eb04c] {\n  position: relative;\n  width: 50px;\n  height: 50px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn--like[data-v-5d1eb04c] {\n  background-color: red;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn--like i[data-v-5d1eb04c] {\n  font-size: 32px;\n}\n.btn--decline[data-v-5d1eb04c] {\n  color: red;\n}\n.btn--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.rounded-borders[data-v-5d1eb04c] {\n  border-radius: 12px;\n}\n.card[data-v-5d1eb04c] {\n  width: 80vw;\n  height: 60vh;\n  color: white;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n.card--one[data-v-5d1eb04c] {\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n.card--two[data-v-5d1eb04c] {\n  transform: translate(-48%, -48%);\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);\n}\n.card--three[data-v-5d1eb04c] {\n  background: rgba(0, 0, 0, 0.8);\n  transform: translate(-46%, -46%);\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.card .text[data-v-5d1eb04c] {\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  background: black;\n  background: rgba(0, 0, 0, 0.5);\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
+exports.push([module.i, ".container[data-v-5d1eb04c] {\n  background: #eceff1;\n  width: 100%;\n  height: 100vh;\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  width: 77vw;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-around;\n  align-items: center;\n}\n.btn[data-v-5d1eb04c] {\n  position: relative;\n  width: 50px;\n  height: 50px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn--like[data-v-5d1eb04c] {\n  background-color: red;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn--like i[data-v-5d1eb04c] {\n  font-size: 32px;\n}\n.btn--decline[data-v-5d1eb04c] {\n  color: red;\n}\n.btn--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.rounded-borders[data-v-5d1eb04c] {\n  border-radius: 12px;\n}\n.card[data-v-5d1eb04c] {\n  width: 80vw;\n  height: 60vh;\n  color: white;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n.card--one[data-v-5d1eb04c] {\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n.card--two[data-v-5d1eb04c] {\n  transform: translate(-48%, -48%);\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);\n}\n.card--three[data-v-5d1eb04c] {\n  background: rgba(0, 0, 0, 0.8);\n  transform: translate(-46%, -46%);\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.card .text[data-v-5d1eb04c] {\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  background: black;\n  background: rgba(0, 0, 0, 0.5);\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
 
 // exports
 
@@ -39222,8 +39241,28 @@ var render = function() {
                     _c("div", { staticStyle: { height: "100%" } }, [
                       _c("img", {
                         staticClass: "rounded-borders",
-                        attrs: { src: "images/" + _vm.current.cover_image }
+                        attrs: { src: "images/" + _vm.currentImage }
                       }),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "img-btn img-btn--prev",
+                          attrs: { href: "#" },
+                          on: { click: _vm.prevImage }
+                        },
+                        [_vm._v("❮")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "img-btn img-btn--next",
+                          attrs: { href: "#" },
+                          on: { click: _vm.nextImage }
+                        },
+                        [_vm._v("❯")]
+                      ),
                       _vm._v(" "),
                       _c("div", { staticClass: "text" }, [
                         _c("h2", [_vm._v(_vm._s(_vm.current.name))])
@@ -51631,15 +51670,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/components/SwipeableCards.vue ***!
   \****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SwipeableCards_vue_vue_type_template_id_5d1eb04c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SwipeableCards.vue?vue&type=template&id=5d1eb04c&scoped=true& */ "./resources/js/components/SwipeableCards.vue?vue&type=template&id=5d1eb04c&scoped=true&");
 /* harmony import */ var _SwipeableCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SwipeableCards.vue?vue&type=script&lang=js& */ "./resources/js/components/SwipeableCards.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SwipeableCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SwipeableCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _SwipeableCards_vue_vue_type_style_index_0_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true& */ "./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true&");
+/* empty/unused harmony star reexport *//* harmony import */ var _SwipeableCards_vue_vue_type_style_index_0_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true& */ "./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -51671,7 +51709,7 @@ component.options.__file = "resources/js/components/SwipeableCards.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/SwipeableCards.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

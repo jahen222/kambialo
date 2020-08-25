@@ -32,12 +32,12 @@ class ShowcaseController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        return [
-            'success' => Favorite::create([
-                'product_id' => $request->input('id'),
-                'user_id' => $user->id
-            ]) != FALSE
-        ];
+
+        $favorite = Favorite::where('product_id', $request->input('id'))->where('user_id', $user->id)->first();
+        if(!$favorite)
+            $favorite = Favorite::create(['product_id' => $request->input('id'), 'user_id' => $user->id]);
+        
+        return ['success' => (bool) $favorite];
     }
 
     /**

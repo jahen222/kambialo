@@ -19,8 +19,10 @@
         class="rounded-borders card card--one">
         <div style="height: 100%">
           <img
-            :src="'images/'+current.cover_image"
+            :src="'images/'+currentImage"
             class="rounded-borders"/>
+          <a class="img-btn img-btn--prev" @click="prevImage" href="#">&#10094;</a>
+          <a class="img-btn img-btn--next" @click="nextImage" href="#">&#10095;</a>
           <div class="text">
             <h2>{{current.name}}</h2>
           </div>
@@ -62,6 +64,8 @@
 <script>
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
 import axios from 'axios';
+//import Slider from 'slider';
+
 const EVENTS = {
   MATCH: 'match',
   SKIP: 'skip',
@@ -75,6 +79,7 @@ export default {
     return {
       isVisible: true,
       index: 0,
+      imageIndex: 0,
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
         draggedLeft: EVENTS.REJECT,
@@ -87,6 +92,13 @@ export default {
     this.fetchData();
   },
   computed: {
+    currentImage(){
+      if(this.imageIndex == 0 || !this.cards[this.index]['image'+this.imageIndex]){
+        this.imageIndex = 0;
+        return this.cards[this.index].cover_image;  
+      }
+      return this.cards[this.index]['image'+this.imageIndex];
+    },
     current() {
       if(!this.cards[this.index])
         this.index = 0;
@@ -99,6 +111,12 @@ export default {
     }
   },
   methods: {
+    nextImage() {
+      this.imageIndex += 1;
+    },
+    prevImage() {
+      this.imageIndex -= 1;
+    },
     async fetchData() {
       const response = await axios.get(`showcase/data`)
       if (response.data) {
@@ -131,6 +149,7 @@ export default {
       setTimeout(() => this.isVisible = false, 200)
       setTimeout(() => {
         this.index++
+        this.imageIndex = 0;
         this.isVisible = true
       }, 200)
     }
@@ -143,6 +162,19 @@ export default {
   background: #eceff1;
   width: 100%;
   height: 100vh;
+}
+
+.img-btn{
+  position: absolute;
+  top: 40%;
+  font-size: 50px;
+  &--prev{
+    left: 0;
+  }
+  &--next{
+    right: 0;
+
+  }
 }
 
 .header {
