@@ -31,6 +31,10 @@ class HomeController extends Controller
         return view('home', compact('products', 'categories'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function searchCategory(Request $request)
     {
         $category = Category::find($request->input('search'));
@@ -44,5 +48,4 @@ class HomeController extends Controller
 
         return view('home', compact('products', 'categories'));
     }
-
 }

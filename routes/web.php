@@ -23,9 +23,8 @@ Route::post('preregister', 'Auth\RegisterController@preregister')->name('preregi
 Route::post('confirmation', 'Auth\RegisterController@confirmation')->name('confirmation');
 Route::post('endregister', 'Auth\RegisterController@endregister')->name('endregister');
 
-Route::get('start', 'HomeController@index')->name('home');
-
 Route::middleware(['auth'])->group(function () {
+    Route::get('index', 'HomeController@index')->name('index');
     // Products
     Route::get('products', 'ProductController@index')->name('products.index');//->middleware('permission:index');
     Route::get('product/create', 'ProductController@create')->name('product.create');//->middleware('permission:create');
