@@ -24,7 +24,7 @@ class ShowcaseController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $products = Product::select('products.*')->leftJoin('favorites','products.id', '=', 'favorites.product_id')
-            ->where('products.user_id', '!=', $user->id)->whereNull('favorites.id')->get();
+            ->where('products.user_id', '!=', $user->id)->whereNull('favorites.id')->with('images')->get();
         return $products;
     }
 

@@ -45,24 +45,30 @@
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image1" name="image1" lang="es">
+                        <input type="file" class="custom-file-input" id="image1" name="images[0]" lang="es">
                         <label class="custom-file-label" for="image1">Imagen1</label>
-                        <img style="max-width: 100%;" src="{{ url()->to('images/' . $product->imagen1) }}" alt="">
                     </div>
+                    @if(isset($product->images[0]) && $image = $product->images[0]->image)
+                        <img style="max-width: 100%;" src="{{ url()->to('images/' . $image) }}" alt="">
+                    @endif
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image2" name="image2" lang="es">
+                        <input type="file" class="custom-file-input" id="image2" name="images[1]" lang="es">
                         <label class="custom-file-label" for="image2">Imagen2</label>
-                        <img style="max-width: 100%;" src="{{ url()->to('images/' . $product->imagen2) }}" alt="">
                     </div>
+                    @if(isset($product->images[1]) && $image = $product->images[1]->image)
+                        <img style="max-width: 100%;" src="{{ url()->to('images/' . $image) }}" alt="">
+                    @endif
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image3" name="image3" lang="es">
+                        <input type="file" class="custom-file-input" id="image3" name="images[2]" lang="es">
                         <label class="custom-file-label" for="image3">Imagen3</label>
-                        <img style="max-width: 100%;" src="{{ url()->to('images/' . $product->imagen3) }}" alt="">
                     </div>
+                    @if(isset($product->images[2]) && $image = $product->images[2]->image)
+                        <img style="max-width: 100%;" src="{{ url()->to('images/' . $image) }}" alt="">
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="tag">Tags</label> <br>

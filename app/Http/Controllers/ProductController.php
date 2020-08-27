@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Category;
 use App\Tag;
+use App\ProductImage;
 
 class ProductController extends Controller
 {
@@ -72,8 +73,6 @@ class ProductController extends Controller
             return redirect('/products')->with('error', 'Tu suscripción no te permite tener mas productos.');
         }
 
-        //echo dd($request->tags);
-
         $product = new Product;
 
         if ($request->hasFile('cover_image')) {
@@ -89,112 +88,27 @@ class ProductController extends Controller
 
         $product->cover_image = $fileNameToStore;
 
-        if ($request->hasFile('image1')) {
-            $file = $request->file('image1');
-            $filenameWithExt = $request->file('image1')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image1')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image1 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image2')) {
-            $file = $request->file('image2');
-            $filenameWithExt = $request->file('image2')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image2')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image2 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image3')) {
-            $file = $request->file('image3');
-            $filenameWithExt = $request->file('image3')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image3')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image3 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image4')) {
-            $file = $request->file('image4');
-            $filenameWithExt = $request->file('image4')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image4')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image4 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image5')) {
-            $file = $request->file('image5');
-            $filenameWithExt = $request->file('image5')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image5')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image5 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image6')) {
-            $file = $request->file('image6');
-            $filenameWithExt = $request->file('image6')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image6')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image6 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image7')) {
-            $file = $request->file('image7');
-            $filenameWithExt = $request->file('image7')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image7')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image7 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image8')) {
-            $file = $request->file('image8');
-            $filenameWithExt = $request->file('image8')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image8')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image8 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image9')) {
-            $file = $request->file('image9');
-            $filenameWithExt = $request->file('image9')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image9')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image9 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image10')) {
-            $file = $request->file('image10');
-            $filenameWithExt = $request->file('image10')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image10')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image10 = $fileNameToStore;
-        }
-
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->user()->associate($user);
         $category = Category::find($request->input('category'));
         $product->category()->associate($category);
         $product->save();
+
+        if ($request->hasFile('images') && $images = $request->file('images')) {
+            foreach ($images as $key => $value) {
+                $filenameWithExt = $value->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $value->getClientOriginalExtension();
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                $value->move(public_path() . '/images/', $fileNameToStore);
+
+                $image = new ProductImage();
+                $image->product()->associate($product);
+                $image->image = $fileNameToStore;
+                $image->save();
+            }
+        }
 
         if ($request->tags != null) {
             $product->tags()->sync($request->tags);
@@ -258,104 +172,25 @@ class ProductController extends Controller
             $product->cover_image = $fileNameToStore;
         }
 
-        if ($request->hasFile('image1')) {
-            $file = $request->file('image1');
-            $filenameWithExt = $request->file('image1')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image1')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image1 = $fileNameToStore;
-        }
+        if ($request->hasFile('images') && $images = $request->file('images')) {
+            foreach ($images as $key => $value) {
+                $filenameWithExt = $value->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $value->getClientOriginalExtension();
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                $value->move(public_path() . '/images/', $fileNameToStore);
 
-        if ($request->hasFile('image2')) {
-            $file = $request->file('image2');
-            $filenameWithExt = $request->file('image2')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image2')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image2 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image3')) {
-            $file = $request->file('image3');
-            $filenameWithExt = $request->file('image3')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image3')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image3 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image4')) {
-            $file = $request->file('image4');
-            $filenameWithExt = $request->file('image4')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image4')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image4 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image5')) {
-            $file = $request->file('image5');
-            $filenameWithExt = $request->file('image5')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image5')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image5 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image6')) {
-            $file = $request->file('image6');
-            $filenameWithExt = $request->file('image6')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image6')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image6 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image7')) {
-            $file = $request->file('image7');
-            $filenameWithExt = $request->file('image7')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image7')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image7 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image8')) {
-            $file = $request->file('image8');
-            $filenameWithExt = $request->file('image8')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image8')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image8 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image9')) {
-            $file = $request->file('image9');
-            $filenameWithExt = $request->file('image9')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image9')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image9 = $fileNameToStore;
-        }
-
-        if ($request->hasFile('image10')) {
-            $file = $request->file('image10');
-            $filenameWithExt = $request->file('image10')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image10')->getClientOriginalExtension();
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-            $file->move(public_path() . '/images/', $fileNameToStore);
-            $product->image10 = $fileNameToStore;
+                if (isset($product->images[$key])) {
+                    //updating an instance
+                    $image = $product->images[$key];
+                } else {
+                    //creating new instance
+                    $image = new ProductImage();
+                    $image->product()->associate($product);
+                }
+                $image->image = $fileNameToStore;
+                $image->save();
+            }
         }
 
         $product->name = $request->input('name');

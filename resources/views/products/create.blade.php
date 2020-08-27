@@ -43,19 +43,19 @@
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image1" name="image1" lang="es">
+                        <input type="file" class="custom-file-input" id="image1" name="images[0]" lang="es">
                         <label class="custom-file-label" for="image1">Imagen1</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image2" name="image2" lang="es">
+                        <input type="file" class="custom-file-input" id="image2" name="images[1]" lang="es">
                         <label class="custom-file-label" for="image2">Imagen2</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image3" name="image3" lang="es">
+                        <input type="file" class="custom-file-input" id="image3" name="images[2]" lang="es">
                         <label class="custom-file-label" for="image3">Imagen3</label>
                     </div>
                 </div>

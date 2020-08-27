@@ -122,7 +122,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script type="text/javascript" src="{{ asset('ssets/material/js/mdb.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/app.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 
 </html>

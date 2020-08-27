@@ -1965,6 +1965,22 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
 //
 //
 //
@@ -2029,12 +2045,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 
- //import Slider from 'slider';
 
 var EVENTS = {
   MATCH: 'match',
   SKIP: 'skip',
   REJECT: 'reject'
+};
+var DEFAULTS = {
+  COVER: 0
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SwipeableCards',
@@ -2045,7 +2063,7 @@ var EVENTS = {
     return {
       isVisible: true,
       index: 0,
-      imageIndex: 0,
+      imageIndex: DEFAULTS.COVER,
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
         draggedLeft: EVENTS.REJECT,
@@ -2059,12 +2077,15 @@ var EVENTS = {
   },
   computed: {
     currentImage: function currentImage() {
-      if (this.imageIndex == 0 || !this.cards[this.index]['image' + this.imageIndex]) {
-        this.imageIndex = 0;
-        return this.cards[this.index].cover_image;
+      var images = this.buildCardImages();
+      if (!images[this.imageIndex]) this.imageIndex = DEFAULTS.COVER;
+
+      if (document.getElementById('image-selector')) {
+        var inputs = document.getElementById('image-selector').getElementsByTagName('input');
+        inputs[this.imageIndex].checked = true;
       }
 
-      return this.cards[this.index]['image' + this.imageIndex];
+      return images[this.imageIndex].image;
     },
     current: function current() {
       if (!this.cards[this.index]) this.index = 0;
@@ -2076,6 +2097,15 @@ var EVENTS = {
     }
   },
   methods: {
+    buildCardImages: function buildCardImages() {
+      if (this.cards[this.index]) return [{
+        image: this.cards[this.index].cover_image
+      }].concat(_toConsumableArray(this.cards[this.index].images));
+      return [];
+    },
+    selectImage: function selectImage(index) {
+      if (index !== undefined) this.imageIndex = index;
+    },
     nextImage: function nextImage() {
       this.imageIndex += 1;
     },
@@ -2160,7 +2190,7 @@ var EVENTS = {
       }, 200);
       setTimeout(function () {
         _this3.index++;
-        _this3.imageIndex = 0;
+        _this3.imageIndex = DEFAULTS.COVER;
         _this3.isVisible = true;
       }, 200);
     }
@@ -6601,7 +6631,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container[data-v-5d1eb04c] {\n  background: #eceff1;\n  width: 100%;\n  height: 100vh;\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  width: 77vw;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-around;\n  align-items: center;\n}\n.btn[data-v-5d1eb04c] {\n  position: relative;\n  width: 50px;\n  height: 50px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn--like[data-v-5d1eb04c] {\n  background-color: red;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn--like i[data-v-5d1eb04c] {\n  font-size: 32px;\n}\n.btn--decline[data-v-5d1eb04c] {\n  color: red;\n}\n.btn--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.rounded-borders[data-v-5d1eb04c] {\n  border-radius: 12px;\n}\n.card[data-v-5d1eb04c] {\n  width: 80vw;\n  height: 60vh;\n  color: white;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n.card--one[data-v-5d1eb04c] {\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n.card--two[data-v-5d1eb04c] {\n  transform: translate(-48%, -48%);\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);\n}\n.card--three[data-v-5d1eb04c] {\n  background: rgba(0, 0, 0, 0.8);\n  transform: translate(-46%, -46%);\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.card .text[data-v-5d1eb04c] {\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  background: black;\n  background: rgba(0, 0, 0, 0.5);\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
+exports.push([module.i, ".image-selector[data-v-5d1eb04c] {\n  position: absolute;\n  text-align: center;\n  top: 0;\n  width: 100%;\n}\n.container[data-v-5d1eb04c] {\n  background: #eceff1;\n  width: 100%;\n  height: 100vh;\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  width: 77vw;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-around;\n  align-items: center;\n}\n.btn-c[data-v-5d1eb04c] {\n  position: relative;\n  width: 50px;\n  height: 50px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn-c[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn-c i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn-c i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn-c--like[data-v-5d1eb04c] {\n  background-color: red;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn-c--like i[data-v-5d1eb04c] {\n  font-size: 32px;\n}\n.btn-c--decline[data-v-5d1eb04c] {\n  color: red;\n}\n.btn-c--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.rounded-borders[data-v-5d1eb04c] {\n  border-radius: 12px;\n}\n.card[data-v-5d1eb04c] {\n  width: 80vw;\n  height: 60vh;\n  color: white;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n.card--one[data-v-5d1eb04c] {\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n.card--two[data-v-5d1eb04c] {\n  transform: translate(-48%, -48%);\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);\n}\n.card--three[data-v-5d1eb04c] {\n  background: rgba(0, 0, 0, 0.8);\n  transform: translate(-46%, -46%);\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.card .text[data-v-5d1eb04c] {\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  background: black;\n  background: rgba(0, 0, 0, 0.5);\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
 
 // exports
 
@@ -39244,25 +39274,68 @@ var render = function() {
                         attrs: { src: "images/" + _vm.currentImage }
                       }),
                       _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "img-btn img-btn--prev",
-                          attrs: { href: "#" },
-                          on: { click: _vm.prevImage }
-                        },
-                        [_vm._v("❮")]
-                      ),
+                      _vm.current.images.length > 0
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "img-btn img-btn--prev",
+                              attrs: { a: "", href: "#" },
+                              on: { click: _vm.prevImage }
+                            },
+                            [_vm._v("❮")]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "img-btn img-btn--next",
-                          attrs: { href: "#" },
-                          on: { click: _vm.nextImage }
-                        },
-                        [_vm._v("❯")]
-                      ),
+                      _vm.current.images.length > 0
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "img-btn img-btn--next",
+                              attrs: { a: "", href: "#" },
+                              on: { click: _vm.nextImage }
+                            },
+                            [_vm._v("❯")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.current.images.length > 0
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "image-selector",
+                              attrs: { id: "image-selector" }
+                            },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "radio",
+                                  name: "image_controller",
+                                  checked: ""
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.selectImage(0)
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm._l(_vm.current.images, function(x, y) {
+                                return _c("input", {
+                                  attrs: {
+                                    type: "radio",
+                                    name: "image_controller"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.selectImage(y + 1)
+                                    }
+                                  }
+                                })
+                              })
+                            ],
+                            2
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _c("div", { staticClass: "text" }, [
                         _c("h2", [_vm._v(_vm._s(_vm.current.name))])
@@ -39303,17 +39376,19 @@ var render = function() {
     _c("div", { staticClass: "footer fixed" }, [
       _c(
         "div",
-        { staticClass: "btn btn--decline", on: { click: _vm.reject } },
+        { staticClass: "btn-c btn-c--decline", on: { click: _vm.reject } },
         [_c("i", { staticClass: "material-icons" }, [_vm._v("close")])]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "btn btn--skip", on: { click: _vm.skip } }, [
+      _c("div", { staticClass: "btn-c btn-c--skip", on: { click: _vm.skip } }, [
         _c("i", { staticClass: "material-icons" }, [_vm._v("call_missed")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "btn btn--like", on: { click: _vm.match } }, [
-        _c("i", { staticClass: "material-icons" }, [_vm._v("favorite")])
-      ])
+      _c(
+        "div",
+        { staticClass: "btn-c btn-c--like", on: { click: _vm.match } },
+        [_c("i", { staticClass: "material-icons" }, [_vm._v("favorite")])]
+      )
     ])
   ])
 }

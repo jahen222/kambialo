@@ -21,8 +21,12 @@
           <img
             :src="'images/'+currentImage"
             class="rounded-borders"/>
-          <a class="img-btn img-btn--prev" @click="prevImage" href="#">&#10094;</a>
-          <a class="img-btn img-btn--next" @click="nextImage" href="#">&#10095;</a>
+          <a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @click="prevImage" href="#">&#10094;</a>
+          <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @click="nextImage" href="#">&#10095;</a>
+          <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
+            <input type="radio" name="image_controller" @click="selectImage(0)" checked/>
+            <input type="radio" name="image_controller" @click="selectImage(y + 1)" v-for="x,y in current.images"/>
+          </div>
           <div class="text">
             <h2>{{current.name}}</h2>
           </div>
@@ -49,13 +53,13 @@
       </div>
     </div>
     <div class="footer fixed">
-      <div class="btn btn--decline" @click="reject">
+      <div class="btn-c btn-c--decline" @click="reject">
           <i class="material-icons">close</i>
       </div>
-      <div class="btn btn--skip" @click="skip">
+      <div class="btn-c btn-c--skip" @click="skip">
           <i class="material-icons">call_missed</i>
       </div>
-      <div class="btn btn--like" @click="match">
+      <div class="btn-c btn-c--like" @click="match">
           <i class="material-icons">favorite</i>
       </div>
     </div>
@@ -64,12 +68,15 @@
 <script>
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
 import axios from 'axios';
-//import Slider from 'slider';
 
 const EVENTS = {
   MATCH: 'match',
   SKIP: 'skip',
   REJECT: 'reject'
+}
+
+const DEFAULTS = {
+  COVER: 0
 }
 
 export default {
@@ -79,7 +86,7 @@ export default {
     return {
       isVisible: true,
       index: 0,
-      imageIndex: 0,
+      imageIndex: DEFAULTS.COVER,
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
         draggedLeft: EVENTS.REJECT,
@@ -93,11 +100,16 @@ export default {
   },
   computed: {
     currentImage(){
-      if(this.imageIndex == 0 || !this.cards[this.index]['image'+this.imageIndex]){
-        this.imageIndex = 0;
-        return this.cards[this.index].cover_image;  
+      const images = this.buildCardImages();
+      if(!images[this.imageIndex])
+        this.imageIndex = DEFAULTS.COVER;
+
+      if(document.getElementById('image-selector')){
+        const inputs = document.getElementById('image-selector').getElementsByTagName('input');
+        inputs[this.imageIndex].checked = true;
       }
-      return this.cards[this.index]['image'+this.imageIndex];
+
+      return images[this.imageIndex].image;
     },
     current() {
       if(!this.cards[this.index])
@@ -111,6 +123,15 @@ export default {
     }
   },
   methods: {
+    buildCardImages(){
+      if(this.cards[this.index])
+        return [{image: this.cards[this.index].cover_image},...this.cards[this.index].images]
+      return [];
+    },
+    selectImage(index){
+      if(index !== undefined)
+        this.imageIndex = index;
+    },
     nextImage() {
       this.imageIndex += 1;
     },
@@ -149,7 +170,7 @@ export default {
       setTimeout(() => this.isVisible = false, 200)
       setTimeout(() => {
         this.index++
-        this.imageIndex = 0;
+        this.imageIndex = DEFAULTS.COVER;
         this.isVisible = true
       }, 200)
     }
@@ -158,6 +179,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.image-selector{
+  position: absolute;
+  text-align:center;
+  top:0;
+  width: 100%;
+}
+
 .container {
   background: #eceff1;
   width: 100%;
@@ -215,7 +243,7 @@ export default {
   align-items: center;
 }
 
-.btn {
+.btn-c {
   position: relative;
   width: 50px;
   height: 50px;
