@@ -23,10 +23,9 @@ Route::post('preregister', 'Auth\RegisterController@preregister')->name('preregi
 Route::post('confirmation', 'Auth\RegisterController@confirmation')->name('confirmation');
 Route::post('endregister', 'Auth\RegisterController@endregister')->name('endregister');
 
-
-Route::get('start', 'HomeController@index')->name('home');
-
 Route::middleware(['auth'])->group(function () {
+    Route::get('index', 'HomeController@index')->name('index');
+
     // showcase
     Route::get('showcase', 'ShowcaseController@index')->name('showcase.index');
     Route::get('showcase/data', 'ShowcaseController@data')->name('showcase.data');
