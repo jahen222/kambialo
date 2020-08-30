@@ -23,6 +23,10 @@ class Product extends Model
         return $this->hasMany('App\Favorite');
     }
 
+    public function images(){
+        return $this->hasMany('App\ProductImage');
+    }
+
     public function tags(){
         return $this->belongsToMany('App\Tag');
     }

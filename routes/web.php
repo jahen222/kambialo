@@ -25,6 +25,12 @@ Route::post('endregister', 'Auth\RegisterController@endregister')->name('endregi
 
 Route::middleware(['auth'])->group(function () {
     Route::get('index', 'HomeController@index')->name('index');
+
+    // showcase
+    Route::get('showcase', 'ShowcaseController@index')->name('showcase.index');
+    Route::get('showcase/data', 'ShowcaseController@data')->name('showcase.data');
+    Route::post('showcase/favorite', 'ShowcaseController@favorite')->name('showcase.favorite');
+
     // Products
     Route::get('products', 'ProductController@index')->name('products.index');//->middleware('permission:index');
     Route::get('product/create', 'ProductController@create')->name('product.create');//->middleware('permission:create');

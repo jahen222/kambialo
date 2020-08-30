@@ -7,7 +7,7 @@
             <h1>Producto Nuevo </h1>
             <br />
 
-            <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('product.store')}}" id="product-form" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <div class="row">
@@ -43,19 +43,19 @@
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image1" name="image1" lang="es">
+                        <input type="file" class="custom-file-input" id="image1" name="images[0]" lang="es">
                         <label class="custom-file-label" for="image1">Imagen1</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image2" name="image2" lang="es">
+                        <input type="file" class="custom-file-input" id="image2" name="images[1]" lang="es">
                         <label class="custom-file-label" for="image2">Imagen2</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image3" name="image3" lang="es">
+                        <input type="file" class="custom-file-input" id="image3" name="images[2]" lang="es">
                         <label class="custom-file-label" for="image3">Imagen3</label>
                     </div>
                 </div>
@@ -73,5 +73,15 @@
         </div>
     </div>
     {{-- @include('inc.footer') --}}
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+      <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Procesando...</h4>
+        </div>
+    </div>
+  </div>
 </div>
 @endsection

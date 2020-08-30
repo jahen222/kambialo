@@ -1,5 +1,12 @@
 $(document).ready(function () {
 
+    $('#product-form').on('submit', function(){
+        //alert('working...');
+        $('#myModal').modal();
+    });
+
+
+
     var current_fs, next_fs, previous_fs; //fieldsets
     var opacity;
 

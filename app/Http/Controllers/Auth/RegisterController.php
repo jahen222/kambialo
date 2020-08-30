@@ -85,6 +85,7 @@ class RegisterController extends Controller
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
+                'comuna' => $data['comuna'],
                 'subscription_id' => $data['subscription_id'],
                 'password' => Hash::make($data['password']),
                 'token_webpay' => $response->token

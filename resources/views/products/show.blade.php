@@ -14,19 +14,19 @@
                   <div class="mySlides">
                     <img style="width:100%" src="{{ url()->to('images/' . $product->cover_image) }}" alt="{{$product->cover_image}}" style="width:100%">
                   </div>
-                  <?php if (isset($product->image1)) : ?>
+                  <?php if (isset($product->images[0])) : ?>
                     <div class="mySlides">
-                      <img style="width:100%" src="{{ url()->to('images/' . $product->image1) }}" alt="{{$product->image1}}" style="width:100%">
+                      <img style="width:100%" src="{{ url()->to('images/' . $product->images[0]->image) }}" alt="{{$product->images[0]->image}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if (isset($product->image2)) : ?>
+                  <?php if (isset($product->images[1])) : ?>
                     <div class="mySlides">
-                      <img style="width:100%" src="{{ url()->to('images/' . $product->image2) }}" alt="{{$product->image2}}" style="width:100%">
+                      <img style="width:100%" src="{{ url()->to('images/' . $product->images[1]->image) }}" alt="{{$product->images[1]->image}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <?php if (isset($product->image3)) : ?>
+                  <?php if (isset($product->images[2])) : ?>
                     <div class="mySlides">
-                      <img style="width:100%" src="{{ url()->to('images/' . $product->image3) }}" alt="{{$product->image3}}" style="width:100%">
+                      <img style="width:100%" src="{{ url()->to('images/' . $product->images[2]->image) }}" alt="{{$product->images[2]->image}}" style="width:100%">
                     </div>
                   <?php endif; ?>
                   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
