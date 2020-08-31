@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMatchesTable extends Migration
+class CreateComunaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateMatchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('matches', function (Blueprint $table) {
+        Schema::create('comuna', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id_1');
-            $table->unsignedBigInteger('user_id_2');
-
-            $table->foreign('user_id_1')->references('id')->on('users');
-            $table->foreign('user_id_2')->references('id')->on('users');
-
+            $table->unsignedBigInteger('region_id');
+            $table->string('name', 100);
             $table->timestamps();
+            $table->smallInteger('active')->default(1);
+            $table->foreign('region_id')->references('id')->on('region');
         });
     }
 
@@ -32,6 +30,6 @@ class CreateMatchesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matches');
+        Schema::dropIfExists('comuna');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableUser extends Migration
+class CreateRegionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AlterTableUser extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('token_webpay');
+        Schema::create('region', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 100);
+            $table->string('number', 10);
+            $table->timestamps();
+            $table->smallInteger('active')->default(1);
         });
     }
 
@@ -25,8 +29,6 @@ class AlterTableUser extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['token_webpay']);
-        });
+        Schema::dropIfExists('region');
     }
 }
