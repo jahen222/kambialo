@@ -1,5 +1,8 @@
 <template>
-  <section class="container">
+  <section class="container" style="position: relative">
+    <div class="fixed fixed--xtra-message alert-success" style="opacity: 0;" id="xtra-message">
+        <div>Agregado a favorito</div>
+    </div>
     <div
       v-if="current"
       class="fixed fixed--center"
@@ -53,13 +56,13 @@
       </div>
     </div>
     <div class="footer fixed">
-      <div class="btn-c btn-c--decline" @click="reject">
+      <div class="btn-c btn-c--decline" @click="reject" title="Rechazar">
           <i class="material-icons">close</i>
       </div>
-      <div class="btn-c btn-c--skip" @click="skip">
+      <div class="btn-c btn-c--skip" @click="skip" title="Saltar">
           <i class="material-icons">call_missed</i>
       </div>
-      <div class="btn-c btn-c--like" @click="match">
+      <div class="btn-c btn-c--like" @click="match" title="Favorito">
           <i class="material-icons">favorite</i>
       </div>
     </div>
@@ -78,6 +81,8 @@ const EVENTS = {
 const DEFAULTS = {
   COVER: 0
 }
+
+var timeout = '';
 
 export default {
   name: 'SwipeableCards',
@@ -163,8 +168,17 @@ export default {
       InteractEventBus.$emit(EVENTS.SKIP)
     },
     emitAndNext(event) {
-      if(event=='match')
+      clearTimeout(timeout);
+      const element = document.getElementById('xtra-message');
+      element.style.opacity = 0;
+
+      if(event=='match'){
+        element.style.opacity = 1;
+        timeout = setTimeout(function(){
+          element.style.opacity = 0;
+        },1500);
         this.favorite(this.index)
+      }
 
       this.$emit(event, this.index)
       setTimeout(() => this.isVisible = false, 200)
@@ -298,6 +312,14 @@ export default {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+  &--xtra-message{
+    transition: 0.5s;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 77vw;
+    z-index: 4;
+    text-align: center;
   }
 }
 .rounded-borders {

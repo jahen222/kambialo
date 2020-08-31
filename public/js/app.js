@@ -2044,6 +2044,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
 
 
 var EVENTS = {
@@ -2054,6 +2057,7 @@ var EVENTS = {
 var DEFAULTS = {
   COVER: 0
 };
+var timeout = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SwipeableCards',
   components: {
@@ -2183,7 +2187,18 @@ var DEFAULTS = {
     emitAndNext: function emitAndNext(event) {
       var _this3 = this;
 
-      if (event == 'match') this.favorite(this.index);
+      clearTimeout(timeout);
+      var element = document.getElementById('xtra-message');
+      element.style.opacity = 0;
+
+      if (event == 'match') {
+        element.style.opacity = 1;
+        timeout = setTimeout(function () {
+          element.style.opacity = 0;
+        }, 1500);
+        this.favorite(this.index);
+      }
+
       this.$emit(event, this.index);
       setTimeout(function () {
         return _this3.isVisible = false;
@@ -6631,7 +6646,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".image-selector[data-v-5d1eb04c] {\n  position: absolute;\n  text-align: center;\n  top: 0;\n  width: 100%;\n}\n.container[data-v-5d1eb04c] {\n  background: #eceff1;\n  width: 100%;\n  height: 100vh;\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  width: 77vw;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-around;\n  align-items: center;\n}\n.btn-c[data-v-5d1eb04c] {\n  position: relative;\n  width: 50px;\n  height: 50px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn-c[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn-c i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn-c i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn-c--like[data-v-5d1eb04c] {\n  background-color: red;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn-c--like i[data-v-5d1eb04c] {\n  font-size: 32px;\n}\n.btn-c--decline[data-v-5d1eb04c] {\n  color: red;\n}\n.btn-c--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.rounded-borders[data-v-5d1eb04c] {\n  border-radius: 12px;\n}\n.card[data-v-5d1eb04c] {\n  width: 80vw;\n  height: 60vh;\n  color: white;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n.card--one[data-v-5d1eb04c] {\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n.card--two[data-v-5d1eb04c] {\n  transform: translate(-48%, -48%);\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);\n}\n.card--three[data-v-5d1eb04c] {\n  background: rgba(0, 0, 0, 0.8);\n  transform: translate(-46%, -46%);\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.card .text[data-v-5d1eb04c] {\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  background: black;\n  background: rgba(0, 0, 0, 0.5);\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
+exports.push([module.i, ".image-selector[data-v-5d1eb04c] {\n  position: absolute;\n  text-align: center;\n  top: 0;\n  width: 100%;\n}\n.container[data-v-5d1eb04c] {\n  background: #eceff1;\n  width: 100%;\n  height: 100vh;\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  width: 77vw;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-around;\n  align-items: center;\n}\n.btn-c[data-v-5d1eb04c] {\n  position: relative;\n  width: 50px;\n  height: 50px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn-c[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn-c i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn-c i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn-c--like[data-v-5d1eb04c] {\n  background-color: red;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn-c--like i[data-v-5d1eb04c] {\n  font-size: 32px;\n}\n.btn-c--decline[data-v-5d1eb04c] {\n  color: red;\n}\n.btn-c--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.fixed--xtra-message[data-v-5d1eb04c] {\n  transition: 0.5s;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 77vw;\n  z-index: 4;\n  text-align: center;\n}\n.rounded-borders[data-v-5d1eb04c] {\n  border-radius: 12px;\n}\n.card[data-v-5d1eb04c] {\n  width: 80vw;\n  height: 60vh;\n  color: white;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n.card--one[data-v-5d1eb04c] {\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n.card--two[data-v-5d1eb04c] {\n  transform: translate(-48%, -48%);\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);\n}\n.card--three[data-v-5d1eb04c] {\n  background: rgba(0, 0, 0, 0.8);\n  transform: translate(-46%, -46%);\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.card .text[data-v-5d1eb04c] {\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  background: black;\n  background: rgba(0, 0, 0, 0.5);\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
 
 // exports
 
@@ -39232,167 +39247,201 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "container" }, [
-    _vm.current
-      ? _c(
-          "div",
-          {
-            staticClass: "fixed fixed--center",
-            class: { transition: _vm.isVisible },
-            staticStyle: { "z-index": "3" }
-          },
-          [
-            _vm.isVisible
-              ? _c(
-                  "Vue2InteractDraggable",
-                  {
-                    staticClass: "rounded-borders card card--one",
-                    attrs: {
-                      "interact-out-of-sight-x-coordinate": 500,
-                      "interact-max-rotation": 15,
-                      "interact-x-threshold": 200,
-                      "interact-y-threshold": 200,
-                      "interact-event-bus-events": _vm.interactEventBus,
-                      "interact-block-drag-down": ""
-                    },
-                    on: {
-                      draggedRight: function($event) {
-                        return _vm.emitAndNext("match")
+  return _c(
+    "section",
+    { staticClass: "container", staticStyle: { position: "relative" } },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _vm.current
+        ? _c(
+            "div",
+            {
+              staticClass: "fixed fixed--center",
+              class: { transition: _vm.isVisible },
+              staticStyle: { "z-index": "3" }
+            },
+            [
+              _vm.isVisible
+                ? _c(
+                    "Vue2InteractDraggable",
+                    {
+                      staticClass: "rounded-borders card card--one",
+                      attrs: {
+                        "interact-out-of-sight-x-coordinate": 500,
+                        "interact-max-rotation": 15,
+                        "interact-x-threshold": 200,
+                        "interact-y-threshold": 200,
+                        "interact-event-bus-events": _vm.interactEventBus,
+                        "interact-block-drag-down": ""
                       },
-                      draggedLeft: function($event) {
-                        return _vm.emitAndNext("reject")
-                      },
-                      draggedUp: function($event) {
-                        return _vm.emitAndNext("skip")
+                      on: {
+                        draggedRight: function($event) {
+                          return _vm.emitAndNext("match")
+                        },
+                        draggedLeft: function($event) {
+                          return _vm.emitAndNext("reject")
+                        },
+                        draggedUp: function($event) {
+                          return _vm.emitAndNext("skip")
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("div", { staticStyle: { height: "100%" } }, [
-                      _c("img", {
-                        staticClass: "rounded-borders",
-                        attrs: { src: "images/" + _vm.currentImage }
-                      }),
-                      _vm._v(" "),
-                      _vm.current.images.length > 0
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "img-btn img-btn--prev",
-                              attrs: { a: "", href: "#" },
-                              on: { click: _vm.prevImage }
-                            },
-                            [_vm._v("❮")]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.current.images.length > 0
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "img-btn img-btn--next",
-                              attrs: { a: "", href: "#" },
-                              on: { click: _vm.nextImage }
-                            },
-                            [_vm._v("❯")]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.current.images.length > 0
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "image-selector",
-                              attrs: { id: "image-selector" }
-                            },
-                            [
-                              _c("input", {
-                                attrs: {
-                                  type: "radio",
-                                  name: "image_controller",
-                                  checked: ""
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.selectImage(0)
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _vm._l(_vm.current.images, function(x, y) {
-                                return _c("input", {
+                    },
+                    [
+                      _c("div", { staticStyle: { height: "100%" } }, [
+                        _c("img", {
+                          staticClass: "rounded-borders",
+                          attrs: { src: "images/" + _vm.currentImage }
+                        }),
+                        _vm._v(" "),
+                        _vm.current.images.length > 0
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "img-btn img-btn--prev",
+                                attrs: { a: "", href: "#" },
+                                on: { click: _vm.prevImage }
+                              },
+                              [_vm._v("❮")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.current.images.length > 0
+                          ? _c(
+                              "a",
+                              {
+                                staticClass: "img-btn img-btn--next",
+                                attrs: { a: "", href: "#" },
+                                on: { click: _vm.nextImage }
+                              },
+                              [_vm._v("❯")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.current.images.length > 0
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "image-selector",
+                                attrs: { id: "image-selector" }
+                              },
+                              [
+                                _c("input", {
                                   attrs: {
                                     type: "radio",
-                                    name: "image_controller"
+                                    name: "image_controller",
+                                    checked: ""
                                   },
                                   on: {
                                     click: function($event) {
-                                      return _vm.selectImage(y + 1)
+                                      return _vm.selectImage(0)
                                     }
                                   }
+                                }),
+                                _vm._v(" "),
+                                _vm._l(_vm.current.images, function(x, y) {
+                                  return _c("input", {
+                                    attrs: {
+                                      type: "radio",
+                                      name: "image_controller"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.selectImage(y + 1)
+                                      }
+                                    }
+                                  })
                                 })
-                              })
-                            ],
-                            2
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "text" }, [
-                        _c("h2", [_vm._v(_vm._s(_vm.current.name))])
+                              ],
+                              2
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text" }, [
+                          _c("h2", [_vm._v(_vm._s(_vm.current.name))])
+                        ])
                       ])
-                    ])
-                  ]
-                )
-              : _vm._e()
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.next
-      ? _c(
+                    ]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.next
+        ? _c(
+            "div",
+            {
+              staticClass: "rounded-borders card card--two fixed fixed--center",
+              staticStyle: { "z-index": "2" }
+            },
+            [
+              _c("div", { staticStyle: { height: "100%" } }, [
+                _c("img", {
+                  staticClass: "rounded-borders",
+                  attrs: { src: "images/" + _vm.next.cover_image }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "text" }, [
+                  _c("h2", [_vm._v(_vm._s(_vm.next.name))])
+                ])
+              ])
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "footer fixed" }, [
+        _c(
           "div",
           {
-            staticClass: "rounded-borders card card--two fixed fixed--center",
-            staticStyle: { "z-index": "2" }
+            staticClass: "btn-c btn-c--decline",
+            attrs: { title: "Rechazar" },
+            on: { click: _vm.reject }
           },
-          [
-            _c("div", { staticStyle: { height: "100%" } }, [
-              _c("img", {
-                staticClass: "rounded-borders",
-                attrs: { src: "images/" + _vm.next.cover_image }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "text" }, [
-                _c("h2", [_vm._v(_vm._s(_vm.next.name))])
-              ])
-            ])
-          ]
+          [_c("i", { staticClass: "material-icons" }, [_vm._v("close")])]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "btn-c btn-c--skip",
+            attrs: { title: "Saltar" },
+            on: { click: _vm.skip }
+          },
+          [_c("i", { staticClass: "material-icons" }, [_vm._v("call_missed")])]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "btn-c btn-c--like",
+            attrs: { title: "Favorito" },
+            on: { click: _vm.match }
+          },
+          [_c("i", { staticClass: "material-icons" }, [_vm._v("favorite")])]
         )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "footer fixed" }, [
-      _c(
-        "div",
-        { staticClass: "btn-c btn-c--decline", on: { click: _vm.reject } },
-        [_c("i", { staticClass: "material-icons" }, [_vm._v("close")])]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "btn-c btn-c--skip", on: { click: _vm.skip } }, [
-        _c("i", { staticClass: "material-icons" }, [_vm._v("call_missed")])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "btn-c btn-c--like", on: { click: _vm.match } },
-        [_c("i", { staticClass: "material-icons" }, [_vm._v("favorite")])]
-      )
-    ])
-  ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "fixed fixed--xtra-message alert-success",
+        staticStyle: { opacity: "0" },
+        attrs: { id: "xtra-message" }
+      },
+      [_c("div", [_vm._v("Agregado a favorito")])]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
