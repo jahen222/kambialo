@@ -91,9 +91,13 @@
                     <small class="form-text text-danger">@error('email') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="users[comuna]" value="{{ old('users.comuna') }}" required class="form-control">
+                    <select class="custom-select js-basic-multiple" id="comuna" name="Comuna">
+                        @foreach(App\Comuna::all() as $comuna)
+                        <option value="{{ $comuna->id }}">{{ $comuna->name }}</option>
+                        @endforeach
+                    </select>
                     <small class="form-text text-muted">Comuna</small>
-                    <small class="form-text text-danger">@error('comuna') {{ $message }} @enderror</small>
+                    <small class="form-text text-danger">@error('comuna_id') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
                     <input type="password" name="users[password]" value="{{ old('users.password') }}" required class="form-control">

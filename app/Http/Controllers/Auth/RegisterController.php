@@ -56,12 +56,14 @@ class RegisterController extends Controller
                 [
                     'name' => 'required',
                     'email' => 'unique:users',
-                    'subscription_id' => 'required'
+                    'subscription_id' => 'required',
+                    'comuna_id' => 'required'
                 ],
                 [
                     'name.required' => 'Usuario es requerido',
                     'subscription_id.required' => 'Debe seleccionar un plan de subscripcion',
                     'email.unique' => 'El correo electronico se encuentra en uso',
+                    'comuna_id.required' => 'Comuna es requerido',
                 ]
             )->validate();
 
@@ -87,6 +89,7 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'comuna' => $data['comuna'],
                 'subscription_id' => $data['subscription_id'],
+                'comuna_id' => $data['comuna_id'],
                 'password' => Hash::make($data['password']),
                 'token_webpay' => $response->token
             ]);
