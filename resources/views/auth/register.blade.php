@@ -45,9 +45,6 @@
         $('div.setup-panel div a.btn-success').trigger('click');
     });
 </script>
-<script>
-   
-</script>
 <section class="container-fluid breakcump register">
     <div class="row" id="selector">
         <a href="#" class="col-4 kb-link kb-link-active" style="text-align: center;">
