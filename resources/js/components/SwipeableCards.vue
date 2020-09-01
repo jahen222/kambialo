@@ -1,69 +1,96 @@
 <template>
-  <section class="container" style="position: relative">
-    <div class="fixed fixed--xtra-message alert-success" style="opacity: 0;" id="xtra-message">
+  <section class="container" style="position: relative; padding: 25px;">
+    <div class="alert-success text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message">
         <div>Agregado a favorito</div>
     </div>
-    <div
-      v-if="current"
-      class="fixed fixed--center"
-      style="z-index: 3"
-      :class="{ 'transition': isVisible }">
-      <Vue2InteractDraggable
-        v-if="isVisible"
-        :interact-out-of-sight-x-coordinate="500"
-        :interact-max-rotation="15"
-        :interact-x-threshold="200"
-        :interact-y-threshold="200"
-        :interact-event-bus-events="interactEventBus"
-        interact-block-drag-down
-        @draggedRight="emitAndNext('match')"
-        @draggedLeft="emitAndNext('reject')"
-        @draggedUp="emitAndNext('skip')"
-        class="rounded-borders card card--one">
+    <div style="margin-top: 10px;">
+      <form class="row" v-on:submit.prevent="search" style="align-items: flex-end">
+        <div class="form-group col-sm-3">
+          <small class="form-text text-muted">Categoria</small>
+          <select name="category" class="form-control" v-model="form.catagory">
+            <option selected>Seleccione Categoria</option>
+            <option v-for="x,y in categories" :value="x.id">{{x.name}}</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-9">
+          <input placeholder="Buscador" class="form-control" v-model="form.search" type="text"/>
+        </div>
+      </form>
+    </div>
+    <div style="height:70vh; width:80vh; position:relative; margin: auto;">
+      <div
+        v-if="!isLoading && current"
+        class="some"
+        style="z-index: 3"
+        :class="{ 'transition': isVisible }">
+        <Vue2InteractDraggable
+          v-if="isVisible"
+          :interact-out-of-sight-x-coordinate="500"
+          :interact-max-rotation="15"
+          :interact-x-threshold="200"
+          :interact-y-threshold="200"
+          :interact-event-bus-events="interactEventBus"
+          interact-block-drag-down
+          @draggedRight="emitAndNext('match')"
+          @draggedLeft="emitAndNext('reject')"
+          @draggedUp="emitAndNext('skip')"
+          class="rounded-borders card card--one">
+          <div style="height: 100%">
+            <img
+              :src="'images/'+currentImage"
+              class="rounded-borders"/>
+            <a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @click="prevImage" href="#!">&#10094;</a>
+            <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @click="nextImage" href="#!">&#10095;</a>
+            <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
+              <input type="radio" name="image_controller" @click="selectImage(0)" checked/>
+              <input type="radio" name="image_controller" @click="selectImage(y + 1)" v-for="x,y in current.images"/>
+            </div>
+            <div class="text">
+              <h2>{{current.name}}</h2>
+            </div>
+          </div>
+        </Vue2InteractDraggable>
+      </div>
+      <div
+        v-if="!isLoading && next"
+        class="rounded-borders card card--two "
+        style="z-index: 2">
         <div style="height: 100%">
           <img
-            :src="'images/'+currentImage"
+            :src="'images/' + next.cover_image"
             class="rounded-borders"/>
-          <a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @click="prevImage" href="#">&#10094;</a>
-          <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @click="nextImage" href="#">&#10095;</a>
-          <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
-            <input type="radio" name="image_controller" @click="selectImage(0)" checked/>
-            <input type="radio" name="image_controller" @click="selectImage(y + 1)" v-for="x,y in current.images"/>
-          </div>
           <div class="text">
-            <h2>{{current.name}}</h2>
-          </div>
+              <h2>{{next.name}}</h2>
+            </div>
         </div>
-      </Vue2InteractDraggable>
-    </div>
-    <div
-      v-if="next"
-      class="rounded-borders card card--two fixed fixed--center"
-      style="z-index: 2">
-      <div style="height: 100%">
-        <img
-          :src="'images/' + next.cover_image"
-          class="rounded-borders"/>
-        <div class="text">
-            <h2>{{next.name}}</h2>
-          </div>
+      </div>
+      <div
+        v-if="!isLoading && current"
+        class="rounded-borders card card--three "
+        style="z-index: 1">
+        <div style="height: 100%">
+        </div>
+      </div>
+      <div
+        v-if="!isLoading && !current && !next"
+        class="rounded-borders card card--flex "
+        style="z-index: 1">
+        <div>No hay mas productos</div>
+      </div>
+      <div
+        v-if="isLoading"
+        class="rounded-borders card card--flex "
+        style="z-index: 1">
+        <div>...Cargando</div>
       </div>
     </div>
-    <div
-      class="rounded-borders card card--three fixed fixed--center"
-      style="z-index: 1">
-      <div style="height: 100%">
+
+    <div v-if="!isLoading && current" class="footer">
+      <div class="btn btn-danger" @click="reject" title="Rechazar">
+          Mas tarde
       </div>
-    </div>
-    <div class="footer fixed">
-      <div class="btn-c btn-c--decline" @click="reject" title="Rechazar">
-          <i class="material-icons">close</i>
-      </div>
-      <div class="btn-c btn-c--skip" @click="skip" title="Saltar">
-          <i class="material-icons">call_missed</i>
-      </div>
-      <div class="btn-c btn-c--like" @click="match" title="Favorito">
-          <i class="material-icons">favorite</i>
+      <div class="btn btn-primary" @click="match" title="Favorito">
+          Me gusta
       </div>
     </div>
   </section>
@@ -89,15 +116,21 @@ export default {
   components: { Vue2InteractDraggable },
   data() {
     return {
+      isLoading: false,
       isVisible: true,
       index: 0,
+      categories: [],
       imageIndex: DEFAULTS.COVER,
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
         draggedLeft: EVENTS.REJECT,
         draggedUp: EVENTS.SKIP
       },
-      cards: []
+      cards: [],
+      form: {
+        category: '',
+        search: ''
+      }
     }
   },
   created: function(){
@@ -128,6 +161,13 @@ export default {
     }
   },
   methods: {
+    async search() {
+      this.isLoading = true;
+      console.log(this.form);
+      const response = await axios.get(`showcase/search`, {params: this.form})
+      this.cards = response.data;
+      this.isLoading = false;
+    },
     buildCardImages(){
       if(this.cards[this.index])
         return [{image: this.cards[this.index].cover_image},...this.cards[this.index].images]
@@ -144,10 +184,13 @@ export default {
       this.imageIndex -= 1;
     },
     async fetchData() {
+      this.isLoading = true;
       const response = await axios.get(`showcase/data`)
       if (response.data) {
-        this.cards = response.data;
+        this.cards = response.data.products;
+        this.categories = response.data.categories;
       }
+      this.isLoading = false;
     },
     async favorite(index)
     {
@@ -203,7 +246,7 @@ export default {
 .container {
   background: #eceff1;
   width: 100%;
-  height: 100vh;
+  /*height: 100vh;*/
 }
 
 .img-btn{
@@ -249,11 +292,9 @@ export default {
 .footer {
   width: 77vw;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   padding-bottom: 30px;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
@@ -326,7 +367,9 @@ export default {
   border-radius: 12px;
 }
 .card {
-  width: 80vw;
+  /*width: 80vw;*/
+  width: 100%;
+  position:absolute;
   height: 60vh;
   color: white;
   img {
@@ -336,16 +379,32 @@ export default {
     height: 100%;
   }
   &--one {
+    z-index: 3;
     box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
   }
   &--two {
-    transform: translate(-48%, -48%);
+    z-index: 2;
+    /*transform: translate(-48%, -48%);*/
+    top: 2vh;
+    left: 2vh;
     box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);
   }
   &--three {
+    z-index: 1;
+    top: 4vh;
+    left: 4vh;
     background: rgba(black, .8);
-    transform: translate(-46%, -46%);
+    /*transform: translate(-46%, -46%);*/
     box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);
+  }
+  &--flex{
+    display: flex;
+    background: transparent;
+    border: 0;
+    > * {
+      margin: auto;
+      color: black;
+    }
   }
   .text {
     position: absolute;

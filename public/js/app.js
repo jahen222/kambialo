@@ -1961,10 +1961,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1977,6 +1973,37 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2065,15 +2092,21 @@ var timeout = '';
   },
   data: function data() {
     return {
+      isLoading: false,
       isVisible: true,
       index: 0,
+      categories: [],
       imageIndex: DEFAULTS.COVER,
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
         draggedLeft: EVENTS.REJECT,
         draggedUp: EVENTS.SKIP
       },
-      cards: []
+      cards: [],
+      form: {
+        category: '',
+        search: ''
+      }
     };
   },
   created: function created() {
@@ -2101,6 +2134,35 @@ var timeout = '';
     }
   },
   methods: {
+    search: function search() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.isLoading = true;
+                console.log(_this.form);
+                _context.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("showcase/search", {
+                  params: _this.form
+                });
+
+              case 4:
+                response = _context.sent;
+                _this.cards = response.data;
+                _this.isLoading = false;
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
     buildCardImages: function buildCardImages() {
       if (this.cards[this.index]) return [{
         image: this.cards[this.index].cover_image
@@ -2117,62 +2179,66 @@ var timeout = '';
       this.imageIndex -= 1;
     },
     fetchData: function fetchData() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("showcase/data");
-
-              case 2:
-                response = _context.sent;
-
-                if (response.data) {
-                  _this.cards = response.data;
-                }
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    favorite: function favorite(index) {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var card, response;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                card = _this2.cards[index];
+                _this2.isLoading = true;
                 _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("showcase/favorite", {
-                  id: card.id
-                });
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("showcase/data");
 
               case 3:
                 response = _context2.sent;
 
-                if (response.data.success) {
-                  _this2.cards.splice(index, 1);
-
-                  _this2.index--;
+                if (response.data) {
+                  _this2.cards = response.data.products;
+                  _this2.categories = response.data.categories;
                 }
 
-              case 5:
+                _this2.isLoading = false;
+
+              case 6:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
+      }))();
+    },
+    favorite: function favorite(index) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var card, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                card = _this3.cards[index];
+                _context3.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("showcase/favorite", {
+                  id: card.id
+                });
+
+              case 3:
+                response = _context3.sent;
+
+                if (response.data.success) {
+                  _this3.cards.splice(index, 1);
+
+                  _this3.index--;
+                }
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     },
     match: function match() {
@@ -2185,7 +2251,7 @@ var timeout = '';
       vue2_interact__WEBPACK_IMPORTED_MODULE_1__["InteractEventBus"].$emit(EVENTS.SKIP);
     },
     emitAndNext: function emitAndNext(event) {
-      var _this3 = this;
+      var _this4 = this;
 
       clearTimeout(timeout);
       var element = document.getElementById('xtra-message');
@@ -2201,12 +2267,12 @@ var timeout = '';
 
       this.$emit(event, this.index);
       setTimeout(function () {
-        return _this3.isVisible = false;
+        return _this4.isVisible = false;
       }, 200);
       setTimeout(function () {
-        _this3.index++;
-        _this3.imageIndex = DEFAULTS.COVER;
-        _this3.isVisible = true;
+        _this4.index++;
+        _this4.imageIndex = DEFAULTS.COVER;
+        _this4.isVisible = true;
       }, 200);
     }
   }
@@ -6646,7 +6712,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".image-selector[data-v-5d1eb04c] {\n  position: absolute;\n  text-align: center;\n  top: 0;\n  width: 100%;\n}\n.container[data-v-5d1eb04c] {\n  background: #eceff1;\n  width: 100%;\n  height: 100vh;\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  width: 77vw;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-around;\n  align-items: center;\n}\n.btn-c[data-v-5d1eb04c] {\n  position: relative;\n  width: 50px;\n  height: 50px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn-c[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn-c i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn-c i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn-c--like[data-v-5d1eb04c] {\n  background-color: red;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn-c--like i[data-v-5d1eb04c] {\n  font-size: 32px;\n}\n.btn-c--decline[data-v-5d1eb04c] {\n  color: red;\n}\n.btn-c--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.fixed--xtra-message[data-v-5d1eb04c] {\n  transition: 0.5s;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 77vw;\n  z-index: 4;\n  text-align: center;\n}\n.rounded-borders[data-v-5d1eb04c] {\n  border-radius: 12px;\n}\n.card[data-v-5d1eb04c] {\n  width: 80vw;\n  height: 60vh;\n  color: white;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n.card--one[data-v-5d1eb04c] {\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n.card--two[data-v-5d1eb04c] {\n  transform: translate(-48%, -48%);\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);\n}\n.card--three[data-v-5d1eb04c] {\n  background: rgba(0, 0, 0, 0.8);\n  transform: translate(-46%, -46%);\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.card .text[data-v-5d1eb04c] {\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  background: black;\n  background: rgba(0, 0, 0, 0.5);\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
+exports.push([module.i, ".image-selector[data-v-5d1eb04c] {\n  position: absolute;\n  text-align: center;\n  top: 0;\n  width: 100%;\n}\n.container[data-v-5d1eb04c] {\n  background: #eceff1;\n  width: 100%;\n  /*height: 100vh;*/\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  width: 77vw;\n  bottom: 0;\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: center;\n  align-items: center;\n}\n.btn-c[data-v-5d1eb04c] {\n  position: relative;\n  width: 50px;\n  height: 50px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn-c[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn-c i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn-c i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn-c--like[data-v-5d1eb04c] {\n  background-color: red;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn-c--like i[data-v-5d1eb04c] {\n  font-size: 32px;\n}\n.btn-c--decline[data-v-5d1eb04c] {\n  color: red;\n}\n.btn-c--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.fixed--xtra-message[data-v-5d1eb04c] {\n  transition: 0.5s;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 77vw;\n  z-index: 4;\n  text-align: center;\n}\n.rounded-borders[data-v-5d1eb04c] {\n  border-radius: 12px;\n}\n.card[data-v-5d1eb04c] {\n  /*width: 80vw;*/\n  width: 100%;\n  position: absolute;\n  height: 60vh;\n  color: white;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n.card--one[data-v-5d1eb04c] {\n  z-index: 3;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n}\n.card--two[data-v-5d1eb04c] {\n  z-index: 2;\n  /*transform: translate(-48%, -48%);*/\n  top: 2vh;\n  left: 2vh;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);\n}\n.card--three[data-v-5d1eb04c] {\n  z-index: 1;\n  top: 4vh;\n  left: 4vh;\n  background: rgba(0, 0, 0, 0.8);\n  /*transform: translate(-46%, -46%);*/\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.card--flex[data-v-5d1eb04c] {\n  display: flex;\n  background: transparent;\n  border: 0;\n}\n.card--flex > *[data-v-5d1eb04c] {\n  margin: auto;\n  color: black;\n}\n.card .text[data-v-5d1eb04c] {\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  background: black;\n  background: rgba(0, 0, 0, 0.5);\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
 
 // exports
 
@@ -39249,181 +39315,314 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "section",
-    { staticClass: "container", staticStyle: { position: "relative" } },
+    {
+      staticClass: "container",
+      staticStyle: { position: "relative", padding: "25px" }
+    },
     [
       _vm._m(0),
       _vm._v(" "),
-      _vm.current
-        ? _c(
-            "div",
-            {
-              staticClass: "fixed fixed--center",
-              class: { transition: _vm.isVisible },
-              staticStyle: { "z-index": "3" }
-            },
-            [
-              _vm.isVisible
-                ? _c(
-                    "Vue2InteractDraggable",
+      _c("div", { staticStyle: { "margin-top": "10px" } }, [
+        _c(
+          "form",
+          {
+            staticClass: "row",
+            staticStyle: { "align-items": "flex-end" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.search($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-group col-sm-3" }, [
+              _c("small", { staticClass: "form-text text-muted" }, [
+                _vm._v("Categoria")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
                     {
-                      staticClass: "rounded-borders card card--one",
-                      attrs: {
-                        "interact-out-of-sight-x-coordinate": 500,
-                        "interact-max-rotation": 15,
-                        "interact-x-threshold": 200,
-                        "interact-y-threshold": 200,
-                        "interact-event-bus-events": _vm.interactEventBus,
-                        "interact-block-drag-down": ""
-                      },
-                      on: {
-                        draggedRight: function($event) {
-                          return _vm.emitAndNext("match")
-                        },
-                        draggedLeft: function($event) {
-                          return _vm.emitAndNext("reject")
-                        },
-                        draggedUp: function($event) {
-                          return _vm.emitAndNext("skip")
-                        }
-                      }
-                    },
-                    [
-                      _c("div", { staticStyle: { height: "100%" } }, [
-                        _c("img", {
-                          staticClass: "rounded-borders",
-                          attrs: { src: "images/" + _vm.currentImage }
-                        }),
-                        _vm._v(" "),
-                        _vm.current.images.length > 0
-                          ? _c(
-                              "a",
-                              {
-                                staticClass: "img-btn img-btn--prev",
-                                attrs: { a: "", href: "#" },
-                                on: { click: _vm.prevImage }
-                              },
-                              [_vm._v("❮")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.current.images.length > 0
-                          ? _c(
-                              "a",
-                              {
-                                staticClass: "img-btn img-btn--next",
-                                attrs: { a: "", href: "#" },
-                                on: { click: _vm.nextImage }
-                              },
-                              [_vm._v("❯")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.current.images.length > 0
-                          ? _c(
-                              "div",
-                              {
-                                staticClass: "image-selector",
-                                attrs: { id: "image-selector" }
-                              },
-                              [
-                                _c("input", {
-                                  attrs: {
-                                    type: "radio",
-                                    name: "image_controller",
-                                    checked: ""
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.selectImage(0)
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _vm._l(_vm.current.images, function(x, y) {
-                                  return _c("input", {
-                                    attrs: {
-                                      type: "radio",
-                                      name: "image_controller"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.selectImage(y + 1)
-                                      }
-                                    }
-                                  })
-                                })
-                              ],
-                              2
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "text" }, [
-                          _c("h2", [_vm._v(_vm._s(_vm.current.name))])
-                        ])
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.next
-        ? _c(
-            "div",
-            {
-              staticClass: "rounded-borders card card--two fixed fixed--center",
-              staticStyle: { "z-index": "2" }
-            },
-            [
-              _c("div", { staticStyle: { height: "100%" } }, [
-                _c("img", {
-                  staticClass: "rounded-borders",
-                  attrs: { src: "images/" + _vm.next.cover_image }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "text" }, [
-                  _c("h2", [_vm._v(_vm._s(_vm.next.name))])
-                ])
-              ])
-            ]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _c("div", { staticClass: "footer fixed" }, [
-        _c(
-          "div",
-          {
-            staticClass: "btn-c btn-c--decline",
-            attrs: { title: "Rechazar" },
-            on: { click: _vm.reject }
-          },
-          [_c("i", { staticClass: "material-icons" }, [_vm._v("close")])]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "btn-c btn-c--skip",
-            attrs: { title: "Saltar" },
-            on: { click: _vm.skip }
-          },
-          [_c("i", { staticClass: "material-icons" }, [_vm._v("call_missed")])]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "btn-c btn-c--like",
-            attrs: { title: "Favorito" },
-            on: { click: _vm.match }
-          },
-          [_c("i", { staticClass: "material-icons" }, [_vm._v("favorite")])]
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.catagory,
+                      expression: "form.catagory"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "category" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "catagory",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { selected: "" } }, [
+                    _vm._v("Seleccione Categoria")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.categories, function(x, y) {
+                    return _c("option", { domProps: { value: x.id } }, [
+                      _vm._v(_vm._s(x.name))
+                    ])
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-sm-9" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.search,
+                    expression: "form.search"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { placeholder: "Buscador", type: "text" },
+                domProps: { value: _vm.form.search },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "search", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticStyle: {
+            height: "70vh",
+            width: "80vh",
+            position: "relative",
+            margin: "auto"
+          }
+        },
+        [
+          !_vm.isLoading && _vm.current
+            ? _c(
+                "div",
+                {
+                  staticClass: "some",
+                  class: { transition: _vm.isVisible },
+                  staticStyle: { "z-index": "3" }
+                },
+                [
+                  _vm.isVisible
+                    ? _c(
+                        "Vue2InteractDraggable",
+                        {
+                          staticClass: "rounded-borders card card--one",
+                          attrs: {
+                            "interact-out-of-sight-x-coordinate": 500,
+                            "interact-max-rotation": 15,
+                            "interact-x-threshold": 200,
+                            "interact-y-threshold": 200,
+                            "interact-event-bus-events": _vm.interactEventBus,
+                            "interact-block-drag-down": ""
+                          },
+                          on: {
+                            draggedRight: function($event) {
+                              return _vm.emitAndNext("match")
+                            },
+                            draggedLeft: function($event) {
+                              return _vm.emitAndNext("reject")
+                            },
+                            draggedUp: function($event) {
+                              return _vm.emitAndNext("skip")
+                            }
+                          }
+                        },
+                        [
+                          _c("div", { staticStyle: { height: "100%" } }, [
+                            _c("img", {
+                              staticClass: "rounded-borders",
+                              attrs: { src: "images/" + _vm.currentImage }
+                            }),
+                            _vm._v(" "),
+                            _vm.current.images.length > 0
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "img-btn img-btn--prev",
+                                    attrs: { a: "", href: "#!" },
+                                    on: { click: _vm.prevImage }
+                                  },
+                                  [_vm._v("❮")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.current.images.length > 0
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "img-btn img-btn--next",
+                                    attrs: { a: "", href: "#!" },
+                                    on: { click: _vm.nextImage }
+                                  },
+                                  [_vm._v("❯")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.current.images.length > 0
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass: "image-selector",
+                                    attrs: { id: "image-selector" }
+                                  },
+                                  [
+                                    _c("input", {
+                                      attrs: {
+                                        type: "radio",
+                                        name: "image_controller",
+                                        checked: ""
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.selectImage(0)
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.current.images, function(x, y) {
+                                      return _c("input", {
+                                        attrs: {
+                                          type: "radio",
+                                          name: "image_controller"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.selectImage(y + 1)
+                                          }
+                                        }
+                                      })
+                                    })
+                                  ],
+                                  2
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "text" }, [
+                              _c("h2", [_vm._v(_vm._s(_vm.current.name))])
+                            ])
+                          ])
+                        ]
+                      )
+                    : _vm._e()
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.isLoading && _vm.next
+            ? _c(
+                "div",
+                {
+                  staticClass: "rounded-borders card card--two ",
+                  staticStyle: { "z-index": "2" }
+                },
+                [
+                  _c("div", { staticStyle: { height: "100%" } }, [
+                    _c("img", {
+                      staticClass: "rounded-borders",
+                      attrs: { src: "images/" + _vm.next.cover_image }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "text" }, [
+                      _c("h2", [_vm._v(_vm._s(_vm.next.name))])
+                    ])
+                  ])
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.isLoading && _vm.current
+            ? _c(
+                "div",
+                {
+                  staticClass: "rounded-borders card card--three ",
+                  staticStyle: { "z-index": "1" }
+                },
+                [_c("div", { staticStyle: { height: "100%" } })]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.isLoading && !_vm.current && !_vm.next
+            ? _c(
+                "div",
+                {
+                  staticClass: "rounded-borders card card--flex ",
+                  staticStyle: { "z-index": "1" }
+                },
+                [_c("div", [_vm._v("No hay mas productos")])]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isLoading
+            ? _c(
+                "div",
+                {
+                  staticClass: "rounded-borders card card--flex ",
+                  staticStyle: { "z-index": "1" }
+                },
+                [_c("div", [_vm._v("...Cargando")])]
+              )
+            : _vm._e()
+        ]
+      ),
+      _vm._v(" "),
+      !_vm.isLoading && _vm.current
+        ? _c("div", { staticClass: "footer" }, [
+            _c(
+              "div",
+              {
+                staticClass: "btn btn-danger",
+                attrs: { title: "Rechazar" },
+                on: { click: _vm.reject }
+              },
+              [_vm._v("\n        Mas tarde\n    ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { title: "Favorito" },
+                on: { click: _vm.match }
+              },
+              [_vm._v("\n        Me gusta\n    ")]
+            )
+          ])
+        : _vm._e()
     ]
   )
 }
@@ -39435,24 +39634,11 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "fixed fixed--xtra-message alert-success",
-        staticStyle: { opacity: "0" },
+        staticClass: "alert-success text-center",
+        staticStyle: { opacity: "0", transition: "1s", "font-size": "16pt" },
         attrs: { id: "xtra-message" }
       },
       [_c("div", [_vm._v("Agregado a favorito")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "rounded-borders card card--three fixed fixed--center",
-        staticStyle: { "z-index": "1" }
-      },
-      [_c("div", { staticStyle: { height: "100%" } })]
     )
   }
 ]

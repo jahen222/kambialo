@@ -21,11 +21,32 @@ class ShowcaseController extends Controller
 
     public function data()
     {
+        return [
+            'products' => $this->_search()->get(),
+            'categories' => \App\Category::all(),
+        ];
+    }
+
+    private function _search()
+    {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $products = Product::select('products.*')->leftJoin('favorites','products.id', '=', 'favorites.product_id')
-            ->where('products.user_id', '!=', $user->id)->whereNull('favorites.id')->with('images')->get();
-        return $products;
+        return Product::select('products.*')->leftJoin('favorites','products.id', '=', 'favorites.product_id')
+            ->where('products.user_id', '!=', $user->id)->whereNull('favorites.id')->with('images');
+    }
+
+
+    public function search(Request $request)
+    {
+        $products = $this->_search();
+        if ($request->input('category'))
+            $products->where('category_id', '=', $request->input('category'));
+
+        $products->where(function ($query) use ($request) {
+            $query->orWhere('name', 'like', $request->input('search') . '%')
+                ->orWhere('description', 'like', $request->input('search') . '%');
+        });
+        return $products->get();
     }
 
     public function favorite(Request $request)

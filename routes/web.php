@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('showcase', 'ShowcaseController@index')->name('showcase.index');
     Route::get('showcase/data', 'ShowcaseController@data')->name('showcase.data');
     Route::post('showcase/favorite', 'ShowcaseController@favorite')->name('showcase.favorite');
+    Route::get('showcase/search', 'ShowcaseController@search')->name('showcase.search');
 
     // Products
     Route::get('products', 'ProductController@index')->name('products.index');//->middleware('permission:index');

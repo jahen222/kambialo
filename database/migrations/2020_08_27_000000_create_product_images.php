@@ -34,7 +34,7 @@ class CreateProductImages extends Migration
     public function down()
     {
 		Schema::dropIfExists('product_images');
-		Schema::table('users', function (Blueprint $table) {
+		Schema::table('products', function (Blueprint $table) {
 			$table->string('image1');
 			$table->string('image2');
 			$table->string('image3');

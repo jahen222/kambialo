@@ -82,8 +82,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('matches.index') }}">
-                                {{ __('Matches') }}
+                            <a class="nav-link" href="{{ route('showcase.index') }}">
+                                {{ __('Mi Vitrina') }}
                             </a>
                         </li>
 
