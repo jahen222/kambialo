@@ -1,8 +1,5 @@
 <template>
   <section class="container" style="position: relative; padding: 25px;">
-    <div class="alert-success text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message">
-        <div>Agregado a favorito</div>
-    </div>
     <div style="margin-top: 10px;">
       <form class="row" v-on:submit.prevent="search" style="align-items: flex-end">
         <div class="form-group col-sm-3">
@@ -17,10 +14,12 @@
         </div>
       </form>
     </div>
-    <div style="height:70vh; width:80vh; position:relative; margin: auto;">
+    <div class="alert-success text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message">
+      <div>Agregado a favorito</div>
+    </div>
+    <div style="height:70vh; width:80vh; position:relative; margin: auto; margin-bottom: -5vh;">
       <div
         v-if="!isLoading && current"
-        class="some"
         style="z-index: 3"
         :class="{ 'transition': isVisible }">
         <Vue2InteractDraggable
@@ -34,63 +33,80 @@
           @draggedRight="emitAndNext('match')"
           @draggedLeft="emitAndNext('reject')"
           @draggedUp="emitAndNext('skip')"
-          class="rounded-borders card card--one">
-          <div style="height: 100%">
-            <img
-              :src="'images/'+currentImage"
-              class="rounded-borders"/>
+          class="rounded card card--no-shadow card--one">
+          <div style="height: 75%">
+            <img :src="'images/'+currentImage"/>
             <a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @click="prevImage" href="#!">&#10094;</a>
             <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @click="nextImage" href="#!">&#10095;</a>
             <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
               <input type="radio" name="image_controller" @click="selectImage(0)" checked/>
               <input type="radio" name="image_controller" @click="selectImage(y + 1)" v-for="x,y in current.images"/>
             </div>
-            <div class="text">
-              <h2>{{current.name}}</h2>
+          </div>
+          <div class="text">
+            <div class="row" style="align-items: center;">
+              <div class="col-9">
+                <h2>{{current.name}}</h2>
+                <p class="text-danger nowrap">{{current.description}}</p>
+              </div>
+              <div class="col-3 text-right" style="padding-right:40px;">
+                <span class="text-muted">{{current.favorites_count}}
+                  <i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
+                </span>
+              </div>
             </div>
           </div>
         </Vue2InteractDraggable>
       </div>
       <div
         v-if="!isLoading && next"
-        class="rounded-borders card card--two "
+        class="rounded card card--no-shadow card--two "
         style="z-index: 2">
-        <div style="height: 100%">
+        <div style="height: 75%">
           <img
-            :src="'images/' + next.cover_image"
-            class="rounded-borders"/>
-          <div class="text">
-              <h2>{{next.name}}</h2>
-            </div>
+            :src="'images/' + next.cover_image" />
         </div>
+        <div class="text">
+            <div class="row" style="align-items: center;">
+              <div class="col-9">
+                <h2>{{next.name}}</h2>
+                <p class="text-danger nowrap">{{next.description}}</p>
+              </div>
+              <div class="col-3 text-right" style="padding-right:40px;">
+                <span class="text-muted">{{next.favorites_count}}
+                  <i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
+                </span>
+              </div>
+            </div>
+          </div>
       </div>
       <div
         v-if="!isLoading && current"
-        class="rounded-borders card card--three "
+        class="rounded card card--no-shadow card--three "
         style="z-index: 1">
         <div style="height: 100%">
         </div>
       </div>
       <div
         v-if="!isLoading && !current && !next"
-        class="rounded-borders card card--flex "
+        class=" card card--no-shadow card--flex "
         style="z-index: 1">
         <div>No hay mas productos</div>
       </div>
       <div
         v-if="isLoading"
-        class="rounded-borders card card--flex "
+        class="card card--no-shadow card--flex "
         style="z-index: 1">
         <div>...Cargando</div>
       </div>
     </div>
 
     <div v-if="!isLoading && current" class="footer">
-      <div class="btn btn-danger" @click="reject" title="Rechazar">
-          Mas tarde
+      <div class="btn-c btn-c--decline" @click="reject" title="Rechazar">
+          <i class="material-icons">close</i>
       </div>
-      <div class="btn btn-primary" @click="match" title="Favorito">
-          Me gusta
+      <div class="btn-c btn-c--like" @click="match" title="Favorito">
+          <i class="material-icons">favorite</i>
       </div>
     </div>
   </section>
@@ -290,18 +306,19 @@ export default {
 }
 
 .footer {
-  width: 77vw;
+  width: 50vw;
   bottom: 0;
   display: flex;
   padding-bottom: 30px;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+  margin:auto;
 }
 
 .btn-c {
   position: relative;
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 75px;
   padding: .2rem;
   border-radius: 50%;
   background-color: white;
@@ -323,16 +340,19 @@ export default {
     }
   }
   &--like {
-    background-color: red;
+    background-color: green;
     padding: .5rem;
     color: white;
     box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);
     i {
+      color: green;
+      text-shadow: 1px 1px 1px white,-1px -1px 1px white,-1px 1px 1px white,1px -1px 1px white;
       font-size: 32px;
     }
   }
   &--decline {
-    color: red;
+    color: white;
+    background-color:red;
   }
   &--skip {
     color: green;
@@ -363,39 +383,39 @@ export default {
     text-align: center;
   }
 }
-.rounded-borders {
-  border-radius: 12px;
+.rounded {
+  border-radius: 12px!important;
 }
 .card {
   /*width: 80vw;*/
   width: 100%;
   position:absolute;
   height: 60vh;
-  color: white;
   img {
     object-fit: cover;
     display: block;
     width: 100%;
     height: 100%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+  &--no-shadow{
+    /*box-shadow: unset!important;*/
   }
   &--one {
     z-index: 3;
-    box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+    /*box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);*/
   }
   &--two {
     z-index: 2;
     /*transform: translate(-48%, -48%);*/
-    top: 2vh;
-    left: 2vh;
-    box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);
+    /*box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);*/
   }
   &--three {
-    z-index: 1;
-    top: 4vh;
-    left: 4vh;
+    z-index: 1;    
     background: rgba(black, .8);
     /*transform: translate(-46%, -46%);*/
-    box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);
+    /*box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);*/
   }
   &--flex{
     display: flex;
@@ -407,16 +427,24 @@ export default {
     }
   }
   .text {
-    position: absolute;
-    bottom: 0;
+    background-color: white;
     width: 100%;
-    background:black;
-    background:rgba(0,0,0,0.5);
+    height: 25%;
+    padding: 10px;
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
     text-indent: 20px;
     span {
       font-weight: normal;
+    }
+    .nowrap{
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    i{
+      color: transparent;
+      text-shadow: 1px 1px 1px green,-1px -1px 1px green,-1px 1px 1px green,1px -1px 1px green;
     }
   }
 }

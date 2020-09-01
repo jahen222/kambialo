@@ -31,8 +31,10 @@ class ShowcaseController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        return Product::select('products.*')->leftJoin('favorites','products.id', '=', 'favorites.product_id')
-            ->where('products.user_id', '!=', $user->id)->whereNull('favorites.id')->with('images');
+        return Product::leftJoin('favorites', function($join) use ($user){
+            $join->on('products.id', '=', 'favorites.product_id');
+            $join->on('favorites.user_id', '=', \Illuminate\Support\Facades\DB::raw($user->id));
+        })->where('products.user_id', '!=', $user->id)->whereNull('favorites.id')->with('images')->withCount('favorites');
     }
 
 
