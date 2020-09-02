@@ -39677,7 +39677,9 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "col-9" }, [
-                                  _c("h2", [_vm._v(_vm._s(_vm.current.name))]),
+                                  _c("h2", { staticClass: "nowrap" }, [
+                                    _vm._v(_vm._s(_vm.current.name))
+                                  ]),
                                   _vm._v(" "),
                                   _c(
                                     "p",
@@ -39747,7 +39749,9 @@ var render = function() {
                       },
                       [
                         _c("div", { staticClass: "col-9" }, [
-                          _c("h2", [_vm._v(_vm._s(_vm.next.name))]),
+                          _c("h2", { staticClass: "nowrap" }, [
+                            _vm._v(_vm._s(_vm.next.name))
+                          ]),
                           _vm._v(" "),
                           _c("p", { staticClass: "text-danger nowrap" }, [
                             _vm._v(_vm._s(_vm.next.description))

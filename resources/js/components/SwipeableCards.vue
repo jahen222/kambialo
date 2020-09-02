@@ -62,7 +62,7 @@
           <div class="text">
             <div class="row" style="align-items: center;">
               <div class="col-9">
-                <h2>{{current.name}}</h2>
+                <h2 class="nowrap">{{current.name}}</h2>
                 <p class="text-danger nowrap">{{current.description}}</p>
               </div>
               <div class="col-3 text-right" style="padding-right:40px;">
@@ -85,7 +85,7 @@
         <div class="text">
             <div class="row" style="align-items: center;">
               <div class="col-9">
-                <h2>{{next.name}}</h2>
+                <h2 class="nowrap">{{next.name}}</h2>
                 <p class="text-danger nowrap">{{next.description}}</p>
               </div>
               <div class="col-3 text-right" style="padding-right:40px;">
