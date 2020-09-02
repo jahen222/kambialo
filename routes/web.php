@@ -24,7 +24,7 @@ Route::post('confirmation', 'Auth\RegisterController@confirmation')->name('confi
 Route::post('endregister', 'Auth\RegisterController@endregister')->name('endregister');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('index', 'HomeController@index')->name('index');
+//    Route::get('index', 'HomeController@index')->name('index');
 
     // showcase
     Route::get('showcase', 'ShowcaseController@index')->name('showcase.index');
@@ -41,7 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('product/{role}', 'ProductController@update')->name('product.update');//->middleware('permission:update');
     Route::delete('product/{role}', 'ProductController@destroy')->name('product.destroy');//->middleware('permission:destroy');
     // Category
-    Route::post('search/category', 'HomeController@searchCategory')->name('search.category');
+//    Route::post('search/category', 'HomeController@searchCategory')->name('search.category');
     // Favorites
     Route::get('favorites', 'FavoriteController@index')->name('favorites.index');//->middleware('permission:index');
     Route::post('favorite/store', 'FavoriteController@store')->name('favorite.store');//->middleware('permission:store');
