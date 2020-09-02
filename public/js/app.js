@@ -2090,6 +2090,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 var EVENTS = {
@@ -2112,6 +2119,7 @@ var timeout = '';
       isVisible: true,
       index: 0,
       categories: [],
+      comunas: [],
       imageIndex: DEFAULTS.COVER,
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
@@ -2119,10 +2127,7 @@ var timeout = '';
         draggedUp: EVENTS.SKIP
       },
       cards: [],
-      form: {
-        category: '',
-        search: ''
-      }
+      form: {}
     };
   },
   created: function created() {
@@ -2213,6 +2218,7 @@ var timeout = '';
                 if (response.data) {
                   _this2.cards = response.data.products;
                   _this2.categories = response.data.categories;
+                  _this2.comunas = response.data.comunas;
                 }
 
                 _this2.isLoading = false;
@@ -39362,8 +39368,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.form.catagory,
-                      expression: "form.catagory"
+                      value: _vm.form.category,
+                      expression: "form.category"
                     }
                   ],
                   staticClass: "form-control",
@@ -39380,7 +39386,7 @@ var render = function() {
                         })
                       _vm.$set(
                         _vm.form,
-                        "catagory",
+                        "category",
                         $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
@@ -39403,7 +39409,60 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group col-sm-9" }, [
+            _c("div", { staticClass: "form-group col-sm-3" }, [
+              _c("small", { staticClass: "form-text text-muted" }, [
+                _vm._v("Comuna")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.comuna,
+                      expression: "form.comuna"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "Comuna" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "comuna",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { selected: "" } }, [
+                    _vm._v("Seleccione Comuna")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.comunas, function(x, y) {
+                    return _c("option", { domProps: { value: x.id } }, [
+                      _vm._v(_vm._s(x.name))
+                    ])
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-sm-6" }, [
               _c("input", {
                 directives: [
                   {

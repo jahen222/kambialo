@@ -24,6 +24,7 @@ class ShowcaseController extends Controller
         return [
             'products' => $this->_search()->get(),
             'categories' => \App\Category::all(),
+            'comunas' => \App\Comuna::all()
         ];
     }
 
@@ -34,7 +35,8 @@ class ShowcaseController extends Controller
         return Product::leftJoin('favorites', function($join) use ($user){
             $join->on('products.id', '=', 'favorites.product_id');
             $join->on('favorites.user_id', '=', \Illuminate\Support\Facades\DB::raw($user->id));
-        })->where('products.user_id', '!=', $user->id)->whereNull('favorites.id')->with('images')->withCount('favorites');
+        })->join('users', 'users.id', '=', 'products.user_id')->where('products.user_id', '!=', $user->id)
+            ->whereNull('favorites.id')->with('images')->withCount('favorites');
     }
 
 
@@ -44,9 +46,12 @@ class ShowcaseController extends Controller
         if ($request->input('category'))
             $products->where('category_id', '=', $request->input('category'));
 
+        if($request->input('comuna'))
+            $products->where('comuna_id', '=', $request->input('comuna'));
+
         $products->where(function ($query) use ($request) {
-            $query->orWhere('name', 'like', $request->input('search') . '%')
-                ->orWhere('description', 'like', $request->input('search') . '%');
+            $query->orWhere('products.name', 'like', $request->input('search') . '%')
+                ->orWhere('products.description', 'like', $request->input('search') . '%');
         });
         return $products->get();
     }

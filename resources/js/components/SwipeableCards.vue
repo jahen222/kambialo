@@ -4,12 +4,19 @@
       <form class="row" v-on:submit.prevent="search" style="align-items: flex-end">
         <div class="form-group col-sm-3">
           <small class="form-text text-muted">Categoria</small>
-          <select name="category" class="form-control" v-model="form.catagory">
+          <select name="category" class="form-control" v-model="form.category">
             <option selected>Seleccione Categoria</option>
             <option v-for="x,y in categories" :value="x.id">{{x.name}}</option>
           </select>
         </div>
-        <div class="form-group col-sm-9">
+        <div class="form-group col-sm-3">
+          <small class="form-text text-muted">Comuna</small>
+          <select name="Comuna" class="form-control" v-model="form.comuna">
+            <option selected>Seleccione Comuna</option>
+            <option v-for="x,y in comunas" :value="x.id">{{x.name}}</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-6">
           <input placeholder="Buscador" class="form-control" v-model="form.search" type="text"/>
         </div>
       </form>
@@ -136,6 +143,7 @@ export default {
       isVisible: true,
       index: 0,
       categories: [],
+      comunas: [],
       imageIndex: DEFAULTS.COVER,
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
@@ -143,10 +151,7 @@ export default {
         draggedUp: EVENTS.SKIP
       },
       cards: [],
-      form: {
-        category: '',
-        search: ''
-      }
+      form: {},
     }
   },
   created: function(){
@@ -205,6 +210,7 @@ export default {
       if (response.data) {
         this.cards = response.data.products;
         this.categories = response.data.categories;
+        this.comunas = response.data.comunas;
       }
       this.isLoading = false;
     },
