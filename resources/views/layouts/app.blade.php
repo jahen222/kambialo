@@ -119,10 +119,10 @@
     <script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="https://kit.fontawesome.com/18f61f0b58.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script type="text/javascript" src="{{ asset('ssets/material/js/mdb.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/app.js') }}"></script>
     @yield('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 </body>
 
 </html>

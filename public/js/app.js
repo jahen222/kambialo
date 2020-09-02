@@ -2097,6 +2097,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 var EVENTS = {
@@ -2120,6 +2129,7 @@ var timeout = '';
       index: 0,
       categories: [],
       comunas: [],
+      tags: [],
       imageIndex: DEFAULTS.COVER,
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
@@ -2127,7 +2137,9 @@ var timeout = '';
         draggedUp: EVENTS.SKIP
       },
       cards: [],
-      form: {}
+      form: {
+        tags: []
+      }
     };
   },
   created: function created() {
@@ -2164,8 +2176,8 @@ var timeout = '';
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _this.form.tags = $('#tags-select2').val();
                 _this.isLoading = true;
-                console.log(_this.form);
                 _context.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("showcase/search", {
                   params: _this.form
@@ -2219,6 +2231,7 @@ var timeout = '';
                   _this2.cards = response.data.products;
                   _this2.categories = response.data.categories;
                   _this2.comunas = response.data.comunas;
+                  _this2.tags = response.data.tags;
                 }
 
                 _this2.isLoading = false;
@@ -39356,7 +39369,7 @@ var render = function() {
             }
           },
           [
-            _c("div", { staticClass: "form-group col-sm-3" }, [
+            _c("div", { staticClass: "form-group col-sm-2" }, [
               _c("small", { staticClass: "form-text text-muted" }, [
                 _vm._v("Categoria")
               ]),
@@ -39409,7 +39422,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group col-sm-3" }, [
+            _c("div", { staticClass: "form-group col-sm-2" }, [
               _c("small", { staticClass: "form-text text-muted" }, [
                 _vm._v("Comuna")
               ]),
@@ -39462,7 +39475,54 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group col-sm-6" }, [
+            _c("div", { staticClass: "form-group col-sm-2" }, [
+              _c("small", { staticClass: "form-text text-muted" }, [
+                _vm._v("Tags")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.tags,
+                      expression: "form.tags"
+                    }
+                  ],
+                  staticClass: "custom-select js-basic-multiple",
+                  attrs: { name: "tags[]", id: "tags-select2", multiple: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "tags",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.tags, function(x, y) {
+                  return _c("option", { domProps: { value: x.id } }, [
+                    _vm._v(_vm._s(x.name))
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-sm-4" }, [
               _c("input", {
                 directives: [
                   {
@@ -39484,12 +39544,14 @@ var render = function() {
                   }
                 }
               })
-            ])
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
           ]
         )
       ]),
       _vm._v(" "),
-      _vm._m(0),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "div",
@@ -39788,6 +39850,21 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-sm-2" }, [
+      _c(
+        "button",
+        {
+          staticStyle: { border: "0", "background-color": "transparent" },
+          attrs: { type: "submit" }
+        },
+        [_c("i", { staticClass: "material-icons" }, [_vm._v("search")])]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

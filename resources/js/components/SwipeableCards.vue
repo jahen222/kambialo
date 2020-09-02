@@ -2,22 +2,31 @@
   <section class="container" style="position: relative; padding: 25px;">
     <div style="margin-top: 10px;">
       <form class="row" v-on:submit.prevent="search" style="align-items: flex-end">
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-2">
           <small class="form-text text-muted">Categoria</small>
           <select name="category" class="form-control" v-model="form.category">
             <option value="" selected>Seleccione Categoria</option>
             <option v-for="x,y in categories" :value="x.id">{{x.name}}</option>
           </select>
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-2">
           <small class="form-text text-muted">Comuna</small>
           <select name="Comuna" class="form-control" v-model="form.comuna">
             <option value="" selected>Seleccione Comuna</option>
             <option v-for="x,y in comunas" :value="x.id">{{x.name}}</option>
           </select>
         </div>
-        <div class="form-group col-sm-6">
+        <div class="form-group col-sm-2">
+          <small class="form-text text-muted">Tags</small>
+          <select name="tags[]" class="custom-select js-basic-multiple" id="tags-select2" v-model="form.tags" multiple>
+            <option v-for="x,y in tags" :value="x.id">{{x.name}}</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-4">
           <input placeholder="Buscador" class="form-control" v-model="form.search" type="text"/>
+        </div>
+        <div class="form-group col-sm-2">
+          <button type="submit" style="border:0; background-color:transparent;"><i class="material-icons">search</i></button>
         </div>
       </form>
     </div>
@@ -144,6 +153,7 @@ export default {
       index: 0,
       categories: [],
       comunas: [],
+      tags: [],
       imageIndex: DEFAULTS.COVER,
       interactEventBus: {
         draggedRight: EVENTS.MATCH,
@@ -151,7 +161,9 @@ export default {
         draggedUp: EVENTS.SKIP
       },
       cards: [],
-      form: {},
+      form: {
+        tags: []
+      },
     }
   },
   created: function(){
@@ -183,8 +195,8 @@ export default {
   },
   methods: {
     async search() {
+      this.form.tags = $('#tags-select2').val();
       this.isLoading = true;
-      console.log(this.form);
       const response = await axios.get(`showcase/search`, {params: this.form})
       this.cards = response.data;
       this.isLoading = false;
@@ -211,6 +223,7 @@ export default {
         this.cards = response.data.products;
         this.categories = response.data.categories;
         this.comunas = response.data.comunas;
+        this.tags = response.data.tags;
       }
       this.isLoading = false;
     },
