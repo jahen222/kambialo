@@ -39395,7 +39395,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c("option", { attrs: { selected: "" } }, [
+                  _c("option", { attrs: { value: "", selected: "" } }, [
                     _vm._v("Seleccione Categoria")
                   ]),
                   _vm._v(" "),
@@ -39448,7 +39448,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c("option", { attrs: { selected: "" } }, [
+                  _c("option", { attrs: { value: "", selected: "" } }, [
                     _vm._v("Seleccione Comuna")
                   ]),
                   _vm._v(" "),

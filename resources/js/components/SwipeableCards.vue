@@ -5,14 +5,14 @@
         <div class="form-group col-sm-3">
           <small class="form-text text-muted">Categoria</small>
           <select name="category" class="form-control" v-model="form.category">
-            <option selected>Seleccione Categoria</option>
+            <option value="" selected>Seleccione Categoria</option>
             <option v-for="x,y in categories" :value="x.id">{{x.name}}</option>
           </select>
         </div>
         <div class="form-group col-sm-3">
           <small class="form-text text-muted">Comuna</small>
           <select name="Comuna" class="form-control" v-model="form.comuna">
-            <option selected>Seleccione Comuna</option>
+            <option value="" selected>Seleccione Comuna</option>
             <option v-for="x,y in comunas" :value="x.id">{{x.name}}</option>
           </select>
         </div>
