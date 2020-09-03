@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Product;
 use App\Favorite;
+use App\Match;
 
 class ShowcaseController extends Controller
 {
@@ -33,7 +34,7 @@ class ShowcaseController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        return Product::distinct()->leftJoin('favorites', function($join) use ($user){
+        return Product::distinct()->leftJoin('favorites', function ($join) use ($user) {
             $join->on('products.id', '=', 'favorites.product_id');
             $join->on('favorites.user_id', '=', \Illuminate\Support\Facades\DB::raw($user->id));
         })->join('users', 'users.id', '=', 'products.user_id')->where('products.user_id', '!=', $user->id)
@@ -49,10 +50,10 @@ class ShowcaseController extends Controller
         if ($request->input('category'))
             $products->where('category_id', '=', $request->input('category'));
 
-        if($request->input('comuna'))
+        if ($request->input('comuna'))
             $products->where('comuna_id', '=', $request->input('comuna'));
 
-        if($request->input('tags'))
+        if ($request->input('tags'))
             $products->whereIn('tag_id', $request->input('tags'));
 
         $products->where(function ($query) use ($request) {
@@ -67,11 +68,21 @@ class ShowcaseController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
 
-        $favorite = Favorite::where('product_id', $request->input('id'))->where('user_id', $user->id)->first();
-        if(!$favorite)
+        $product = Product::where('id', $request->input('id'))->first();
+        $userProduct = $product->user()->first();
+
+        $favorite = $user->favorites()->where('product_id', $product->id)->first();
+        if (!$favorite)
             $favorite = Favorite::create(['product_id' => $request->input('id'), 'user_id' => $user->id]);
-        
-        return ['success' => (bool) $favorite];
+
+        $match = Match::whereIn('user_id_1', [$user->id, $userProduct->id])->whereIn('user_id_2', [$user->id, $userProduct->id])->first();
+        if (!$match) {
+            if ($allUserProducts = $userProduct->favorites()->get()->toArray()) {
+                if ($user->products()->whereIn('id', array_column($allUserProducts, 'product_id'))->get())
+                    $match = Match::create(['user_id_1' => $user->id, 'user_id_2' => $userProduct->id]);
+            }
+        }
+        return ['success' => (bool) $favorite, 'match' => (bool) $match];
     }
 
     /**

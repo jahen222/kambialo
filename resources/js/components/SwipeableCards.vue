@@ -33,6 +33,9 @@
     <div class="alert-success text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message">
       <div>Agregado a favorito</div>
     </div>
+    <div class="alert-info text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message-info">
+      <div>Haz hecho match con otra persona</div>
+    </div>
     <div style="height:70vh; width:80vh; position:relative; margin: auto; margin-bottom: -5vh;">
       <div
         v-if="!isLoading && current"
@@ -142,6 +145,7 @@ const DEFAULTS = {
 }
 
 var timeout = '';
+var timeoutInfo = '';
 
 export default {
   name: 'SwipeableCards',
@@ -172,6 +176,9 @@ export default {
   computed: {
     currentImage(){
       const images = this.buildCardImages();
+	  if(this.imageIndex < 0)
+		this.imageIndex = images.length - 1;
+		
       if(!images[this.imageIndex])
         this.imageIndex = DEFAULTS.COVER;
 
@@ -235,6 +242,13 @@ export default {
         this.cards.splice(index, 1);
         this.index--;
       }
+      if(response.data.match){
+        const elementInfo = document.getElementById('xtra-message-info');
+        elementInfo.style.opacity = 1;
+        timeoutInfo = setTimeout(function(){
+          elementInfo.style.opacity = 0;
+        },2500);
+      }
     },
     match() {
       InteractEventBus.$emit(EVENTS.MATCH)
@@ -249,6 +263,9 @@ export default {
       clearTimeout(timeout);
       const element = document.getElementById('xtra-message');
       element.style.opacity = 0;
+
+      const elementInfo = document.getElementById('xtra-message-info');
+      elementInfo.style.opacity = 0;
 
       if(event=='match'){
         element.style.opacity = 1;

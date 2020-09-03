@@ -2106,6 +2106,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 var EVENTS = {
@@ -2117,6 +2120,7 @@ var DEFAULTS = {
   COVER: 0
 };
 var timeout = '';
+var timeoutInfo = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SwipeableCards',
   components: {
@@ -2148,6 +2152,7 @@ var timeout = '';
   computed: {
     currentImage: function currentImage() {
       var images = this.buildCardImages();
+      if (this.imageIndex < 0) this.imageIndex = images.length - 1;
       if (!images[this.imageIndex]) this.imageIndex = DEFAULTS.COVER;
 
       if (document.getElementById('image-selector')) {
@@ -2248,7 +2253,7 @@ var timeout = '';
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var card, response;
+        var card, response, elementInfo;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -2268,7 +2273,15 @@ var timeout = '';
                   _this3.index--;
                 }
 
-              case 5:
+                if (response.data.match) {
+                  elementInfo = document.getElementById('xtra-message-info');
+                  elementInfo.style.opacity = 1;
+                  timeoutInfo = setTimeout(function () {
+                    elementInfo.style.opacity = 0;
+                  }, 2500);
+                }
+
+              case 6:
               case "end":
                 return _context3.stop();
             }
@@ -2291,6 +2304,8 @@ var timeout = '';
       clearTimeout(timeout);
       var element = document.getElementById('xtra-message');
       element.style.opacity = 0;
+      var elementInfo = document.getElementById('xtra-message-info');
+      elementInfo.style.opacity = 0;
 
       if (event == 'match') {
         element.style.opacity = 1;
@@ -39553,6 +39568,8 @@ var render = function() {
       _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
+      _vm._m(2),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -39881,6 +39898,20 @@ var staticRenderFns = [
         attrs: { id: "xtra-message" }
       },
       [_c("div", [_vm._v("Agregado a favorito")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "alert-info text-center",
+        staticStyle: { opacity: "0", transition: "1s", "font-size": "16pt" },
+        attrs: { id: "xtra-message-info" }
+      },
+      [_c("div", [_vm._v("Haz hecho match con otra persona")])]
     )
   }
 ]
