@@ -70,28 +70,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Productos</div>
                 <div class="panel-body">
-{{--                    <form action="" method="get">--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="form-group col-sm-3">--}}
-{{--                                <select name="category" id="" class="form-control">--}}
-{{--                                    <option value>Seleccionar Categoria</option>--}}
-{{--                                    @foreach(App\Category::all() as $category)--}}
-{{--                                    <option value="{{ $category->id }}" {{ $category->id == request('category') ? 'selected' : '' }}>--}}
-{{--                                        {{$category->name}}--}}
-{{--                                    </option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group col-sm-9">--}}
-{{--                                <input type="text" placeholder="Buscador" name="search" value="{{ request('search') }}" class="form-control">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
 
                     @can('create')
-
-                    <a href="{{ route('product.create') }}" class="mdc-fab app-fab--absolute" aria-label="F+">
-                        <span class="mdc-fab__icon material-icons">+</span>
+                    <a href="{{ route('product.create') }}" class="float">
+                        <i class="fa fa-plus my-float"></i>
                     </a>
                     @endcan
 
