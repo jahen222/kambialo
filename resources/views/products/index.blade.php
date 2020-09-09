@@ -99,7 +99,7 @@
                         @foreach($products as $product)
                         <tbody>
                             <tr>
-                                <td>{{ $product->id }}</td>
+                                <td><img style="max-height:50px;" src="{{url()->to('images/' . $product->cover_image)}}" /></td>
                                 <td>{{ $product->name }}</td>
                                 <td>Favoritos: {{ count($product->favorites()->get()) }}</td>
 
@@ -117,7 +117,7 @@
                                     <form action="{{ route('product.destroy', $product->id) }}" method="POST">
                                         {{ method_field('DELETE') }}
                                         {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-sm btn-danger">
+                                        <button type="submit" class="btn btn-sm btn-danger" style="margin:0;">
                                             Eliminar
                                         </button>
                                     </form>
