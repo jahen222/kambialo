@@ -82,20 +82,19 @@
                         <tbody>
                             <tr>
                                 <td><img style="max-height:50px;" src="{{url()->to('images/' . $product->cover_image)}}" /></td>
-                                <td>{{ $product->name }}</td>
-                                <td>Favoritos: {{ count($product->favorites()->get()) }}</td>
-
-                                <td>
+                                <td style="vertical-align: middle;">{{ $product->name }}</td>
+                                <td style="vertical-align: middle;">Favoritos: {{ count($product->favorites()->get()) }}</td>
+                                <td style="vertical-align: middle;">
                                     <a href="{{ route('product.show', $product->id) }}" class="btn btn-sm btn-primary">
                                         Ver
                                     </a>
                                 </td>
-                                <td>
+                                <td style="vertical-align: middle;">
                                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-primary">
                                         Actualizar
                                     </a>
                                 </td>
-                                <td>
+                                <td style="vertical-align: middle;">
                                     <form action="{{ route('product.destroy', $product->id) }}" method="POST">
                                         {{ method_field('DELETE') }}
                                         {{ csrf_field() }}
@@ -104,7 +103,6 @@
                                         </button>
                                     </form>
                                 </td>
-
                             </tr>
                         </tbody>
                         @endforeach
