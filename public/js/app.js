@@ -2267,12 +2267,6 @@ var timeoutInfo = '';
               case 3:
                 response = _context3.sent;
 
-                if (response.data.success) {
-                  _this3.cards.splice(index, 1);
-
-                  _this3.index--;
-                }
-
                 if (response.data.match) {
                   elementInfo = document.getElementById('xtra-message-info');
                   elementInfo.style.opacity = 1;
@@ -2281,7 +2275,7 @@ var timeoutInfo = '';
                   }, 2500);
                 }
 
-              case 6:
+              case 5:
               case "end":
                 return _context3.stop();
             }

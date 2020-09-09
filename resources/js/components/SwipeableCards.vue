@@ -238,10 +238,6 @@ export default {
     {
       const card = this.cards[index];
       const response = await axios.post(`showcase/favorite`, {id: card.id});
-      if(response.data.success){
-        this.cards.splice(index, 1);
-        this.index--;
-      }
       if(response.data.match){
         const elementInfo = document.getElementById('xtra-message-info');
         elementInfo.style.opacity = 1;
