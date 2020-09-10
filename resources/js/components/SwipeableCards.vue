@@ -31,10 +31,10 @@
       </form>
     </div>
     <div class="alert-success text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message">
-      <div>Agregado a favorito</div>
+      
     </div>
     <div class="alert-info text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message-info">
-      <div>Haz hecho match con otra persona</div>
+      
     </div>
     <div style="height:70vh; width:80vh; position:relative; margin: auto; margin-bottom: -5vh;">
       <div
@@ -238,6 +238,14 @@ export default {
     {
       const card = this.cards[index];
       const response = await axios.post(`showcase/favorite`, {id: card.id});
+
+      const element = document.getElementById('xtra-message');
+      element.innerHTML = response.data.favoriteMessage;
+      element.style.opacity = 1;
+      timeout = setTimeout(function(){
+        element.style.opacity = 0;
+      },1500);
+
       if(response.data.match){
         const elementInfo = document.getElementById('xtra-message-info');
         elementInfo.style.opacity = 1;
@@ -257,6 +265,8 @@ export default {
     },
     emitAndNext(event) {
       clearTimeout(timeout);
+      clearTimeout(timeoutInfo);
+
       const element = document.getElementById('xtra-message');
       element.style.opacity = 0;
 
@@ -264,10 +274,6 @@ export default {
       elementInfo.style.opacity = 0;
 
       if(event=='match'){
-        element.style.opacity = 1;
-        timeout = setTimeout(function(){
-          element.style.opacity = 0;
-        },1500);
         this.favorite(this.index)
       }
 

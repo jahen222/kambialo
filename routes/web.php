@@ -23,14 +23,15 @@ Route::post('preregister', 'Auth\RegisterController@preregister')->name('preregi
 Route::post('confirmation', 'Auth\RegisterController@confirmation')->name('confirmation');
 Route::post('endregister', 'Auth\RegisterController@endregister')->name('endregister');
 
+// showcase
+Route::get('showcase', 'ShowcaseController@index')->name('showcase.index');
+Route::get('showcase/data', 'ShowcaseController@data')->name('showcase.data');
+Route::post('showcase/favorite', 'ShowcaseController@favorite')->name('showcase.favorite');
+Route::get('showcase/search', 'ShowcaseController@search')->name('showcase.search');
+
 Route::middleware(['auth'])->group(function () {
 //    Route::get('index', 'HomeController@index')->name('index');
 
-    // showcase
-    Route::get('showcase', 'ShowcaseController@index')->name('showcase.index');
-    Route::get('showcase/data', 'ShowcaseController@data')->name('showcase.data');
-    Route::post('showcase/favorite', 'ShowcaseController@favorite')->name('showcase.favorite');
-    Route::get('showcase/search', 'ShowcaseController@search')->name('showcase.search');
 
     // Products
     Route::get('products', 'ProductController@index')->name('products.index');//->middleware('permission:index');

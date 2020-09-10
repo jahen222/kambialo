@@ -2253,7 +2253,7 @@ var timeoutInfo = '';
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var card, response, elementInfo;
+        var card, response, element, elementInfo;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -2266,6 +2266,12 @@ var timeoutInfo = '';
 
               case 3:
                 response = _context3.sent;
+                element = document.getElementById('xtra-message');
+                element.innerHTML = response.data.favoriteMessage;
+                element.style.opacity = 1;
+                timeout = setTimeout(function () {
+                  element.style.opacity = 0;
+                }, 1500);
 
                 if (response.data.match) {
                   elementInfo = document.getElementById('xtra-message-info');
@@ -2275,7 +2281,7 @@ var timeoutInfo = '';
                   }, 2500);
                 }
 
-              case 5:
+              case 9:
               case "end":
                 return _context3.stop();
             }
@@ -2296,16 +2302,13 @@ var timeoutInfo = '';
       var _this4 = this;
 
       clearTimeout(timeout);
+      clearTimeout(timeoutInfo);
       var element = document.getElementById('xtra-message');
       element.style.opacity = 0;
       var elementInfo = document.getElementById('xtra-message-info');
       elementInfo.style.opacity = 0;
 
       if (event == 'match') {
-        element.style.opacity = 1;
-        timeout = setTimeout(function () {
-          element.style.opacity = 0;
-        }, 1500);
         this.favorite(this.index);
       }
 
@@ -39560,9 +39563,17 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", {
+        staticClass: "alert-success text-center",
+        staticStyle: { opacity: "0", transition: "1s", "font-size": "16pt" },
+        attrs: { id: "xtra-message" }
+      }),
       _vm._v(" "),
-      _vm._m(2),
+      _c("div", {
+        staticClass: "alert-info text-center",
+        staticStyle: { opacity: "0", transition: "1s", "font-size": "16pt" },
+        attrs: { id: "xtra-message-info" }
+      }),
       _vm._v(" "),
       _c(
         "div",
@@ -39879,34 +39890,6 @@ var staticRenderFns = [
         [_c("i", { staticClass: "material-icons" }, [_vm._v("search")])]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "alert-success text-center",
-        staticStyle: { opacity: "0", transition: "1s", "font-size": "16pt" },
-        attrs: { id: "xtra-message" }
-      },
-      [_c("div", [_vm._v("Agregado a favorito")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "alert-info text-center",
-        staticStyle: { opacity: "0", transition: "1s", "font-size": "16pt" },
-        attrs: { id: "xtra-message-info" }
-      },
-      [_c("div", [_vm._v("Haz hecho match con otra persona")])]
-    )
   }
 ]
 render._withStripped = true

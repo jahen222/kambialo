@@ -322,7 +322,7 @@
                                 <img src="{{ asset('assets/img/watch.jpg') }}" class="img-fluid d-block" alt="">
                             </a>
                             <div class="b-cat_mask">
-                                <a href="#" class="category-link-overlay">Relojes</a>
+                                <a href="{{ route('showcase.index') }}" class="category-link-overlay">Relojes</a>
                             </div>
                         </div>
                     </div>
@@ -332,7 +332,7 @@
                                 <img src="{{ asset('assets/img/shoes.jpg') }}" class="img-fluid d-block" alt="">
                             </a>
                             <div class="b-cat_mask">
-                                <a href="#" class="category-link-overlay">Zapatos</a>
+                                <a href="{{ route('showcase.index') }}" class="category-link-overlay">Zapatos</a>
                             </div>
                         </div>
                         <div class="b-featured_cat_in">
@@ -340,7 +340,7 @@
                                 <img src="{{ asset('assets/img/shoes.jpg') }}" class="img-fluid d-block" alt="">
                             </a>
                             <div class="b-cat_mask">
-                                <a href="#" class="category-link-overlay">Ropa</a>
+                                <a href="{{ route('showcase.index') }}" class="category-link-overlay">Ropa</a>
                             </div>
                         </div>
                     </div>
@@ -350,7 +350,7 @@
                                 <img src="{{ asset('assets/img/bag.jpg') }}" class="img-fluid d-block" alt="">
                             </a>
                             <div class="b-cat_mask">
-                                <a href="#" class="category-link-overlay">Bolsos</a>
+                                <a href="{{ route('showcase.index') }}" class="category-link-overlay">Bolsos</a>
                             </div>
                         </div>
                     </div>

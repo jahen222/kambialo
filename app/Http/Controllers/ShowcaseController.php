@@ -32,11 +32,12 @@ class ShowcaseController extends Controller
 
     private function _search()
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        return Product::distinct()->join('users', 'users.id', '=', 'products.user_id')->where('products.user_id', '!=', $user->id)
-            ->leftJoin('product_tag', 'product_tag.product_id', '=', 'products.id')
-            ->leftJoin('tags', 'product_tag.tag_id', '=', 'tags.id')->with('images')->withCount('favorites');
+        $_query = Product::distinct()->join('users', 'users.id', '=', 'products.user_id')
+        ->leftJoin('product_tag', 'product_tag.product_id', '=', 'products.id')
+        ->leftJoin('tags', 'product_tag.tag_id', '=', 'tags.id')->with('images')->withCount('favorites');
+        if(!auth()->user())
+            return $_query;
+        return $_query->where('products.user_id', '!=', auth()->user()->id);        
     }
 
 
@@ -61,24 +62,35 @@ class ShowcaseController extends Controller
 
     public function favorite(Request $request)
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-
-        $product = Product::where('id', $request->input('id'))->first();
-        $userProduct = $product->user()->first();
-
-        $favorite = $user->favorites()->where('product_id', $product->id)->first();
-        if (!$favorite)
-            $favorite = Favorite::create(['product_id' => $request->input('id'), 'user_id' => $user->id]);
-
-        $match = Match::whereIn('user_id_1', [$user->id, $userProduct->id])->whereIn('user_id_2', [$user->id, $userProduct->id])->first();
-        if (!$match) {
-            if ($allUserProducts = $userProduct->favorites()->get()->toArray()) {
-                if ($user->products()->whereIn('id', array_column($allUserProducts, 'product_id'))->get())
-                    $match = Match::create(['user_id_1' => $user->id, 'user_id_2' => $userProduct->id]);
+        $favoriteMessage = 'Agregado a favorito';
+        if(!auth()->user())
+            $favoriteMessage = 'Debe iniciar sesion para agregar a favorito';
+        else{
+            $user_id = auth()->user()->id;
+            $user = User::find($user_id);
+    
+            $product = Product::where('id', $request->input('id'))->first();
+            $userProduct = $product->user()->first();
+    
+            $favorite = $user->favorites()->where('product_id', $product->id)->first();
+            if (!$favorite)
+                $favorite = Favorite::create(['product_id' => $request->input('id'), 'user_id' => $user->id]);
+    
+            $match = Match::whereIn('user_id_1', [$user->id, $userProduct->id])->whereIn('user_id_2', [$user->id, $userProduct->id])->first();
+            if (!$match) {
+                if ($allUserProducts = $userProduct->favorites()->get()->toArray()) {
+                    if ($user->products()->whereIn('id', array_column($allUserProducts, 'product_id'))->get())
+                        $match = Match::create(['user_id_1' => $user->id, 'user_id_2' => $userProduct->id]);
+                }
             }
         }
-        return ['success' => (bool) $favorite, 'match' => (bool) $match];
+
+        return [
+            'favorite' => (bool) ($favorite ?? false),
+            'favoriteMessage' => $favoriteMessage,
+            'match' => (bool) ($match ?? false),
+            'matchMessage' => '',
+        ];
     }
 
     /**
