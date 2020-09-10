@@ -26,7 +26,6 @@
     <!-- Styles -->
     <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
 </head>
-
 <body style="background-color: #e1e3e5;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -38,12 +37,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
+                <div class="collapse navbar-collapse" id="navbarSupportedContent"style="flex-basis: 100%;">
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -83,7 +77,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('showcase.index') }}">
-                                {{ __('Mi Vitrina') }}
+                                {{ __('Mi Vitrinea') }}
                             </a>
                         </li>
 
@@ -123,6 +117,14 @@
     <script type="text/javascript" src="{{ asset('assets/app.js') }}"></script>
     @yield('scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+	
+	<script>
+		$('.navbar-toggler').on('click',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			$($(this).data('target')).collapse('toggle');
+		})
+	</script>
 </body>
 
 </html>
