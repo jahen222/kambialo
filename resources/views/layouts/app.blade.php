@@ -28,15 +28,17 @@
 </head>
 <body style="background-color: #e1e3e5;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="padding: 0;">
             <div class="container">
-                <a style="width: 50%;" href="{{ url('/') }}">
-                    <img src="{{ asset('images/logo.png') }}" alt="" style="width: 50%;">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
+				<div>
+					<a style="width: 50%;" href="{{ url('/') }}">
+						<img src="{{ asset('images/logo.png') }}" alt="" style="width: 50%;">
+					</a>
+					<button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				</div>
+                
                 <div class="collapse navbar-collapse" id="navbarSupportedContent"style="flex-basis: 100%;">
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -51,33 +53,33 @@
                         </li>
                         @endif
                         @else
-                        <li class="nav-item">
+                        <li class="nav-item {{ \Request::is('home') ? 'active' : ''  }}">
                             <a class="nav-link" href="{{ url('/') }}">
                                 {{ __('Home') }}
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item {{ \Request::is('products') ? 'active' : ''  }}">
                             <a class="nav-link" href="{{ route('products.index') }}">
-                                {{ __('Mis Productos') }}
+                                {{ __('Productos') }}
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item {{ \Request::is('favorites') ? 'active' : ''  }}">
                             <a class="nav-link" href="{{ route('favorites.index') }}">
-                                {{ __('Mis Favoritos') }}
+                                {{ __('Favoritos') }}
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item {{ \Request::is('matches') ? 'active' : ''  }}">
                             <a class="nav-link" href="{{ route('matches.index') }}">
-                                {{ __('Mis Matches') }}
+                                {{ __('Matches') }}
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item {{ \Request::is('showcase') ? 'active' : ''  }}">
                             <a class="nav-link" href="{{ route('showcase.index') }}">
-                                {{ __('Mi Vitrinea') }}
+                                {{ __('Vitrinea') }}
                             </a>
                         </li>
 
