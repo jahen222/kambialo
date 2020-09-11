@@ -44,11 +44,11 @@ class ShowcaseController extends Controller
     public function search(Request $request)
     {
         $products = $this->_search();
-        if ($request->input('category'))
-            $products->where('category_id', '=', $request->input('category'));
+        if ($request->input('categories'))
+            $products->whereIn('category_id', $request->input('categories'));
 
-        if ($request->input('comuna'))
-            $products->where('comuna_id', '=', $request->input('comuna'));
+        if ($request->input('comunas'))
+            $products->whereIn('comuna_id', $request->input('comunas'));
 
         if ($request->input('tags'))
             $products->whereIn('tag_id', $request->input('tags'));

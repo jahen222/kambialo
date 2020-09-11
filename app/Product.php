@@ -30,4 +30,8 @@ class Product extends Model
     public function tags(){
         return $this->belongsToMany('App\Tag');
     }
+
+    public static function getRecents($limit = 4){
+        return self::distinct()->orderByDesc('created_at')->limit($limit)->get();
+    }
 }

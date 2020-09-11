@@ -316,44 +316,79 @@
         <div class="b-featured_cat">
             <div class="container">
                 <div class="row clearfix">
+                    @if($categories = \App\Category::getCommons(4))
+                        <div class="col-xl-3 col-lg-3 col-mb-3 col-sm-3 col-xs-12">
+                            @if(isset($categories[0]) && $category = $categories[0])
+                                <div class="b-featured_cat_in" style="height: 100%;">
+                                    <a href="#">
+                                        <img style="width: 100%;height: 100%;" src="{{ url()->to('images/' . $category->image) }}" class="img-fluid d-block" alt="">
+                                    </a>
+                                    <div class="b-cat_mask" style="left: 50%; transform: translateX(-50%);">
+                                        <a href="{{ route('showcase.index') }}" class="category-link-overlay">{{ $category->name }}</a>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-mb-3 col-sm-3 col-xs-12">
+                            @if(isset($categories[1]) && $category = $categories[1])
+                                <div class="b-featured_cat_in mb-4" style="height: calc(50% - 15px);">
+                                    <a href="#">
+                                        <img style="width: 100%; height: 100%;" src="{{ url()->to('images/' . $category->image) }}" class="img-fluid d-block" alt="">
+                                    </a>
+                                    <div class="b-cat_mask" style="left: 50%; transform: translateX(-50%);">
+                                        <a href="{{ route('showcase.index') }}" class="category-link-overlay">{{ $category->name }}</a>
+                                    </div>
+                                </div>
+                            @endif
+                            @if(isset($categories[2]) && $category = $categories[2])
+                                <div class="b-featured_cat_in" style="height: calc(50% - 15px);">
+                                    <a href="#">
+                                        <img style="width: 100%; height: 100%;" src="{{ url()->to('images/' . $category->image) }}" class="img-fluid d-block" alt="">
+                                    </a>
+                                    <div class="b-cat_mask" style="left: 50%; transform: translateX(-50%);">
+                                        <a href="{{ route('showcase.index') }}" class="category-link-overlay">{{ $category->name }}</a>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-mb-6 col-sm-6 col-xs-12">
+                            @if(isset($categories[3]) && $category = $categories[3])
+                                <div class="b-featured_cat_in" style="height:100%;">
+                                    <a href="#">
+                                        <img style="width: 100%;height:100%;" src="{{ url()->to('images/' . $category->image) }}" class="img-fluid d-block" alt="">
+                                    </a>
+                                    <div class="b-cat_mask" style="left: 50%; transform: translateX(-50%);">
+                                        <a href="{{ route('showcase.index') }}" class="category-link-overlay">{{ $category->name }}</a>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="b-products_cat">
+        <div class="b-section_title text-center">
+            <h1>PRODUCTOS PUBLICADOS RECIENTEMENTE
+            </h1>
+        </div>
+        <div class="b-featured_cat">
+            <div class="container">
+                <div class="row clearfix">
+                @foreach(\App\Product::getRecents(4) as $value)
                     <div class="col-xl-3 col-lg-3 col-mb-3 col-sm-3 col-xs-12">
-                        <div class="b-featured_cat_in">
+                        <div class="b-featured_cat_in" style="height: 100%;">
                             <a href="#">
-                                <img src="{{ asset('assets/img/watch.jpg') }}" class="img-fluid d-block" alt="">
+                                <img style="width: 100%; height: 100%;" src="{{ url()->to('images/' . $value->cover_image) }}" class="img-fluid d-block" alt="">
                             </a>
-                            <div class="b-cat_mask">
-                                <a href="{{ route('showcase.index') }}" class="category-link-overlay">Relojes</a>
+                            <div class="b-cat_mask" style="left: 50%; transform: translateX(-50%);">
+                                <a href="{{ route('showcase.index') }}" class="category-link-overlay">{{ $value->name }}</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-mb-3 col-sm-3 col-xs-12">
-                        <div class="b-featured_cat_in mb-4">
-                            <a href="#">
-                                <img src="{{ asset('assets/img/shoes.jpg') }}" class="img-fluid d-block" alt="">
-                            </a>
-                            <div class="b-cat_mask">
-                                <a href="{{ route('showcase.index') }}" class="category-link-overlay">Zapatos</a>
-                            </div>
-                        </div>
-                        <div class="b-featured_cat_in">
-                            <a href="#">
-                                <img src="{{ asset('assets/img/shoes.jpg') }}" class="img-fluid d-block" alt="">
-                            </a>
-                            <div class="b-cat_mask">
-                                <a href="{{ route('showcase.index') }}" class="category-link-overlay">Ropa</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-mb-6 col-sm-6 col-xs-12">
-                        <div class="b-featured_cat_in">
-                            <a href="#">
-                                <img src="{{ asset('assets/img/bag.jpg') }}" class="img-fluid d-block" alt="">
-                            </a>
-                            <div class="b-cat_mask">
-                                <a href="{{ route('showcase.index') }}" class="category-link-overlay">Bolsos</a>
-                            </div>
-                        </div>
-                    </div>
+                @endforeach
                 </div>
             </div>
         </div>

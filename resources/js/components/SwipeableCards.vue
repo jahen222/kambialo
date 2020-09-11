@@ -1,33 +1,54 @@
 <template>
   <section class="container" style="position: relative; padding: 25px;">
-    <div style="margin-top: 10px;">
+
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+          <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Procesando...</h4>
+            </div>
+            <div class="modal-body">
+              <form class="row">
+                <div class="form-group col-12">
+                  <small class="form-text text-muted">Categoria</small>
+                  <select name="category" class="form-control"  id="categories-select2" v-model="form.categories" multiple>
+                    <option v-for="x,y in categories" :value="x.id">{{x.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group col-12">
+                  <small class="form-text text-muted">Comuna</small>
+                  <select name="Comuna" class="form-control" id="comunas-select2" v-model="form.comunas" multiple>
+                    <option v-for="x,y in comunas" :value="x.id">{{x.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group col-12">
+                  <small class="form-text text-muted">Tags</small>
+                  <select name="tags[]" class="custom-select js-basic-multiple" id="tags-select2" v-model="form.tags" multiple>
+                    <option v-for="x,y in tags" :value="x.id">{{x.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group col-sm-2">
+                  <button type="button" style="border:0; background-color:transparent;" class="modal-dimiss" @click="search">Aceptar</button>
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div style="margin-top: 10px;" class="col-12 col-sm-6 offset-sm-3">
       <form class="row" v-on:submit.prevent="search" style="align-items: flex-end">
-        <div class="form-group col-sm-2">
-          <small class="form-text text-muted">Categoria</small>
-          <select name="category" class="form-control" v-model="form.category">
-            <option value="" selected>Seleccione Categoria</option>
-            <option v-for="x,y in categories" :value="x.id">{{x.name}}</option>
-          </select>
-        </div>
-        <div class="form-group col-sm-2">
-          <small class="form-text text-muted">Comuna</small>
-          <select name="Comuna" class="form-control" v-model="form.comuna">
-            <option value="" selected>Seleccione Comuna</option>
-            <option v-for="x,y in comunas" :value="x.id">{{x.name}}</option>
-          </select>
-        </div>
-        <div class="form-group col-sm-2">
-          <small class="form-text text-muted">Tags</small>
-          <select name="tags[]" class="custom-select js-basic-multiple" id="tags-select2" v-model="form.tags" multiple>
-            <option v-for="x,y in tags" :value="x.id">{{x.name}}</option>
-          </select>
-        </div>
-        <div class="form-group col-sm-4">
-          <input placeholder="Buscador" class="form-control" v-model="form.search" type="text"/>
-        </div>
-        <div class="form-group col-sm-2">
-          <button type="submit" style="border:0; background-color:transparent;"><i class="material-icons">search</i></button>
-        </div>
+  
+          <div class="form-group col-12">
+            <input placeholder="Buscador" class="form-control" v-model="form.search" type="text"/>
+          </div>
+          <div class="form-group col-sm-2 d-none">
+            <button type="submit" style="border:0; background-color:transparent;"><i class="material-icons">search</i></button>
+          </div>
+        
       </form>
     </div>
     <div class="alert-success text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message">
@@ -36,93 +57,98 @@
     <div class="alert-info text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message-info">
       
     </div>
-    <div style="height:70vh; width:80vh; position:relative; margin: auto; margin-bottom: -5vh;">
-      <div
-        v-if="!isLoading && current"
-        style="z-index: 3"
-        :class="{ 'transition': isVisible }">
-        <Vue2InteractDraggable
-          v-if="isVisible"
-          :interact-out-of-sight-x-coordinate="500"
-          :interact-max-rotation="15"
-          :interact-x-threshold="200"
-          :interact-y-threshold="200"
-          :interact-event-bus-events="interactEventBus"
-          interact-block-drag-down
-          @draggedRight="emitAndNext('match')"
-          @draggedLeft="emitAndNext('reject')"
-          @draggedUp="emitAndNext('skip')"
-          class="rounded card card--no-shadow card--one">
-          <div style="height: 75%">
-            <img :src="'images/'+currentImage"/>
-            <a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @click="prevImage" href="#!">&#10094;</a>
-            <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @click="nextImage" href="#!">&#10095;</a>
-            <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
-              <input type="radio" name="image_controller" @click="selectImage(0)" checked/>
-              <input type="radio" name="image_controller" @click="selectImage(y + 1)" v-for="x,y in current.images"/>
+    <div class="row">
+    
+      <div style="height:70vh; position:relative; margin: auto; margin-bottom: -5vh;" class="col-12 col-sm-6 offset-sm-3">
+        <div
+          v-if="!isLoading && current"
+          style="z-index: 3"
+          :class="{ 'transition': isVisible }">
+          <Vue2InteractDraggable
+            v-if="isVisible"
+            :interact-out-of-sight-x-coordinate="500"
+            :interact-max-rotation="15"
+            :interact-x-threshold="200"
+            :interact-y-threshold="200"
+            :interact-event-bus-events="interactEventBus"
+            interact-block-drag-down
+            @draggedRight="emitAndNext('match')"
+            @draggedLeft="emitAndNext('reject')"
+            @draggedUp="emitAndNext('skip')"
+            class="rounded card card--no-shadow card--one">
+            <div style="height: 75%">
+              <img :src="'images/'+currentImage"/>
+              <a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @click="prevImage" href="#!">&#10094;</a>
+              <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @click="nextImage" href="#!">&#10095;</a>
+              <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
+                <input type="radio" name="image_controller" @click="selectImage(0)" checked/>
+                <input type="radio" name="image_controller" @click="selectImage(y + 1)" v-for="x,y in current.images"/>
+              </div>
             </div>
+            <div class="text">
+              <div class="row" style="align-items: center;">
+                <div class="col-9">
+                  <h2 class="nowrap">{{current.name}}</h2>
+                  <p class="text-danger nowrap">{{current.description}}</p>
+                </div>
+                <div class="col-3 text-right" style="padding-right:40px;">
+                  <span class="text-muted">{{current.favorites_count}}
+                    <i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </Vue2InteractDraggable>
+        </div>
+        <div
+          v-if="!isLoading && next"
+          class="rounded card card--no-shadow card--two "
+          style="z-index: 2">
+          <div style="height: 75%">
+            <img
+              :src="'images/' + next.cover_image" />
           </div>
           <div class="text">
-            <div class="row" style="align-items: center;">
-              <div class="col-9">
-                <h2 class="nowrap">{{current.name}}</h2>
-                <p class="text-danger nowrap">{{current.description}}</p>
-              </div>
-              <div class="col-3 text-right" style="padding-right:40px;">
-                <span class="text-muted">{{current.favorites_count}}
-                  <i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </Vue2InteractDraggable>
-      </div>
-      <div
-        v-if="!isLoading && next"
-        class="rounded card card--no-shadow card--two "
-        style="z-index: 2">
-        <div style="height: 75%">
-          <img
-            :src="'images/' + next.cover_image" />
-        </div>
-        <div class="text">
-            <div class="row" style="align-items: center;">
-              <div class="col-9">
-                <h2 class="nowrap">{{next.name}}</h2>
-                <p class="text-danger nowrap">{{next.description}}</p>
-              </div>
-              <div class="col-3 text-right" style="padding-right:40px;">
-                <span class="text-muted">{{next.favorites_count}}
-                  <i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
-                </span>
+              <div class="row" style="align-items: center;">
+                <div class="col-9">
+                  <h2 class="nowrap">{{next.name}}</h2>
+                  <p class="text-danger nowrap">{{next.description}}</p>
+                </div>
+                <div class="col-3 text-right" style="padding-right:40px;">
+                  <span class="text-muted">{{next.favorites_count}}
+                    <i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-      </div>
-      <div
-        v-if="!isLoading && current"
-        class="rounded card card--no-shadow card--three "
-        style="z-index: 1">
-        <div style="height: 100%">
         </div>
-      </div>
-      <div
-        v-if="!isLoading && !current && !next"
-        class=" card card--no-shadow card--flex "
-        style="z-index: 1">
-        <div>No hay mas productos</div>
-      </div>
-      <div
-        v-if="isLoading"
-        class="card card--no-shadow card--flex "
-        style="z-index: 1">
-        <div>...Cargando</div>
+        <div
+          v-if="!isLoading && current"
+          class="rounded card card--no-shadow card--three "
+          style="z-index: 1">
+          <div style="height: 100%">
+          </div>
+        </div>
+        <div
+          v-if="!isLoading && !current && !next"
+          class=" card card--no-shadow card--flex "
+          style="z-index: 1">
+          <div>No hay mas productos</div>
+        </div>
+        <div
+          v-if="isLoading"
+          class="card card--no-shadow card--flex "
+          style="z-index: 1">
+          <div>...Cargando</div>
+        </div>
       </div>
     </div>
-
     <div v-if="!isLoading && current" class="footer">
       <div class="btn-c btn-c--decline" @click="reject" title="Rechazar">
           <i class="material-icons">close</i>
+      </div>
+      <div class="btn-c btn-c--like" @click="modal" title="Favorito">
+          <i class="material-icons">favorite</i>
       </div>
       <div class="btn-c btn-c--like" @click="match" title="Favorito">
           <i class="material-icons">favorite</i>
@@ -203,6 +229,9 @@ export default {
   methods: {
     async search() {
       this.form.tags = $('#tags-select2').val();
+      this.form.categories = $('#categories-select2').val();
+      this.form.comunas = $('#comunas-select2').val();
+
       this.isLoading = true;
       const response = await axios.get(`showcase/search`, {params: this.form})
       this.cards = response.data;
@@ -254,6 +283,9 @@ export default {
         },2500);
       }
     },
+    modal() {
+      $('#myModal').modal('show');
+    },
     match() {
       InteractEventBus.$emit(EVENTS.MATCH)
     },
@@ -290,6 +322,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.select2-container{
+  width: 100%;
+}
+
 .image-selector{
   position: absolute;
   text-align:center;
