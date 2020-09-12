@@ -1,42 +1,41 @@
 <template>
   <section class="container" style="position: relative; padding: 25px;">
-
+    
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
           <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Procesando...</h4>
+                <h4 class="modal-title">Filtros</h4>
             </div>
             <div class="modal-body">
               <form class="row">
                 <div class="form-group col-12">
                   <small class="form-text text-muted">Categoria</small>
-                  <select name="category" class="form-control"  id="categories-select2" v-model="form.categories" multiple>
+                  <select name="category" class="custom-select js-basic-multiple"  id="categories-select2"  multiple>
                     <option v-for="x,y in categories" :value="x.id">{{x.name}}</option>
                   </select>
                 </div>
                 <div class="form-group col-12">
                   <small class="form-text text-muted">Comuna</small>
-                  <select name="Comuna" class="form-control" id="comunas-select2" v-model="form.comunas" multiple>
+                  <select name="Comuna" class="custom-select js-basic-multiple" id="comunas-select2" multiple>
                     <option v-for="x,y in comunas" :value="x.id">{{x.name}}</option>
                   </select>
                 </div>
                 <div class="form-group col-12">
                   <small class="form-text text-muted">Tags</small>
-                  <select name="tags[]" class="custom-select js-basic-multiple" id="tags-select2" v-model="form.tags" multiple>
+                  <select name="tags[]" class="custom-select js-basic-multiple" id="tags-select2" multiple>
                     <option v-for="x,y in tags" :value="x.id">{{x.name}}</option>
                   </select>
                 </div>
                 <div class="form-group col-sm-2">
-                  <button type="button" style="border:0; background-color:transparent;" class="modal-dimiss" @click="search">Aceptar</button>
+                  <button type="button" style="border:0; background-color:transparent;" data-dismiss="modal" @click="filter">Aceptar</button>
                 </div>
               </form>
             </div>
         </div>
       </div>
     </div>
-
 
 
     <div style="margin-top: 10px;" class="col-12 col-sm-6 offset-sm-3">
@@ -72,9 +71,9 @@
             :interact-y-threshold="200"
             :interact-event-bus-events="interactEventBus"
             interact-block-drag-down
+            interact-block-drag-up
             @draggedRight="emitAndNext('match')"
             @draggedLeft="emitAndNext('reject')"
-            @draggedUp="emitAndNext('skip')"
             class="rounded card card--no-shadow card--one">
             <div style="height: 75%">
               <img :src="'images/'+currentImage"/>
@@ -147,8 +146,8 @@
       <div class="btn-c btn-c--decline" @click="reject" title="Rechazar">
           <i class="material-icons">close</i>
       </div>
-      <div class="btn-c btn-c--like" @click="modal" title="Favorito">
-          <i class="material-icons">favorite</i>
+      <div class="btn-c btn-c--filter" @click="modal" title="Favorito">
+          <i class="material-icons">tune</i>
       </div>
       <div class="btn-c btn-c--like" @click="match" title="Favorito">
           <i class="material-icons">favorite</i>
@@ -172,6 +171,9 @@ const DEFAULTS = {
 
 var timeout = '';
 var timeoutInfo = '';
+var timeoutVisible = '';
+var timeoutNext = '';
+var _lastSearch = '';
 
 export default {
   name: 'SwipeableCards',
@@ -228,12 +230,21 @@ export default {
   },
   methods: {
     async search() {
-      this.form.tags = $('#tags-select2').val();
-      this.form.categories = $('#categories-select2').val();
-      this.form.comunas = $('#comunas-select2').val();
-
+      _lastSearch = this.form.search;
       this.isLoading = true;
       const response = await axios.get(`showcase/search`, {params: this.form})
+      this.cards = response.data;
+      this.isLoading = false;
+    },
+    async filter(){
+      const data = {
+        tags: $('#tags-select2').val(),
+        categories: $('#categories-select2').val(),
+        comunas: $('#comunas-select2').val(),
+        search: _lastSearch
+      }
+      this.isLoading = true;
+      const response = await axios.get(`showcase/search`, {params: data})
       this.cards = response.data;
       this.isLoading = false;
     },
@@ -295,36 +306,42 @@ export default {
     skip() {
       InteractEventBus.$emit(EVENTS.SKIP)
     },
-    emitAndNext(event) {
+    clearTimeouts(){
       clearTimeout(timeout);
       clearTimeout(timeoutInfo);
-
+      clearTimeout(timeoutVisible);
+      clearTimeout(timeoutNext);
+    },
+    emitAndNext(event) {
+      this.$emit(event, this.index)
+      this.clearTimeouts();
+      
+      timeoutVisible = setTimeout(() => this.isVisible = false, 160)
+      timeoutNext = setTimeout(() => {
+        this.index++
+        this.imageIndex = DEFAULTS.COVER;
+        this.isVisible = true
+      }, 160)
+      
       const element = document.getElementById('xtra-message');
       element.style.opacity = 0;
-
       const elementInfo = document.getElementById('xtra-message-info');
       elementInfo.style.opacity = 0;
 
       if(event=='match'){
         this.favorite(this.index)
       }
-
-      this.$emit(event, this.index)
-      setTimeout(() => this.isVisible = false, 200)
-      setTimeout(() => {
-        this.index++
-        this.imageIndex = DEFAULTS.COVER;
-        this.isVisible = true
-      }, 200)
     }
   }
 }
 </script>
-
+<style>
+  .select2-container{
+    width: 100%!important;
+  }
+</style>
 <style lang="scss" scoped>
-.select2-container{
-  width: 100%;
-}
+
 
 .image-selector{
   position: absolute;
@@ -430,6 +447,15 @@ export default {
   }
   &--skip {
     color: green;
+  }
+  &--filter{
+    box-shadow: unset;
+    background-color: transparent;
+    i {
+      color: white;
+      text-shadow: 1px 1px 1px black,-1px -1px 1px black,-1px 1px 1px black,1px -1px 1px black;
+      font-size: 32px;
+    }
   }
 }
 

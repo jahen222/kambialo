@@ -2134,7 +2134,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 var EVENTS = {
@@ -2147,6 +2146,9 @@ var DEFAULTS = {
 };
 var timeout = '';
 var timeoutInfo = '';
+var timeoutVisible = '';
+var timeoutNext = '';
+var _lastSearch = '';
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SwipeableCards',
   components: {
@@ -2207,26 +2209,58 @@ var timeoutInfo = '';
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.form.tags = $('#tags-select2').val();
-                _this.form.categories = $('#categories-select2').val();
-                _this.form.comunas = $('#comunas-select2').val();
+                _lastSearch = _this.form.search;
                 _this.isLoading = true;
-                _context.next = 6;
+                _context.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("showcase/search", {
                   params: _this.form
                 });
 
-              case 6:
+              case 4:
                 response = _context.sent;
                 _this.cards = response.data;
                 _this.isLoading = false;
 
-              case 9:
+              case 7:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
+      }))();
+    },
+    filter: function filter() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                data = {
+                  tags: $('#tags-select2').val(),
+                  categories: $('#categories-select2').val(),
+                  comunas: $('#comunas-select2').val(),
+                  search: _lastSearch
+                };
+                _this2.isLoading = true;
+                _context2.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("showcase/search", {
+                  params: data
+                });
+
+              case 4:
+                response = _context2.sent;
+                _this2.cards = response.data;
+                _this2.isLoading = false;
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     },
     buildCardImages: function buildCardImages() {
@@ -2245,55 +2279,55 @@ var timeoutInfo = '';
       this.imageIndex -= 1;
     },
     fetchData: function fetchData() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _this2.isLoading = true;
-                _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("showcase/data");
-
-              case 3:
-                response = _context2.sent;
-
-                if (response.data) {
-                  _this2.cards = response.data.products;
-                  _this2.categories = response.data.categories;
-                  _this2.comunas = response.data.comunas;
-                  _this2.tags = response.data.tags;
-                }
-
-                _this2.isLoading = false;
-
-              case 6:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    favorite: function favorite(index) {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var card, response, element, elementInfo;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                card = _this3.cards[index];
+                _this3.isLoading = true;
                 _context3.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("showcase/data");
+
+              case 3:
+                response = _context3.sent;
+
+                if (response.data) {
+                  _this3.cards = response.data.products;
+                  _this3.categories = response.data.categories;
+                  _this3.comunas = response.data.comunas;
+                  _this3.tags = response.data.tags;
+                }
+
+                _this3.isLoading = false;
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    favorite: function favorite(index) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var card, response, element, elementInfo;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                card = _this4.cards[index];
+                _context4.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("showcase/favorite", {
                   id: card.id
                 });
 
               case 3:
-                response = _context3.sent;
+                response = _context4.sent;
                 element = document.getElementById('xtra-message');
                 element.innerHTML = response.data.favoriteMessage;
                 element.style.opacity = 1;
@@ -2311,10 +2345,10 @@ var timeoutInfo = '';
 
               case 9:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     },
     modal: function modal() {
@@ -2329,11 +2363,25 @@ var timeoutInfo = '';
     skip: function skip() {
       vue2_interact__WEBPACK_IMPORTED_MODULE_1__["InteractEventBus"].$emit(EVENTS.SKIP);
     },
-    emitAndNext: function emitAndNext(event) {
-      var _this4 = this;
-
+    clearTimeouts: function clearTimeouts() {
       clearTimeout(timeout);
       clearTimeout(timeoutInfo);
+      clearTimeout(timeoutVisible);
+      clearTimeout(timeoutNext);
+    },
+    emitAndNext: function emitAndNext(event) {
+      var _this5 = this;
+
+      this.$emit(event, this.index);
+      this.clearTimeouts();
+      timeoutVisible = setTimeout(function () {
+        return _this5.isVisible = false;
+      }, 160);
+      timeoutNext = setTimeout(function () {
+        _this5.index++;
+        _this5.imageIndex = DEFAULTS.COVER;
+        _this5.isVisible = true;
+      }, 160);
       var element = document.getElementById('xtra-message');
       element.style.opacity = 0;
       var elementInfo = document.getElementById('xtra-message-info');
@@ -2342,16 +2390,6 @@ var timeoutInfo = '';
       if (event == 'match') {
         this.favorite(this.index);
       }
-
-      this.$emit(event, this.index);
-      setTimeout(function () {
-        return _this4.isVisible = false;
-      }, 200);
-      setTimeout(function () {
-        _this4.index++;
-        _this4.imageIndex = DEFAULTS.COVER;
-        _this4.isVisible = true;
-      }, 200);
     }
   }
 });
@@ -6778,9 +6816,9 @@ var timeoutInfo = '';
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true&":
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true& ***!
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true& ***!
   \************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6790,7 +6828,26 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".select2-container[data-v-5d1eb04c] {\n  width: 100%;\n}\n.image-selector[data-v-5d1eb04c] {\n  position: absolute;\n  text-align: center;\n  top: 0;\n  width: 100%;\n}\n.container[data-v-5d1eb04c] {\n  background: #eceff1;\n  width: 100%;\n  /*height: 100vh;*/\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  width: 50vw;\n  bottom: 0;\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-evenly;\n  align-items: center;\n  margin: auto;\n}\n.btn-c[data-v-5d1eb04c] {\n  position: relative;\n  width: 75px;\n  height: 75px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn-c[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn-c i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn-c i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn-c--like[data-v-5d1eb04c] {\n  background-color: green;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn-c--like i[data-v-5d1eb04c] {\n  color: green;\n  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;\n  font-size: 32px;\n}\n.btn-c--decline[data-v-5d1eb04c] {\n  color: white;\n  background-color: red;\n}\n.btn-c--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.fixed--xtra-message[data-v-5d1eb04c] {\n  transition: 0.5s;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 77vw;\n  z-index: 4;\n  text-align: center;\n}\n.rounded[data-v-5d1eb04c] {\n  border-radius: 12px !important;\n}\n.card[data-v-5d1eb04c] {\n  /*width: 80vw;*/\n  width: 100%;\n  position: absolute;\n  height: 60vh;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n  border-top-left-radius: 12px;\n  border-top-right-radius: 12px;\n}\n.card--no-shadow[data-v-5d1eb04c] {\n  /*box-shadow: unset!important;*/\n}\n.card--one[data-v-5d1eb04c] {\n  z-index: 3;\n  /*box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);*/\n}\n.card--two[data-v-5d1eb04c] {\n  z-index: 2;\n  /*transform: translate(-48%, -48%);*/\n  /*box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);*/\n}\n.card--three[data-v-5d1eb04c] {\n  z-index: 1;\n  background: rgba(0, 0, 0, 0.8);\n  /*transform: translate(-46%, -46%);*/\n  /*box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);*/\n}\n.card--flex[data-v-5d1eb04c] {\n  display: flex;\n  background: transparent;\n  border: 0;\n}\n.card--flex > *[data-v-5d1eb04c] {\n  margin: auto;\n  color: black;\n}\n.card .text[data-v-5d1eb04c] {\n  background-color: white;\n  width: 100%;\n  height: 25%;\n  padding: 10px;\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.card .text .nowrap[data-v-5d1eb04c] {\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.card .text i[data-v-5d1eb04c] {\n  color: transparent;\n  text-shadow: 1px 1px 1px green, -1px -1px 1px green, -1px 1px 1px green, 1px -1px 1px green;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
+exports.push([module.i, ".image-selector[data-v-5d1eb04c] {\n  position: absolute;\n  text-align: center;\n  top: 0;\n  width: 100%;\n}\n.container[data-v-5d1eb04c] {\n  background: #eceff1;\n  width: 100%;\n  /*height: 100vh;*/\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  width: 50vw;\n  bottom: 0;\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-evenly;\n  align-items: center;\n  margin: auto;\n}\n.btn-c[data-v-5d1eb04c] {\n  position: relative;\n  width: 75px;\n  height: 75px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn-c[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn-c i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn-c i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn-c--like[data-v-5d1eb04c] {\n  background-color: green;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn-c--like i[data-v-5d1eb04c] {\n  color: green;\n  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;\n  font-size: 32px;\n}\n.btn-c--decline[data-v-5d1eb04c] {\n  color: white;\n  background-color: red;\n}\n.btn-c--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.btn-c--filter[data-v-5d1eb04c] {\n  box-shadow: unset;\n  background-color: transparent;\n}\n.btn-c--filter i[data-v-5d1eb04c] {\n  color: white;\n  text-shadow: 1px 1px 1px black, -1px -1px 1px black, -1px 1px 1px black, 1px -1px 1px black;\n  font-size: 32px;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.fixed--xtra-message[data-v-5d1eb04c] {\n  transition: 0.5s;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 77vw;\n  z-index: 4;\n  text-align: center;\n}\n.rounded[data-v-5d1eb04c] {\n  border-radius: 12px !important;\n}\n.card[data-v-5d1eb04c] {\n  /*width: 80vw;*/\n  width: 100%;\n  position: absolute;\n  height: 60vh;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n  border-top-left-radius: 12px;\n  border-top-right-radius: 12px;\n}\n.card--no-shadow[data-v-5d1eb04c] {\n  /*box-shadow: unset!important;*/\n}\n.card--one[data-v-5d1eb04c] {\n  z-index: 3;\n  /*box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);*/\n}\n.card--two[data-v-5d1eb04c] {\n  z-index: 2;\n  /*transform: translate(-48%, -48%);*/\n  /*box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);*/\n}\n.card--three[data-v-5d1eb04c] {\n  z-index: 1;\n  background: rgba(0, 0, 0, 0.8);\n  /*transform: translate(-46%, -46%);*/\n  /*box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);*/\n}\n.card--flex[data-v-5d1eb04c] {\n  display: flex;\n  background: transparent;\n  border: 0;\n}\n.card--flex > *[data-v-5d1eb04c] {\n  margin: auto;\n  color: black;\n}\n.card .text[data-v-5d1eb04c] {\n  background-color: white;\n  width: 100%;\n  height: 25%;\n  padding: 10px;\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.card .text .nowrap[data-v-5d1eb04c] {\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.card .text i[data-v-5d1eb04c] {\n  color: transparent;\n  text-shadow: 1px 1px 1px green, -1px -1px 1px green, -1px 1px 1px green, 1px -1px 1px green;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.select2-container{\n  width: 100%!important;\n}\n", ""]);
 
 // exports
 
@@ -38715,15 +38772,45 @@ try {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true&":
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true& ***!
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true& ***!
   \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true&");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./SwipeableCards.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -39416,38 +39503,11 @@ var render = function() {
                     _c(
                       "select",
                       {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.categories,
-                            expression: "form.categories"
-                          }
-                        ],
-                        staticClass: "form-control",
+                        staticClass: "custom-select js-basic-multiple",
                         attrs: {
                           name: "category",
                           id: "categories-select2",
                           multiple: ""
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.form,
-                              "categories",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
                         }
                       },
                       _vm._l(_vm.categories, function(x, y) {
@@ -39467,38 +39527,11 @@ var render = function() {
                     _c(
                       "select",
                       {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.comunas,
-                            expression: "form.comunas"
-                          }
-                        ],
-                        staticClass: "form-control",
+                        staticClass: "custom-select js-basic-multiple",
                         attrs: {
                           name: "Comuna",
                           id: "comunas-select2",
                           multiple: ""
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.form,
-                              "comunas",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
                         }
                       },
                       _vm._l(_vm.comunas, function(x, y) {
@@ -39518,38 +39551,11 @@ var render = function() {
                     _c(
                       "select",
                       {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.tags,
-                            expression: "form.tags"
-                          }
-                        ],
                         staticClass: "custom-select js-basic-multiple",
                         attrs: {
                           name: "tags[]",
                           id: "tags-select2",
                           multiple: ""
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.form,
-                              "tags",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
                         }
                       },
                       _vm._l(_vm.tags, function(x, y) {
@@ -39565,13 +39571,12 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "modal-dimiss",
                         staticStyle: {
                           border: "0",
                           "background-color": "transparent"
                         },
-                        attrs: { type: "button" },
-                        on: { click: _vm.search }
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                        on: { click: _vm.filter }
                       },
                       [_vm._v("Aceptar")]
                     )
@@ -39678,7 +39683,8 @@ var render = function() {
                               "interact-x-threshold": 200,
                               "interact-y-threshold": 200,
                               "interact-event-bus-events": _vm.interactEventBus,
-                              "interact-block-drag-down": ""
+                              "interact-block-drag-down": "",
+                              "interact-block-drag-up": ""
                             },
                             on: {
                               draggedRight: function($event) {
@@ -39686,9 +39692,6 @@ var render = function() {
                               },
                               draggedLeft: function($event) {
                                 return _vm.emitAndNext("reject")
-                              },
-                              draggedUp: function($event) {
-                                return _vm.emitAndNext("skip")
                               }
                             }
                           },
@@ -39945,11 +39948,11 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "btn-c btn-c--like",
+                staticClass: "btn-c btn-c--filter",
                 attrs: { title: "Favorito" },
                 on: { click: _vm.modal }
               },
-              [_c("i", { staticClass: "material-icons" }, [_vm._v("favorite")])]
+              [_c("i", { staticClass: "material-icons" }, [_vm._v("tune")])]
             ),
             _vm._v(" "),
             _c(
@@ -39972,7 +39975,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Procesando...")])
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Filtros")])
     ])
   },
   function() {
@@ -52336,8 +52339,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SwipeableCards_vue_vue_type_template_id_5d1eb04c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SwipeableCards.vue?vue&type=template&id=5d1eb04c&scoped=true& */ "./resources/js/components/SwipeableCards.vue?vue&type=template&id=5d1eb04c&scoped=true&");
 /* harmony import */ var _SwipeableCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SwipeableCards.vue?vue&type=script&lang=js& */ "./resources/js/components/SwipeableCards.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _SwipeableCards_vue_vue_type_style_index_0_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true& */ "./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _SwipeableCards_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SwipeableCards.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _SwipeableCards_vue_vue_type_style_index_1_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true& */ "./resources/js/components/SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -52346,7 +52351,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _SwipeableCards_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _SwipeableCards_vue_vue_type_template_id_5d1eb04c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _SwipeableCards_vue_vue_type_template_id_5d1eb04c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -52378,19 +52383,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true&":
+/***/ "./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./SwipeableCards.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true&":
 /*!**************************************************************************************************************!*\
-  !*** ./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true& ***!
+  !*** ./resources/js/components/SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true& ***!
   \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=0&id=5d1eb04c&lang=scss&scoped=true&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_0_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_1_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SwipeableCards.vue?vue&type=style&index=1&id=5d1eb04c&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_1_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_1_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_1_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_1_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SwipeableCards_vue_vue_type_style_index_1_id_5d1eb04c_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
