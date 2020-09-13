@@ -71,11 +71,11 @@
                 <div class="panel-heading">Productos</div>
                 <div class="panel-body">
 
-                    @can('create')
+                    
                     <a href="{{ route('product.create') }}" class="float">
                         <i class="fa fa-plus my-float"></i>
                     </a>
-                    @endcan
+                    
 
                     <table class="table table-striped">
                         @foreach($products as $product)

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <card-component v-bind:cards="[{text: 'test1'}]"></card-component>
+  <card-component v-bind:category="'{{ request('category') }}'"></card-component>
 @endsection
 @section('scripts')
 <!-- vue -->

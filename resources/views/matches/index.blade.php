@@ -12,9 +12,18 @@
                         @foreach($matches as $match)
                         <tbody>
                             <tr>
-                                <td>{{ $match->id }}</td>
-                                <td>{{ $match->user_id_1 }}</td>
-                                <td>{{ $match->user_id_2 }}</td>
+                                <td align="right" width="40%">
+									<img style="max-height:80px;" src="{{
+										url()->to('images/' . $match->user1->products()->whereIn(
+										'id', array_column($match->user2->favorites()->get()->toArray(), 'product_id')
+									)->first()->cover_image)}}"/></td>
+								<td align="center"><img style="max-height:80px;" src="{{url()->to('assets/img/icon-k.png') }}" /></td>
+                                <td aling="left" width="40%">
+									<img style="max-height:80px;" src="{{
+										url()->to('images/' . $match->user2->products()->whereIn(
+										'id', array_column($match->user1->favorites()->get()->toArray(), 'product_id')
+									)->first()->cover_image)}}"/>
+								</td>
 
                                 @can('show')
                                 <td>

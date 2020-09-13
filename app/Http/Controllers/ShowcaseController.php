@@ -20,10 +20,10 @@ class ShowcaseController extends Controller
         return view('showcase.index');
     }
 
-    public function data()
+    public function data(Request $request)
     {
         return [
-            'products' => $this->_search()->get(),
+            'products' => $this->_search()->where('category_id', $request->input('category'))->get(),
             'categories' => \App\Category::all(),
             'comunas' => \App\Comuna::all(),
             'tags' => \App\Tag::all()

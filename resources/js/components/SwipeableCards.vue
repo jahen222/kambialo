@@ -13,7 +13,7 @@
                 <div class="form-group col-12">
                   <small class="form-text text-muted">Categoria</small>
                   <select name="category" class="custom-select js-basic-multiple"  id="categories-select2"  multiple>
-                    <option v-for="x,y in categories" :value="x.id">{{x.name}}</option>
+                    <option v-for="x,y in categories" :value="x.id" :selected="x.id == category">{{x.name}}</option>
                   </select>
                 </div>
                 <div class="form-group col-12">
@@ -62,9 +62,9 @@
         <div
           v-if="!isLoading && current"
           style="z-index: 3"
-          :class="{ 'transition': isVisible }">
+          
           <Vue2InteractDraggable
-            v-if="isVisible"
+            v-if="!isLoading && current && isVisible"
             :interact-out-of-sight-x-coordinate="500"
             :interact-max-rotation="15"
             :interact-x-threshold="200"
@@ -98,55 +98,57 @@
               </div>
             </div>
           </Vue2InteractDraggable>
-        </div>
-        <div
-          v-if="!isLoading && next"
-          class="rounded card card--no-shadow card--two "
-          style="z-index: 2">
-          <div style="height: 75%">
-            <img
-              :src="'images/' + next.cover_image" />
-          </div>
-          <div class="text">
-              <div class="row" style="align-items: center;">
-                <div class="col-9">
-                  <h2 class="nowrap">{{next.name}}</h2>
-                  <p class="text-danger nowrap">{{next.description}}</p>
-                </div>
-                <div class="col-3 text-right" style="padding-right:40px;">
-                  <span class="text-muted">{{next.favorites_count}}
-                    <i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
-                  </span>
-                </div>
-              </div>
-            </div>
-        </div>
-        <div
-          v-if="!isLoading && current"
-          class="rounded card card--no-shadow card--three "
-          style="z-index: 1">
-          <div style="height: 100%">
-          </div>
-        </div>
-        <div
-          v-if="!isLoading && !current && !next"
-          class=" card card--no-shadow card--flex "
-          style="z-index: 1">
-          <div>No hay mas productos</div>
-        </div>
-        <div
-          v-if="isLoading"
-          class="card card--no-shadow card--flex "
-          style="z-index: 1">
-          <div>...Cargando</div>
-        </div>
+        
+			<div
+			  v-if="!isLoading && next"
+			  class="rounded card card--no-shadow card--two"
+			  style="z-index: 2">
+			  <div style="height: 75%">
+				<img
+				  :src="'images/' + next.cover_image" />
+			  </div>
+			  <div class="text">
+				  <div class="row" style="align-items: center;">
+					<div class="col-9">
+					  <h2 class="nowrap">{{next.name}}</h2>
+					  <p class="text-danger nowrap">{{next.description}}</p>
+					</div>
+					<div class="col-3 text-right" style="padding-right:40px;">
+					  <span class="text-muted">{{next.favorites_count}}
+						<i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
+					  </span>
+					</div>
+				  </div>
+				</div>
+			</div>
+			<div
+			  v-if="!isLoading && current"
+			  class="rounded card card--no-shadow card--three"
+			  style="z-index: 1">
+			  <div style="height: 100%">
+			  </div>
+			</div>
+			 <div
+			  v-if="!isLoading && !current && !next"
+			  class=" card card--no-shadow card--flex "
+			  style="z-index: 1">
+			  <div>No hay mas productos</div>
+			</div>
+			<div
+			  v-if="isLoading"
+			  class="card card--no-shadow card--flex "
+			  style="z-index: 1">
+			  <div>...Cargando</div>
+			</div>
+		</div>
+       
       </div>
     </div>
-    <div v-if="!isLoading && current" class="footer">
+    <div v-if="!isLoading && current" class="footer col-12 col-sm-6">
       <div class="btn-c btn-c--decline" @click="reject" title="Rechazar">
           <i class="material-icons">close</i>
       </div>
-      <div class="btn-c btn-c--filter" @click="modal" title="Favorito">
+      <div class="btn-c btn-c--filter" @click="modal" title="Filtros">
           <i class="material-icons">tune</i>
       </div>
       <div class="btn-c btn-c--like" @click="match" title="Favorito">
@@ -178,6 +180,7 @@ var _lastSearch = '';
 export default {
   name: 'SwipeableCards',
   components: { Vue2InteractDraggable },
+  props: ['category'],
   data() {
     return {
       isLoading: false,
@@ -206,26 +209,29 @@ export default {
       const images = this.buildCardImages();
 	  if(this.imageIndex < 0)
 		this.imageIndex = images.length - 1;
-		
-      if(!images[this.imageIndex])
-        this.imageIndex = DEFAULTS.COVER;
+	
+	  if(images){
+		if(!images[this.imageIndex])
+			this.imageIndex = DEFAULTS.COVER;
 
-      if(document.getElementById('image-selector')){
-        const inputs = document.getElementById('image-selector').getElementsByTagName('input');
-        inputs[this.imageIndex].checked = true;
-      }
-
-      return images[this.imageIndex].image;
+		if(document.getElementById('image-selector')){
+			const inputs = document.getElementById('image-selector').getElementsByTagName('input');
+			inputs[this.imageIndex].checked = true;
+		}
+		return images[this.imageIndex].image;
+	  }
+	  return '';
+      
     },
     current() {
       if(!this.cards[this.index])
         this.index = 0;
-      return this.cards[this.index]
+      return this.cards[this.index];
     },
     next() {
       if(this.cards[this.index + 1])
         return this.cards[this.index + 1]
-      return this.cards[0]
+      return this.cards[0];
     }
   },
   methods: {
@@ -265,7 +271,7 @@ export default {
     },
     async fetchData() {
       this.isLoading = true;
-      const response = await axios.get(`showcase/data`)
+      const response = await axios.get(`showcase/data`, {params: {category: this.category}})
       if (response.data) {
         this.cards = response.data.products;
         this.categories = response.data.categories;
@@ -397,7 +403,6 @@ export default {
 }
 
 .footer {
-  width: 50vw;
   bottom: 0;
   display: flex;
   padding-bottom: 30px;
@@ -491,6 +496,7 @@ export default {
   width: 100%;
   position:absolute;
   height: 60vh;
+  left: 0;
   img {
     object-fit: cover;
     display: block;

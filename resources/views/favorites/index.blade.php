@@ -12,7 +12,7 @@
                         @foreach($favorites as $favorite)
                         <tbody>
                             <tr>
-                                <td>{{ $favorite->id }}</td>
+                                <td><img style="max-height:50px;" src="{{url()->to('images/' . $favorite->product->cover_image)}}" /></td>
                                 <td>{{ $favorite->product()->get()[0]->name }}</td>
 
 
