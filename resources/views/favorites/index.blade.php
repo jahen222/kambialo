@@ -23,16 +23,13 @@
                                     </a>
                                 </td>
                                 @endcan
-
-                                @can('destroy')
                                 <td>
                                     <form action="{{route('favorite.store')}}" method="POST">
                                         {{ csrf_field() }}
-                                        <input type="hidden" name="product" value="{{ $favorite->product()->get()[0]->id }}">
+                                        <input type="hidden" name="product" value="{{ $favorite->product()->first()->id }}">
                                         <button type="submit" class="btn btn-sm btn-danger">Quitar a Favoritos</button>
                                     </form>
                                 </td>
-                                @endcan
                             </tr>
                         </tbody>
                         @endforeach

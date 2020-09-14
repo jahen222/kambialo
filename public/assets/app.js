@@ -17,14 +17,14 @@ $(document).ready(function () {
     });
 
     $(".next").click(function () {
-        current_fs = $(this).parent();
+        current_fs = $(this).parents('fieldset:first');
         show_next_fs(current_fs);
     });
 
     $(".previous").click(function () {
 
-        current_fs = $(this).parent();
-        previous_fs = $(this).parent().prev();
+        current_fs = $(this).parents('fieldset:first');
+        previous_fs = $(this).parents('fieldset:first').prev();
 
         //Remove class active
         $("#selector a").eq($("fieldset").index(current_fs)).removeClass("kb-link-active");

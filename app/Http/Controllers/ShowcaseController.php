@@ -22,8 +22,12 @@ class ShowcaseController extends Controller
 
     public function data(Request $request)
     {
+		$products = $this->_search();
+		if($request->input('category'))
+			$products->where('category_id', $request->input('category'));
+		
         return [
-            'products' => $this->_search()->where('category_id', $request->input('category'))->get(),
+            'products' => $products->get(),
             'categories' => \App\Category::all(),
             'comunas' => \App\Comuna::all(),
             'tags' => \App\Tag::all()

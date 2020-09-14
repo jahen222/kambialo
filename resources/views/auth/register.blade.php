@@ -136,4 +136,9 @@
         </form>
     </div>
 </section>
+<style>
+.select2-container, .select2-selection{
+	width: 100%!important;
+}
+</style>
 @endsection

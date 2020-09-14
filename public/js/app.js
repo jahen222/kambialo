@@ -39708,7 +39708,9 @@ var render = function() {
                   [
                     _c("div", { staticStyle: { height: "75%" } }, [
                       _c("img", {
-                        attrs: { src: "images/" + _vm.currentImage }
+                        attrs: {
+                          src: "system/public/images/" + _vm.currentImage
+                        }
                       }),
                       _vm._v(" "),
                       _vm.current.images.length > 0
@@ -39837,7 +39839,9 @@ var render = function() {
                   [
                     _c("div", { staticStyle: { height: "75%" } }, [
                       _c("img", {
-                        attrs: { src: "images/" + _vm.next.cover_image }
+                        attrs: {
+                          src: "system/public/images/" + _vm.next.cover_image
+                        }
                       })
                     ]),
                     _vm._v(" "),

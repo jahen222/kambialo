@@ -76,7 +76,7 @@
             @draggedLeft="emitAndNext('reject')"
             class="rounded card card--no-shadow card--one">
             <div style="height: 75%">
-              <img :src="'images/'+currentImage"/>
+              <img :src="'system/public/images/'+currentImage"/>
               <a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @click="prevImage" href="#!">&#10094;</a>
               <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @click="nextImage" href="#!">&#10095;</a>
               <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
@@ -105,7 +105,7 @@
 			  style="z-index: 2">
 			  <div style="height: 75%">
 				<img
-				  :src="'images/' + next.cover_image" />
+				  :src="'system/public/images/' + next.cover_image" />
 			  </div>
 			  <div class="text">
 				  <div class="row" style="align-items: center;">
