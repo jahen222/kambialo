@@ -12,24 +12,24 @@
               <form class="row">
                 <div class="form-group col-12">
                   <small class="form-text text-muted">Categoria</small>
-                  <select name="category" class="custom-select js-basic-multiple"  id="categories-select2"  multiple>
+                  <select name="category" class="custom-select js-basic-multiple" v-model="form.categories" id="categories-select2"  multiple>
                     <option v-for="x,y in categories" :value="x.id" :selected="x.id == category">{{x.name}}</option>
                   </select>
                 </div>
                 <div class="form-group col-12">
                   <small class="form-text text-muted">Comuna</small>
-                  <select name="Comuna" class="custom-select js-basic-multiple" id="comunas-select2" multiple>
+                  <select name="Comuna" class="custom-select js-basic-multiple" v-model="form.comunas" id="comunas-select2" multiple>
                     <option v-for="x,y in comunas" :value="x.id">{{x.name}}</option>
                   </select>
                 </div>
                 <div class="form-group col-12">
                   <small class="form-text text-muted">Tags</small>
-                  <select name="tags[]" class="custom-select js-basic-multiple" id="tags-select2" multiple>
+                  <select name="tags[]" class="custom-select js-basic-multiple" v-model="form.tags" id="tags-select2" multiple>
                     <option v-for="x,y in tags" :value="x.id">{{x.name}}</option>
                   </select>
                 </div>
-                <div class="form-group col-sm-2">
-                  <button type="button" style="border:0; background-color:transparent;" data-dismiss="modal" @click="filter">Aceptar</button>
+                <div class="form-group col-12 text-center">
+                  <button type="button" data-dismiss="modal" @click="search" class="btn btn-green">Aceptar</button>
                 </div>
               </form>
             </div>
@@ -144,14 +144,14 @@
        
       </div>
     </div>
-    <div v-if="!isLoading && current" class="footer col-12 col-sm-6">
-      <div class="btn-c btn-c--decline" @click="reject" title="Rechazar">
+    <div class="footer col-12 col-sm-6">
+      <div v-if="!isLoading && current" class="btn-c btn-c--decline" @click="reject" title="Rechazar">
           <i class="material-icons">close</i>
       </div>
-      <div class="btn-c btn-c--filter" @click="modal" title="Filtros">
+      <div v-if="!isLoading" class="btn-c btn-c--filter" @click="modal" title="Filtros">
           <i class="material-icons">tune</i>
       </div>
-      <div class="btn-c btn-c--like" @click="match" title="Favorito">
+      <div v-if="!isLoading && current" class="btn-c btn-c--like" @click="match" title="Favorito">
           <i class="material-icons">favorite</i>
       </div>
     </div>
@@ -236,21 +236,11 @@ export default {
   },
   methods: {
     async search() {
-      _lastSearch = this.form.search;
       this.isLoading = true;
+	  this.form.tags = $('#tags-select2').val();
+      this.form.categories = $('#categories-select2').val();
+      this.form.comunas = $('#comunas-select2').val();
       const response = await axios.get(`showcase/search`, {params: this.form})
-      this.cards = response.data;
-      this.isLoading = false;
-    },
-    async filter(){
-      const data = {
-        tags: $('#tags-select2').val(),
-        categories: $('#categories-select2').val(),
-        comunas: $('#comunas-select2').val(),
-        search: _lastSearch
-      }
-      this.isLoading = true;
-      const response = await axios.get(`showcase/search`, {params: data})
       this.cards = response.data;
       this.isLoading = false;
     },

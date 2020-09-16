@@ -418,7 +418,7 @@
                         <div class="card-footer">
                             <p class="card-title">1 Producto</p>
                             <hr>
-                            <p class="card-text">1 mes</p>
+                            <p class="card-text">4 mes</p>
                             <a href="{{ route('register') }}" type="button" class="btn btn-green">COMPRAR</a>
                         </div>
                     </div>
@@ -433,7 +433,7 @@
                         <div class="card-footer">
                             <p class="card-title">Hasta 5 Productos</p>
                             <hr>
-                            <p class="card-text">1 mes</p>
+                            <p class="card-text">4 mes</p>
                             <a href="{{ route('register') }}" type="button" class="btn btn-green">COMPRAR</a>
                         </div>
                     </div>
@@ -448,7 +448,7 @@
                         <div class="card-footer">
                             <p class="card-title">Hasta 15 Productos</p>
                             <hr>
-                            <p class="card-text">1 mes</p>
+                            <p class="card-text">4 mes</p>
                             <a href="{{ route('register') }}" type="button" class="btn btn-green">COMPRAR</a>
                         </div>
                     </div>

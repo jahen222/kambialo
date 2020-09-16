@@ -2217,58 +2217,26 @@ var _lastSearch = '';
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _lastSearch = _this.form.search;
                 _this.isLoading = true;
-                _context.next = 4;
+                _this.form.tags = $('#tags-select2').val();
+                _this.form.categories = $('#categories-select2').val();
+                _this.form.comunas = $('#comunas-select2').val();
+                _context.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("showcase/search", {
                   params: _this.form
                 });
 
-              case 4:
+              case 6:
                 response = _context.sent;
                 _this.cards = response.data;
                 _this.isLoading = false;
 
-              case 7:
+              case 9:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
-      }))();
-    },
-    filter: function filter() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var data, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                data = {
-                  tags: $('#tags-select2').val(),
-                  categories: $('#categories-select2').val(),
-                  comunas: $('#comunas-select2').val(),
-                  search: _lastSearch
-                };
-                _this2.isLoading = true;
-                _context2.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("showcase/search", {
-                  params: data
-                });
-
-              case 4:
-                response = _context2.sent;
-                _this2.cards = response.data;
-                _this2.isLoading = false;
-
-              case 7:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
       }))();
     },
     buildCardImages: function buildCardImages() {
@@ -2287,59 +2255,59 @@ var _lastSearch = '';
       this.imageIndex -= 1;
     },
     fetchData: function fetchData() {
-      var _this3 = this;
+      var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _this3.isLoading = true;
-                _context3.next = 3;
+                _this2.isLoading = true;
+                _context2.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("showcase/data", {
                   params: {
-                    category: _this3.category
+                    category: _this2.category
                   }
                 });
 
               case 3:
-                response = _context3.sent;
+                response = _context2.sent;
 
                 if (response.data) {
-                  _this3.cards = response.data.products;
-                  _this3.categories = response.data.categories;
-                  _this3.comunas = response.data.comunas;
-                  _this3.tags = response.data.tags;
+                  _this2.cards = response.data.products;
+                  _this2.categories = response.data.categories;
+                  _this2.comunas = response.data.comunas;
+                  _this2.tags = response.data.tags;
                 }
 
-                _this3.isLoading = false;
+                _this2.isLoading = false;
 
               case 6:
               case "end":
-                return _context3.stop();
+                return _context2.stop();
             }
           }
-        }, _callee3);
+        }, _callee2);
       }))();
     },
     favorite: function favorite(index) {
-      var _this4 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var card, response, element, elementInfo;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                card = _this4.cards[index];
-                _context4.next = 3;
+                card = _this3.cards[index];
+                _context3.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("showcase/favorite", {
                   id: card.id
                 });
 
               case 3:
-                response = _context4.sent;
+                response = _context3.sent;
                 element = document.getElementById('xtra-message');
                 element.innerHTML = response.data.favoriteMessage;
                 element.style.opacity = 1;
@@ -2357,10 +2325,10 @@ var _lastSearch = '';
 
               case 9:
               case "end":
-                return _context4.stop();
+                return _context3.stop();
             }
           }
-        }, _callee4);
+        }, _callee3);
       }))();
     },
     modal: function modal() {
@@ -2382,17 +2350,17 @@ var _lastSearch = '';
       clearTimeout(timeoutNext);
     },
     emitAndNext: function emitAndNext(event) {
-      var _this5 = this;
+      var _this4 = this;
 
       this.$emit(event, this.index);
       this.clearTimeouts();
       timeoutVisible = setTimeout(function () {
-        return _this5.isVisible = false;
+        return _this4.isVisible = false;
       }, 160);
       timeoutNext = setTimeout(function () {
-        _this5.index++;
-        _this5.imageIndex = DEFAULTS.COVER;
-        _this5.isVisible = true;
+        _this4.index++;
+        _this4.imageIndex = DEFAULTS.COVER;
+        _this4.isVisible = true;
       }, 160);
       var element = document.getElementById('xtra-message');
       element.style.opacity = 0;
@@ -39515,11 +39483,38 @@ var render = function() {
                     _c(
                       "select",
                       {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.categories,
+                            expression: "form.categories"
+                          }
+                        ],
                         staticClass: "custom-select js-basic-multiple",
                         attrs: {
                           name: "category",
                           id: "categories-select2",
                           multiple: ""
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "categories",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
                         }
                       },
                       _vm._l(_vm.categories, function(x, y) {
@@ -39546,11 +39541,38 @@ var render = function() {
                     _c(
                       "select",
                       {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.comunas,
+                            expression: "form.comunas"
+                          }
+                        ],
                         staticClass: "custom-select js-basic-multiple",
                         attrs: {
                           name: "Comuna",
                           id: "comunas-select2",
                           multiple: ""
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "comunas",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
                         }
                       },
                       _vm._l(_vm.comunas, function(x, y) {
@@ -39570,11 +39592,38 @@ var render = function() {
                     _c(
                       "select",
                       {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.tags,
+                            expression: "form.tags"
+                          }
+                        ],
                         staticClass: "custom-select js-basic-multiple",
                         attrs: {
                           name: "tags[]",
                           id: "tags-select2",
                           multiple: ""
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "tags",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
                         }
                       },
                       _vm._l(_vm.tags, function(x, y) {
@@ -39586,16 +39635,13 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-sm-2" }, [
+                  _c("div", { staticClass: "form-group col-12 text-center" }, [
                     _c(
                       "button",
                       {
-                        staticStyle: {
-                          border: "0",
-                          "background-color": "transparent"
-                        },
+                        staticClass: "btn btn-green",
                         attrs: { type: "button", "data-dismiss": "modal" },
-                        on: { click: _vm.filter }
+                        on: { click: _vm.search }
                       },
                       [_vm._v("Aceptar")]
                     )
@@ -39934,9 +39980,9 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      !_vm.isLoading && _vm.current
-        ? _c("div", { staticClass: "footer col-12 col-sm-6" }, [
-            _c(
+      _c("div", { staticClass: "footer col-12 col-sm-6" }, [
+        !_vm.isLoading && _vm.current
+          ? _c(
               "div",
               {
                 staticClass: "btn-c btn-c--decline",
@@ -39944,9 +39990,11 @@ var render = function() {
                 on: { click: _vm.reject }
               },
               [_c("i", { staticClass: "material-icons" }, [_vm._v("close")])]
-            ),
-            _vm._v(" "),
-            _c(
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.isLoading
+          ? _c(
               "div",
               {
                 staticClass: "btn-c btn-c--filter",
@@ -39954,9 +40002,11 @@ var render = function() {
                 on: { click: _vm.modal }
               },
               [_c("i", { staticClass: "material-icons" }, [_vm._v("tune")])]
-            ),
-            _vm._v(" "),
-            _c(
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.isLoading && _vm.current
+          ? _c(
               "div",
               {
                 staticClass: "btn-c btn-c--like",
@@ -39965,8 +40015,8 @@ var render = function() {
               },
               [_c("i", { staticClass: "material-icons" }, [_vm._v("favorite")])]
             )
-          ])
-        : _vm._e()
+          : _vm._e()
+      ])
     ]
   )
 }
