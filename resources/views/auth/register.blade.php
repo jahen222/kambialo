@@ -88,7 +88,7 @@
                     <small class="form-text text-danger">@error('email') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
-                    <select class="custom-select js-basic-multiple" id="comuna" name="Comuna">
+                    <select class="custom-select js-basic-multiple" id="comuna" name="comuna_id">
                         @foreach(App\Comuna::all() as $comuna)
                         <option value="{{ $comuna->id }}">{{ $comuna->name }}</option>
                         @endforeach
