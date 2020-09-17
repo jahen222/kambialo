@@ -14,6 +14,8 @@ $(document).ready(function () {
         $('#sub-name').html($(this).data('name'));
         $('#sub-description').html($(this).data('description'));
         $('#sub-price').html($(this).data('price'));
+		$('#sub-quote').html($(this).data('quote'));
+		$('#sub-months').html($(this).data('months'));
     });
 
     $(".next").click(function () {

@@ -109,27 +109,49 @@
                 <button type="button" name="next" style="width:100%;" class="btn btn-lg btn-success btn-block next action-button">CONTINUAR</button>
             </fieldset>
             <fieldset>
-                <div class="col-md-12 pt-5 pb-5">
-                    <?php
-                    $subcription = App\Subscription::all();
-                    ?>
-                    @foreach($subcription as $sub)
-                    <div class="form-group col-md-12">
-                        <div class="custom-control custom-radio mb-3">
-                            <input type="radio" data-name="{{ $sub->name }}" data-description="{{$sub->description}}" data-price="{{ number_format($sub->price) }}" class="custom-control-input" id="subscription-{{ $sub->id }}" name="users[subscription_id]" value="{{ $sub->id }}" />
-                            <label class="custom-control-label" for="subscription-{{ $sub->id }}">{{ $sub->name }} - {{ $sub->description }} - $ {{ number_format($sub->price) }}</label>
-                        </div>
-                    </div>
-                    @endforeach
+                <div class="col-md-12 text-center">
+					@foreach(App\Subscription::all() as $sub)
+					<input style="display:none; "type="radio" data-name="{{ $sub->name }}" data-description="{{$sub->description}}"
+							data-price="{{ number_format($sub->price) }}" data-quote="{{ $sub->quote }}" data-months="{{ $sub->months }}"
+							class="custom-control-input" id="subscription-{{ $sub->id }}" name="users[subscription_id]" value="{{ $sub->id }}" />
+					<label style="width: 100%;" for="subscription-{{ $sub->id }}">
+						<div class="card mb-4 shadow-sm">
+							<div class="card-header" style="background-color: transparent; color: #000;">
+								<h3>{{ $sub->name }}</h3>
+								<p>{{ $sub->description }}</p>
+							</div>
+							<div class="card-body success-color">
+								<h1 class="card-title pricing-card-titler" style="color: #fff;">$ {{ $sub->price }}</h1>
+							</div>
+							<div class="card-footer">
+								<p class="card-title">Hasta  {{ $sub->quote }} Productos</p>
+								<hr>
+								<p class="card-text">{{ $sub->months }} meses</p>
+								<button style="width:auto;margin:auto;" onclick="$('#subscription-{{ $sub->id }}').trigger('click')" type="button" name="next" class="col-12 btn btn-success btn-block next action-button">PAGAR</button>
+							</div>
+						</div>
+					</label>
+					@endforeach
                     <small class="form-text text-danger">@error('subscription_id'){{ $message }} @enderror</small>
                 </div>
                 <button type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous">REGRESAR</button>
-                <button type="button" name="next" class="col-12 btn btn-lg btn-success btn-block next action-button">PAGAR</button>
+                <!--<button type="button" name="next" class="col-12 btn btn-lg btn-success btn-block next action-button">PAGAR</button>-->
             </fieldset>
             <fieldset>
-                <p><b>Vigencia de planes 4 meses</b></p>
-                <p><b>Subscripción: </b><span id="sub-name"></span> - <span id="sub-description"></span></p>
-                <p><b>Precio: $ </b><span id="sub-price"></span></p>
+				<div class="card mb-4 shadow-sm text-center">
+					<div class="card-header" style="background-color: transparent; color: #000;">
+						<h3 id="sub-name"></h3>
+						<p id="sub-description"></p>
+					</div>
+					<div class="card-body success-color">
+						<h1 class="card-title pricing-card-titler" style="color: #fff;">$ <span id="sub-price"></span></h1>
+					</div>
+					<div class="card-footer">
+						<p class="card-title">Hasta <span id="sub-quote"></span> Productos</p>
+						<hr>
+						<p class="card-text"><span id="sub-months"></span> meses</p>
+					</div>
+				</div>
                 <button type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous">REGRESAR</button>
                 <button type="submit" class="col-12 btn btn-lg btn-info btn-block submit">CONFIRMAR</button>
             </fieldset>
