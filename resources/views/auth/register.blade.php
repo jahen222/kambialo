@@ -88,7 +88,7 @@
                     <small class="form-text text-danger">@error('email') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
-                    <select class="custom-select js-basic-multiple" id="comuna" name="comuna_id">
+                    <select class="custom-select js-basic-multiple" id="comuna" name="users[comuna_id]">
                         @foreach(App\Comuna::all() as $comuna)
                         <option value="{{ $comuna->id }}">{{ $comuna->name }}</option>
                         @endforeach
@@ -106,7 +106,7 @@
                     <small class="form-text text-muted">Confirmar Contraseña</small>
                     <small class="form-text text-danger">@error('password_confirmation'){{ $message }} @enderror</small>
                 </div>
-                <input type="button" name="next" class="btn btn-lg btn-success btn-block next action-button" value="CONTINUAR" />
+                <button type="button" name="next" style="width:100%;" class="btn btn-lg btn-success btn-block next action-button">CONTINUAR</button>
             </fieldset>
             <fieldset>
                 <div class="col-md-12 pt-5 pb-5">
@@ -123,14 +123,14 @@
                     @endforeach
                     <small class="form-text text-danger">@error('subscription_id'){{ $message }} @enderror</small>
                 </div>
-                <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" />
-                <input type="button" name="next" class="col-12 btn btn-lg btn-success btn-block next action-button" value="PAGAR" />
+                <button type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous">REGRESAR</button>
+                <button type="button" name="next" class="col-12 btn btn-lg btn-success btn-block next action-button">PAGAR</button>
             </fieldset>
             <fieldset>
                 <p><b>Vigencia de planes 4 meses</b></p>
                 <p><b>Subscripción: </b><span id="sub-name"></span> - <span id="sub-description"></span></p>
                 <p><b>Precio: $ </b><span id="sub-price"></span></p>
-                <input type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous" value="REGRESAR" />
+                <button type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous">REGRESAR</button>
                 <button type="submit" class="col-12 btn btn-lg btn-info btn-block submit">CONFIRMAR</button>
             </fieldset>
         </form>

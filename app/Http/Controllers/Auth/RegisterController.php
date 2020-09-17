@@ -55,15 +55,18 @@ class RegisterController extends Controller
                 $data,
                 [
                     'name' => 'required',
-                    'email' => 'unique:users',
+                    'email' => 'required|unique:users',
                     'subscription_id' => 'required',
-                    'comuna_id' => 'required'
+                    'comuna_id' => 'required',
+					'password' => 'required',
                 ],
                 [
                     'name.required' => 'Usuario es requerido',
                     'subscription_id.required' => 'Debe seleccionar un plan de subscripcion',
+					'email.required' => 'El correo electronico es requerido',
                     'email.unique' => 'El correo electronico se encuentra en uso',
                     'comuna_id.required' => 'Comuna es requerido',
+					'password.required' => 'Contraseña es requerido',
                 ]
             )->validate();
 
