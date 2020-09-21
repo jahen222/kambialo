@@ -1,5 +1,5 @@
 <template>
-  <section class="container" style="position: relative; padding: 25px;">
+  <section class="container" style="position: relative; padding: 25px; height: 85vh;">
     
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -38,7 +38,7 @@
     </div>
 
 
-    <div style="margin-top: 10px;" class="col-12 col-sm-6 offset-sm-3">
+    <div style="margin: 0 auto; margin-top: 10px;" class="col-12 col-sm-5">
       <form class="row" v-on:submit.prevent="search" style="align-items: flex-end">
   
           <div class="form-group col-12">
@@ -58,7 +58,7 @@
     </div>
     <div class="row">
     
-      <div style="height:70vh; position:relative; margin: auto; margin-bottom: -5vh;" class="col-12 col-sm-6 offset-sm-3">
+      <div style="height:60vh; position:relative; margin: auto; margin-bottom: -5vh;" class="col-12 col-sm-5">
         <div
           v-if="!isLoading && current"
           style="z-index: 3"
@@ -67,16 +67,18 @@
             v-if="!isLoading && current && isVisible"
             :interact-out-of-sight-x-coordinate="500"
             :interact-max-rotation="15"
-            :interact-x-threshold="200"
-            :interact-y-threshold="200"
+            :interact-x-threshold="50"
+            :interact-y-threshold="50"
             :interact-event-bus-events="interactEventBus"
             interact-block-drag-down
             interact-block-drag-up
             @draggedRight="emitAndNext('match')"
             @draggedLeft="emitAndNext('reject')"
             class="rounded card card--no-shadow card--one">
-            <div style="height: 75%">
-              <img :src="'system/public/images/'+currentImage"/>
+            <div style="height: 70%">
+              <a @mousedown="clickDown($event)" @mouseup=clickUp($event)>
+                <img :src="'system/public/images/'+currentImage"/>
+              </a>
               <a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @click="prevImage" href="#!">&#10094;</a>
               <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @click="nextImage" href="#!">&#10095;</a>
               <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
@@ -177,10 +179,13 @@ var timeoutVisible = '';
 var timeoutNext = '';
 var _lastSearch = '';
 
+var _clickDownPosX = '';
+var _clickDownPosY = '';
+
 export default {
   name: 'SwipeableCards',
   components: { Vue2InteractDraggable },
-  props: ['category'],
+  props: ['category','url'],
   data() {
     return {
       isLoading: false,
@@ -197,7 +202,9 @@ export default {
       },
       cards: [],
       form: {
-        tags: []
+        tags: [],
+        categories: [],
+        comunas: [],
       },
     }
   },
@@ -207,21 +214,20 @@ export default {
   computed: {
     currentImage(){
       const images = this.buildCardImages();
-	  if(this.imageIndex < 0)
-		this.imageIndex = images.length - 1;
-	
-	  if(images){
-		if(!images[this.imageIndex])
-			this.imageIndex = DEFAULTS.COVER;
+      if(this.imageIndex < 0)
+      this.imageIndex = images.length - 1;
+    
+      if(images){
+        if(!images[this.imageIndex])
+          this.imageIndex = DEFAULTS.COVER;
 
-		if(document.getElementById('image-selector')){
-			const inputs = document.getElementById('image-selector').getElementsByTagName('input');
-			inputs[this.imageIndex].checked = true;
-		}
-		return images[this.imageIndex].image;
-	  }
-	  return '';
-      
+        if(document.getElementById('image-selector')){
+          const inputs = document.getElementById('image-selector').getElementsByTagName('input');
+          inputs[this.imageIndex].checked = true;
+        }
+        return images[this.imageIndex].image;
+      }
+	    return '';  
     },
     current() {
       if(!this.cards[this.index])
@@ -289,6 +295,16 @@ export default {
           elementInfo.style.opacity = 0;
         },2500);
       }
+    },
+    clickDown(event){
+      //setting the initial click position
+      _clickDownPosX = event.clientX;
+      _clickDownPosY = event.clientY;
+    },
+    clickUp(event){
+      //checking the final position of click to avoid click event on drag
+      if(event.clientX == _clickDownPosX && event.clientY == _clickDownPosY)
+        window.location = this.url + '/' + this.current.id;
     },
     modal() {
       $('#myModal').modal('show');
@@ -485,7 +501,7 @@ export default {
   /*width: 80vw;*/
   width: 100%;
   position:absolute;
-  height: 60vh;
+  height: 50vh;
   left: 0;
   img {
     object-fit: cover;
@@ -525,7 +541,7 @@ export default {
   .text {
     background-color: white;
     width: 100%;
-    height: 25%;
+    height: 30%;
     padding: 10px;
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
