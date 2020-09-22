@@ -13,17 +13,17 @@
                         <tbody>
                             <tr>
                                 <td><img style="max-height:50px;" src="{{url()->to('images/' . $favorite->product->cover_image)}}" /></td>
-                                <td>{{ $favorite->product()->get()[0]->name }}</td>
+                                <td style="vertical-align: middle;">{{ $favorite->product()->get()[0]->name }}</td>
 
 
                                 @can('show')
-                                <td>
+                                <td style="vertical-align: middle;">
                                     <a href="{{ route('product.show', $favorite->product()->get()[0]->id) }}" class="btn btn-sm btn-primary">
                                         Ver
                                     </a>
                                 </td>
                                 @endcan
-                                <td>
+                                <td style="vertical-align: middle;">
                                     <form action="{{route('favorite.store')}}" method="POST">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="product" value="{{ $favorite->product()->first()->id }}">
