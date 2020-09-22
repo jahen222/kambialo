@@ -84,11 +84,12 @@
                 </div>
                 <div class="form-group">
                     <input type="email" name="users[email]" value="{{ old('users.email') }}" required class="form-control">
-                    <small class="form-text text-muted">Correo Elecronico</small>
+                    <small class="form-text text-muted">Correo Electrónico</small>
                     <small class="form-text text-danger">@error('email') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
                     <select class="custom-select js-basic-multiple" id="comuna" name="users[comuna_id]">
+                        <option>Seleccionar comuna</option>
                         @foreach(App\Comuna::all() as $comuna)
                         <option value="{{ $comuna->id }}">{{ $comuna->name }}</option>
                         @endforeach

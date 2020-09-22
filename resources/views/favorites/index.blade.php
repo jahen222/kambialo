@@ -6,7 +6,6 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Favoritos</div>
-
                 <div class="panel-body">
                     <table class="table table-striped">
                         @foreach($favorites as $favorite)
@@ -14,8 +13,6 @@
                             <tr>
                                 <td><img style="max-height:50px;" src="{{url()->to('images/' . $favorite->product->cover_image)}}" /></td>
                                 <td style="vertical-align: middle;">{{ $favorite->product()->get()[0]->name }}</td>
-
-
                                 @can('show')
                                 <td style="vertical-align: middle;">
                                     <a href="{{ route('product.show', $favorite->product()->get()[0]->id) }}" class="btn btn-sm btn-primary">
