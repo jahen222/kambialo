@@ -39,11 +39,14 @@
 	<div style="margin: 0px auto 10px; background-color:#024600;" class="">
 	  <form v-on:submit.prevent="search" style="align-items: flex-end; padding: 1px;">
 		<div class="col-sm-4" style="margin:10px auto;">
-		  <div class="form-group col-12" style="margin:0">
-			<input placeholder="Buscador" class="form-control" v-model="form.search" type="text"/>
+		  <div class="input-group col-12" style="margin:0">
+			<input placeholder="Buscar" style="border-right:0" class="form-control text-center" v-model="form.search" type="text"/>
+			<div class="input-group-append">
+				<button type="submit" class="btn-submit"><i class="material-icons">search</i></button>
+			</div>
 		  </div>
 		  <div class="form-group col-sm-2 d-none">
-			<button type="submit" style="border:0; background-color:transparent;"><i class="material-icons">search</i></button>
+			
 		  </div>
 		</div>
 	  </form>
@@ -376,7 +379,17 @@ export default {
 *{
 --green: #36c132;
 }
-
+.btn-submit{
+ background-color: white;
+ border: 0;
+ border-radius: 0 5px 5px 0px;
+ box-shadow: inset -1px 0px 2px grey;
+ color: white;
+ text-shadow: 1px 1px 1px var(--green),-1px -1px 1px var(--green),-1px 1px 1px var(--green),1px -1px 1px var(--green);
+ i{
+	vertical-align:middle;
+ }
+}
 .nav-bottom{
   position: fixed;
   width: 100%;
@@ -386,7 +399,7 @@ export default {
   align-items: center;
   margin:auto;
   color: white;
-  text-shadow: 1px 1px 1px cyan,-1px -1px 1px cyan,-1px 1px 1px cyan,1px -1px 1px cyan;
+  text-shadow: 1px 1px 1px #96fff5,-1px -1px 1px #96fff5,-1px 1px 1px #96fff5,1px -1px 1px #96fff5;
 }
 
 .image-selector{
@@ -453,8 +466,8 @@ export default {
 
 .btn-c {
   position: relative;
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   padding: .2rem;
   border-radius: 50%;
   background-color: white;
