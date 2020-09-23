@@ -39887,7 +39887,7 @@ var render = function() {
                             _c(
                               "div",
                               {
-                                staticClass: "col-8",
+                                staticClass: "col-10",
                                 staticStyle: { padding: "0" }
                               },
                               [
@@ -39901,7 +39901,7 @@ var render = function() {
                               ]
                             ),
                             _vm._v(" "),
-                            _c("div", { staticClass: "col-4 text-right" }, [
+                            _c("div", { staticClass: "text-right favorites" }, [
                               _c("span", { staticClass: "text-muted" }, [
                                 _vm._v(
                                   _vm._s(_vm.next.favorites_count) +

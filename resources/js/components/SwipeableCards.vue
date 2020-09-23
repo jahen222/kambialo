@@ -110,11 +110,11 @@
 				  </div>
 				  <div class="text">
 					  <div class="row" style="align-items: center;">
-						<div class="col-8" style="padding: 0;">
+						<div class="col-10" style="padding: 0;">
 						  <h5 class="nowrap">{{next.name}}</h5>
 						  <p class="text-danger nowrap">{{next.description}}</p>
 						</div>
-						<div class="col-4 text-right">
+						<div class="text-right favorites">
 						  <span class="text-muted">{{next.favorites_count}}
 							<i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
 						  </span>
