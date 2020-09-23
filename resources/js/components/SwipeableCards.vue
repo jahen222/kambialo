@@ -157,7 +157,13 @@
 		  </div>
 		</div>
 	</div>
-
+	<div class="nav-bottom">
+	  <div><i class="material-icons">home</i></div>
+	  <div><i class="material-icons">message</i></div>
+	  <div><i class="material-icons">add_circle</i></div>
+	  <div><i class="material-icons">notifications</i></div>
+	  <div><i class="material-icons">person</i></div>
+	</div>
   </section>
 </template>
 <script>
@@ -371,6 +377,18 @@ export default {
 --green: #36c132;
 }
 
+.nav-bottom{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin:auto;
+  color: white;
+  text-shadow: 1px 1px 1px cyan,-1px -1px 1px cyan,-1px 1px 1px cyan,1px -1px 1px cyan;
+}
+
 .image-selector{
   position: absolute;
   text-align:center;
@@ -453,6 +471,7 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+	font-size: 32px;
     &::before {
       content: '';
     }
