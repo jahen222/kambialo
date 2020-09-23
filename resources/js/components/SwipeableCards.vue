@@ -1,5 +1,5 @@
 <template>
-  <section class="container" style="position: relative; padding: 0; height: 85vh;">
+  <section class="" style="position: relative; padding: 0; height: 85vh;">
     
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -36,127 +36,128 @@
         </div>
       </div>
     </div>
-
-
-    <div style="margin: 10px auto; background-color: green;" class="">
-      <form v-on:submit.prevent="search" style="align-items: flex-end; padding: 5px;">
-		<div class="col-sm-5" style="margin:15px auto 0;">
-          <div class="form-group col-12">
-            <input placeholder="Buscador" class="form-control" v-model="form.search" type="text"/>
-          </div>
-          <div class="form-group col-sm-2 d-none">
-            <button type="submit" style="border:0; background-color:transparent;"><i class="material-icons">search</i></button>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="alert-success text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message">
-      
-    </div>
-    <div class="alert-info text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message-info">
-      
-    </div>
-    <div style="padding: 0 30px;">
-    
-      <div style="height:60vh; position:relative; margin: auto; margin-bottom: -5vh;" class="col-12 col-sm-4">
-        <div
-          v-if="!isLoading && current"
-          style="z-index: 3"
-          
-          <Vue2InteractDraggable
-            v-if="!isLoading && current && isVisible"
-            :interact-out-of-sight-x-coordinate="500"
-            :interact-max-rotation="15"
-            :interact-x-threshold="50"
-            :interact-y-threshold="50"
-            :interact-event-bus-events="interactEventBus"
-            interact-block-drag-down
-            interact-block-drag-up
-            @draggedRight="emitAndNext('match')"
-            @draggedLeft="emitAndNext('reject')"
-            class="rounded card card--no-shadow card--one">
-            <div style="height: 75%">
-              <a @touchstart="clickDown($event)" @touchend="clickUp($event)" @mousedown="clickDown($event)" @mouseup=clickUp($event)>
-                <img :src="'system/public/images/'+currentImage"/>
-              </a>
-              <a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @touchstart="prevImage" @click="prevImage" href="#!">&#10094;</a>
-              <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @touchstart="nextImage" @click="nextImage" href="#!">&#10095;</a>
-              <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
-                <input type="radio" name="image_controller" @click="selectImage(0)" checked/>
-                <input type="radio" name="image_controller" @click="selectImage(y + 1)" v-for="x,y in current.images"/>
-              </div>
-            </div>
-            <div class="text">
-              <div class="row" style="align-items: center;">
-                <div class="col-8">
-                  <h5 class="nowrap">{{current.name}}</h5>
-                  <p class="text-danger nowrap">{{current.description}}</p>
-                </div>
-                <div class="col-4 text-right">
-                  <span class="text-muted">{{current.favorites_count}}
-                    <i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Vue2InteractDraggable>
-        
+	<div style="margin: 10px auto; background-color: var(--green);" class="">
+	  <form v-on:submit.prevent="search" style="align-items: flex-end; padding: 5px;">
+		<div class="col-sm-4" style="margin:15px auto 0;">
+		  <div class="form-group col-12">
+			<input placeholder="Buscador" class="form-control" v-model="form.search" type="text"/>
+		  </div>
+		  <div class="form-group col-sm-2 d-none">
+			<button type="submit" style="border:0; background-color:transparent;"><i class="material-icons">search</i></button>
+		  </div>
+		</div>
+	  </form>
+	</div>
+	<div class="container">
+		<div class="alert-success text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message">
+		  
+		</div>
+		<div class="alert-info text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message-info">
+		  
+		</div>
+		<div style="padding: 0 30px;">
+		
+		  <div style="height:60vh; position:relative; margin: auto; margin-bottom: -5vh;" class="col-12 col-sm-4">
 			<div
-			  v-if="!isLoading && next"
-			  class="rounded card card--no-shadow card--two"
-			  style="z-index: 2">
-			  <div style="height: 75%">
-				<img
-				  :src="'system/public/images/' + next.cover_image" />
-			  </div>
-			  <div class="text">
+			  v-if="!isLoading && current"
+			  style="z-index: 3"
+			  
+			  <Vue2InteractDraggable
+				v-if="!isLoading && current && isVisible"
+				:interact-out-of-sight-x-coordinate="500"
+				:interact-max-rotation="15"
+				:interact-x-threshold="50"
+				:interact-y-threshold="50"
+				:interact-event-bus-events="interactEventBus"
+				interact-block-drag-down
+				interact-block-drag-up
+				@draggedRight="emitAndNext('match')"
+				@draggedLeft="emitAndNext('reject')"
+				class="rounded card card--no-shadow card--one">
+				<div style="height: 77%">
+				  <a @touchstart="clickDown($event)" @touchend="clickUp($event)" @mousedown="clickDown($event)" @mouseup=clickUp($event)>
+					<img :src="'system/public/images/'+currentImage"/>
+				  </a>
+				  <!--<a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @touchstart="prevImage" @click="prevImage" href="#!">&#10094;</a>
+				  <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @touchstart="nextImage" @click="nextImage" href="#!">&#10095;</a>
+				  <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
+					<input type="radio" name="image_controller" @click="selectImage(0)" checked/>
+					<input type="radio" name="image_controller" @click="selectImage(y + 1)" v-for="x,y in current.images"/>
+				  </div>-->
+				</div>
+				<div class="text">
 				  <div class="row" style="align-items: center;">
-					<div class="col-8">
-					  <h5 class="nowrap">{{next.name}}</h5>
-					  <p class="text-danger nowrap">{{next.description}}</p>
+					<div class="col-10" style="padding: 0;">
+					  <h5 class="nowrap">{{current.name}}</h5>
+					  <p class="text-danger nowrap">{{current.description}}</p>
 					</div>
-					<div class="col-4 text-right">
-					  <span class="text-muted">{{next.favorites_count}}
+					<div class="text-right favorites">
+					  <span class="text-muted">{{current.favorites_count}}
 						<i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
 					  </span>
 					</div>
 				  </div>
 				</div>
+			  </Vue2InteractDraggable>
+			
+				<div
+				  v-if="!isLoading && next"
+				  class="rounded card card--no-shadow card--two"
+				  style="z-index: 2">
+				  <div style="height: 77%">
+					<img
+					  :src="'system/public/images/' + next.cover_image" />
+				  </div>
+				  <div class="text">
+					  <div class="row" style="align-items: center;">
+						<div class="col-8" style="padding: 0;">
+						  <h5 class="nowrap">{{next.name}}</h5>
+						  <p class="text-danger nowrap">{{next.description}}</p>
+						</div>
+						<div class="col-4 text-right">
+						  <span class="text-muted">{{next.favorites_count}}
+							<i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
+						  </span>
+						</div>
+					  </div>
+					</div>
+				</div>
+				<div
+				  v-if="!isLoading && current"
+				  class="rounded card card--no-shadow card--three"
+				  style="z-index: 1">
+				  <div style="height: 100%">
+				  </div>
+				</div>
+				 <div
+				  v-if="!isLoading && !current && !next"
+				  class=" card card--no-shadow card--flex "
+				  style="z-index: 1">
+				  <div>No hay mas productos</div>
+				</div>
+				<div
+				  v-if="isLoading"
+				  class="card card--no-shadow card--flex "
+				  style="z-index: 1">
+				  <div>...Cargando</div>
+				</div>
 			</div>
-			<div
-			  v-if="!isLoading && current"
-			  class="rounded card card--no-shadow card--three"
-			  style="z-index: 1">
-			  <div style="height: 100%">
-			  </div>
-			</div>
-			 <div
-			  v-if="!isLoading && !current && !next"
-			  class=" card card--no-shadow card--flex "
-			  style="z-index: 1">
-			  <div>No hay mas productos</div>
-			</div>
-			<div
-			  v-if="isLoading"
-			  class="card card--no-shadow card--flex "
-			  style="z-index: 1">
-			  <div>...Cargando</div>
-			</div>
+		   
+		  </div>
 		</div>
-       
-      </div>
-    </div>
-    <div class="footer col-12 col-sm-4">
-      <div v-if="!isLoading && current" class="btn-c btn-c--decline" @click="reject" title="Rechazar">
-          <i class="material-icons">close</i>
-      </div>
-      <div v-if="!isLoading" class="btn-c btn-c--filter" @click="modal" title="Filtros">
-          <i class="material-icons">tune</i>
-      </div>
-      <div v-if="!isLoading && current" class="btn-c btn-c--like" @click="match" title="Favorito">
-          <i class="material-icons">favorite</i>
-      </div>
-    </div>
+		<div class="footer col-12 col-sm-4">
+		  <div v-if="!isLoading && current" class="btn-c btn-c--decline" @click="reject" title="Rechazar">
+			  <i class="material-icons">close</i>
+		  </div>
+		  <div v-if="!isLoading" class="btn-c btn-c--filter" @click="modal" title="Filtros">
+			  <i class="material-icons">tune</i>
+		  </div>
+		  <div v-if="!isLoading && current" class="btn-c btn-c--like" @click="match" title="Favorito">
+			  <i class="material-icons">favorite</i>
+		  </div>
+		</div>
+	</div>
+
   </section>
 </template>
 <script>
@@ -366,7 +367,9 @@ export default {
   }
 </style>
 <style lang="scss" scoped>
-
+*{
+--green: #36c132;
+}
 
 .image-selector{
   position: absolute;
@@ -455,12 +458,12 @@ export default {
     }
   }
   &--like {
-    background-color: green;
+    background-color: var(--green);
     padding: .5rem;
     color: white;
     box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);
     i {
-      color: green;
+      color: var(--green);
       text-shadow: 1px 1px 1px white,-1px -1px 1px white,-1px 1px 1px white,1px -1px 1px white;
       font-size: 32px;
     }
@@ -470,7 +473,7 @@ export default {
     background-color:red;
   }
   &--skip {
-    color: green;
+    color: var(--green);
   }
   &--filter{
     box-shadow: unset;
@@ -555,7 +558,7 @@ export default {
   .text {
     background-color: white;
     width: 100%;
-    height: 25%;
+    height: 23%;
     padding: 10px;
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
@@ -570,8 +573,18 @@ export default {
     }
     i{
       color: transparent;
-      text-shadow: 1px 1px 1px green,-1px -1px 1px green,-1px 1px 1px green,1px -1px 1px green;
+      text-shadow: 1px 1px 1px var(--green),-1px -1px 1px var(--green),-1px 1px 1px var(--green),1px -1px 1px var(--green);
     }
+	h5{
+	  font-size: 1.1em;
+	}
+	p{
+	  font-size: 0.85em;
+	}
+	.favorites{
+	  position: absolute;
+	  right: 10px;
+	}
   }
 }
 

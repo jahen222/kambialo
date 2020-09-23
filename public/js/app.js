@@ -2138,6 +2138,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 var EVENTS = {
@@ -6826,7 +6827,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".image-selector[data-v-5d1eb04c] {\n  position: absolute;\n  text-align: center;\n  top: 0;\n  width: 100%;\n}\n.container[data-v-5d1eb04c] {\n  background: white;\n  width: 100%;\n  /*height: 100vh;*/\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  bottom: 0;\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-evenly;\n  align-items: center;\n  margin: auto;\n}\n.btn-c[data-v-5d1eb04c] {\n  position: relative;\n  width: 75px;\n  height: 75px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn-c[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn-c i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn-c i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn-c--like[data-v-5d1eb04c] {\n  background-color: green;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn-c--like i[data-v-5d1eb04c] {\n  color: green;\n  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;\n  font-size: 32px;\n}\n.btn-c--decline[data-v-5d1eb04c] {\n  color: white;\n  background-color: red;\n}\n.btn-c--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.btn-c--filter[data-v-5d1eb04c] {\n  box-shadow: unset;\n  background-color: transparent;\n}\n.btn-c--filter i[data-v-5d1eb04c] {\n  color: white;\n  text-shadow: 1px 1px 1px grey, -1px -1px 1px grey, -1px 1px 1px grey, 1px -1px 1px grey;\n  font-size: 32px;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.fixed--xtra-message[data-v-5d1eb04c] {\n  transition: 0.5s;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 77vw;\n  z-index: 4;\n  text-align: center;\n}\n.rounded[data-v-5d1eb04c] {\n  border-radius: 12px !important;\n}\n.card[data-v-5d1eb04c] {\n  /*width: 80vw;*/\n  width: 100%;\n  position: absolute;\n  height: 50vh;\n  left: 0;\n  box-shadow: 0 0 10px -5px grey !important;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n  border-top-left-radius: 12px;\n  border-top-right-radius: 12px;\n}\n.card--no-shadow[data-v-5d1eb04c] {\n  /*box-shadow: unset!important;*/\n}\n.card--one[data-v-5d1eb04c] {\n  z-index: 3;\n  /*box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);*/\n}\n.card--two[data-v-5d1eb04c] {\n  z-index: 2;\n  /*transform: translate(-48%, -48%);*/\n  /*box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);*/\n}\n.card--three[data-v-5d1eb04c] {\n  z-index: 1;\n  background: rgba(0, 0, 0, 0.8);\n  /*transform: translate(-46%, -46%);*/\n  /*box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);*/\n}\n.card--flex[data-v-5d1eb04c] {\n  display: flex;\n  background: transparent;\n  border: 0;\n}\n.card--flex > *[data-v-5d1eb04c] {\n  margin: auto;\n  color: black;\n}\n.card .text[data-v-5d1eb04c] {\n  background-color: white;\n  width: 100%;\n  height: 25%;\n  padding: 10px;\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.card .text .nowrap[data-v-5d1eb04c] {\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.card .text i[data-v-5d1eb04c] {\n  color: transparent;\n  text-shadow: 1px 1px 1px green, -1px -1px 1px green, -1px 1px 1px green, 1px -1px 1px green;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
+exports.push([module.i, "*[data-v-5d1eb04c] {\n  --green: #36c132;\n}\n.image-selector[data-v-5d1eb04c] {\n  position: absolute;\n  text-align: center;\n  top: 0;\n  width: 100%;\n}\n.container[data-v-5d1eb04c] {\n  background: white;\n  width: 100%;\n  /*height: 100vh;*/\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  bottom: 0;\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-evenly;\n  align-items: center;\n  margin: auto;\n}\n.btn-c[data-v-5d1eb04c] {\n  position: relative;\n  width: 75px;\n  height: 75px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn-c[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn-c i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn-c i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn-c--like[data-v-5d1eb04c] {\n  background-color: var(--green);\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn-c--like i[data-v-5d1eb04c] {\n  color: var(--green);\n  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;\n  font-size: 32px;\n}\n.btn-c--decline[data-v-5d1eb04c] {\n  color: white;\n  background-color: red;\n}\n.btn-c--skip[data-v-5d1eb04c] {\n  color: var(--green);\n}\n.btn-c--filter[data-v-5d1eb04c] {\n  box-shadow: unset;\n  background-color: transparent;\n}\n.btn-c--filter i[data-v-5d1eb04c] {\n  color: white;\n  text-shadow: 1px 1px 1px grey, -1px -1px 1px grey, -1px 1px 1px grey, 1px -1px 1px grey;\n  font-size: 32px;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.fixed--xtra-message[data-v-5d1eb04c] {\n  transition: 0.5s;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 77vw;\n  z-index: 4;\n  text-align: center;\n}\n.rounded[data-v-5d1eb04c] {\n  border-radius: 12px !important;\n}\n.card[data-v-5d1eb04c] {\n  /*width: 80vw;*/\n  width: 100%;\n  position: absolute;\n  height: 50vh;\n  left: 0;\n  box-shadow: 0 0 10px -5px grey !important;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n  border-top-left-radius: 12px;\n  border-top-right-radius: 12px;\n}\n.card--no-shadow[data-v-5d1eb04c] {\n  /*box-shadow: unset!important;*/\n}\n.card--one[data-v-5d1eb04c] {\n  z-index: 3;\n  /*box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);*/\n}\n.card--two[data-v-5d1eb04c] {\n  z-index: 2;\n  /*transform: translate(-48%, -48%);*/\n  /*box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);*/\n}\n.card--three[data-v-5d1eb04c] {\n  z-index: 1;\n  background: rgba(0, 0, 0, 0.8);\n  /*transform: translate(-46%, -46%);*/\n  /*box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);*/\n}\n.card--flex[data-v-5d1eb04c] {\n  display: flex;\n  background: transparent;\n  border: 0;\n}\n.card--flex > *[data-v-5d1eb04c] {\n  margin: auto;\n  color: black;\n}\n.card .text[data-v-5d1eb04c] {\n  background-color: white;\n  width: 100%;\n  height: 23%;\n  padding: 10px;\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.card .text .nowrap[data-v-5d1eb04c] {\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.card .text i[data-v-5d1eb04c] {\n  color: transparent;\n  text-shadow: 1px 1px 1px var(--green), -1px -1px 1px var(--green), -1px 1px 1px var(--green), 1px -1px 1px var(--green);\n}\n.card .text h5[data-v-5d1eb04c] {\n  font-size: 1.1em;\n}\n.card .text p[data-v-5d1eb04c] {\n  font-size: 0.85em;\n}\n.card .text .favorites[data-v-5d1eb04c] {\n  position: absolute;\n  right: 10px;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
 
 // exports
 
@@ -39478,10 +39479,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "section",
-    {
-      staticClass: "container",
-      staticStyle: { position: "relative", padding: "0", height: "85vh" }
-    },
+    { staticStyle: { position: "relative", padding: "0", height: "85vh" } },
     [
       _c(
         "div",
@@ -39673,7 +39671,12 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticStyle: { margin: "10px auto", "background-color": "green" } },
+        {
+          staticStyle: {
+            margin: "10px auto",
+            "background-color": "var(--green)"
+          }
+        },
         [
           _c(
             "form",
@@ -39690,7 +39693,7 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "col-sm-5",
+                  staticClass: "col-sm-4",
                   staticStyle: { margin: "15px auto 0" }
                 },
                 [
@@ -39726,294 +39729,241 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("div", {
-        staticClass: "alert-success text-center",
-        staticStyle: { opacity: "0", transition: "1s", "font-size": "16pt" },
-        attrs: { id: "xtra-message" }
-      }),
-      _vm._v(" "),
-      _c("div", {
-        staticClass: "alert-info text-center",
-        staticStyle: { opacity: "0", transition: "1s", "font-size": "16pt" },
-        attrs: { id: "xtra-message-info" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticStyle: { padding: "0 30px" } }, [
-        _c(
-          "div",
-          {
-            staticClass: "col-12 col-sm-4",
-            staticStyle: {
-              height: "60vh",
-              position: "relative",
-              margin: "auto",
-              "margin-bottom": "-5vh"
-            }
-          },
-          [
-            !_vm.isLoading && _vm.current && _vm.isVisible
-              ? _c(
-                  "Vue2InteractDraggable",
-                  {
-                    staticClass: "rounded card card--no-shadow card--one",
-                    attrs: {
-                      "interact-out-of-sight-x-coordinate": 500,
-                      "interact-max-rotation": 15,
-                      "interact-x-threshold": 50,
-                      "interact-y-threshold": 50,
-                      "interact-event-bus-events": _vm.interactEventBus,
-                      "interact-block-drag-down": "",
-                      "interact-block-drag-up": ""
-                    },
-                    on: {
-                      draggedRight: function($event) {
-                        return _vm.emitAndNext("match")
+      _c("div", { staticClass: "container" }, [
+        _c("div", {
+          staticClass: "alert-success text-center",
+          staticStyle: { opacity: "0", transition: "1s", "font-size": "16pt" },
+          attrs: { id: "xtra-message" }
+        }),
+        _vm._v(" "),
+        _c("div", {
+          staticClass: "alert-info text-center",
+          staticStyle: { opacity: "0", transition: "1s", "font-size": "16pt" },
+          attrs: { id: "xtra-message-info" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticStyle: { padding: "0 30px" } }, [
+          _c(
+            "div",
+            {
+              staticClass: "col-12 col-sm-4",
+              staticStyle: {
+                height: "60vh",
+                position: "relative",
+                margin: "auto",
+                "margin-bottom": "-5vh"
+              }
+            },
+            [
+              !_vm.isLoading && _vm.current && _vm.isVisible
+                ? _c(
+                    "Vue2InteractDraggable",
+                    {
+                      staticClass: "rounded card card--no-shadow card--one",
+                      attrs: {
+                        "interact-out-of-sight-x-coordinate": 500,
+                        "interact-max-rotation": 15,
+                        "interact-x-threshold": 50,
+                        "interact-y-threshold": 50,
+                        "interact-event-bus-events": _vm.interactEventBus,
+                        "interact-block-drag-down": "",
+                        "interact-block-drag-up": ""
                       },
-                      draggedLeft: function($event) {
-                        return _vm.emitAndNext("reject")
-                      }
-                    }
-                  },
-                  [
-                    _c("div", { staticStyle: { height: "75%" } }, [
-                      _c(
-                        "a",
-                        {
-                          on: {
-                            touchstart: function($event) {
-                              return _vm.clickDown($event)
-                            },
-                            touchend: function($event) {
-                              return _vm.clickUp($event)
-                            },
-                            mousedown: function($event) {
-                              return _vm.clickDown($event)
-                            },
-                            mouseup: function($event) {
-                              return _vm.clickUp($event)
-                            }
-                          }
+                      on: {
+                        draggedRight: function($event) {
+                          return _vm.emitAndNext("match")
                         },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "system/public/images/" + _vm.currentImage
-                            }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm.current.images.length > 0
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "img-btn img-btn--prev",
-                              attrs: { a: "", href: "#!" },
-                              on: {
-                                touchstart: _vm.prevImage,
-                                click: _vm.prevImage
-                              }
-                            },
-                            [_vm._v("❮")]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.current.images.length > 0
-                        ? _c(
-                            "a",
-                            {
-                              staticClass: "img-btn img-btn--next",
-                              attrs: { a: "", href: "#!" },
-                              on: {
-                                touchstart: _vm.nextImage,
-                                click: _vm.nextImage
-                              }
-                            },
-                            [_vm._v("❯")]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.current.images.length > 0
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "image-selector",
-                              attrs: { id: "image-selector" }
-                            },
-                            [
-                              _c("input", {
-                                attrs: {
-                                  type: "radio",
-                                  name: "image_controller",
-                                  checked: ""
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.selectImage(0)
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _vm._l(_vm.current.images, function(x, y) {
-                                return _c("input", {
-                                  attrs: {
-                                    type: "radio",
-                                    name: "image_controller"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.selectImage(y + 1)
-                                    }
-                                  }
-                                })
-                              })
-                            ],
-                            2
-                          )
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "text" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "row",
-                          staticStyle: { "align-items": "center" }
-                        },
-                        [
-                          _c("div", { staticClass: "col-8" }, [
-                            _c("h5", { staticClass: "nowrap" }, [
-                              _vm._v(_vm._s(_vm.current.name))
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "text-danger nowrap" }, [
-                              _vm._v(_vm._s(_vm.current.description))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-4 text-right" }, [
-                            _c("span", { staticClass: "text-muted" }, [
-                              _vm._v(
-                                _vm._s(_vm.current.favorites_count) +
-                                  "\n                    "
-                              ),
-                              _c(
-                                "i",
-                                {
-                                  staticClass: "material-icons",
-                                  staticStyle: {
-                                    color: "white",
-                                    float: "right",
-                                    "margin-left": "-15px"
-                                  }
-                                },
-                                [_vm._v("favorite")]
-                              )
-                            ])
-                          ])
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.isLoading && _vm.next
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "rounded card card--no-shadow card--two",
-                    staticStyle: { "z-index": "2" }
-                  },
-                  [
-                    _c("div", { staticStyle: { height: "75%" } }, [
-                      _c("img", {
-                        attrs: {
-                          src: "system/public/images/" + _vm.next.cover_image
+                        draggedLeft: function($event) {
+                          return _vm.emitAndNext("reject")
                         }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "text" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "row",
-                          staticStyle: { "align-items": "center" }
-                        },
-                        [
-                          _c("div", { staticClass: "col-8" }, [
-                            _c("h5", { staticClass: "nowrap" }, [
-                              _vm._v(_vm._s(_vm.next.name))
-                            ]),
+                      }
+                    },
+                    [
+                      _c("div", { staticStyle: { height: "77%" } }, [
+                        _c(
+                          "a",
+                          {
+                            on: {
+                              touchstart: function($event) {
+                                return _vm.clickDown($event)
+                              },
+                              touchend: function($event) {
+                                return _vm.clickUp($event)
+                              },
+                              mousedown: function($event) {
+                                return _vm.clickDown($event)
+                              },
+                              mouseup: function($event) {
+                                return _vm.clickUp($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "system/public/images/" + _vm.currentImage
+                              }
+                            })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "row",
+                            staticStyle: { "align-items": "center" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "col-10",
+                                staticStyle: { padding: "0" }
+                              },
+                              [
+                                _c("h5", { staticClass: "nowrap" }, [
+                                  _vm._v(_vm._s(_vm.current.name))
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "text-danger nowrap" }, [
+                                  _vm._v(_vm._s(_vm.current.description))
+                                ])
+                              ]
+                            ),
                             _vm._v(" "),
-                            _c("p", { staticClass: "text-danger nowrap" }, [
-                              _vm._v(_vm._s(_vm.next.description))
+                            _c("div", { staticClass: "text-right favorites" }, [
+                              _c("span", { staticClass: "text-muted" }, [
+                                _vm._v(
+                                  _vm._s(_vm.current.favorites_count) +
+                                    "\n\t\t\t\t\t\t"
+                                ),
+                                _c(
+                                  "i",
+                                  {
+                                    staticClass: "material-icons",
+                                    staticStyle: {
+                                      color: "white",
+                                      float: "right",
+                                      "margin-left": "-15px"
+                                    }
+                                  },
+                                  [_vm._v("favorite")]
+                                )
+                              ])
                             ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-4 text-right" }, [
-                            _c("span", { staticClass: "text-muted" }, [
-                              _vm._v(
-                                _vm._s(_vm.next.favorites_count) +
-                                  "\n\t\t\t\t\t\t"
-                              ),
-                              _c(
-                                "i",
-                                {
-                                  staticClass: "material-icons",
-                                  staticStyle: {
-                                    color: "white",
-                                    float: "right",
-                                    "margin-left": "-15px"
-                                  }
-                                },
-                                [_vm._v("favorite")]
-                              )
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isLoading && _vm.next
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "rounded card card--no-shadow card--two",
+                      staticStyle: { "z-index": "2" }
+                    },
+                    [
+                      _c("div", { staticStyle: { height: "77%" } }, [
+                        _c("img", {
+                          attrs: {
+                            src: "system/public/images/" + _vm.next.cover_image
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "row",
+                            staticStyle: { "align-items": "center" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "col-8",
+                                staticStyle: { padding: "0" }
+                              },
+                              [
+                                _c("h5", { staticClass: "nowrap" }, [
+                                  _vm._v(_vm._s(_vm.next.name))
+                                ]),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "text-danger nowrap" }, [
+                                  _vm._v(_vm._s(_vm.next.description))
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-4 text-right" }, [
+                              _c("span", { staticClass: "text-muted" }, [
+                                _vm._v(
+                                  _vm._s(_vm.next.favorites_count) +
+                                    "\n\t\t\t\t\t\t\t"
+                                ),
+                                _c(
+                                  "i",
+                                  {
+                                    staticClass: "material-icons",
+                                    staticStyle: {
+                                      color: "white",
+                                      float: "right",
+                                      "margin-left": "-15px"
+                                    }
+                                  },
+                                  [_vm._v("favorite")]
+                                )
+                              ])
                             ])
-                          ])
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.isLoading && _vm.current
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "rounded card card--no-shadow card--three",
-                    staticStyle: { "z-index": "1" }
-                  },
-                  [_c("div", { staticStyle: { height: "100%" } })]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.isLoading && !_vm.current && !_vm.next
-              ? _c(
-                  "div",
-                  {
-                    staticClass: " card card--no-shadow card--flex ",
-                    staticStyle: { "z-index": "1" }
-                  },
-                  [_c("div", [_vm._v("No hay mas productos")])]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.isLoading
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "card card--no-shadow card--flex ",
-                    staticStyle: { "z-index": "1" }
-                  },
-                  [_c("div", [_vm._v("...Cargando")])]
-                )
-              : _vm._e()
-          ],
-          1
-        )
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isLoading && _vm.current
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "rounded card card--no-shadow card--three",
+                      staticStyle: { "z-index": "1" }
+                    },
+                    [_c("div", { staticStyle: { height: "100%" } })]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isLoading && !_vm.current && !_vm.next
+                ? _c(
+                    "div",
+                    {
+                      staticClass: " card card--no-shadow card--flex ",
+                      staticStyle: { "z-index": "1" }
+                    },
+                    [_c("div", [_vm._v("No hay mas productos")])]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isLoading
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "card card--no-shadow card--flex ",
+                      staticStyle: { "z-index": "1" }
+                    },
+                    [_c("div", [_vm._v("...Cargando")])]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "footer col-12 col-sm-4" }, [
