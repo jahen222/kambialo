@@ -36,10 +36,10 @@
         </div>
       </div>
     </div>
-	<div style="margin: 10px auto; background-color: var(--green);" class="">
-	  <form v-on:submit.prevent="search" style="align-items: flex-end; padding: 5px;">
-		<div class="col-sm-4" style="margin:15px auto 0;">
-		  <div class="form-group col-12">
+	<div style="margin: 0px auto 10px; background-color:#024600;" class="">
+	  <form v-on:submit.prevent="search" style="align-items: flex-end; padding: 1px;">
+		<div class="col-sm-4" style="margin:10px auto;">
+		  <div class="form-group col-12" style="margin:0">
 			<input placeholder="Buscador" class="form-control" v-model="form.search" type="text"/>
 		  </div>
 		  <div class="form-group col-sm-2 d-none">

@@ -39673,15 +39673,15 @@ var render = function() {
         "div",
         {
           staticStyle: {
-            margin: "10px auto",
-            "background-color": "var(--green)"
+            margin: "0px auto 10px",
+            "background-color": "#024600"
           }
         },
         [
           _c(
             "form",
             {
-              staticStyle: { "align-items": "flex-end", padding: "5px" },
+              staticStyle: { "align-items": "flex-end", padding: "1px" },
               on: {
                 submit: function($event) {
                   $event.preventDefault()
@@ -39694,32 +39694,39 @@ var render = function() {
                 "div",
                 {
                   staticClass: "col-sm-4",
-                  staticStyle: { margin: "15px auto 0" }
+                  staticStyle: { margin: "10px auto" }
                 },
                 [
-                  _c("div", { staticClass: "form-group col-12" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.search,
-                          expression: "form.search"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { placeholder: "Buscador", type: "text" },
-                      domProps: { value: _vm.form.search },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group col-12",
+                      staticStyle: { margin: "0" }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.search,
+                            expression: "form.search"
                           }
-                          _vm.$set(_vm.form, "search", $event.target.value)
+                        ],
+                        staticClass: "form-control",
+                        attrs: { placeholder: "Buscador", type: "text" },
+                        domProps: { value: _vm.form.search },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "search", $event.target.value)
+                          }
                         }
-                      }
-                    })
-                  ]),
+                      })
+                    ]
+                  ),
                   _vm._v(" "),
                   _vm._m(1)
                 ]
