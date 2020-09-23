@@ -1,5 +1,5 @@
 <template>
-  <section class="container" style="position: relative; padding: 25px; height: 85vh;">
+  <section class="container" style="position: relative; padding: 0; height: 85vh;">
     
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -38,16 +38,16 @@
     </div>
 
 
-    <div style="margin: 0 auto; margin-top: 10px;" class="col-12 col-sm-5">
-      <form class="row" v-on:submit.prevent="search" style="align-items: flex-end">
-  
+    <div style="margin: 10px auto; background-color: green;" class="">
+      <form v-on:submit.prevent="search" style="align-items: flex-end; padding: 5px;">
+		<div class="col-sm-5" style="margin:15px auto 0;">
           <div class="form-group col-12">
             <input placeholder="Buscador" class="form-control" v-model="form.search" type="text"/>
           </div>
           <div class="form-group col-sm-2 d-none">
             <button type="submit" style="border:0; background-color:transparent;"><i class="material-icons">search</i></button>
           </div>
-        
+        </div>
       </form>
     </div>
     <div class="alert-success text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message">
@@ -56,9 +56,9 @@
     <div class="alert-info text-center" style="opacity: 0; transition: 1s; font-size: 16pt;" id="xtra-message-info">
       
     </div>
-    <div class="row">
+    <div style="padding: 0 30px;">
     
-      <div style="height:60vh; position:relative; margin: auto; margin-bottom: -5vh;" class="col-12 col-sm-5">
+      <div style="height:60vh; position:relative; margin: auto; margin-bottom: -5vh;" class="col-12 col-sm-4">
         <div
           v-if="!isLoading && current"
           style="z-index: 3"
@@ -75,12 +75,12 @@
             @draggedRight="emitAndNext('match')"
             @draggedLeft="emitAndNext('reject')"
             class="rounded card card--no-shadow card--one">
-            <div style="height: 70%">
-              <a @mousedown="clickDown($event)" @mouseup=clickUp($event)>
+            <div style="height: 75%">
+              <a @touchstart="clickDown($event)" @touchend="clickUp($event)" @mousedown="clickDown($event)" @mouseup=clickUp($event)>
                 <img :src="'system/public/images/'+currentImage"/>
               </a>
-              <a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @click="prevImage" href="#!">&#10094;</a>
-              <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @click="nextImage" href="#!">&#10095;</a>
+              <a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @touchstart="prevImage" @click="prevImage" href="#!">&#10094;</a>
+              <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @touchstart="nextImage" @click="nextImage" href="#!">&#10095;</a>
               <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
                 <input type="radio" name="image_controller" @click="selectImage(0)" checked/>
                 <input type="radio" name="image_controller" @click="selectImage(y + 1)" v-for="x,y in current.images"/>
@@ -88,11 +88,11 @@
             </div>
             <div class="text">
               <div class="row" style="align-items: center;">
-                <div class="col-9">
-                  <h2 class="nowrap">{{current.name}}</h2>
+                <div class="col-8">
+                  <h5 class="nowrap">{{current.name}}</h5>
                   <p class="text-danger nowrap">{{current.description}}</p>
                 </div>
-                <div class="col-3 text-right" style="padding-right:40px;">
+                <div class="col-4 text-right">
                   <span class="text-muted">{{current.favorites_count}}
                     <i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
                   </span>
@@ -111,11 +111,11 @@
 			  </div>
 			  <div class="text">
 				  <div class="row" style="align-items: center;">
-					<div class="col-9">
-					  <h2 class="nowrap">{{next.name}}</h2>
+					<div class="col-8">
+					  <h5 class="nowrap">{{next.name}}</h5>
 					  <p class="text-danger nowrap">{{next.description}}</p>
 					</div>
-					<div class="col-3 text-right" style="padding-right:40px;">
+					<div class="col-4 text-right">
 					  <span class="text-muted">{{next.favorites_count}}
 						<i class="material-icons" style="color:white;float:right;margin-left:-15px;">favorite</i>
 					  </span>
@@ -146,7 +146,7 @@
        
       </div>
     </div>
-    <div class="footer col-12 col-sm-6">
+    <div class="footer col-12 col-sm-4">
       <div v-if="!isLoading && current" class="btn-c btn-c--decline" @click="reject" title="Rechazar">
           <i class="material-icons">close</i>
       </div>
@@ -297,13 +297,17 @@ export default {
       }
     },
     clickDown(event){
-      //setting the initial click position
-      _clickDownPosX = event.clientX;
-      _clickDownPosY = event.clientY;
+      //setting the initial click/touch position
+      _clickDownPosX = event.type == 'touchstart' ? event.changedTouches[0].clientX : event.clientX;
+      _clickDownPosY = event.type == 'touchstart' ? event.changedTouches[0].clientY : event.clientY;
     },
     clickUp(event){
-      //checking the final position of click to avoid click event on drag
-      if(event.clientX == _clickDownPosX && event.clientY == _clickDownPosY)
+      //checking the final position of click/touch to avoid click event on drag
+	  const lastClientX = event.type == 'touchend' ? event.changedTouches[0].clientX : event.clientX;
+	  const lastClientY = event.type == 'touchend' ? event.changedTouches[0].clientY : event.clientY;
+	 
+	  //button 0 means left click
+      if(lastClientX == _clickDownPosX && lastClientY == _clickDownPosY && (event.type == 'touchend' || event.button == 0 ))
         window.location = this.url + '/' + this.current.id;
     },
     modal() {
@@ -351,6 +355,15 @@ export default {
   .select2-container{
     width: 100%!important;
   }
+  nav{
+	z-index: 1;
+  }
+  main.py-4{
+	padding-top: 0!important;
+  }
+  main, body{
+	background-color: white!important;
+  }
 </style>
 <style lang="scss" scoped>
 
@@ -363,7 +376,7 @@ export default {
 }
 
 .container {
-  background: #eceff1;
+  background: white;
   width: 100%;
   /*height: 100vh;*/
 }
@@ -464,7 +477,7 @@ export default {
     background-color: transparent;
     i {
       color: white;
-      text-shadow: 1px 1px 1px black,-1px -1px 1px black,-1px 1px 1px black,1px -1px 1px black;
+      text-shadow: 1px 1px 1px grey,-1px -1px 1px grey,-1px 1px 1px grey,1px -1px 1px grey;
       font-size: 32px;
     }
   }
@@ -503,6 +516,7 @@ export default {
   position:absolute;
   height: 50vh;
   left: 0;
+  box-shadow: 0 0 10px -5px grey!important;
   img {
     object-fit: cover;
     display: block;
@@ -541,7 +555,7 @@ export default {
   .text {
     background-color: white;
     width: 100%;
-    height: 30%;
+    height: 25%;
     padding: 10px;
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;

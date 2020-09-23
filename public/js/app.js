@@ -2338,13 +2338,16 @@ var _clickDownPosY = '';
       }))();
     },
     clickDown: function clickDown(event) {
-      //setting the initial click position
-      _clickDownPosX = event.clientX;
-      _clickDownPosY = event.clientY;
+      //setting the initial click/touch position
+      _clickDownPosX = event.type == 'touchstart' ? event.changedTouches[0].clientX : event.clientX;
+      _clickDownPosY = event.type == 'touchstart' ? event.changedTouches[0].clientY : event.clientY;
     },
     clickUp: function clickUp(event) {
-      //checking the final position of click to avoid click event on drag
-      if (event.clientX == _clickDownPosX && event.clientY == _clickDownPosY) window.location = this.url + '/' + this.current.id;
+      //checking the final position of click/touch to avoid click event on drag
+      var lastClientX = event.type == 'touchend' ? event.changedTouches[0].clientX : event.clientX;
+      var lastClientY = event.type == 'touchend' ? event.changedTouches[0].clientY : event.clientY; //button 0 means left click
+
+      if (lastClientX == _clickDownPosX && lastClientY == _clickDownPosY && (event.type == 'touchend' || event.button == 0)) window.location = this.url + '/' + this.current.id;
     },
     modal: function modal() {
       $('#myModal').modal('show');
@@ -6823,7 +6826,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".image-selector[data-v-5d1eb04c] {\n  position: absolute;\n  text-align: center;\n  top: 0;\n  width: 100%;\n}\n.container[data-v-5d1eb04c] {\n  background: #eceff1;\n  width: 100%;\n  /*height: 100vh;*/\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  bottom: 0;\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-evenly;\n  align-items: center;\n  margin: auto;\n}\n.btn-c[data-v-5d1eb04c] {\n  position: relative;\n  width: 75px;\n  height: 75px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn-c[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn-c i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn-c i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn-c--like[data-v-5d1eb04c] {\n  background-color: green;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn-c--like i[data-v-5d1eb04c] {\n  color: green;\n  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;\n  font-size: 32px;\n}\n.btn-c--decline[data-v-5d1eb04c] {\n  color: white;\n  background-color: red;\n}\n.btn-c--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.btn-c--filter[data-v-5d1eb04c] {\n  box-shadow: unset;\n  background-color: transparent;\n}\n.btn-c--filter i[data-v-5d1eb04c] {\n  color: white;\n  text-shadow: 1px 1px 1px black, -1px -1px 1px black, -1px 1px 1px black, 1px -1px 1px black;\n  font-size: 32px;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.fixed--xtra-message[data-v-5d1eb04c] {\n  transition: 0.5s;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 77vw;\n  z-index: 4;\n  text-align: center;\n}\n.rounded[data-v-5d1eb04c] {\n  border-radius: 12px !important;\n}\n.card[data-v-5d1eb04c] {\n  /*width: 80vw;*/\n  width: 100%;\n  position: absolute;\n  height: 50vh;\n  left: 0;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n  border-top-left-radius: 12px;\n  border-top-right-radius: 12px;\n}\n.card--no-shadow[data-v-5d1eb04c] {\n  /*box-shadow: unset!important;*/\n}\n.card--one[data-v-5d1eb04c] {\n  z-index: 3;\n  /*box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);*/\n}\n.card--two[data-v-5d1eb04c] {\n  z-index: 2;\n  /*transform: translate(-48%, -48%);*/\n  /*box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);*/\n}\n.card--three[data-v-5d1eb04c] {\n  z-index: 1;\n  background: rgba(0, 0, 0, 0.8);\n  /*transform: translate(-46%, -46%);*/\n  /*box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);*/\n}\n.card--flex[data-v-5d1eb04c] {\n  display: flex;\n  background: transparent;\n  border: 0;\n}\n.card--flex > *[data-v-5d1eb04c] {\n  margin: auto;\n  color: black;\n}\n.card .text[data-v-5d1eb04c] {\n  background-color: white;\n  width: 100%;\n  height: 30%;\n  padding: 10px;\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.card .text .nowrap[data-v-5d1eb04c] {\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.card .text i[data-v-5d1eb04c] {\n  color: transparent;\n  text-shadow: 1px 1px 1px green, -1px -1px 1px green, -1px 1px 1px green, 1px -1px 1px green;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
+exports.push([module.i, ".image-selector[data-v-5d1eb04c] {\n  position: absolute;\n  text-align: center;\n  top: 0;\n  width: 100%;\n}\n.container[data-v-5d1eb04c] {\n  background: white;\n  width: 100%;\n  /*height: 100vh;*/\n}\n.img-btn[data-v-5d1eb04c] {\n  position: absolute;\n  top: 40%;\n  font-size: 50px;\n}\n.img-btn--prev[data-v-5d1eb04c] {\n  left: 0;\n}\n.img-btn--next[data-v-5d1eb04c] {\n  right: 0;\n}\n.header[data-v-5d1eb04c] {\n  width: 100%;\n  height: 60vh;\n  z-index: 0;\n  top: 0;\n  left: 0;\n  color: white;\n  text-align: center;\n  font-style: italic;\n  font-family: \"Engagement\", cursive;\n  background: #f953c6;\n  background: linear-gradient(to top, #b91d73, #f953c6);\n  -webkit-clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n          clip-path: polygon(0 1%, 100% 0%, 100% 76%, 0 89%);\n  display: flex;\n  justify-content: space-between;\n}\n.header span[data-v-5d1eb04c] {\n  display: block;\n  font-size: 4rem;\n  padding-top: 2rem;\n  text-shadow: 1px 1px 1px red;\n}\n.header i[data-v-5d1eb04c] {\n  padding: 24px;\n}\n.footer[data-v-5d1eb04c] {\n  bottom: 0;\n  display: flex;\n  padding-bottom: 30px;\n  justify-content: space-evenly;\n  align-items: center;\n  margin: auto;\n}\n.btn-c[data-v-5d1eb04c] {\n  position: relative;\n  width: 75px;\n  height: 75px;\n  padding: 0.2rem;\n  border-radius: 50%;\n  background-color: white;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.02), 0 10px 14px 1px rgba(0, 0, 0, 0.02), 0 4px 18px 3px rgba(0, 0, 0, 0.02);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.btn-c[data-v-5d1eb04c]:active {\n  transform: translateY(4px);\n}\n.btn-c i[data-v-5d1eb04c] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n.btn-c i[data-v-5d1eb04c]::before {\n  content: \"\";\n}\n.btn-c--like[data-v-5d1eb04c] {\n  background-color: green;\n  padding: 0.5rem;\n  color: white;\n  box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);\n}\n.btn-c--like i[data-v-5d1eb04c] {\n  color: green;\n  text-shadow: 1px 1px 1px white, -1px -1px 1px white, -1px 1px 1px white, 1px -1px 1px white;\n  font-size: 32px;\n}\n.btn-c--decline[data-v-5d1eb04c] {\n  color: white;\n  background-color: red;\n}\n.btn-c--skip[data-v-5d1eb04c] {\n  color: green;\n}\n.btn-c--filter[data-v-5d1eb04c] {\n  box-shadow: unset;\n  background-color: transparent;\n}\n.btn-c--filter i[data-v-5d1eb04c] {\n  color: white;\n  text-shadow: 1px 1px 1px grey, -1px -1px 1px grey, -1px 1px 1px grey, 1px -1px 1px grey;\n  font-size: 32px;\n}\n.flex[data-v-5d1eb04c] {\n  display: flex;\n}\n.flex--center[data-v-5d1eb04c] {\n  align-items: center;\n  justify-content: center;\n}\n.fixed[data-v-5d1eb04c] {\n  position: fixed;\n}\n.fixed--center[data-v-5d1eb04c] {\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.fixed--xtra-message[data-v-5d1eb04c] {\n  transition: 0.5s;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 77vw;\n  z-index: 4;\n  text-align: center;\n}\n.rounded[data-v-5d1eb04c] {\n  border-radius: 12px !important;\n}\n.card[data-v-5d1eb04c] {\n  /*width: 80vw;*/\n  width: 100%;\n  position: absolute;\n  height: 50vh;\n  left: 0;\n  box-shadow: 0 0 10px -5px grey !important;\n}\n.card img[data-v-5d1eb04c] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  display: block;\n  width: 100%;\n  height: 100%;\n  border-top-left-radius: 12px;\n  border-top-right-radius: 12px;\n}\n.card--no-shadow[data-v-5d1eb04c] {\n  /*box-shadow: unset!important;*/\n}\n.card--one[data-v-5d1eb04c] {\n  z-index: 3;\n  /*box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);*/\n}\n.card--two[data-v-5d1eb04c] {\n  z-index: 2;\n  /*transform: translate(-48%, -48%);*/\n  /*box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);*/\n}\n.card--three[data-v-5d1eb04c] {\n  z-index: 1;\n  background: rgba(0, 0, 0, 0.8);\n  /*transform: translate(-46%, -46%);*/\n  /*box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);*/\n}\n.card--flex[data-v-5d1eb04c] {\n  display: flex;\n  background: transparent;\n  border: 0;\n}\n.card--flex > *[data-v-5d1eb04c] {\n  margin: auto;\n  color: black;\n}\n.card .text[data-v-5d1eb04c] {\n  background-color: white;\n  width: 100%;\n  height: 25%;\n  padding: 10px;\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n  text-indent: 20px;\n}\n.card .text span[data-v-5d1eb04c] {\n  font-weight: normal;\n}\n.card .text .nowrap[data-v-5d1eb04c] {\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.card .text i[data-v-5d1eb04c] {\n  color: transparent;\n  text-shadow: 1px 1px 1px green, -1px -1px 1px green, -1px 1px 1px green, 1px -1px 1px green;\n}\n.transition[data-v-5d1eb04c] {\n  -webkit-animation: appear-data-v-5d1eb04c 200ms ease-in;\n          animation: appear-data-v-5d1eb04c 200ms ease-in;\n}\n@-webkit-keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}\n@keyframes appear-data-v-5d1eb04c {\nfrom {\n    transform: translate(-48%, -48%);\n}\nto {\n    transform: translate(-50%, -50%);\n}\n}", ""]);
 
 // exports
 
@@ -6842,7 +6845,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.select2-container{\n  width: 100%!important;\n}\n", ""]);
+exports.push([module.i, "\n.select2-container{\n    width: 100%!important;\n}\nnav{\n\tz-index: 1;\n}\nmain.py-4{\n\tpadding-top: 0!important;\n}\nmain, body{\n\tbackground-color: white!important;\n}\n", ""]);
 
 // exports
 
@@ -39477,7 +39480,7 @@ var render = function() {
     "section",
     {
       staticClass: "container",
-      staticStyle: { position: "relative", padding: "25px", height: "85vh" }
+      staticStyle: { position: "relative", padding: "0", height: "85vh" }
     },
     [
       _c(
@@ -39670,16 +39673,12 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        {
-          staticClass: "col-12 col-sm-5",
-          staticStyle: { margin: "0 auto", "margin-top": "10px" }
-        },
+        { staticStyle: { margin: "10px auto", "background-color": "green" } },
         [
           _c(
             "form",
             {
-              staticClass: "row",
-              staticStyle: { "align-items": "flex-end" },
+              staticStyle: { "align-items": "flex-end", padding: "5px" },
               on: {
                 submit: function($event) {
                   $event.preventDefault()
@@ -39688,31 +39687,40 @@ var render = function() {
               }
             },
             [
-              _c("div", { staticClass: "form-group col-12" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.search,
-                      expression: "form.search"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { placeholder: "Buscador", type: "text" },
-                  domProps: { value: _vm.form.search },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+              _c(
+                "div",
+                {
+                  staticClass: "col-sm-5",
+                  staticStyle: { margin: "15px auto 0" }
+                },
+                [
+                  _c("div", { staticClass: "form-group col-12" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.search,
+                          expression: "form.search"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { placeholder: "Buscador", type: "text" },
+                      domProps: { value: _vm.form.search },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "search", $event.target.value)
+                        }
                       }
-                      _vm.$set(_vm.form, "search", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _vm._m(1)
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ]
+              )
             ]
           )
         ]
@@ -39730,11 +39738,11 @@ var render = function() {
         attrs: { id: "xtra-message-info" }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
+      _c("div", { staticStyle: { padding: "0 30px" } }, [
         _c(
           "div",
           {
-            staticClass: "col-12 col-sm-5",
+            staticClass: "col-12 col-sm-4",
             staticStyle: {
               height: "60vh",
               position: "relative",
@@ -39767,11 +39775,17 @@ var render = function() {
                     }
                   },
                   [
-                    _c("div", { staticStyle: { height: "70%" } }, [
+                    _c("div", { staticStyle: { height: "75%" } }, [
                       _c(
                         "a",
                         {
                           on: {
+                            touchstart: function($event) {
+                              return _vm.clickDown($event)
+                            },
+                            touchend: function($event) {
+                              return _vm.clickUp($event)
+                            },
                             mousedown: function($event) {
                               return _vm.clickDown($event)
                             },
@@ -39795,7 +39809,10 @@ var render = function() {
                             {
                               staticClass: "img-btn img-btn--prev",
                               attrs: { a: "", href: "#!" },
-                              on: { click: _vm.prevImage }
+                              on: {
+                                touchstart: _vm.prevImage,
+                                click: _vm.prevImage
+                              }
                             },
                             [_vm._v("❮")]
                           )
@@ -39807,7 +39824,10 @@ var render = function() {
                             {
                               staticClass: "img-btn img-btn--next",
                               attrs: { a: "", href: "#!" },
-                              on: { click: _vm.nextImage }
+                              on: {
+                                touchstart: _vm.nextImage,
+                                click: _vm.nextImage
+                              }
                             },
                             [_vm._v("❯")]
                           )
@@ -39861,8 +39881,8 @@ var render = function() {
                           staticStyle: { "align-items": "center" }
                         },
                         [
-                          _c("div", { staticClass: "col-9" }, [
-                            _c("h2", { staticClass: "nowrap" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c("h5", { staticClass: "nowrap" }, [
                               _vm._v(_vm._s(_vm.current.name))
                             ]),
                             _vm._v(" "),
@@ -39871,33 +39891,26 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "col-3 text-right",
-                              staticStyle: { "padding-right": "40px" }
-                            },
-                            [
-                              _c("span", { staticClass: "text-muted" }, [
-                                _vm._v(
-                                  _vm._s(_vm.current.favorites_count) +
-                                    "\n                    "
-                                ),
-                                _c(
-                                  "i",
-                                  {
-                                    staticClass: "material-icons",
-                                    staticStyle: {
-                                      color: "white",
-                                      float: "right",
-                                      "margin-left": "-15px"
-                                    }
-                                  },
-                                  [_vm._v("favorite")]
-                                )
-                              ])
-                            ]
-                          )
+                          _c("div", { staticClass: "col-4 text-right" }, [
+                            _c("span", { staticClass: "text-muted" }, [
+                              _vm._v(
+                                _vm._s(_vm.current.favorites_count) +
+                                  "\n                    "
+                              ),
+                              _c(
+                                "i",
+                                {
+                                  staticClass: "material-icons",
+                                  staticStyle: {
+                                    color: "white",
+                                    float: "right",
+                                    "margin-left": "-15px"
+                                  }
+                                },
+                                [_vm._v("favorite")]
+                              )
+                            ])
+                          ])
                         ]
                       )
                     ])
@@ -39929,8 +39942,8 @@ var render = function() {
                           staticStyle: { "align-items": "center" }
                         },
                         [
-                          _c("div", { staticClass: "col-9" }, [
-                            _c("h2", { staticClass: "nowrap" }, [
+                          _c("div", { staticClass: "col-8" }, [
+                            _c("h5", { staticClass: "nowrap" }, [
                               _vm._v(_vm._s(_vm.next.name))
                             ]),
                             _vm._v(" "),
@@ -39939,33 +39952,26 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "col-3 text-right",
-                              staticStyle: { "padding-right": "40px" }
-                            },
-                            [
-                              _c("span", { staticClass: "text-muted" }, [
-                                _vm._v(
-                                  _vm._s(_vm.next.favorites_count) +
-                                    "\n\t\t\t\t\t\t"
-                                ),
-                                _c(
-                                  "i",
-                                  {
-                                    staticClass: "material-icons",
-                                    staticStyle: {
-                                      color: "white",
-                                      float: "right",
-                                      "margin-left": "-15px"
-                                    }
-                                  },
-                                  [_vm._v("favorite")]
-                                )
-                              ])
-                            ]
-                          )
+                          _c("div", { staticClass: "col-4 text-right" }, [
+                            _c("span", { staticClass: "text-muted" }, [
+                              _vm._v(
+                                _vm._s(_vm.next.favorites_count) +
+                                  "\n\t\t\t\t\t\t"
+                              ),
+                              _c(
+                                "i",
+                                {
+                                  staticClass: "material-icons",
+                                  staticStyle: {
+                                    color: "white",
+                                    float: "right",
+                                    "margin-left": "-15px"
+                                  }
+                                },
+                                [_vm._v("favorite")]
+                              )
+                            ])
+                          ])
                         ]
                       )
                     ])
@@ -40010,7 +40016,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "footer col-12 col-sm-6" }, [
+      _c("div", { staticClass: "footer col-12 col-sm-4" }, [
         !_vm.isLoading && _vm.current
           ? _c(
               "div",
