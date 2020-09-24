@@ -161,45 +161,7 @@
             </li>
         @endguest
         @auth
-            <li>
-                <a href="{{ url('/') }}">
-                    {{ __('Home') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('products.index') }}">
-                    {{ __('Mis Productos') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('favorites.index') }}">
-                    {{ __('Mis Favoritos') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('matches.index') }}">
-                    {{ __('Mis Matches') }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('matches.index') }}">
-                    {{ __('Matches') }}
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    {{ __('Perfil ') }}{{ Auth::user()->name }}
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-            </li>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
+		 {{ view('layouts.menu_auth') }}
         @endauth
     </ul>
 </div>
