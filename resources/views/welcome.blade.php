@@ -255,14 +255,16 @@
     <div class="fullwidthbanner-container">
         <div id="b-home_01_slider" style="display:none;" data-version="5.4.1">
             <ul>
-                <li style="background-image: url({{ asset('homes/assets/images/imagen-slider-02-06-min.jpg') }} ); background-size: cover;">
-                    <div class="caption">
-                        <!--<h1> PARA QUE COMPRAR </h1>
-                        <h1> SI PUEDES KAMBIAR </h1>-->
-                        <h1> Aquí podrás subir los productos que <br> no necesitas pero que alguien más si </h1>
-                        <div class="registrate-button">
-                            <a href="{{ url('register') }}" class="btn btn-green"> REGÍSTRATE </a>
-                        </div>
+                <li style="display:flex;background-image: url({{ asset('homes/assets/images/imagen-slider-02-06-min.jpg') }} ); background-size: cover;">
+                    <div class="caption"style="display:flex;">
+						<div style="margin:auto;width:100%;">
+							<!--<h1> PARA QUE COMPRAR </h1>
+							<h1> SI PUEDES KAMBIAR </h1>-->
+							<h1> Aquí podrás subir los productos que <br> no necesitas pero que alguien más si </h1>
+							<div class="registrate-button">
+								<a href="{{ url('register') }}" class="btn btn-green"> REGÍSTRATE </a>
+							</div>
+						</div>
                     </div>
                 </li>
             </ul>
@@ -275,7 +277,7 @@
             </h4>
             <h1>
                 ¿CÓMO FUNCIONA?
-                <span class="b-title_separator"><span></span></span>
+                <!--<span class="b-title_separator"><span></span></span>-->
             </h1>
         </div>
         <div class="b-products b-product_grid b-product_grid_four mb-4">
@@ -401,7 +403,7 @@
             </h4>
             <h1>
                 PLANES
-                <span class="b-title_separator"><span></span></span>
+                <!--<span class="b-title_separator"><span></span></span>-->
             </h1>
         </div>
         <div class="b-products b-product_grid b-product_grid_four mb-4">
