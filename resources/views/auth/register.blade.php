@@ -73,7 +73,7 @@
 </section>
 <section class="container mt-2 pb-2 mb-4">
     <div class="col-md-12">
-        <form method="POST" action="{{ route('preregister') }}" class="form-register form-registro-step">
+        <form method="POST" action="{{ route('preregister') }}" class="form-register form-registro-step card">
             @csrf
             <fieldset>
                 <label class="color-green">Ingrese los datos</label>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="form-group">
                     <select class="custom-select js-basic-multiple" id="comuna" name="users[comuna_id]">
-                        <option>Seleccionar comuna</option>
+                        <option value>Seleccionar comuna</option>
                         @foreach(App\Comuna::all() as $comuna)
                         <option value="{{ $comuna->id }}">{{ $comuna->name }}</option>
                         @endforeach

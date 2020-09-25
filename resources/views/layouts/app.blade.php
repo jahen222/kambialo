@@ -26,7 +26,7 @@
     <!-- Styles -->
     <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
 </head>
-<body style="background-color: #e1e3e5;">
+<body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="padding: 0;">
             <div class="container">
@@ -60,7 +60,7 @@
             </div>
         </nav>
 
-        <main class="py-4" style="background-color: #e1e3e5;">
+        <main class="py-4">
             @include('flash-message')
 
             @yield('content')
