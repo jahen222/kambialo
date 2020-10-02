@@ -31,6 +31,7 @@
 
     <!-- CSS:: MAIN -->
     <link rel="stylesheet" type="text/css" href="{{ asset('homes/assets/css/main.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('homes/assets/css/style.css') }}">
 
     <style>
         .kb-plans {

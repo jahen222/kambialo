@@ -1,0 +1,8 @@
+@font-face{
+	font-family: 'poppins';
+	src: url('../../../fonts/Poppins/Poppins-Regular.ttf');
+}
+
+*{
+	font-family: "poppins", "Karla", "roboto", "sans-serif"!important;
+}

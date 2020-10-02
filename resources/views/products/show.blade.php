@@ -37,13 +37,15 @@
           </div>
         </div>
         <br><br>
-        <p class="blog-product-meta">Categoría: {{ $product->category->name }} </p>
-        <p class="blog-product-meta">Propietario: {{ $product->user->email }} </p>
-        <p class="blog-product-meta">Publicado: {{ $product->created_at }} </p>
-        <p class="blog-product-meta">Tags: 
-          @foreach ($product->tags()->get() as $tag)
-            {{ $tag->name }}
-          @endforeach </p>
+		@if(false) //implementar formulario match
+			<p class="blog-product-meta">Categoría: {{ $product->category->name }} </p>
+			<p class="blog-product-meta">Propietario: {{ $product->user->email }} </p>
+			<p class="blog-product-meta">Publicado: {{ $product->created_at }} </p>
+			<p class="blog-product-meta">Tags: 
+			@foreach ($product->tags()->get() as $tag)
+				{{ $tag->name }}
+			@endforeach </p>	
+		@endif        
         <p>{!! $product->description !!}</p>
       </div>
     </div>

@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-	<h2>Usuario registrado satisfactoriamente. Bienvenido {{ $user->name }}</h2>
+	<h4 class="text-center">Usuario registrado satisfactoriamente. Bienvenido {{ $user->name }}</h4>
 
 	<div class="row justify-content-center">
 		<div class="col-sm-6" style="border: 1px dashed blue">
 			<div class="text-center">
-				<div><h2>Pedido procesado satisfactoriamente</p></div>
+				<div><p>Pedido procesado satisfactoriamente</p></div>
 				<div class="row">
 					<div class="col-sm-3">
 						<b>Pedido:</b><br>
@@ -31,7 +31,7 @@
 				<p style="margin:0;"><?= $order->response_code == 0 ? 'Transaccion aprobada' : ''?></p>
 			</div>
 			<div class="col-12" style="border: 1px solid blue; margin: 5px 0;">
-				<h3 class="text-center">Detalles de pago</h3>
+				<h4 class="text-center">Detalles de pago</h4>
 				<table widht="100%">
 					<tbody>
 						<tr>
@@ -93,7 +93,7 @@
 			</div>
 
 			<div class="col-12" style="border: 1px solid blue; margin: 5px 0;">
-				<h3 class="text-center">Detalles del Plan</h3>
+				<h4 class="text-center">Detalles del Plan</h4>
 				<table width="100%">
 					<tbody>
 						<tr>
@@ -124,6 +124,9 @@
 				</table>
 			</div>
 		</div>
+	</div>
+	<div class="row justify-content-center">
+		<a href="{{ route('showcase.index') }}" class="btn btn-success">Ir a vitrinea</a>
 	</div>
 </div>
 @endsection
