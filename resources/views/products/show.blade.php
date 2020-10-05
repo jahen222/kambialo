@@ -29,8 +29,8 @@
                       <img style="width:100%" src="{{ url()->to('images/' . $product->images[2]->image) }}" alt="{{$product->images[2]->image}}" style="width:100%">
                     </div>
                   <?php endif; ?>
-                  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                  <a class="prev btn-circle prev-slide" onclick="plusSlides(-1)">&#10094;</a>
+                  <a class="next btn-circle next-slide" onclick="plusSlides(1)">&#10095;</a>
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
         <form action="{{route('favorite.store')}}" method="POST" class="pull-right">
           {{ csrf_field() }}
           <input type="hidden" name="product" value="{{ $product->id }}">
-          <button type="submit" class="btn btn-success">Favoritos</button>
+          <button type="submit" class="btn btn-success">Añadir a favoritos</button>
         </form>
       </div>
     </div>
