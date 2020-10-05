@@ -289,7 +289,7 @@
                                         <img style="width: 100%;height: 100%;" src="{{ url()->to('assets/img/' . $category->image) }}" class="img-fluid d-block" alt="">
                                     </a>
                                     <div class="b-cat_mask" style="left: 50%; transform: translateX(-50%);">
-                                        <a href="{{ route('showcase.index', ['category' => $category->id]) }}" class="category-link-overlay">{{ $category->name }}</a>
+                                        <a style="font-style:normal;" href="{{ route('showcase.index', ['category' => $category->id]) }}" class="category-link-overlay">{{ $category->name }}</a>
                                     </div>
                                 </div>
                             @endif
@@ -301,7 +301,7 @@
                                         <img style="width: 100%; height: 100%;" src="{{ url()->to('assets/img/' . $category->image) }}" class="img-fluid d-block" alt="">
                                     </a>
                                     <div class="b-cat_mask" style="left: 50%; transform: translateX(-50%);">
-                                        <a href="{{ route('showcase.index', ['category' => $category->id]) }}" class="category-link-overlay">{{ $category->name }}</a>
+                                        <a style="font-style:normal;" href="{{ route('showcase.index', ['category' => $category->id]) }}" class="category-link-overlay">{{ $category->name }}</a>
                                     </div>
                                 </div>
                             @endif
@@ -311,7 +311,7 @@
                                         <img style="width: 100%; height: 100%;" src="{{ url()->to('assets/img/' . $category->image) }}" class="img-fluid d-block" alt="">
                                     </a>
                                     <div class="b-cat_mask" style="left: 50%; transform: translateX(-50%);">
-                                        <a href="{{ route('showcase.index', ['category' => $category->id]) }}" class="category-link-overlay">{{ $category->name }}</a>
+                                        <a style="font-style:normal;" href="{{ route('showcase.index', ['category' => $category->id]) }}" class="category-link-overlay">{{ $category->name }}</a>
                                     </div>
                                 </div>
                             @endif
@@ -323,7 +323,7 @@
                                         <img style="width: 100%;height:100%;" src="{{ url()->to('assets/img/' . $category->image) }}" class="img-fluid d-block" alt="">
                                     </a>
                                     <div class="b-cat_mask" style="left: 50%; transform: translateX(-50%);">
-                                        <a href="{{ route('showcase.index', ['category' => $category->id]) }}" class="category-link-overlay">{{ $category->name }}</a>
+                                        <a style="font-style:normal;" href="{{ route('showcase.index', ['category' => $category->id]) }}" class="category-link-overlay">{{ $category->name }}</a>
                                     </div>
                                 </div>
                             @endif
@@ -349,7 +349,7 @@
                                 <img style="width: 100%; height: 100%;" src="{{ url()->to('images/' . $value->cover_image) }}" class="img-fluid d-block" alt="">
                             </a>
                             <div class="b-cat_mask" style="left: 50%; transform: translateX(-50%);">
-                                <a href="{{ route('showcase.index') }}" class="category-link-overlay">{{ $value->name }}</a>
+                                <a style="font-style:normal;" href="{{ route('showcase.index') }}" class="category-link-overlay">{{ $value->name }}</a>
                             </div>
                         </div>
                     </div>

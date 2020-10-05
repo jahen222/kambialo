@@ -7,7 +7,7 @@ body{
 	src: url('../fonts/Poppins/Poppins-Regular.ttf');
 }
 
-*:not(.material-icons){
+*:not([class*="icon"]){
 	font-family: "poppins", "Karla", "roboto", "sans-serif"!important;
 }
 
