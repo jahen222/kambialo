@@ -47,11 +47,11 @@ class FavoriteController extends Controller
         $product = Product::find($request->input('product'));
         $favorite = $user->favorites()->where('product_id', '=', $product->id)->first();
         $userProduct = $product->user()->first();
-        
+
         $match = Match::whereIn('user_id_1', [$user->id, $userProduct->id])->whereIn('user_id_2', [$user->id, $userProduct->id])->first();
         if (!empty($favorite)) {
             $favorite->delete();
-            
+
             if (!is_null($match)) {
                 $productIds = [];
                 foreach ($user->favorites()->get() as $favorite) {
@@ -76,7 +76,7 @@ class FavoriteController extends Controller
                 foreach ($userProduct->favorites()->get() as $upf) {
                     array_push($productIds, $upf->product_id);
                 }
-                
+
                 if (!empty($user->products()->whereIn('id', $productIds)->first())) {
                     $userMatcher = new Match;
                     $userMatcher->user1()->associate($user);
@@ -87,22 +87,25 @@ class FavoriteController extends Controller
                 }
             }
         }
-        
+
         return back()->withInput()->with('success', 'Producto agregado a favoritos.');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function storeHome(Request $request)
     {
-        //echo dd($request->input('product'));
         $user = User::find(auth()->user()->id);
         $product = Product::find($request->input('product'));
         $favorite = $user->favorites()->where('product_id', '=', $product->id)->first();
         $userProduct = $product->user()->first();
-        
+
         $match = Match::whereIn('user_id_1', [$user->id, $userProduct->id])->whereIn('user_id_2', [$user->id, $userProduct->id])->first();
         if (!empty($favorite)) {
             $favorite->delete();
-            
+
             if (!is_null($match)) {
                 $productIds = [];
                 foreach ($user->favorites()->get() as $favorite) {
@@ -124,7 +127,7 @@ class FavoriteController extends Controller
                 foreach ($userProduct->favorites()->get() as $upf) {
                     array_push($productIds, $upf->product_id);
                 }
-                
+
                 if (!empty($user->products()->whereIn('id', $productIds)->first())) {
                     $userMatcher = new Match;
                     $userMatcher->user1()->associate($user);

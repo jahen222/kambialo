@@ -38,7 +38,7 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 				</div>
-                
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent"style="flex-basis: 100%;">
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

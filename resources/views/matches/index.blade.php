@@ -26,7 +26,7 @@
 								</td>
 
                                 @can('show')
-                                <td>
+                                <td style="vertical-align: inherit;">
                                     <a href="{{ route('match.show', $match->id) }}" class="btn btn-sm btn-primary">
                                         Ver
                                     </a>

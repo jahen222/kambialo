@@ -46,24 +46,23 @@ class MatchController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Match  $match
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $match = Match::find($id);
-        $i = User::find(auth()->user()->id);
+        $user = User::find(auth()->user()->id);
         $user1 = User::find($match->user_id_1);
         $user2 = User::find($match->user_id_2);
-        
-        if ($i->id != $user1->id) {
-            $usermatch = $user1;
-        }
-        else{
-            $usermatch = $user2;
+
+        if ($user->id != $user1->id) {
+            $userMatch = $user1;
+        } else {
+            $userMatch = $user2;
         }
 
-        return view('matches.show', compact('usermatch'));
+        return view('matches.show', compact('userMatch'));
     }
 
     /**
