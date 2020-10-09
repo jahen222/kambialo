@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     // Matches
     Route::get('matches', 'MatchController@index')->name('matches.index');//->middleware('permission:index');
     Route::get('match/{role}', 'MatchController@show')->name('match.show');//->middleware('permission:show');
+	Route::post('match/confirm/{role}', 'MatchController@confirm')->name('match.confirm');//->middleware('permission:show');
     // Favorites
     Route::post('match/store', 'FavoriteController@storeHome')->name('favorite_home.store');//->middleware('permission:store');
 });

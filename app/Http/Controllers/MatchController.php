@@ -62,8 +62,23 @@ class MatchController extends Controller
             $userMatch = $user2;
         }
 
-        return view('matches.show', compact('userMatch'));
+        return view('matches.show', compact('userMatch', 'match'));
     }
+	
+	public function confirm($id)
+	{
+		$match = Match::find($id);
+		$user = User::find(auth()->user()->id);
+		
+		if($match->user_id_1 == $user->id)
+			$match->user_id_1_confirm = 1;
+		else	
+			$match->user_id_2_confirm = 1;
+		
+		$match->save();
+		
+		return redirect('/match/'.$match->id)->with('success', 'Confirmado exitosamente');
+	}
 
     /**
      * Show the form for editing the specified resource.
