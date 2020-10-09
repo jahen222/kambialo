@@ -32,7 +32,6 @@ Route::get('showcase/search', 'ShowcaseController@search')->name('showcase.searc
 Route::middleware(['auth'])->group(function () {
 //    Route::get('index', 'HomeController@index')->name('index');
 
-
     // Products
     Route::get('products', 'ProductController@index')->name('products.index');//->middleware('permission:index');
     Route::get('product/create', 'ProductController@create')->name('product.create');//->middleware('permission:create');

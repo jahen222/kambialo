@@ -70,13 +70,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Productos</div>
                 <div class="panel-body">
-
-                    
                     <a href="{{ route('product.create') }}" class="float">
                         <i class="fa fa-plus my-float"></i>
                     </a>
-                    
-
                     <table class="table table-striped">
                         @foreach($products as $product)
                         <tbody>

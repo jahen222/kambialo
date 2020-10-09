@@ -117,45 +117,11 @@
     </style>
 </head>
 <body>
-
-<div class="b-mini_cart">
-    <div class="b-mini_cart_header">
-        SHOPPING CART1
-        <span class="b-close_search" id="b-close_cart"></span>
-    </div>
-    <ul class="b-mini_cart_items mb-0 list-unstyled">
-        <li class="clearfix">
-            <img src="{{ asset('homes/assets/images/products/home/product_grid_01_01.jpg') }}" width="50" alt="item1">
-            <span class="item-name">Sony DSC-RX100M III</span>
-            <span class="item-price">1&nbsp;x&nbsp;<span>$849.99</span></span>
-        </li>
-
-        <li class="clearfix">
-            <img src="{{ asset('homes/assets/images/products/home/product_grid_02_01.jpg') }}" width="50" alt="item1">
-            <span class="item-name">KS Automatic Mechanic...</span>
-            <span class="item-price">1&nbsp;x&nbsp;<span>$849.99</span></span>
-        </li>
-
-        <li class="clearfix">
-            <img src="{{ asset('homes/assets/images/products/home/product_grid_03_01.jpg') }}" width="50" alt="item1">
-            <span class="item-name">Kindle, 6" Glare-Free To...</span>
-            <span class="item-price">1&nbsp;x&nbsp;<span>$849.99</span></span>
-        </li>
-    </ul>
-    <div class="shopping-cart-total clearfix pl-3 pr-3 mb-4">
-        <span class="lighter-text float-left">Total:</span>
-        <span class="main-color-text float-right">$2,229.97</span>
-    </div>
-    <div class="pl-3 pr-3">
-        <a href="cart-default.html" class="btn d-block mb-2">Cart</a>
-        <a href="checkout.html" class="btn btn-bg d-block">Checkout</a>
-    </div>
-</div>
 <div class="b-main_menu-wrapper hidden-lg-up">
     <ul class="categories">
         @guest
             <li>
-                <a href="{{ url('login') }}"><span class="top">Iniciar Sesion</span></a>
+                <a href="{{ url('login') }}"><span class="top">Iniciar sesión</span></a>
             </li>
             <li>
                 <a href="{{ url('register') }}"><span class="top">Registro</span></a>
@@ -171,23 +137,13 @@
         <div class="b-header b-header_main">
             <div class="container">
                 <div class="clearfix row">
-
                     <div class="col-xl-4 col-lg-4 col-mb-4 col-sm-4 col-xs-6">
                         <div class="b-logo text-sm-left text-lg-center text-xl-center">
-                            <a href="/" class="d-inline-block"><img src="{{ asset('assets/img/logo-header.png')}}"
-                                                                    class="img-fluid d-block" alt=""></a>
+                            <a href="/" class="d-inline-block"><img src="{{ asset('assets/img/logo-header.png')}}" class="img-fluid d-block" alt=""></a>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-mb-4 col-sm-12 col-xs-12 hidden-sm-down hidden-md-down">
-                        <!--<div class="b-header_nav">
-                          <div class="b-menu_top_bar_container">
-                              <div class="b-main_menu menu-stay-left">
-                                  <ul class="categories pl-0 mb-0 list-unstyled">
-                                      <li>Inicio</li>
-                                  </ul>
-                              </div>
-                          </div>
-                        </div>-->
+                        <!-- ESPACIO DE BOTON INICIO -->
                     </div>
                     <div class="col-xl-4 col-lg-4 col-mb-4 col-sm-8 col-xs-6">
                         <div class="b-header_right">
@@ -205,7 +161,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="b-search_icon">
+                            <div class="b-search_icon"> <!-- hidden-lg-up -->
                                 <i class="icon-menu icons b-nav_icon" id="b-nav_icon" style="color: #fff;"></i>
                                 </a>
                             </div>

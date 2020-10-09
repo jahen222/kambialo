@@ -45,16 +45,17 @@
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
                         </li>
                         @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
                         </li>
                         @endif
-                        @else
-							{{ view('layouts.menu_auth') }}
                         @endguest
+                        @auth
+							{{ view('layouts.menu_auth') }}
+                        @endauth
                     </ul>
                 </div>
             </div>
@@ -75,7 +76,7 @@
     <script type="text/javascript" src="{{ asset('assets/app.js') }}"></script>
     @yield('scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-	
+
 	<script>
 		$('.navbar-toggler').on('click',function(e){
 			e.preventDefault();

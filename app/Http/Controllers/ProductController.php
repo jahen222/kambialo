@@ -126,8 +126,9 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+        $user = User::find(auth()->user()->id);
 
-        return view('products.show', compact('product'));
+        return view('products.show')->with('product', $product)->with('user', $user);
     }
 
     /**
