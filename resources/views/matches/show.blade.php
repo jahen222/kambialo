@@ -46,19 +46,19 @@
                     </div>
                 </div>
             </div>
+            @if($match->user_id_1 == auth()->user()->id && !$match->user_id_1_confirm
+                || $match->user_id_2 == auth()->user()->id && !$match->user_id_2_confirm)
             <div class="col-md-4">
                 <div class="well">
                     <h2>Opciones</h2>
                     <hr>
-                    @if($match->user_id_1 == auth()->user()->id && !$match->user_id_1_confirm
-                         || $match->user_id_2 == auth()->user()->id && !$match->user_id_2_confirm)
-                        <form action="{{route('match.confirm', $match->id)}}" method="POST" class="pull-right">
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary">Confirmar</button>
-                        </form>
-                    @endif
+                    <form action="{{route('match.confirm', $match->id)}}" method="POST" class="pull-right">
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </form>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 

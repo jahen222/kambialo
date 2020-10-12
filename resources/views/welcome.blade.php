@@ -163,7 +163,6 @@
                             </div>
                             <div class="b-search_icon"> <!-- hidden-lg-up -->
                                 <i class="icon-menu icons b-nav_icon" id="b-nav_icon" style="color: #fff;"></i>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -177,8 +176,6 @@
                 <li style="display:flex;background-image: url({{ asset('homes/assets/images/imagen-slider-02-06-min.jpg') }} ); background-size: cover;">
                     <div class="caption"style="display:flex;">
 						<div style="margin:auto;width:100%;">
-							<!--<h1> PARA QUE COMPRAR </h1>
-							<h1> SI PUEDES KAMBIAR </h1>-->
 							<h1> Aquí podrás subir los productos que <br> no necesitas pero que alguien más si </h1>
 							<div class="registrate-button">
 								<a href="{{ url('register') }}" class="btn btn-green"> REGÍSTRATE </a>
