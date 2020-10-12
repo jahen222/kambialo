@@ -35,6 +35,11 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('homes/assets/css/style.css') }}">
 
     <style>
+        .b-header_fixed .b-header_main .b-logo a img{
+            content: url({{ url()->to('images/logo.png') }});
+        }
+
+
         .kb-plans {
             background-color: transparent;
         }
