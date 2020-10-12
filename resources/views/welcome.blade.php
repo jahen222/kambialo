@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Caveat:400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('homes/assets/css/fonts/font-awesome.css') }}">
 
     <!-- CSS:: OWL -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.css') }}">
