@@ -39,15 +39,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function products(){
+    public function products()
+    {
         return $this->hasMany('App\Product');
     }
 
-    public function subscription(){
+    public function subscription()
+    {
         return $this->belongsTo('App\Subscription');
     }
 
-    public function favorites(){
+    public function favorites()
+    {
         return $this->hasMany('App\Favorite');
+    }
+
+    use Notifiable;
+
+    public function routeNotificationForMail($notification)
+    {
+        // Return email address only
+        return $this->email;
     }
 }

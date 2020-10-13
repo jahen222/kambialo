@@ -54,6 +54,10 @@
                     <hr>
                     <form action="{{route('match.confirm', $match->id)}}" method="POST" class="pull-right">
                         {{ csrf_field() }}
+                        <div class="form-group">
+                            <small class="form-text text-muted">Mensaje</small>
+                            <textarea type="text" name="message" class="form-control" rows="3" style="resize: none; "></textarea>
+                        </div>
                         <button type="submit" class="btn btn-primary">Confirmar</button>
                     </form>
                 </div>

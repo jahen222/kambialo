@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Match;
 use Illuminate\Http\Request;
 use App\User;
+use Notification;
+use App\Notifications\MatchConfirm;
 
 class MatchController extends Controller
 {
@@ -52,33 +54,43 @@ class MatchController extends Controller
     public function show($id)
     {
         $match = Match::find($id);
-        $user = User::find(auth()->user()->id);
-        $user1 = User::find($match->user_id_1);
-        $user2 = User::find($match->user_id_2);
-
-        if ($user->id != $user1->id) {
-            $userMatch = $user1;
-        } else {
-            $userMatch = $user2;
-        }
-
+        $userMatch = $this->getUserMatch($match);
         return view('matches.show', compact('userMatch', 'match'));
     }
-	
-	public function confirm($id)
-	{
-		$match = Match::find($id);
-		$user = User::find(auth()->user()->id);
-		
-		if($match->user_id_1 == $user->id)
-			$match->user_id_1_confirm = 1;
-		else	
-			$match->user_id_2_confirm = 1;
-		
-		$match->save();
-		
-		return redirect('/match/'.$match->id)->with('success', 'Confirmado exitosamente');
-	}
+
+    /**
+     * Get the matched user
+     *
+     * @param Match $match
+     * @return User
+     */
+    private function getUserMatch($match){
+        $user = auth()->user();
+        $user1 = $match->user1()->first();
+        $user2 = $match->user2()->first();
+        return $user->id != $user1->id ? $user1 : $user2;
+    }
+
+    public function confirm(Request $request, $id)
+    {
+        $match = Match::find($id);
+        $user = auth()->user();
+        $userMatch = $this->getUserMatch($match);
+
+        if ($match->user_id_1 == $user->id){
+            $match->user_id_1_confirm = 1;
+            $match->user_id_1_message = $request->input('message');
+        }
+        else{
+            $match->user_id_2_confirm = 1;
+            $match->user_id_2_message = $request->input('message');
+        }
+
+        $userMatch->notify(new MatchConfirm($user, $match));
+
+        $match->save();
+        return redirect('/match/' . $match->id)->with('success', 'Confirmado exitosamente');
+    }
 
     /**
      * Show the form for editing the specified resource.

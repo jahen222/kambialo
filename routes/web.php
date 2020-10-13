@@ -29,6 +29,8 @@ Route::get('showcase/data', 'ShowcaseController@data')->name('showcase.data');
 Route::post('showcase/favorite', 'ShowcaseController@favorite')->name('showcase.favorite');
 Route::get('showcase/search', 'ShowcaseController@search')->name('showcase.search');
 
+Route::get('match/testnoti', 'MatchController@testnoti')->name('match.testnoti');
+
 Route::middleware(['auth'])->group(function () {
 //    Route::get('index', 'HomeController@index')->name('index');
 
