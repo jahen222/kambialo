@@ -6,10 +6,12 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
 class MatchConfirm extends Notification
 {
     use Queueable;
+
     private $userMatch;
     private $match;
 
@@ -32,7 +34,7 @@ class MatchConfirm extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['broadcast', /*'mail'*/];
     }
 
     /**
@@ -44,8 +46,38 @@ class MatchConfirm extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)->view(
-            'emails.match', ['user' => $notifiable, 'userMatch' => $this->userMatch, 'match' => $this->match]
+            'emails.match',
+            ['user' => $notifiable, 'userMatch' => $this->userMatch, 'match' => $this->match]
         );
+    }
+
+    /**
+     * Get the broadcastable representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return BroadcastMessage
+     */
+    public function toBroadcast($notifiable)
+    {
+        return (new BroadcastMessage([
+            'invoice_id' => 'test',
+            'amount' => 'test amount',
+        ]));
+    }
+
+    /**
+     * Get the type of the notification being broadcast.
+     *
+     * @return string
+     */
+    public function broadcastType()
+    {
+        return 'broadcast.message';
+    }
+
+    public function broadcastAs()
+    {
+        return 'notification';
     }
 
     /**
