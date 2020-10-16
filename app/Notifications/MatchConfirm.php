@@ -34,7 +34,7 @@ class MatchConfirm extends Notification
      */
     public function via($notifiable)
     {
-        return ['broadcast', /*'mail'*/];
+        return ['broadcast', 'database', /*'mail'*/];
     }
 
     /**
@@ -59,11 +59,8 @@ class MatchConfirm extends Notification
      */
     public function toBroadcast($notifiable)
     {
-        return (new BroadcastMessage([
-            'invoice_id' => 'test',
-            'amount' => 'test amount',
-        ]));
-    }
+        return (new BroadcastMessage($this->toArray($notifiable)));
+    }    
 
     /**
      * Get the type of the notification being broadcast.
@@ -75,11 +72,6 @@ class MatchConfirm extends Notification
         return 'broadcast.message';
     }
 
-    public function broadcastAs()
-    {
-        return 'notification';
-    }
-
     /**
      * Get the array representation of the notification.
      *
@@ -89,7 +81,8 @@ class MatchConfirm extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'message' => "El usuario {$notifiable->name} ha aceptado compartir su informacion",
+            'url' => route('match.show', $this->match->id)
         ];
     }
 }

@@ -160,13 +160,6 @@
 		  </div>
 		</div>
 	</div>
-	<div class="nav-bottom">
-	  <div><i class="material-icons">home</i></div>
-	  <div><i class="material-icons">message</i></div>
-	  <div><i class="material-icons">add_circle</i></div>
-	  <div><i class="material-icons">notifications</i></div>
-	  <div><i class="material-icons">person</i></div>
-	</div>
   </section>
 </template>
 <script>
@@ -379,6 +372,7 @@ export default {
 *{
 --green: #36c132;
 }
+
 .btn-submit{
  background-color: white;
  border: 0;
@@ -390,18 +384,6 @@ export default {
 	vertical-align:middle;
  }
 }
-.nav-bottom{
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin:auto;
-  color: white;
-  text-shadow: 1px 1px 1px #96fff5,-1px -1px 1px #96fff5,-1px 1px 1px #96fff5,1px -1px 1px #96fff5;
-}
-
 .image-selector{
   position: absolute;
   text-align:center;

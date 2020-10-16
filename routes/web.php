@@ -31,6 +31,8 @@ Route::get('showcase/search', 'ShowcaseController@search')->name('showcase.searc
 
 Route::get('match/testnoti', 'MatchController@testnoti')->name('match.testnoti');
 
+Route::get('notification/read','NotificationController@markAsRead')->name('notification.markAsRead');
+
 Route::middleware(['auth'])->group(function () {
 //    Route::get('index', 'HomeController@index')->name('index');
 

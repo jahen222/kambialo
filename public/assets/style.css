@@ -11,6 +11,44 @@ body{
 	font-family: "poppins", "Karla", "roboto", "sans-serif"!important;
 }
 
+.nav-bottom {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: auto;
+  z-index: 10;
+}
+.nav-bottom .material-icons{
+  color: white;
+  text-shadow: 1px 1px 1px #96fff5, -1px -1px 1px #96fff5, -1px 1px 1px #96fff5, 1px -1px 1px #96fff5;
+}
+.nav-bottom .dropdown-item{
+  white-space: normal;
+  font-size: 8pt;
+}
+#notification-list{
+  max-height: 250px;
+  overflow-y: auto;
+  width: 250px;
+}
+
+.notification{
+  background-color: red;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 8pt;
+  left: 15px;
+  top: -5px;
+  color: white;
+  text-shadow: 0 0 0 black;
+}
+
 .btn-circle{
 	color: rgba(200,200,200,0.5)!important;
 	background-color: rgba(255,255,255,0.5);

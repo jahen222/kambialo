@@ -71,11 +71,6 @@ class MatchController extends Controller
         return $user->id != $user1->id ? $user1 : $user2;
     }
 
-    public function testnoti()
-    {
-        User::find(1)->notify(new MatchConfirm(User::find(1), Match::find(1)));
-    }
-
     public function confirm(Request $request, $id)
     {
         $match = Match::find($id);
