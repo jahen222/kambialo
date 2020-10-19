@@ -7,7 +7,11 @@
                 <div class="well">
                     <h1>Match con {{ $userMatch->name }}</h1>
                     <br>
-                    <p class="blog-product-meta">Email: {{ $userMatch->email }} </p>
+                    @if(($match->user_id_1 == $userMatch->id && $match->user_id_1_confirm)
+                        || ($match->user_id_2 == $userMatch->id && $match->user_id_2_confirm))
+                        <p class="blog-product-meta">Email: {{ $userMatch->email }} </p>
+                        <p>Mensaje: {{ $match->user_id_1 == $userMatch->id ? $match->user_id_1_message : $match->user_id_2_message }}  </p>
+                    @endif
                 </div>
 
                 <div class="well" style="margin-top: 15px;">
@@ -46,8 +50,8 @@
                     </div>
                 </div>
             </div>
-            @if($match->user_id_1 == auth()->user()->id && !$match->user_id_1_confirm
-                || $match->user_id_2 == auth()->user()->id && !$match->user_id_2_confirm)
+            @if(($match->user_id_1 == auth()->user()->id && !$match->user_id_1_confirm)
+                || ($match->user_id_2 == auth()->user()->id && !$match->user_id_2_confirm))
             <div class="col-md-4">
                 <div class="well">
                     <h2>Opciones</h2>

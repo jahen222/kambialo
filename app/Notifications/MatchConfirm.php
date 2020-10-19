@@ -34,7 +34,7 @@ class MatchConfirm extends Notification
      */
     public function via($notifiable)
     {
-        return ['broadcast', 'database', /*'mail'*/];
+        return ['broadcast', 'database', 'mail'];
     }
 
     /**
