@@ -78,7 +78,7 @@ class ProductController extends Controller
         if ($request->hasFile('cover_image')) {
             $file = $request->file('cover_image');
             $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $filename = str_replace(' ', '_', pathinfo($filenameWithExt, PATHINFO_FILENAME));
             $extension = $request->file('cover_image')->getClientOriginalExtension();
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             $file->move(public_path() . '/images/', $fileNameToStore);
@@ -98,7 +98,7 @@ class ProductController extends Controller
         if ($request->hasFile('images') && $images = $request->file('images')) {
             foreach ($images as $key => $value) {
                 $filenameWithExt = $value->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $filename = str_replace(' ', '_', pathinfo($filenameWithExt, PATHINFO_FILENAME));
                 $extension = $value->getClientOriginalExtension();
                 $fileNameToStore = $filename . '_' . time() . '.' . $extension;
                 $value->move(public_path() . '/images/', $fileNameToStore);
