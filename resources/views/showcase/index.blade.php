@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<card-component v-bind:category="'{{ request('category') }}'" v-bind:url="'{{ url()->to('product') }}'"></card-component>
+<card-component v-bind:category="'{{ request('category') }}'" v-bind:url="'{{ url()->to('product') }}'" v-bind:public="'{{ config('constants.publicUrl') }}'"></card-component>
+
 <div class="nav-bottom">
-  <div><i class="material-icons">home</i></div>
-  <div><i class="material-icons">message</i></div>
-  <div><i class="material-icons">add_circle</i></div>
+  <div><a href="{{ url()->to('/') }}"><i class="material-icons">home</i></a></div>
   <div class="dropdown show">
     <a style="color:white;" href="#" onclick="resetNotification()" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="material-icons">notifications</i>
@@ -21,7 +20,9 @@
     </div>
     @endif
   </div>
-  <div><i class="material-icons">person</i></div>
+  <div><a href="{{ route('product.create') }}"><i class="material-icons">add_circle</i></a></div> 
+  <div><a href="{{ route('matches.index') }}"><i class="material-icons">message</i></a></div>
+  <div><a href="#"><i class="material-icons">person</i></a></div>
 </div>
 @endsection
 @section('scripts')
@@ -30,9 +31,6 @@
 @if($user = auth()->user())
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
   <script>
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-
     var notificationEle = $('#notification-number');
     var notificationListEle = $('#notification-list');
     var notificationN = 0;
@@ -50,14 +48,13 @@
       });
     }
 
-    var pusher = new Pusher('97c2397e96499bcf7440', {
+    var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
       cluster: 'us3',
-      authEndpoint: 'http://localhost/kambialo/public/broadcasting/auth',
+      authEndpoint: 'broadcasting/auth',
     });
 
-    var channel = pusher.subscribe('private-users.{{ $user->id}}');
+    var channel = pusher.subscribe('private-users.{{ auth()->user()->id }}');
     channel.bind('Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', function(data) {
-      console.log(data);
       notificationN++;
       notificationEle.html(notificationN);
       notificationEle.show();

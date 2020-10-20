@@ -77,7 +77,7 @@
                         @foreach($products as $product)
                         <tbody>
                             <tr>
-                                <td><img style="max-height:50px;" src="{{url()->to('images/' . $product->cover_image)}}" /></td>
+                                <td><img style="max-height:50px;" src="{{url()->to(config('constants.publicUrl') . 'images/' . $product->cover_image)}}" /></td>
                                 <td style="vertical-align: middle;">{{ $product->name }}</td>
                                 <td style="vertical-align: middle;">Favoritos: {{ count($product->favorites()->get()) }}</td>
                                 <td style="vertical-align: middle;">

@@ -33,7 +33,7 @@
                         <input type="file" class="custom-file-input" name="cover_image" id="customFile" lang="es">
                         <label class="custom-file-label" for="customFile">Cover Imagen</label>
                     </div>
-                    <img style="max-width: 100%;" src="{{ url()->to('images/' . $product->cover_image) }}" alt="">
+                    <img style="max-width: 100%;" src="{{ url()->to(config('constants.publicUrl') . 'images/' . $product->cover_image) }}" alt="">
                 </div>
                 <div class="form-group">
                     <label for="name">Nombre del producto</label>
@@ -49,7 +49,7 @@
                         <label class="custom-file-label" for="image1">Imagen1</label>
                     </div>
                     @if(isset($product->images[0]) && $image = $product->images[0]->image)
-                        <img style="max-width: 100%;" src="{{ url()->to('images/' . $image) }}" alt="">
+                        <img style="max-width: 100%;" src="{{ url()->to(config('constants.publicUrl') . 'images/' . $image) }}" alt="">
                     @endif
                 </div>
                 <div class="form-group">
@@ -58,7 +58,7 @@
                         <label class="custom-file-label" for="image2">Imagen2</label>
                     </div>
                     @if(isset($product->images[1]) && $image = $product->images[1]->image)
-                        <img style="max-width: 100%;" src="{{ url()->to('images/' . $image) }}" alt="">
+                        <img style="max-width: 100%;" src="{{ url()->to(config('constants.publicUrl') . 'images/' . $image) }}" alt="">
                     @endif
                 </div>
                 <div class="form-group">
@@ -67,7 +67,7 @@
                         <label class="custom-file-label" for="image3">Imagen3</label>
                     </div>
                     @if(isset($product->images[2]) && $image = $product->images[2]->image)
-                        <img style="max-width: 100%;" src="{{ url()->to('images/' . $image) }}" alt="">
+                        <img style="max-width: 100%;" src="{{ url()->to(config('constants.publicUrl') . 'images/' . $image) }}" alt="">
                     @endif
                 </div>
                 <div class="form-group">

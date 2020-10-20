@@ -11,7 +11,7 @@
                         @foreach($favorites as $favorite)
                         <tbody>
                             <tr>
-                                <td><img style="max-height:50px;" src="{{url()->to('images/' . $favorite->product->cover_image)}}" /></td>
+                                <td><img style="max-height:50px;" src="{{url()->to(config('constants.publicUrl') . 'images/' . $favorite->product->cover_image)}}" /></td>
                                 <td style="vertical-align: middle;">{{ $favorite->product()->get()[0]->name }}</td>
                                 @can('show')
                                 <td style="vertical-align: middle;">

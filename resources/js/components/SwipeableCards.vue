@@ -79,13 +79,13 @@
 				class="rounded card card--no-shadow card--one">
 				<div style="height: 77%">
 				  <a @touchstart="clickDown($event)" @touchend="clickUp($event)" @mousedown="clickDown($event)" @mouseup=clickUp($event)>
-					<img :src="'system/public/images/'+currentImage"/>
+					<img :src="public + 'images/'+currentImage"/>
 				  </a>
 				  <!--<a v-if="current.images.length > 0" a class="img-btn img-btn--prev" @touchstart="prevImage" @click="prevImage" href="#!">&#10094;</a>
 				  <a v-if="current.images.length > 0" a class="img-btn img-btn--next" @touchstart="nextImage" @click="nextImage" href="#!">&#10095;</a>
 				  <div v-if="current.images.length > 0" id="image-selector" class="image-selector">
-					<input type="radio" name="image_controller" @click="selectImage(0)" checked/>
-					<input type="radio" name="image_controller" @click="selectImage(y + 1)" v-for="x,y in current.images"/>
+            <input type="radio" name="image_controller" @click="selectImage(0)" checked/>
+            <input type="radio" name="image_controller" @click="selectImage(y + 1)" v-for="x,y in current.images"/>
 				  </div>-->
 				</div>
 				<div class="text">
@@ -109,7 +109,7 @@
 				  style="z-index: 2">
 				  <div style="height: 77%">
 					<img
-					  :src="'system/public/images/' + next.cover_image" />
+					  :src="public + 'images/' + next.cover_image" />
 				  </div>
 				  <div class="text">
 					  <div class="row" style="align-items: center;">
@@ -188,7 +188,7 @@ var _clickDownPosY = '';
 export default {
   name: 'SwipeableCards',
   components: { Vue2InteractDraggable },
-  props: ['category','url'],
+  props: ['category','url','public'],
   data() {
     return {
       isLoading: false,
@@ -453,7 +453,8 @@ export default {
   padding: .2rem;
   border-radius: 50%;
   background-color: white;
-  box-shadow: 0 6px 6px -3px rgba(0,0,0,0.02), 0 10px 14px 1px rgba(0,0,0,0.02), 0 4px 18px 3px rgba(0,0,0,0.02);
+  /*box-shadow: 0 6px 6px -3px rgba(0,0,0,0.02), 0 10px 14px 1px rgba(0,0,0,0.02), 0 4px 18px 3px rgba(0,0,0,0.02);*/
+  box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);
   cursor: pointer;
   transition: all .3s ease;
   user-select: none;
@@ -475,7 +476,6 @@ export default {
     background-color: var(--green);
     padding: .5rem;
     color: white;
-    box-shadow: 0 10px 13px -6px rgba(0,0,0,.2), 0 20px 31px 3px rgba(0,0,0,.14), 0 8px 38px 7px rgba(0,0,0,.12);
     i {
       color: var(--green);
       text-shadow: 1px 1px 1px white,-1px -1px 1px white,-1px 1px 1px white,1px -1px 1px white;

@@ -14,13 +14,13 @@
                             <tr>
                                 <td align="right" width="40%">
 									<img style="max-height:80px;" src="{{
-										url()->to('images/' . $match->user1->products()->whereIn(
+										url()->to(config('constants.publicUrl') . 'images/' . $match->user1->products()->whereIn(
 										'id', array_column($match->user2->favorites()->get()->toArray(), 'product_id')
 									)->first()->cover_image)}}"/></td>
 								<td align="center"><img style="max-height:80px;" src="{{url()->to('assets/img/icon-k.png') }}" /></td>
                                 <td aling="left" width="40%">
 									<img style="max-height:80px;" src="{{
-										url()->to('images/' . $match->user2->products()->whereIn(
+										url()->to(config('constants.publicUrl') . 'images/' . $match->user2->products()->whereIn(
 										'id', array_column($match->user1->favorites()->get()->toArray(), 'product_id')
 									)->first()->cover_image)}}"/>
 								</td>

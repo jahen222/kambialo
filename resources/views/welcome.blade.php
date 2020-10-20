@@ -305,7 +305,7 @@
                     <div class="col-xl-3 col-lg-3 col-mb-3 col-sm-3 col-xs-12">
                         <div class="b-featured_cat_in" style="height: 100%;">
                             <a href="{{ route('showcase.index') }}">
-                                <img style="width: 100%; height: 100%;" src="{{ url()->to('images/' . $value->cover_image) }}" class="img-fluid d-block" alt="">
+                                <img style="width: 100%; height: 100%;" src="{{ url()->to(config('constants.publicUrl') . 'images/' . $value->cover_image) }}" class="img-fluid d-block" alt="">
                             </a>
                             <div class="b-cat_mask" style="left: 50%; transform: translateX(-50%);">
                                 <a style="font-style:normal;" href="{{ route('showcase.index') }}" class="category-link-overlay">{{ $value->name }}</a>

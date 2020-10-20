@@ -22,7 +22,7 @@
                                 'id', array_column(auth()->user()->favorites()->get()->toArray(), 'product_id')
                             )->get() as $key => $value)
                                 <div class="mySlides">
-                                    <img style="width:100%" src="{{ url()->to('images/' . $value->cover_image) }}"
+                                    <img style="width:100%" src="{{ url()->to(config('constants.publicUrl') . 'images/' . $value->cover_image) }}"
                                          alt="{{$value->cover_image}}" style="width:100%">
                                 </div>
                             @endforeach
@@ -40,7 +40,7 @@
                                 'id', array_column($userMatch->favorites()->get()->toArray(), 'product_id')
                             )->get() as $key => $value)
                                 <div class="mySlides">
-                                    <img style="width:100%" src="{{ url()->to('images/' . $value->cover_image) }}"
+                                    <img style="width:100%" src="{{ url()->to(config('constants.publicUrl') . 'images/' . $value->cover_image) }}"
                                          alt="{{$value->cover_image}}" style="width:100%">
                                 </div>
                             @endforeach
