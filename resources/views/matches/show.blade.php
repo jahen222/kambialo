@@ -58,6 +58,9 @@
                     <hr>
                     <form action="{{route('match.confirm', $match->id)}}" method="POST" class="pull-right">
                         {{ csrf_field() }}
+                        <div class="alert alert-warning">
+                            Al confirmar, sus datos seran compartidos con el usuario
+                        </div>
                         <div class="form-group">
                             <small class="form-text text-muted">Mensaje</small>
                             <textarea type="text" name="message" class="form-control" rows="3" style="resize: none; "></textarea>

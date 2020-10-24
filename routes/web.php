@@ -29,8 +29,6 @@ Route::get('showcase/data', 'ShowcaseController@data')->name('showcase.data');
 Route::post('showcase/favorite', 'ShowcaseController@favorite')->name('showcase.favorite');
 Route::get('showcase/search', 'ShowcaseController@search')->name('showcase.search');
 
-Route::get('match/testnoti', 'MatchController@testnoti')->name('match.testnoti');
-
 Route::get('notification/read','NotificationController@markAsRead')->name('notification.markAsRead');
 
 Route::middleware(['auth'])->group(function () {
