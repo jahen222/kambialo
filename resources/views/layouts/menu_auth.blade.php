@@ -29,7 +29,7 @@
 </li>
 
 <li class="nav-item">
-	<a class="nav-link" href="#">
+	<a class="nav-link" href="{{ route('user.edit') }}">
 		{{ __('Mi perfil ') }}{{ Auth::user()->name }}
 	</a>
 </li>

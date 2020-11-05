@@ -201,3 +201,8 @@ body{
 .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 45px;
 }
+
+
+.select2-container, .select2-selection{
+	width: 100%!important;
+}

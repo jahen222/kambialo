@@ -53,4 +53,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('match/confirm/{role}', 'MatchController@confirm')->name('match.confirm');//->middleware('permission:show');
     // Favorites
     Route::post('match/store', 'FavoriteController@storeHome')->name('favorite_home.store');//->middleware('permission:store');
+
+    //user profile
+    Route::get('user/edit', 'UserController@edit')->name('user.edit');//->middleware('permission:store');
+    Route::post('user/update', 'UserController@update')->name('user.update');//->middleware('permission:store');
 });
