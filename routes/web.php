@@ -55,6 +55,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('match/store', 'FavoriteController@storeHome')->name('favorite_home.store');//->middleware('permission:store');
 
     //user profile
-    Route::get('user/edit', 'UserController@edit')->name('user.edit');//->middleware('permission:store');
-    Route::post('user/update', 'UserController@update')->name('user.update');//->middleware('permission:store');
+    Route::get('users', 'UserController@index')->name('user.index');
+    //Route::get('user/create', 'UserController@create')->name('user.create');
+    //Route::post('user/store', 'UserController@store')->name('user.store');
+    Route::get('user/show/{id?}', 'UserController@show')->name('user.show');
+    Route::delete('user/delete/{id}', 'UserController@destroy')->name('user.destroy');//->middleware('permission:destroy');
+    Route::get('user/edit/{id?}', 'UserController@edit')->name('user.edit');//->middleware('permission:store');
+    Route::post('user/update/{id?}', 'UserController@update')->name('user.update');//->middleware('permission:store');
 });

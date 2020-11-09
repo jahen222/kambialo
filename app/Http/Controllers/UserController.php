@@ -18,7 +18,7 @@ class UserController extends Controller
 	 */
 	public function index()
 	{
-		//
+		return view('user.index')->with('users', User::all());
 	}
 
 	/**
@@ -28,7 +28,7 @@ class UserController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('user.create');
 	}
 
 	/**
@@ -39,7 +39,50 @@ class UserController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
+		if ($data = $request->input('users')) {
+			Validator::make(
+				$data,
+				[
+					'email' => ['required',Rule::unique('users')],
+					'name' => ['required',Rule::unique('users')],
+					'comuna_id' => 'required',
+					'subscription_id' => 'required',
+					'password' => 'required|same:confirm_password',
+					'confirm_password' => 'required|same:password',
+					'firstname' => 'required',
+					'lastname' => 'required',
+					'telephone' => 'required',
+				],
+				[
+					'email.required' => 'El correo electronico es requerido',
+					'email.unique' => 'El correo electronico se encuentra en uso',
+					'name.required' => 'El nombre de usuario es requerido',
+					'name.unique' => 'El nombre de usuario se encuentra en uso',
+					'comuna_id.required' => 'Comuna es requerido',
+					'subscription_id.required' => 'Subscripcion es requerido',
+					'password.required' => 'Contraseña es requerido',
+					'confirm_password.required' => 'Confirmar contraseña es requerido',
+					'password.same' => 'Las contraseñas no coinciden',
+					'confirm_password.same' => 'Las contraseñas no coinciden',
+					'firstname.required' => 'El Nombre es requerido',
+					'lastname.required' => 'El Apellido es requerido',
+					'telephone.required' => 'El Telefono es requerido',
+				]
+			)->validate();
+			
+			User::create([
+				'name' => $data['name'],
+				'email' => $data['email'],
+				'comuna_id' => $data['comuna_id'],
+				'subscription_id' => $data['subscription_id'],
+				'password' => Hash::make($data['password']),
+				'firstname' => $data['firstname'],
+				'lastname' => $data['lastname'],
+				'telephone' => $data['telephone'],
+				'token_webpay' => '',
+			]);
+			return redirect('/users/')->with('success', 'Perfil creado con éxito.');
+		}
 	}
 
 	/**
@@ -48,9 +91,9 @@ class UserController extends Controller
 	 * @param  \App\user  $user
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(user $user)
+	public function show($id)
 	{
-		//
+		return view('user.show')->with('user', User::find($id));
 	}
 
 	/**
@@ -59,10 +102,10 @@ class UserController extends Controller
 	 * @param  \App\user  $user
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(user $user)
+	public function edit($id = '')
 	{
-		$user = auth()->user();
-		return view('user/edit')->with('user', $user);
+		$user = $id ? User::find($id) : auth()->user();
+		return view('user/edit')->with('user', $user)->with('id', $id);
 	}
 
 	/**
@@ -72,16 +115,16 @@ class UserController extends Controller
 	 * @param  \App\user  $user
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, user $user)
+	public function update(Request $request, $id = '')
 	{
-		//
 		if ($data = $request->input('users')) {
+			$user = $id ? User::find($id) : auth()->user();
 			Validator::make(
 				$data,
 				[
 					'email' => [
 						'required',
-						Rule::unique('users')->ignore(auth()->user()->id),
+						Rule::unique('users')->ignore($user->id),
 					],
 					'comuna_id' => 'required',
 					'password' => 'required_with:confirm_password|same:confirm_password',
@@ -94,6 +137,7 @@ class UserController extends Controller
 					'email.required' => 'El correo electronico es requerido',
 					'email.unique' => 'El correo electronico se encuentra en uso',
 					'comuna_id.required' => 'Comuna es requerido',
+					'subscription_id.required' => 'Subscripcion es requerido',
 					'password.required_with' => 'Contraseña es requerido',
 					'confirm_password.required_with' => 'Confirmar contraseña es requerido',
 					'password.same' => 'Las contraseñas no coinciden',
@@ -103,15 +147,17 @@ class UserController extends Controller
 					'telephone.required' => 'El Telefono es requerido',
 				]
 			)->validate();
-			auth()->user()->update([
+			
+			$user->update([
 				'email' => $data['email'],
 				'comuna_id' => $data['comuna_id'],
-				'password' => $data['password'] ? Hash::make($data['password']) : auth()->user()->password,
+				'subscription_id' => $data['subscription_id'] ?? $user->subscription_id,
+				'password' => $data['password'] ? Hash::make($data['password']) : $user->password,
 				'firstname' => $data['firstname'],
 				'lastname' => $data['lastname'],
 				'telephone' => $data['telephone']
 			]);
-			return redirect('/user/edit')->with('success', 'Perfil actualizado con éxito.');
+			return redirect('/user/edit/'.$id)->with('success', 'Perfil actualizado con éxito.');
 		}
 	}
 
@@ -121,8 +167,13 @@ class UserController extends Controller
 	 * @param  \App\user  $user
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(user $user)
+	public function destroy($id)
 	{
-		//
+		$user = User::find($id);
+        if (count($user->products()->get()))
+            return back()->with('error', 'No se puede eliminar, tiene informacion asociada.');
+
+		$user->delete();
+        return redirect('/users')->with('success', 'Usuario eliminado con éxito.');
 	}
 }
