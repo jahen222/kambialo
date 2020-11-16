@@ -13,7 +13,6 @@ table td{
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Matches</div>
-
                 <div class="panel-body">
                     <table class="table table-striped">
                         @foreach($matches as $match)
@@ -32,13 +31,12 @@ table td{
 									)->first()->cover_image)}}"/>
 								</td>
 
-                                
                                 <td style="vertical-align: inherit;">
                                     <a href="{{ route('match.show', $match->id) }}" class="btn btn-sm btn-primary">
                                         Ver
                                     </a>
                                 </td>
-                                
+
                             </tr>
                         </tbody>
                         @endforeach

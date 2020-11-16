@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Favorite;
+use App\Match;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -210,7 +212,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -221,9 +223,22 @@ class ProductController extends Controller
             return back()->with('error', 'No puedes hacer eso.');
         }
 
-        if ($product->image !== 'noimage.jpg') {
-            //Delete image
-            Storage::delete('public/images/' . $product->image);
+        if ($product->cover_image !== 'noimage.jpg') {
+            Storage::delete(config('constants.publicUrl') . 'images/' . $product->image);
+        }
+
+        foreach ($product->images as $image) {
+            Storage::delete(config('constants.publicUrl') . 'images/' . $image->image);
+        }
+        ProductImage::where('product_id', $id)->delete();
+
+        foreach (Favorite::where('product_id', $id)->get() as $favorite) {
+            $match = Match::where('user_id_1', $favorite->user_id)->orWhere('user_id_2', $favorite->user_id)->first();
+
+            if (!is_null($match)) {
+                $match->delete();
+            }
+            $favorite->delete();
         }
         $product->delete();
 
