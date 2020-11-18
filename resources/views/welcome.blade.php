@@ -100,8 +100,8 @@
             min-width: 220px;
         }
 
-        .success-color {
-            background-color: #28a745;
+        .success-color, .btn-green {
+            background-color: #34BF30;
             color: #fff;
         }
 
@@ -157,7 +157,7 @@
                                 <ul class="pl-0 mb-0 list-unstyled">
                                     <li>
                                         @guest
-                                            <a href="{{ url('login') }}" class="btn btn-white d-none-sm d-block-md d-block-lg d-block-xl"> INICIA SESIÓN </a>
+                                            <a href="{{ url('login') }}" class="btn btn-white d-none-sm d-block-md d-block-lg d-block-xl" style="font-style: unset;"> INICIA SESIÓN </a>
                                         @endguest
                                         @auth
                                         <li>
@@ -182,8 +182,9 @@
                 <li style="display:flex;background-image: url({{ asset('homes/assets/images/imagen-slider-02-06-min.jpg') }} ); background-size: cover;">
                     <div class="caption"style="display:flex;">
 						<div style="margin:auto;width:100%;">
-							<h1> Aquí podrás subir los productos que <br> no necesitas pero que alguien más si </h1>
-							<div class="registrate-button">
+                            <h1 style="font-weight: 600;"><b> PARA QUE COMPRAR <br> SI PUEDES CAMBIAR </b></h1>
+							<p> Aquí podrás subir los productos que <br> no necesitas pero que alguien más si </p>
+							<div class="registrate-button" style="font-weight: bold;">
 								<a href="{{ url('register') }}" class="btn btn-green"> REGÍSTRATE </a>
 							</div>
 						</div>
@@ -192,15 +193,17 @@
             </ul>
         </div>
     </div>
+    
     <section id="b-products">
         <div class="b-section_title text-center">
-            <h4 class="text-uppercase text-azul">
+            <h4 class="text-uppercase text-azul lato-font" style="margin:0;">
                 SE PARTE DE KÁMBIALO
             </h4>
-            <h1>
+            <h1 style="position: relative; font-weight: lighter;" class="lato-font">
                 ¿CÓMO FUNCIONA?
-                <!--<span class="b-title_separator"><span></span></span>-->
+                <span class="b-title_separator"><span></span></span>
             </h1>
+            <br><br><br><br><br>
         </div>
         <div class="b-products b-product_grid b-product_grid_four mb-4">
             <div class="container">
@@ -229,13 +232,17 @@
             </div>
         </div>
     </section>
+    <br><br>
     <section id="b-products_cat">
         <div class="b-section_title text-center">
-            <h4 class="text-uppercase text-azul">
+            <h4 class="text-uppercase text-azul lato-font" style="margin:0;">
                 LO MÁS KAMBIADO
             </h4>
-            <h1>CATEGORÍAS DESTACADAS
+            <h1 style="position: relative; font-weight: lighter;" class="lato-font">
+                CATEGORÍAS DESTACADAS
+                <span class="b-title_separator"><span></span></span>
             </h1>
+            <br><br><br><br><br>
         </div>
         <div class="b-featured_cat">
             <div class="container">
@@ -292,11 +299,17 @@
             </div>
         </div>
     </section>
-
+    <br><br><br><br>
     <section id="b-products_cat">
         <div class="b-section_title text-center">
-            <h1>PRODUCTOS PUBLICADOS RECIENTEMENTE
+            <h4 class="text-uppercase text-azul lato-font" style="margin:0;">
+                SE KAMBIAN
+            </h4>
+            <h1 style="position: relative; font-weight: lighter;" class="lato-font">
+                ULTIMOS SUBIDOS
+                <span class="b-title_separator"><span></span></span>
             </h1>
+            <br><br><br><br><br>
         </div>
         <div class="b-featured_cat">
             <div class="container">
@@ -317,27 +330,28 @@
             </div>
         </div>
     </section>
-
-    <section id="sobre">
+    <br><br><br><br>
+    <section id="sobre" style="background-color: #f4f4f4;">
         <div class="b-section_title text-center">
-            <h4 class="text-uppercase text-azul">
+            <h4 class="text-uppercase text-azul lato-font" style="margin:0;">
                 KÁMBIALO
             </h4>
-            <h1>
+            <h1 style="position: relative; font-weight: lighter;" class="lato-font">
                 PLANES
-                <!--<span class="b-title_separator"><span></span></span>-->
+                <span class="b-title_separator"><span></span></span>
             </h1>
+            <br><br><br><br><br>
         </div>
         <div class="b-products b-product_grid b-product_grid_four mb-4">
             <div class="container">
                 <div class="card-deck mb-3 text-center">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-header" style="background-color: transparent; color: #000;">
-                            <h3>Plan 1</h3>
-                            <p>básico</p>
+                            <h3 style="margin: 0;">Plan 1</h3>
+                            <small class="text-muted" style="margin:0;">básico</small>
                         </div>
                         <div class="card-body success-color">
-                            <h1 class="card-title pricing-card-titler" style="color: #fff;">$2.000</h1>
+                            <h1 class="card-title pricing-card-titler" style="color: #fff;margin:0;">$2.000</h1>
                         </div>
                         <div class="card-footer">
                             <p class="card-title">1 Producto</p>
@@ -348,11 +362,11 @@
                     </div>
                     <div class="card mb-4 shadow-sm">
                         <div class="card-header" style="background-color: transparent; color: #000;">
-                            <h3>Plan 2</h3>
-                            <p>básico</p>
+                            <h3 style="margin: 0;">Plan 2</h3>
+                            <small class="text-muted" style="margin:0;">básico</small>
                         </div>
                         <div class="card-body success-color">
-                            <h1 class="card-title pricing-card-titler" style="color: #fff;">$6.000</h1>
+                            <h1 class="card-title pricing-card-titler" style="color: #fff;margin:0;">$6.000</h1>
                         </div>
                         <div class="card-footer">
                             <p class="card-title">Hasta 5 Productos</p>
@@ -363,11 +377,11 @@
                     </div>
                     <div class="card mb-4 shadow-sm">
                         <div class="card-header" style="background-color: transparent; color: #000;">
-                            <h3>Plan 3</h3>
-                            <p>básico</p>
+                            <h3 style="margin: 0;">Plan 3</h3>
+                            <small class="text-muted" style="margin:0;">básico</small>
                         </div>
                         <div class="card-body success-color">
-                            <h1 class="card-title pricing-card-titler" style="color: #fff;">$12.000</h1>
+                            <h1 class="card-title pricing-card-titler" style="color: #fff;margin:0;">$12.000</h1>
                         </div>
                         <div class="card-footer">
                             <p class="card-title">Hasta 15 Productos</p>
@@ -382,11 +396,11 @@
     </section>
     <div id="b-gallery_logo_outer">
         <div class="b-gallery_logo"
-             style="background-image:url({{ asset('assets/img/imagen-comunidad-10.jpg') }}) ; background-size: 100% 100%;">
+             style="background-image:url({{ asset('assets/img/imagen-comunidad-10.jpg') }}) ; background-size: cover; background-position: center;">
             <div class="container">
                 <div class="row clearfix">
                     <div class="col-md-12">
-                        <div class="kb-commission">
+                        <div class="kb-commission" style="padding: 10% 0;">
                             <h1>¿TIENES UNA COMUNIDAD?</h1>
                             <p>PRONTO PODRÁS GANAR COMISIÓN POR TU COMUNIDAD</p>
                         </div>
@@ -416,22 +430,22 @@
                 </div>
                 <div class="b-footer_column col-lg-3 col-md-3 col-sm-6 mb-4">
                     <div class="b-footer_block">
-                        <h5 class="b-footer_block_title"><a href="#">TÉRMINOS Y CONDICIONES</a></h5>
+                        <a style="color:white;" href="#">TÉRMINOS Y CONDICIONES</a>
                     </div>
                 </div>
                 <div class="b-footer_column col-lg-3 col-md-3 col-sm-6 mb-4">
                     <div class="b-footer_block">
-                        <h5 class="b-footer_block_title"><a href="#">CALCULA TU ENVÍO</a></h5>
+                        <a style="color:white;" href="#">CALCULA TU ENVÍO</a>
                     </div>
                 </div>
                 <div class="b-footer_column col-lg-3 col-md-3 col-sm-6 mb-4">
                     <div class="b-footer_block">
-                        <h5 class="b-footer_block_title"><a href="#">DONACIONES</a></h5>
+                        <a style="color:white;" href="#">DONACIONES</a>
                     </div>
                 </div>
                 <div class="b-footer_column col-lg-3 col-md-3 col-sm-6 mb-4">
                     <div class="b-footer_block">
-                        <h5 class="b-footer_block_title"><a href="#">CONTACTO</a></h5>
+                        <a style="color:white;" href="#">CONTACTO</a>
                     </div>
                 </div>
             </aside>
