@@ -49,7 +49,7 @@
     }
 
     var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
-      cluster: 'us3',
+      cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
       authEndpoint: 'broadcasting/auth',
     });
 
