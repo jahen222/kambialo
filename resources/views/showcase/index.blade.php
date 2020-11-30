@@ -4,10 +4,10 @@
 <card-component v-bind:category="'{{ request('category') }}'" v-bind:url="'{{ url()->to('product') }}'" v-bind:public="'{{ config('constants.publicUrl') }}'"></card-component>
 
 <div class="nav-bottom">
-  <div><a href="{{ url()->to('/') }}"><i class="material-icons">home</i></a></div>
+  <div><a href="{{ url()->to('/') }}"><img style="max-height: 24px;" src="{{ url()->to(config('constants.publicUrl') . 'images/iconos app-06.png') }}" alt=""></a></div>
   <div class="dropdown show">
     <a style="color:white;" href="#" onclick="resetNotification()" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <i class="material-icons">notifications</i>
+      <img style="max-height: 24px;" src="{{ url()->to(config('constants.publicUrl') . 'images/iconos app-09.png') }}" alt="">
       @if($user = auth()->user())
         <span style="{{ count($user->unreadNotifications) ?: 'display:none;' }}" class="notification" id="notification-number">{{ count($user->unreadNotifications) }}</span>
       @endif
@@ -20,9 +20,9 @@
     </div>
     @endif
   </div>
-  <div><a href="{{ route('product.create') }}"><i class="material-icons">add_circle</i></a></div> 
-  <div><a href="{{ route('matches.index') }}"><i class="material-icons">message</i></a></div>
-  <div><a href="#"><i class="material-icons">person</i></a></div>
+  <div><a href="{{ route('product.create') }}"><img style="max-height: 24px;" src="{{ url()->to(config('constants.publicUrl') . 'images/iconos app-08.png') }}" alt=""></a></div> 
+  <div><a href="{{ route('matches.index') }}"><img style="max-height: 24px;" src="{{ url()->to(config('constants.publicUrl') . 'images/iconos app-07.png') }}" alt=""></a></div>
+  <div><a href="#"><img style="max-height: 24px;" src="{{ url()->to(config('constants.publicUrl') . 'images/iconos app-10.png') }}" alt=""></a></div>
 </div>
 @endsection
 @section('scripts')
