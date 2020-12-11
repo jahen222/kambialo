@@ -38,6 +38,7 @@ body{
 
 *:not([class*="icon"]):not([class*="fa"]):not([class*="lato-font"]){
 	font-family: "avenir", "Karla", "roboto", "sans-serif"!important;
+    font-weight: 100;
 }
 
 .lato-font{

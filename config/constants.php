@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'publicUrl' => ''
+    'publicUrl' => 'system/public/'
 ];
