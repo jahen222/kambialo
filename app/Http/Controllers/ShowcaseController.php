@@ -83,8 +83,9 @@ class ShowcaseController extends Controller
             $match = Match::whereIn('user_id_1', [$user->id, $userProduct->id])->whereIn('user_id_2', [$user->id, $userProduct->id])->first();
             if (!$match) {
                 if ($allUserProducts = $userProduct->favorites()->get()->toArray()) {
-                    if ($user->products()->whereIn('id', array_column($allUserProducts, 'product_id'))->get())
+                    if ($user->products()->whereIn('id', array_column($allUserProducts, 'product_id'))->first()){
                         $match = Match::create(['user_id_1' => $user->id, 'user_id_2' => $userProduct->id]);
+                    }
                 }
             }
         }
@@ -93,7 +94,7 @@ class ShowcaseController extends Controller
             'favorite' => (bool) ($favorite ?? false),
             'favoriteMessage' => $favoriteMessage,
             'match' => (bool) ($match ?? false),
-            'matchMessage' => '',
+            'matchMessage' => 'Ha realizado un match',
         ];
     }
 
