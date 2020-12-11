@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'publicUrl' => 'system/public/'
+    //'publicUrl' => 'system/public/' //Server
+    'publicUrl' => '' //Local
 ];
