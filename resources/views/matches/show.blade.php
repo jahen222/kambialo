@@ -49,6 +49,23 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="well" style="margin-top: 20px;">
+                    <h3>Otros productos de {{ $userMatch->name }} </h3>
+                    <div class="col-md-4">
+                        <div class="slideshow-container" id="slide3">
+                            @foreach($userMatch->products()->get() as $key => $value)
+                                <div class="mySlides">
+                                    <img style="width:100%" src="{{ url()->to(config('constants.publicUrl') . 'images/' . $value->cover_image) }}"
+                                         alt="{{$value->cover_image}}" style="width:100%">
+                                </div>
+                            @endforeach
+                            <a class="prev btn-circle prev-slide" onclick="plusSlides(-1, 'slide3')">&#10094;</a>
+                            <a class="next btn-circle next-slide" onclick="plusSlides(1, 'slide3')">&#10095;</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             @if(($match->user_id_1 == auth()->user()->id && !$match->user_id_1_confirm)
                 || ($match->user_id_2 == auth()->user()->id && !$match->user_id_2_confirm))
@@ -77,6 +94,7 @@
         var slideIndex = 1;
         showSlides(slideIndex, "slide1");
         showSlides(slideIndex, "slide2");
+        showSlides(slideIndex, "slide3");
 
         function plusSlides(n, id = "") {
             showSlides(slideIndex += n, id);
