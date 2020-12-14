@@ -26,7 +26,7 @@
             @endif
         </div>
         <div><a href="{{ route('product.create') }}"><img style="max-height: 24px;" src="{{ asset('assets/img/iconos_app-08.png') }}" alt=""></a></div>
-        <div><a href="{{ route('matches.index') }}"><img style="max-height: 24px;" src="{{ asset('assets/img/iconos_app-07.png') }}" alt=""></a></div>
+        <!--<div><a href="{{ route('matches.index') }}"><img style="max-height: 24px;" src="{{ asset('assets/img/iconos_app-07.png') }}" alt=""></a></div>-->
         <div><a href="#"><img style="max-height: 24px;" src="{{ asset('assets/img/iconos_app-10.png') }}" alt=""></a></div>
     </div>
 @endsection
