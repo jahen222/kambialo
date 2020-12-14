@@ -86,7 +86,7 @@ class MatchController extends Controller
             $match->user_id_2_message = $request->input('message');
         }
 
-        $userMatch->notify(new MatchConfirm($user, $match));
+        $userMatch->notify(new MatchConfirm($user, $match, "El usuario {$user->name} ha aceptado compartir su informacion"));
 
         $match->save();
         return redirect('/match/' . $match->id)->with('success', 'Confirmado exitosamente');

@@ -14,16 +14,18 @@ class MatchConfirm extends Notification
 
     private $userMatch;
     private $match;
+    private $message;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($userMatch, $match)
+    public function __construct($userMatch, $match, $message)
     {
         $this->userMatch = $userMatch;
         $this->match = $match;
+        $this->message = $message;
     }
 
     /**
@@ -81,7 +83,7 @@ class MatchConfirm extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => "El usuario {$notifiable->name} ha aceptado compartir su informacion",
+            'message' => $this->message,
             'url' => route('match.show', $this->match->id)
         ];
     }

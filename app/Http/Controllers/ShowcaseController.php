@@ -7,6 +7,7 @@ use App\User;
 use App\Product;
 use App\Favorite;
 use App\Match;
+use App\Notifications\MatchConfirm;
 
 class ShowcaseController extends Controller
 {
@@ -85,6 +86,7 @@ class ShowcaseController extends Controller
                 if ($allUserProducts = $userProduct->favorites()->get()->toArray()) {
                     if ($user->products()->whereIn('id', array_column($allUserProducts, 'product_id'))->first()){
                         $match = Match::create(['user_id_1' => $user->id, 'user_id_2' => $userProduct->id]);
+                        $userProduct->notify(new MatchConfirm($user, $match, "El usuario {$user->name} ha hecho match contigo"));
                     }
                 }
             }
