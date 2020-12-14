@@ -88,6 +88,11 @@
                     <small class="form-text text-danger">@error('email') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
+                    <input type="text" name="users[telephone]" value="{{ old('users.telephone') }}" required class="form-control">
+                    <small class="form-text text-muted">Telefono</small>
+                    <small class="form-text text-danger">@error('telephone') {{ $message }} @enderror</small>
+                </div>
+                <div class="form-group">
                     <select class="custom-select js-basic-multiple" id="comuna" name="users[comuna_id]">
                         <option value>Seleccionar comuna</option>
                         @foreach(App\Comuna::all() as $comuna)

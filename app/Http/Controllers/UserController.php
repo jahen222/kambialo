@@ -132,6 +132,8 @@ class UserController extends Controller
 					'firstname' => 'required',
 					'lastname' => 'required',
 					'telephone' => 'required',
+					'birthdate' => 'required',
+					'gender' => 'required',
 				],
 				[
 					'email.required' => 'El correo electronico es requerido',
@@ -145,6 +147,8 @@ class UserController extends Controller
 					'firstname.required' => 'El Nombre es requerido',
 					'lastname.required' => 'El Apellido es requerido',
 					'telephone.required' => 'El Telefono es requerido',
+					'birthdate.required' => 'La fecha de nacimiento es requerido',
+					'gender.required' => 'El sexo es requerido',
 				]
 			)->validate();
 			
@@ -155,7 +159,9 @@ class UserController extends Controller
 				'password' => $data['password'] ? Hash::make($data['password']) : $user->password,
 				'firstname' => $data['firstname'],
 				'lastname' => $data['lastname'],
-				'telephone' => $data['telephone']
+				'telephone' => $data['telephone'],
+				'birthdate' => $data['birthdate'],
+				'gender' => $data['gender'],
 			]);
 			return redirect('/user/edit/'.$id)->with('success', 'Perfil actualizado con éxito.');
 		}
