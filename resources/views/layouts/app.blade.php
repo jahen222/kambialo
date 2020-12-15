@@ -23,6 +23,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/material/css/mdb.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/style.css') }}">
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/jquery-ui/jquery-ui.min.css') }}">
+
     <!-- Styles -->
     <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
 </head>
@@ -74,6 +76,8 @@
     <script src="https://kit.fontawesome.com/18f61f0b58.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ asset('assets/material/js/mdb.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/app.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('js/jquery-ui/jquery-ui.min.js') }}"></script>
     @yield('scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 

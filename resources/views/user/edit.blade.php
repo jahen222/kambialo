@@ -56,12 +56,16 @@
 				</div>
 				<div class="form-group">
 					<label for="birthdate">Fecha de nacimiento</label>
-					<input type="text" class="form-control" name="users[birthdate]" id="birthdate" value="{{ old('users.birthdate') ?? $user->birthdate }}" >
+					<input type="text" class="form-control datepicker" name="users[birthdate]" id="birthdate" value="{{ old('users.birthdate') ?? $user->birthdate }}" >
 					<small class="form-text text-danger">@error('birthdate') {{ $message }} @enderror</small>
 				</div>
 				<div class="form-group">
 					<label for="gender">Sexo</label>
-					<input type="text" class="form-control" name="users[gender]" id="gender" value="{{ old('users.gender') ?? $user->gender }}" >
+					<select class="custom-select js-basic-multiple" id="gender" name="users[gender]">
+						@foreach(config('constants.genders') as $key => $value)
+							<option {{ (old('users.gender') ==  $key) ? 'selected' : '' }}  value="{{ $key }}">{{ $value }}</option>
+						@endforeach
+					</select>
 					<small class="form-text text-danger">@error('gender') {{ $message }} @enderror</small>
 				</div>
 				<div class="form-group">
@@ -81,4 +85,5 @@
 	</div>
 	{{-- @include('inc.footer') --}}
 </div>
+
 @endsection

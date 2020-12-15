@@ -54,6 +54,20 @@
 					<small class="form-text text-danger">@error('telephone') {{ $message }} @enderror</small>
 				</div>
 				<div class="form-group">
+					<label for="birthdate">Fecha de nacimiento</label>
+					<input type="text" class="form-control datepicker" name="users[birthdate]" id="birthdate" value="{{ old('users.birthdate') ?? $user->birthdate }}" >
+					<small class="form-text text-danger">@error('birthdate') {{ $message }} @enderror</small>
+				</div>
+				<div class="form-group">
+					<label for="gender">Sexo</label>
+					<select class="custom-select js-basic-multiple" id="gender" name="users[gender]">
+						@foreach(config('constants.genders') as $key => $value)
+							<option {{ (old('users.gender') ==  $key) ? 'selected' : '' }}  value="{{ $key }}">{{ $value }}</option>
+						@endforeach
+					</select>
+					<small class="form-text text-danger">@error('gender') {{ $message }} @enderror</small>
+				</div>
+				<div class="form-group">
 					<label for="password">Contraseña</label>
 					<input type="password" class="form-control" name="users[password]" id="password" value="{{ old('users.password') }}">
 					<small class="form-text text-danger">@error('password') {{ $message }} @enderror</small>
