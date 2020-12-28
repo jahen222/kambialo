@@ -10,7 +10,7 @@
                     @if(($match->user_id_1 == $userMatch->id && $match->user_id_1_confirm)
                         || ($match->user_id_2 == $userMatch->id && $match->user_id_2_confirm))
                         <p class="blog-product-meta">Email: {{ $userMatch->email }} </p>
-                        <p class="blog-product-meta">Telefono: {{ $userMatch->telephone }} </p>
+                        <p class="blog-product-meta">Telefono: <a href="https://wa.me/{{ $userMatch->telephone }}" target="_blank">{{ $userMatch->telephone }}</a></p>
                         <p>Mensaje: {{ $match->user_id_1 == $userMatch->id ? $match->user_id_1_message : $match->user_id_2_message }}  </p>
                     @endif
                 </div>

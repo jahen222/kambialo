@@ -24,9 +24,10 @@ class ShowcaseController extends Controller
     public function data(Request $request)
     {
 		$products = $this->_search();
-		if($request->input('category'))
-			$products->where('category_id', $request->input('category'));
-		
+		if($request->input('category')) {
+            $products->where('category_id', $request->input('category'));
+        }
+
         return [
             'products' => $products->get(),
             'categories' => \App\Category::all(),
@@ -38,26 +39,31 @@ class ShowcaseController extends Controller
     private function _search()
     {
         $_query = Product::distinct()->select(['users.comuna_id','products.*'])->join('users', 'users.id', '=', 'products.user_id')
-        ->leftJoin('product_tag', 'product_tag.product_id', '=', 'products.id')
-        ->leftJoin('tags', 'product_tag.tag_id', '=', 'tags.id')->with('images')->withCount('favorites');
-        if($user = auth()->user())
-            $_query->orderByRaw('users.comuna_id = '.$user->comuna_id.' DESC');
+            ->leftJoin('product_tag', 'product_tag.product_id', '=', 'products.id')
+            ->leftJoin('tags', 'product_tag.tag_id', '=', 'tags.id')->with('images')->withCount('favorites');
+
+        if($user = auth()->user()) {
+            $_query->orderByRaw('users.comuna_id = ' . $user->comuna_id . ' DESC');
+        }
+
         $_query->orderBy('favorites_count', 'DESC');
         return $_query;
     }
 
-
     public function search(Request $request)
     {
         $products = $this->_search();
-        if ($request->input('categories'))
+        if ($request->input('categories')) {
             $products->whereIn('category_id', $request->input('categories'));
+        }
 
-        if ($request->input('comunas'))
+        if ($request->input('comunas')) {
             $products->whereIn('comuna_id', $request->input('comunas'));
+        }
 
-        if ($request->input('tags'))
+        if ($request->input('tags')) {
             $products->whereIn('tag_id', $request->input('tags'));
+        }
 
         $products->where(function ($query) use ($request) {
             $query->orWhere('products.name', 'like', $request->input('search') . '%')
@@ -69,19 +75,20 @@ class ShowcaseController extends Controller
     public function favorite(Request $request)
     {
         $favoriteMessage = 'Agregado a favorito';
-        if(!auth()->user())
+        if(!auth()->user()) {
             $favoriteMessage = 'Debe iniciar sesion para agregar a favorito';
-        else{
+        } else {
             $user_id = auth()->user()->id;
             $user = User::find($user_id);
-    
+
             $product = Product::where('id', $request->input('id'))->first();
             $userProduct = $product->user()->first();
-    
+
             $favorite = $user->favorites()->where('product_id', $product->id)->first();
-            if (!$favorite)
+            if (!$favorite) {
                 $favorite = Favorite::create(['product_id' => $request->input('id'), 'user_id' => $user->id]);
-    
+            }
+
             $match = Match::whereIn('user_id_1', [$user->id, $userProduct->id])->whereIn('user_id_2', [$user->id, $userProduct->id])->first();
             if (!$match) {
                 if ($allUserProducts = $userProduct->favorites()->get()->toArray()) {
