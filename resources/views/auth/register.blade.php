@@ -66,8 +66,8 @@
             </div>
         <?php endif ?>
         <div class="icon-breakcump">
-            <img src="assets/img/icon-k.png">
-            <h4>REGISTRO</h4>
+            <img src="assets/img/iconos-registro.png">
+            <h4>DATOS DE ACCESO</h4>
         </div>
     </div>
 </section>
@@ -76,15 +76,15 @@
         <form method="POST" action="{{ route('preregister') }}" class="form-register form-registro-step card">
             @csrf
             <fieldset>
-                <label class="color-green">Ingrese los datos</label>
+                <label class="color-green">Ingresa tus datos</label>
                 <div class="form-group">
                     <input type="text" name="users[name]" value="{{ old('users.name') }}" required class="form-control">
-                    <small class="form-text text-muted">Nombre de Usuario</small>
+                    <small class="form-text text-muted">Nombre de usuario</small>
                     <small class="form-text text-danger">@error('name') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
                     <input type="email" name="users[email]" value="{{ old('users.email') }}" required class="form-control">
-                    <small class="form-text text-muted">Correo Electrónico</small>
+                    <small class="form-text text-muted">Correo electrónico</small>
                     <small class="form-text text-danger">@error('email') {{ $message }} @enderror</small>
                 </div>
                 <div class="form-group">
