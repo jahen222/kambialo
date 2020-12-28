@@ -87,7 +87,8 @@ class ShowcaseController extends Controller
                 if ($allUserProducts = $userProduct->favorites()->get()->toArray()) {
                     if ($user->products()->whereIn('id', array_column($allUserProducts, 'product_id'))->first()){
                         $match = Match::create(['user_id_1' => $user->id, 'user_id_2' => $userProduct->id]);
-                        $userProduct->notify(new MatchConfirm($user, $match, "El usuario {$user->name} ha hecho match contigo"));
+                        $userProduct->notify(new MatchConfirm($user, $match, "El usuario {$user->name} ha hecho match contigo", "Kambialo - Haz hecho Match"));
+                        $user->notify(new MatchConfirm($userProduct, $match, "El usuario {$userProduct->name} ha hecho match contigo", "Kambialo - Haz hecho Match", ['mail']));
                     }
                 }
             }

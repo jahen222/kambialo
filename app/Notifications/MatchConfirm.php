@@ -15,17 +15,21 @@ class MatchConfirm extends Notification
     private $userMatch;
     private $match;
     private $message;
+    private $subject;
+    private $via;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($userMatch, $match, $message)
+    public function __construct($userMatch, $match, $message, $subject = 'Kambialo - Han confimado el Match', array $via = ['broadcast', 'database', 'mail'])
     {
         $this->userMatch = $userMatch;
         $this->match = $match;
         $this->message = $message;
+        $this->subject = $subject;
+        $this->via = $via;
     }
 
     /**
@@ -36,7 +40,7 @@ class MatchConfirm extends Notification
      */
     public function via($notifiable)
     {
-        return ['broadcast', 'database', 'mail'];
+        return $this->via;
     }
 
     /**
@@ -47,7 +51,7 @@ class MatchConfirm extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->view(
+        return (new MailMessage)->subject($this->subject)->view(
             'emails.match',
             ['user' => $notifiable, 'userMatch' => $this->userMatch, 'match' => $this->match]
         );

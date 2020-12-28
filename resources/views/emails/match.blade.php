@@ -100,9 +100,14 @@
                 <td>Email: {{ $userMatch->email }}</td>
             </tr>
             <tr>
-                <td>Mensaje:
-                    {{ $match->user_id_1 == $userMatch->id ? $match->user_id_1_message : $match->user_id_2_message }}</td>
+                <td>Telefono: {{ $userMatch->telephone }}</td>
             </tr>
+            @if(($match->user_id_1 == $userMatch->id && $match->user_id_1_message) 
+                || ($match->user_id_2 == $userMatch->id && $match->user_id_2_message))
+                <tr>
+                    <td>Mensaje: {{ $match->user_id_1 == $userMatch->id ? $match->user_id_1_message : $match->user_id_2_message }}</td>
+                </tr>
+            @endif
             <tr>
                 <td>
                     <h3>Tus matchs con {{ $userMatch->name }}</h3>
