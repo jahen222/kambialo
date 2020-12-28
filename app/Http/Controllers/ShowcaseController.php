@@ -37,12 +37,13 @@ class ShowcaseController extends Controller
 
     private function _search()
     {
-        $_query = Product::distinct()->join('users', 'users.id', '=', 'products.user_id')
+        $_query = Product::distinct()->select(['users.comuna_id','products.*'])->join('users', 'users.id', '=', 'products.user_id')
         ->leftJoin('product_tag', 'product_tag.product_id', '=', 'products.id')
         ->leftJoin('tags', 'product_tag.tag_id', '=', 'tags.id')->with('images')->withCount('favorites');
-        if(!auth()->user())
-            return $_query;
-        return $_query->where('products.user_id', '!=', auth()->user()->id);        
+        if($user = auth()->user())
+            $_query->orderByRaw('users.comuna_id = '.$user->comuna_id.' DESC');
+        $_query->orderBy('favorites_count', 'DESC');
+        return $_query;
     }
 
 

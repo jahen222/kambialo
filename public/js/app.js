@@ -2324,12 +2324,13 @@ var _clickDownPosY = '';
                   element.style.opacity = 0;
                 }, 1500);
 
-                if (response.data.match) {
+                if (response.data.match == true) {
                   elementInfo = document.getElementById('xtra-message-info');
+                  elementInfo.innerHTML = response.data.matchMessage;
                   elementInfo.style.opacity = 1;
                   timeoutInfo = setTimeout(function () {
                     elementInfo.style.opacity = 0;
-                  }, 2500);
+                  }, 1500);
                 }
 
               case 9:
@@ -58402,8 +58403,8 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   authEndpoint: 'http://localhost/kambialo/public/broadcasting/auth',
-  key: "97c2397e96499bcf7440",
-  cluster: "us3",
+  key: "3d085d7de41662fa7c4e",
+  cluster: "mt1",
   forceTLS: true
 });
 

@@ -283,7 +283,7 @@ export default {
     {
       const card = this.cards[index];
       const response = await axios.post(`showcase/favorite`, {id: card.id});
-
+      
       const element = document.getElementById('xtra-message');
       element.innerHTML = response.data.favoriteMessage;
       element.style.opacity = 1;
@@ -291,12 +291,13 @@ export default {
         element.style.opacity = 0;
       },1500);
 
-      if(response.data.match){
+      if(response.data.match == true){
         const elementInfo = document.getElementById('xtra-message-info');
+        elementInfo.innerHTML = response.data.matchMessage;
         elementInfo.style.opacity = 1;
         timeoutInfo = setTimeout(function(){
           elementInfo.style.opacity = 0;
-        },2500);
+        },1500);
       }
     },
     clickDown(event){
