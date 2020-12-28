@@ -51,7 +51,7 @@ class UserController extends Controller
 					'confirm_password' => 'required|same:password',
 					'firstname' => 'required',
 					'lastname' => 'required',
-					'telephone' => 'required',
+					'telephone' => 'required|numeric|digits_between:10,12',
 				],
 				[
 					'email.required' => 'El correo electronico es requerido',
@@ -66,7 +66,9 @@ class UserController extends Controller
 					'confirm_password.same' => 'Las contraseñas no coinciden',
 					'firstname.required' => 'El Nombre es requerido',
 					'lastname.required' => 'El Apellido es requerido',
-					'telephone.required' => 'El Telefono es requerido',
+					'telephone.required' => 'Telefono es requerido',
+                    'telephone.numeric' => 'Telefono debe ser numerico',
+                    'telephone.digits_between' => 'Telefono debe tener entre 10 y 12 dígitos.',
 				]
 			)->validate();
 			
@@ -131,7 +133,7 @@ class UserController extends Controller
 					'confirm_password' => 'required_with:password|same:password',
 					'firstname' => 'required',
 					'lastname' => 'required',
-					'telephone' => 'required',
+					'telephone' => 'required|numeric|digits_between:10,12',
 					'birthdate' => 'required',
 					'gender' => 'required',
 				],
@@ -146,7 +148,9 @@ class UserController extends Controller
 					'confirm_password.same' => 'Las contraseñas no coinciden',
 					'firstname.required' => 'El Nombre es requerido',
 					'lastname.required' => 'El Apellido es requerido',
-					'telephone.required' => 'El Telefono es requerido',
+					'telephone.required' => 'Telefono es requerido',
+                    'telephone.numeric' => 'Telefono debe ser numerico',
+                    'telephone.digits_between' => 'Telefono debe tener entre 10 y 12 dígitos.',
 					'birthdate.required' => 'La fecha de nacimiento es requerido',
 					'gender.required' => 'El sexo es requerido',
 				]
@@ -160,7 +164,7 @@ class UserController extends Controller
 				'firstname' => $data['firstname'],
 				'lastname' => $data['lastname'],
 				'telephone' => $data['telephone'],
-				'birthdate' => $data['birthdate'],
+				'birthdate' => date('Y-m-d', strtotime($data['birthdate'])),
 				'gender' => $data['gender'],
 			]);
 			return redirect('/user/edit/'.$id)->with('success', 'Perfil actualizado con éxito.');

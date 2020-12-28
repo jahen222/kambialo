@@ -57,7 +57,7 @@ class RegisterController extends Controller
                     'name' => 'required',
                     'email' => 'required|unique:users',
                     'subscription_id' => 'required',
-                    'telephone' => 'required',
+                    'telephone' => 'required|numeric|digits_between:10,12',
                     'comuna_id' => 'required',
 					'password' => 'required',
                 ],
@@ -67,6 +67,8 @@ class RegisterController extends Controller
 					'email.required' => 'El correo electronico es requerido',
                     'email.unique' => 'El correo electronico se encuentra en uso',
                     'telephone.required' => 'Telefono es requerido',
+                    'telephone.numeric' => 'Telefono debe ser numerico',
+                    'telephone.digits_between' => 'Telefono debe tener entre 10 y 12 dígitos.',
                     'comuna_id.required' => 'Comuna es requerido',
 					'password.required' => 'Contraseña es requerido',
                 ]

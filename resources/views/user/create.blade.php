@@ -55,7 +55,7 @@
 				</div>
 				<div class="form-group">
 					<label for="birthdate">Fecha de nacimiento</label>
-					<input type="text" class="form-control datepicker" name="users[birthdate]" id="birthdate" value="{{ old('users.birthdate') ?? $user->birthdate }}" >
+					<input type="text" readonly  class="form-control datepicker" name="users[birthdate]" id="birthdate" value="{{ old('users.birthdate') ?? $user->birthdate }}" >
 					<small class="form-text text-danger">@error('birthdate') {{ $message }} @enderror</small>
 				</div>
 				<div class="form-group">
