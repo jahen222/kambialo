@@ -3,7 +3,7 @@
 @section('content')
     <card-component v-bind:category="'{{ request('category') }}'" v-bind:url="'{{ url()->to('product') }}'" v-bind:public="'{{ config('constants.publicUrl') }}'"></card-component>
 
-    <div class="nav-bottom" style="margin-bottom: 10px;">
+    <div class="nav-bottom" style="margin-bottom: 10px; z-index: 1000;">
         <div><a href="{{ url()->to('/') }}"><img style="max-height: 24px;" src="{{ asset('assets/img/iconos_app-06.png') }}"alt=""></a></div>
         <div class="dropdown show">
             <a style="color:white;" href="#" onclick="resetNotification()" role="button" id="dropdownMenuLink"
