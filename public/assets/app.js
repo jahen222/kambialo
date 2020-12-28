@@ -101,6 +101,8 @@ $(document).ready(function () {
         dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
         weekHeader: 'Sm',
         dateFormat: 'dd-mm-yy',
-        maxDate: 0
+        maxDate: 0,
+        changeYear: true,
+        changeMonth: true,
     });
 });
