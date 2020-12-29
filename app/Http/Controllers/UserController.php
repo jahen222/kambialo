@@ -43,7 +43,7 @@ class UserController extends Controller
 			Validator::make(
 				$data,
 				[
-					'email' => ['required',Rule::unique('users')],
+					'email' => ['required|email',Rule::unique('users')],
 					'name' => ['required',Rule::unique('users')],
 					'comuna_id' => 'required',
 					'subscription_id' => 'required',
@@ -54,24 +54,24 @@ class UserController extends Controller
 					'telephone' => 'required|numeric|digits_between:10,12',
 				],
 				[
-					'email.required' => 'El correo electronico es requerido',
-					'email.unique' => 'El correo electronico se encuentra en uso',
+					'email.required' => 'El correo electrónico es requerido',
+					'email.unique' => 'El correo electrónico se encuentra en uso',
 					'name.required' => 'El nombre de usuario es requerido',
 					'name.unique' => 'El nombre de usuario se encuentra en uso',
 					'comuna_id.required' => 'Comuna es requerido',
-					'subscription_id.required' => 'Subscripcion es requerido',
+					'subscription_id.required' => 'Subscripción es requerido',
 					'password.required' => 'Contraseña es requerido',
 					'confirm_password.required' => 'Confirmar contraseña es requerido',
 					'password.same' => 'Las contraseñas no coinciden',
 					'confirm_password.same' => 'Las contraseñas no coinciden',
 					'firstname.required' => 'El Nombre es requerido',
 					'lastname.required' => 'El Apellido es requerido',
-					'telephone.required' => 'Telefono es requerido',
-                    'telephone.numeric' => 'Telefono debe ser numerico',
-                    'telephone.digits_between' => 'Telefono debe tener entre 10 y 12 dígitos.',
+					'telephone.required' => 'Teléfono es requerido',
+                    'telephone.numeric' => 'Teléfono debe ser numerico',
+                    'telephone.digits_between' => 'Teléfono debe tener entre 10 y 12 dígitos.',
 				]
 			)->validate();
-			
+
 			User::create([
 				'name' => $data['name'],
 				'email' => $data['email'],
@@ -124,10 +124,7 @@ class UserController extends Controller
 			Validator::make(
 				$data,
 				[
-					'email' => [
-						'required',
-						Rule::unique('users')->ignore($user->id),
-					],
+					'email' => ['required|email',Rule::unique('users')->ignore($user->id)],
 					'comuna_id' => 'required',
 					'password' => 'required_with:confirm_password|same:confirm_password',
 					'confirm_password' => 'required_with:password|same:password',
@@ -138,24 +135,24 @@ class UserController extends Controller
 					'gender' => 'required',
 				],
 				[
-					'email.required' => 'El correo electronico es requerido',
-					'email.unique' => 'El correo electronico se encuentra en uso',
+					'email.required' => 'El correo electrónico es requerido',
+					'email.unique' => 'El correo electrónico se encuentra en uso',
 					'comuna_id.required' => 'Comuna es requerido',
-					'subscription_id.required' => 'Subscripcion es requerido',
+					'subscription_id.required' => 'Subscripción es requerido',
 					'password.required_with' => 'Contraseña es requerido',
 					'confirm_password.required_with' => 'Confirmar contraseña es requerido',
 					'password.same' => 'Las contraseñas no coinciden',
 					'confirm_password.same' => 'Las contraseñas no coinciden',
 					'firstname.required' => 'El Nombre es requerido',
 					'lastname.required' => 'El Apellido es requerido',
-					'telephone.required' => 'Telefono es requerido',
-                    'telephone.numeric' => 'Telefono debe ser numerico',
-                    'telephone.digits_between' => 'Telefono debe tener entre 10 y 12 dígitos.',
+					'telephone.required' => 'Teléfono es requerido',
+                    'telephone.numeric' => 'Teléfono debe ser numerico',
+                    'telephone.digits_between' => 'Teléfono debe tener entre 10 y 12 dígitos.',
 					'birthdate.required' => 'La fecha de nacimiento es requerido',
 					'gender.required' => 'El sexo es requerido',
 				]
 			)->validate();
-			
+
 			$user->update([
 				'email' => $data['email'],
 				'comuna_id' => $data['comuna_id'],
@@ -181,7 +178,7 @@ class UserController extends Controller
 	{
 		$user = User::find($id);
         if (count($user->products()->get()))
-            return back()->with('error', 'No se puede eliminar, tiene informacion asociada.');
+            return back()->with('error', 'No se puede eliminar, tiene información asociada.');
 
 		$user->delete();
         return redirect('/users')->with('success', 'Usuario eliminado con éxito.');

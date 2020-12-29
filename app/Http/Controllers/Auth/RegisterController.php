@@ -27,7 +27,6 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
 
     /**
@@ -50,12 +49,11 @@ class RegisterController extends Controller
     public function preregister(Request $request)
     {
         if ($data = $request->input('users')) {
-
             Validator::make(
                 $data,
                 [
                     'name' => 'required',
-                    'email' => 'required|unique:users',
+                    'email' => 'required|email|unique:users',
                     'subscription_id' => 'required',
                     'telephone' => 'required|numeric|digits_between:10,12',
                     'comuna_id' => 'required',
@@ -63,29 +61,28 @@ class RegisterController extends Controller
                 ],
                 [
                     'name.required' => 'Usuario es requerido',
-                    'subscription_id.required' => 'Debe seleccionar un plan de subscripcion',
-					'email.required' => 'El correo electronico es requerido',
-                    'email.unique' => 'El correo electronico se encuentra en uso',
-                    'telephone.required' => 'Telefono es requerido',
-                    'telephone.numeric' => 'Telefono debe ser numerico',
-                    'telephone.digits_between' => 'Telefono debe tener entre 10 y 12 dígitos.',
+                    'subscription_id.required' => 'Debe seleccionar un plan de subscripción',
+					'email.required' => 'El correo electrónico es requerido',
+                    'email.unique' => 'El correo electrónico se encuentra en uso',
+                    'telephone.required' => 'Teléfono es requerido',
+                    'telephone.numeric' => 'Teléfono debe ser numérico',
+                    'telephone.digits_between' => 'Teléfono debe tener entre 10 y 12 dígitos.',
                     'comuna_id.required' => 'Comuna es requerido',
 					'password.required' => 'Contraseña es requerido',
                 ]
             )->validate();
 
-            
-            // Obtenemos los certificados y llaves para utilizar el ambiente de integración de Webpay Normal.  
+            // Obtenemos los certificados y llaves para utilizar el ambiente de integración de Webpay Normal.
             $bag = CertificationBagFactory::integrationWebpayNormal();
 
             $plus = TransbankServiceFactory::normal($bag);
             $sub = \App\Subscription::where('id', $data['subscription_id'])->first();
             $idOrder = date('YmdHis') . $sub->id;
 
-            // Para transacciones normales, solo puedes añadir una linea de detalle de transacción.  
-            $plus->addTransactionDetail($sub->price, $idOrder); // Monto e identificador de la orden  
+            // Para transacciones normales, solo puedes añadir una linea de detalle de transacción.
+            $plus->addTransactionDetail($sub->price, $idOrder); // Monto e identificador de la orden
 
-            // Debes además, registrar las URLs a las cuales volverá el cliente durante y después del flujo de Webpay  
+            // Debes además, registrar las URLs a las cuales volverá el cliente durante y después del flujo de Webpay
             $response = $plus->initTransaction(route('confirmation'), route('endregister'));
 
             /**
@@ -168,7 +165,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -177,7 +173,6 @@ class RegisterController extends Controller
         ]);
 
         $user->assignRole('User');
-
         return $user;
     }
 }
