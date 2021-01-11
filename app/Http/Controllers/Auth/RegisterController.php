@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\UserCategory;
 use Auth;
 use App\WebpayOrder;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -57,18 +58,20 @@ class RegisterController extends Controller
                     'subscription_id' => 'required',
                     'telephone' => 'required|numeric|digits_between:10,12',
                     'comuna_id' => 'required',
-					'password' => 'required',
+                    'password' => 'required',
+                    'categories' => 'required',
                 ],
                 [
                     'name.required' => 'Usuario es requerido',
                     'subscription_id.required' => 'Debe seleccionar un plan de subscripción',
-					'email.required' => 'El correo electrónico es requerido',
+                    'email.required' => 'El correo electrónico es requerido',
                     'email.unique' => 'El correo electrónico se encuentra en uso',
                     'telephone.required' => 'Teléfono es requerido',
                     'telephone.numeric' => 'Teléfono debe ser numérico',
                     'telephone.digits_between' => 'Teléfono debe tener entre 10 y 12 dígitos.',
                     'comuna_id.required' => 'Comuna es requerido',
-					'password.required' => 'Contraseña es requerido',
+                    'password.required' => 'Contraseña es requerido',
+                    'categories.required' => 'Debe seleccionar al menos 1 categoria',
                 ]
             )->validate();
 
@@ -85,9 +88,6 @@ class RegisterController extends Controller
             // Debes además, registrar las URLs a las cuales volverá el cliente durante y después del flujo de Webpay
             $response = $plus->initTransaction(route('confirmation'), route('endregister'));
 
-            /**
-             * @TODO Guardar en DB preregistro
-             */
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -97,7 +97,14 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
                 'token_webpay' => $response->token
             ]);
-
+            
+            foreach ($data['categories'] as $categoryID) {
+                UserCategory::create([
+                    'user_id' => $user->id,
+                    'category_id' => $categoryID
+                ]);
+            }
+            
             return RedirectorHelper::redirectHTML($response->url, $response->token);
         }
     }

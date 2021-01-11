@@ -47,13 +47,16 @@
 </script>
 <section class="container-fluid breakcump register">
     <div class="row" id="selector">
-        <a href="#" class="col-4 kb-link kb-link-active" style="text-align: center;">
+        <a href="#" class="col-3 kb-link kb-link-active" style="text-align: center;">
             REGISTRO
         </a>
-        <a href="#" class="col-4 kb-link" style="text-align: center;">
+        <a href="#" class="col-3 kb-link" style="text-align: center;">
+            CATEGORIAS
+        </a>
+        <a href="#" class="col-3 kb-link" style="text-align: center;">
             PLANES
         </a>
-        <a href="#" class="col-4 kb-link" style="text-align: center;">
+        <a href="#" class="col-3 kb-link" style="text-align: center;">
             PAGO
         </a>
     </div>
@@ -115,6 +118,30 @@
                 <button type="button" name="next" style="width:100%;" class="btn btn-lg btn-success btn-block next action-button">CONTINUAR</button>
             </fieldset>
             <fieldset>
+                <label class="color-green">Seleccione las categorias que te interesan</label>
+                <div class="form-check mb-4">
+                    <input class="form-check-input custom-checkbox" onchange="seleccionarTodos(this)" name="" type="checkbox" id="todos">
+                    <label class="form-check-label custom-label" for="todos">Todos</label>
+                </div>
+                
+                <div class="row">
+                    @foreach(\App\Category::all() as $key => $category)
+                    <div class="col-12 col-sm-4 mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input custom-checkbox" {{ in_array($category->id, old('users.categories') ?? []) ? 'checked' : '' }} onchange="verificarTodos()" name="users[categories][]" type="checkbox" id="{{ $key.$category->id }}" value="{{ $category->id }}">
+                            <label class="form-check-label custom-label" for="{{ $key.$category->id }}">{{ $category->name }}</label>
+                        </div>
+                    </div>
+                    @endforeach
+                    <div class="col-12">
+                        <small class="form-text text-danger">@error('categories') {{ $message }} @enderror</small><!-- por terminar mostrar el eerror -->
+                    </div>
+                </div>
+                <br>
+                <button type="button" name="previous" class="col-12 btn btn-lg btn-defaul btn-block previous action-button-previous">REGRESAR</button>
+                <button type="button" name="next" style="width:100%;" class="btn btn-lg btn-success btn-block next action-button">CONTINUAR</button>
+            </fieldset>
+            <fieldset>
                 <div class="col-md-12 text-center">
 					@foreach(App\Subscription::all() as $sub)
 					<input style="display:none; "type="radio" data-name="{{ $sub->name }}" data-description="{{$sub->description}}"
@@ -133,7 +160,7 @@
 								<p class="card-title">Hasta  {{ $sub->quote }} Productos</p>
 								<hr>
 								<p class="card-text">{{ $sub->months }} meses</p>
-								<button style="width:auto;margin:auto;" onclick="$('#subscription-{{ $sub->id }}').trigger('click')" type="button" name="next" class="col-12 btn btn-success btn-block next action-button">PAGAR</button>
+								<button onclick="$('#subscription-{{ $sub->id }}').trigger('click')" type="button" name="next" class="col-12 btn btn-success btn-block next action-button">PAGAR</button>
 							</div>
 						</div>
 					</label>
@@ -164,9 +191,28 @@
         </form>
     </div>
 </section>
-<style>
-.select2-container, .select2-selection{
-	width: 100%!important;
-}
-</style>
+@endsection
+@section('scripts')
+<script>
+    function seleccionarTodos(element, selector = '.custom-checkbox'){
+        if($(element).is(':checked'))
+            $(selector).prop('checked', true);
+        else
+            $(selector).prop('checked', false);
+    }
+
+    function verificarTodos(selectorGroup = '.custom-checkbox', selectorTarget = '#todos'){
+        let checks = $(selectorGroup).not(selectorTarget);
+        let cantidadCheck = checks.length;
+        let cantidadCheckCheckeados = 0;
+        checks.each(function(){
+            if($(this).is(':checked'))
+                cantidadCheckCheckeados++;
+        });
+        if(cantidadCheckCheckeados == cantidadCheck)
+            $(selectorTarget).prop('checked', true);
+        else
+            $(selectorTarget).prop('checked', false);
+    }
+</script>
 @endsection

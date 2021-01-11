@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Favorite');
     }
 
+    public function categories()
+    {
+        return $this->hasMany('App\UserCategory');
+    }
+
     public function routeNotificationForMail($notification)
     {
         // Return email address only

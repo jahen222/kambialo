@@ -241,3 +241,38 @@ body{
 .select2-container, .select2-selection{
 	width: 100%!important;
 }
+
+.custom-checkbox{
+  height: 18px;
+  width: 18px;
+  display: none;
+}
+
+.custom-checkbox + .custom-label:before{
+  content: '';
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 0;
+  border-radius: 2px;
+  border: 1px solid black;
+}
+
+.custom-checkbox:checked + .custom-label:before{
+  content: '✔';
+  padding-left: 3px;
+  line-height: 1;
+  font-size: 20px;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 0;
+  border-radius: 2px;
+  border: 1px solid var(--green);
+  color: white;
+  background-color: var(--green);
+}
+.custom-label{
+  font-size: 18px;
+  margin-left: 6px;
+}
