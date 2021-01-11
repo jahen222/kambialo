@@ -23,8 +23,8 @@ class ShowcaseController extends Controller
 
     public function data(Request $request)
     {
-		$products = $this->_search();
-		if($request->input('category')) {
+        $products = $this->_search();
+        if ($request->input('category')) {
             $products->where('category_id', $request->input('category'));
         }
 
@@ -38,11 +38,18 @@ class ShowcaseController extends Controller
 
     private function _search()
     {
-        $_query = Product::distinct()->select(['users.comuna_id','products.*'])->join('users', 'users.id', '=', 'products.user_id')
+        $_query = Product::distinct()->select(['users.comuna_id', 'products.*'])->join('users', 'users.id', '=', 'products.user_id')
             ->leftJoin('product_tag', 'product_tag.product_id', '=', 'products.id')
             ->leftJoin('tags', 'product_tag.tag_id', '=', 'tags.id')->with('images')->withCount('favorites');
 
-        if($user = auth()->user()) {
+        if ($user = auth()->user()) {
+            $categories = [];
+            foreach ($user->categories as $key => $value)
+                $categories[] = $value->category_id;
+
+            if($categories)
+                $_query->orderByRaw('products.category_id in( ' . implode(',', $categories) . ') DESC');
+                
             $_query->orderByRaw('users.comuna_id = ' . $user->comuna_id . ' DESC');
         }
 
@@ -75,7 +82,7 @@ class ShowcaseController extends Controller
     public function favorite(Request $request)
     {
         $favoriteMessage = 'Agregado a favorito';
-        if(!auth()->user()) {
+        if (!auth()->user()) {
             $favoriteMessage = 'Debe iniciar sesion para agregar a favorito';
         } else {
             $user_id = auth()->user()->id;
@@ -92,7 +99,7 @@ class ShowcaseController extends Controller
             $match = Match::whereIn('user_id_1', [$user->id, $userProduct->id])->whereIn('user_id_2', [$user->id, $userProduct->id])->first();
             if (!$match) {
                 if ($allUserProducts = $userProduct->favorites()->get()->toArray()) {
-                    if ($user->products()->whereIn('id', array_column($allUserProducts, 'product_id'))->first()){
+                    if ($user->products()->whereIn('id', array_column($allUserProducts, 'product_id'))->first()) {
                         $match = Match::create(['user_id_1' => $user->id, 'user_id_2' => $userProduct->id]);
                         $userProduct->notify(new MatchConfirm($user, $match, "El usuario {$user->name} ha hecho match contigo", "Kambialo - Haz hecho Match"));
                         $user->notify(new MatchConfirm($userProduct, $match, "El usuario {$userProduct->name} ha hecho match contigo", "Kambialo - Haz hecho Match", ['mail']));
