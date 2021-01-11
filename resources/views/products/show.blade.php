@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -46,13 +47,18 @@
                     </div>
                     <br><br>
                     <p class="blog-product-meta">Descripción: {!! $product->description !!}</p>
+                    <p class="blog-product-meta span-group">Categorias de interes:
+                        @foreach($product->user->categories as $key => $userCategory)
+                            <span>{{ $userCategory->category->name }}</span>
+                        @endforeach
+                    </p>
                     @if($product->user_id == $user->id) <!-- implementar formulario match -->
                     <p class="blog-product-meta">Categoría: {{ $product->category->name }} </p>
                     <p class="blog-product-meta">Propietario: {{ $product->user->email }} </p>
                     <p class="blog-product-meta">Publicado: {{ $product->created_at }} </p>
-                    <p class="blog-product-meta">Tags:
+                    <p class="blog-product-meta span-group">Tags:
                         @foreach ($product->tags()->get() as $tag)
-                            {{ $tag->name }}
+                            <span>{{ $tag->name }}</span>
                         @endforeach </p>
                     @endif
                 </div>

@@ -1,3 +1,6 @@
+:root{
+  --separator: ',';
+}
 body{
   /*background-color: #eeeeee;*/
 }
@@ -275,4 +278,8 @@ body{
 .custom-label{
   font-size: 18px;
   margin-left: 6px;
+}
+
+.span-group span:not(:last-child):after{
+  content: var(--separator);
 }
