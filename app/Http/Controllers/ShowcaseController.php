@@ -49,8 +49,9 @@ class ShowcaseController extends Controller
 
             if($categories)
                 $_query->orderByRaw('products.category_id in( ' . implode(',', $categories) . ') DESC');
-                
-            $_query->orderByRaw('users.comuna_id = ' . $user->comuna_id . ' DESC');
+             
+			if($user->comuna_id)
+				$_query->orderByRaw('users.comuna_id = ' . $user->comuna_id . ' DESC');
         }
 
         $_query->orderBy('favorites_count', 'DESC');
